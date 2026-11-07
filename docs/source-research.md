@@ -67,6 +67,9 @@ Work in topic batches of roughly 25–50 distinct objectives. This is a batching
 policy, not a promised delivery rate. Start with NumPy/data preparation, then
 probability/evaluation, then autograd and tokenization. Reuse the established
 reading/editor/feedback interface; content-only batches do not need a redesign.
+The [production workflow](content-production.md) now provides a reusable batch
+packager, one tested build shared across browsers, and parallel execution of
+the full browser suite.
 
 For each candidate, record its source revision and exact section, the learning
 objective, misconception to expose, required runtime, and attribution obligations.

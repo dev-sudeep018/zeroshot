@@ -1,5 +1,33 @@
 # Verification record
 
+## Curriculum production workflow — 25 October 2026
+
+The published catalog remains 81 lessons plus one project checkpoint. This change
+removes repeated production work: one reusable draft packager, one workflow per
+feature PR update, one tested build shared across all browser jobs, and two
+independent browser workers. See [the production guide](content-production.md).
+
+Local `pnpm check` passed types, lint, formatting, 26 Vitest tests, 65 Python test
+methods, all 82 content packages and the 94-page export. Seven new tests cover
+source/license tampering, draft output, public evaluator execution, existing-file
+preservation, path traversal, malformed later entries, sample correspondence and
+reading upstream snapshots without executing them.
+
+Repackaging the existing twelve-lesson third platform batch produced twelve draft
+packages with all 144 reference cases passing, three samples per package and
+incomplete starters rejected. These copies remain outside the published catalog
+and do not add to its count.
+
+The same 26 Chromium/WebKit checks used for the previous batch passed with two
+workers in 1.9 minutes, compared with the recorded 3.0 minutes at one worker.
+That is roughly 37% less elapsed time for this local check, not a guaranteed
+curriculum-authoring speedup. All 300 tests remain in the full browser suite.
+GitHub PR checks record the result of downloading and testing the shared artifact
+in each browser; no browser job builds a second copy.
+
+The previous batch's eight GitHub checks all passed at `d560c46` (PR #18).
+No product UI, lesson content or runner isolation boundary changed in this pass.
+
 ## Third platform batch — 24 October 2026
 
 Twelve further licensed adaptations bring the catalog to 81 lessons plus one

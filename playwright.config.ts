@@ -1,8 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/e2e",
-  fullyParallel: false,
-  workers: 1,
+  // Each test has its own browser context and runner worker. Keep concurrency
+  // bounded because each Python execution loads its own NumPy runtime.
+  fullyParallel: true,
+  workers: 2,
   timeout: 60_000,
   expect: { timeout: 12_000 },
   retries: process.env.CI ? 1 : 0,

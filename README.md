@@ -41,6 +41,11 @@ The project is in development. See [verification](docs/verification.md) for what
 
 For fast content iteration, use `pnpm content:check m05 d06 e07` (omit IDs for all packages). See the [free-resource survey and batch workflow](docs/source-research.md) and its [source registry](content/sources.json).
 
+For larger authored batches, `pnpm content:author` generates draft packages and
+source notices from one JSON file. The [production workflow](docs/content-production.md)
+documents the reusable packager, 25–50-objective batch target, shared CI build and
+parallel browser checks.
+
 ## Contributing and maintenance
 
 Start with [CONTRIBUTING.md](CONTRIBUTING.md). Use a branch and pull request; GitHub Actions checks content, reference solutions, types, formatting, lint, builds, and Chromium/Firefox/WebKit behavior. Dependabot proposes weekly dependency and Actions updates. Report vulnerabilities privately using the repository's Security tab.
