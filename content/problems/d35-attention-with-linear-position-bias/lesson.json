@@ -1,0 +1,46 @@
+{
+  "intro": "A position bias can favor nearby tokens without changing their content vectors. Different attention heads can use different distance penalties.",
+  "task": "Add a per-head linear distance penalty to scaled attention scores. Compare a head with no penalty against one with a stronger preference for nearby positions.",
+  "signature": "alibi_attention(queries, keys, values, slopes)",
+  "requirements": [
+    "queries and keys have matching nonempty shape (H,S,D). values has shape (H,S,V) with V>0. slopes is a nonnegative vector of length H, supplied by the caller.",
+    "For head h and positions i,j, use score[h,i,j]=dot(queries[h,i],keys[h,j])/sqrt(D)-slopes[h]*abs(i-j). Apply stable row-wise softmax and combine the values.",
+    "Return an (H,S,V) array. This is bidirectional self-attention with integer positions 0..S-1; there is no causal mask. The lesson does not generate a canonical ALiBi slope schedule.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "No distance penalty",
+      "input": "queries=keys=[[[0],[0]]], values=[[[0],[8]]], slopes=[0]",
+      "output": "[[[4],[4]]]"
+    },
+    {
+      "name": "Prefer the nearest position",
+      "input": "queries=keys=[[[0],[0]]], values=[[[0],[8]]], slopes=[log(3)]",
+      "output": "[[[2],[6]]]"
+    },
+    {
+      "name": "A single position",
+      "input": "queries=keys=[[[1]]], values=[[[7,9]]], slopes=[2]",
+      "output": "[[[7,9]]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Bias the scores before softmax",
+      "body": "Subtracting a distance penalty from the final output would operate on the wrong axis and units."
+    },
+    {
+      "title": "Use a separate slope per head",
+      "body": "A shared distance matrix can broadcast against slopes shaped (H,1,1)."
+    }
+  ],
+  "explanation": [
+    "With zero content scores, the attention weights depend only on distance and the supplied slope. At an edge, fewer positions exist on one side, so normalization still uses the available keys.",
+    "A zero slope recovers ordinary bidirectional scaled dot-product attention. The distance bias does not prevent future-token access; a causal model would need an additional mask.",
+    "Adapted the upstream bidirectional ALiBi attention to explicit head-shaped NumPy arrays and caller-provided slopes. Removed learned projections and the fixed upstream slope schedule."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

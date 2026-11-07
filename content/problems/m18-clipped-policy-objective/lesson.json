@@ -1,0 +1,46 @@
+{
+  "intro": "A policy update changes the probability of an observed action. PPO compares that change with an advantage estimate, and clipping behaves differently for helpful and harmful actions.",
+  "task": "Calculate the negative mean clipped surrogate objective from supplied log probabilities and advantages. Explore both signs of the advantage before interpreting the clipping operation.",
+  "signature": "ppo_loss(new_logps, old_logps, advantages, clip_ratio=0.2)",
+  "requirements": [
+    "new_logps, old_logps and advantages are nonempty one-dimensional arrays of equal length. Log probabilities must be nonpositive, and abs(new_logps-old_logps) must be at most 60.",
+    "Require 0<=clip_ratio<1. Let r=exp(new_logps-old_logps). For each example use min(r*advantage, clip(r,1-clip_ratio,1+clip_ratio)*advantage).",
+    "Return the negative mean of those terms as a scalar. This is the forward surrogate loss only; the caller supplies fixed old log probabilities and advantages. There is no value loss, entropy bonus, advantage estimator or training loop.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Unchanged policy",
+      "input": "new_logps=old_logps=[-1,-2], advantages=[2,-1]",
+      "output": "-0.5"
+    },
+    {
+      "name": "Rewarded action doubles in probability",
+      "input": "new_logps=[-1+log(2)], old_logps=[-1], advantages=[1], clip_ratio=0.2",
+      "output": "-1.2"
+    },
+    {
+      "name": "Penalized action doubles in probability",
+      "input": "new_logps=[-1+log(2)], old_logps=[-1], advantages=[-1], clip_ratio=0.2",
+      "output": "2"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Multiply before taking the minimum",
+      "body": "A negative advantage reverses the ordering of the two ratio-weighted terms."
+    },
+    {
+      "title": "Clipping is not a hard trust-region constraint",
+      "body": "A ratio outside the interval can still affect the loss. Inspect negative advantages when the ratio is too large."
+    }
+  ],
+  "explanation": [
+    "For a positive advantage, increasing the action probability beyond the upper clip boundary stops improving this surrogate. For a negative advantage, reducing it below the lower boundary stops improving the surrogate.",
+    "The minimum chooses the less optimistic term for either sign. Simply clipping every ratio and then averaging fails on the other side of the interval.",
+    "Ported the upstream clipped surrogate to NumPy with bounded log-ratio validation. Autograd detachment and full PPO training are outside this forward-only contract."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

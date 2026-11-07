@@ -1,0 +1,46 @@
+{
+  "intro": "A predicted noise vector lets a diffusion sampler estimate the clean signal. A deterministic DDIM step recombines that estimate and the same noise direction at an earlier, cleaner noise level.",
+  "task": "Recover the predicted clean sample and calculate one eta-zero DDIM update. Check the identity step and the clean endpoint before trying an intermediate noise level.",
+  "signature": "ddim_step(sample, predicted_noise, alpha_bar, previous_alpha_bar)",
+  "requirements": [
+    "sample and predicted_noise are nonempty arrays of the same shape with at least one dimension. The scalar cumulative retentions satisfy 1e-12<=alpha_bar<=previous_alpha_bar<=1.",
+    "Let clean=(sample-sqrt(1-alpha_bar)*predicted_noise)/sqrt(alpha_bar). Let previous=sqrt(previous_alpha_bar)*clean+sqrt(1-previous_alpha_bar)*predicted_noise.",
+    "Return a dictionary with sample=previous and predicted_clean=clean. These alpha values are cumulative retentions, not per-step beta or alpha values. This is deterministic eta=0 without clipping, random noise or a trained denoiser.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Reach the clean endpoint",
+      "input": "sample=[2], predicted_noise=[0], alpha_bar=0.25, previous_alpha_bar=1",
+      "output": "sample=[4], predicted_clean=[4]"
+    },
+    {
+      "name": "Identity step with predicted noise",
+      "input": "sample=[2], predicted_noise=[1], alpha_bar=previous_alpha_bar=0.25",
+      "output": "sample=[2], predicted_clean=[2.26794919]"
+    },
+    {
+      "name": "Intermediate cleaner state",
+      "input": "sample=[2], predicted_noise=[0], alpha_bar=0.25, previous_alpha_bar=0.75",
+      "output": "sample=[3.46410162], predicted_clean=[4]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use the forward equation in reverse",
+      "body": "Rearrange sample=sqrt(alpha_bar)*clean+sqrt(1-alpha_bar)*noise."
+    },
+    {
+      "title": "Check the two boundaries",
+      "body": "Equal retentions should preserve the sample. previous_alpha_bar=1 should return the predicted clean value."
+    }
+  ],
+  "explanation": [
+    "The earlier diffusion state has at least as much retained signal as the current state. Reversing that ordering would move toward more noise, outside this lesson\u2019s update contract.",
+    "An exact predicted noise reconstructs the clean signal used in a synthetic forward process. A real denoiser can be wrong; the formula does not guarantee clean predictions.",
+    "Ported the upstream eta-zero DDIM equation and exposed its clean estimate alongside the previous sample. Added an explicit positive retention floor and direction checks."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

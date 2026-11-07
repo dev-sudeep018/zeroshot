@@ -1,0 +1,46 @@
+{
+  "intro": "Preference learning compares a chosen response with a rejected response. DPO measures how their relative log probabilities change from a reference policy.",
+  "task": "Build the reference-adjusted preference margin and compute its stable logistic loss. Distinguish a policy favoring the chosen response from a policy improving that preference relative to its reference.",
+  "signature": "dpo_loss(policy_chosen, policy_rejected, reference_chosen, reference_rejected, beta=0.1)",
+  "requirements": [
+    "The four inputs are nonempty one-dimensional arrays of the same length, containing nonpositive sequence log probabilities. beta is a finite nonnegative scalar.",
+    "For each pair use margin=beta*((policy_chosen-policy_rejected)-(reference_chosen-reference_rejected)). Return mean(log(1+exp(-margin))) as a scalar.",
+    "Use a stable softplus/logaddexp calculation without clipping the loss or adding a probability epsilon. These are supplied sequence log probabilities; do not normalize the chosen and rejected values into a two-class distribution.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Same relative preference",
+      "input": "policy_chosen=[-1], policy_rejected=[-3], reference_chosen=[-2], reference_rejected=[-4], beta=1",
+      "output": "0.69314718"
+    },
+    {
+      "name": "Improved preference",
+      "input": "policy_chosen=[-1], policy_rejected=[-3], reference_chosen=reference_rejected=[-2], beta=1",
+      "output": "0.12692801"
+    },
+    {
+      "name": "Strongly wrong preference",
+      "input": "policy_chosen=[-1000], policy_rejected=reference_chosen=reference_rejected=[0], beta=1",
+      "output": "1000"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Subtract two log-odds differences",
+      "body": "The reference correction compares chosen versus rejected responses in the same order as the policy."
+    },
+    {
+      "title": "Avoid taking log of a rounded sigmoid",
+      "body": "At a very negative margin, direct sigmoid evaluation can underflow to zero. Stable softplus retains the large loss."
+    }
+  ],
+  "explanation": [
+    "When policy and reference have identical relative preferences, the margin is zero and the loss is log(2), even if both strongly favor the chosen response.",
+    "A larger positive adjusted margin reduces the loss. beta scales this margin; beta zero makes every pair have loss log(2). This operation alone does not train a language model.",
+    "Ported the upstream DPO margin to NumPy and replaced log(sigmoid(margin)) with stable logaddexp. Added explicit sequence-level inputs and original reference-shift fixtures."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

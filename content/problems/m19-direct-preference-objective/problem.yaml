@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m19",
+  "kind": "lesson",
+  "slug": "direct-preference-objective",
+  "version": 1,
+  "title": "Compare Preferences against a Reference Policy",
+  "summary": "Preference learning compares a chosen response with a rejected response. DPO measures how their relative log probabilities change from a reference policy.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Preference learning", "Stable logistic losses"],
+  "prerequisites": ["m04", "m18"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "dpo_loss",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors; adapted from Pyre-Code / TorchCode",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Adapted MIT-licensed implementation: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/dpo_loss.py",
+      "Upstream copyright (c) 2024 duoan and (c) 2024 kiren; full MIT notice retained in reference solution and THIRD_PARTY_NOTICE.md. Original additions: Apache-2.0; original prose: CC-BY-SA-4.0.",
+    ],
+}

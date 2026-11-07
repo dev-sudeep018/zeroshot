@@ -1,0 +1,46 @@
+{
+  "intro": "A local attention window changes which tokens can influence each other. Edge positions see fewer neighbors, so their weights must be normalized over a smaller set.",
+  "task": "Compute bidirectional attention within a fixed radius. Use distant-token perturbations to check that excluded positions cannot affect a query\u2019s output.",
+  "signature": "window_attention(queries, keys, values, radius)",
+  "requirements": [
+    "queries and keys have matching nonempty shape (S,D); values has shape (S,V) with V>0. radius is an integer in [0,S-1], excluding booleans.",
+    "Query i may attend to exactly those keys j with abs(i-j)<=radius. Scale dot products by sqrt(D), apply stable softmax over allowed keys, then combine their values.",
+    "Return an (S,V) NumPy array. Radius zero attends only to the token itself; radius S-1 gives full bidirectional attention. There is no causal restriction or padding mask.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Self-only attention",
+      "input": "queries=keys=[[0],[0],[0]], values=[[2],[4],[8]], radius=0",
+      "output": "[[2],[4],[8]]"
+    },
+    {
+      "name": "One neighbor on each side",
+      "input": "queries=keys=[[0],[0],[0]], values=[[2],[4],[8]], radius=1",
+      "output": "[[3],[4.66666667],[6]]"
+    },
+    {
+      "name": "Full window",
+      "input": "queries=keys=[[0],[0],[0]], values=[[2],[4],[8]], radius=2",
+      "output": "[[4.66666667],[4.66666667],[4.66666667]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Clip the interval at sequence boundaries",
+      "body": "Use max(0,i-radius) and min(S,i+radius+1) as slice boundaries."
+    },
+    {
+      "title": "Normalize only the allowed scores",
+      "body": "Zeroing excluded logits before softmax still gives those positions positive weight."
+    }
+  ],
+  "explanation": [
+    "Locality can make a distant change invisible to a single layer. Multiple stacked layers can propagate information farther, but this exercise evaluates one attention operation.",
+    "The reference processes each local slice directly. The lesson tests the neighborhood and normalization semantics and makes no measured runtime claim.",
+    "Ported the upstream bidirectional radius mask to NumPy local slices, avoiding a full score matrix in the reference. Kept the source\u2019s two-sided window rather than silently adding causality."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

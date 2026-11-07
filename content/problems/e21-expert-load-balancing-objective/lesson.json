@@ -1,0 +1,46 @@
+{
+  "intro": "A router can repeatedly choose the same expert even while assigning probability to others. A load-balancing auxiliary objective combines hard assignment frequencies with average soft probabilities.",
+  "task": "Return both routing statistics and their auxiliary loss. Compare a balanced batch, tied logits and a confidently collapsed router before interpreting the loss value.",
+  "signature": "load_balance(router_logits)",
+  "requirements": [
+    "router_logits is a nonempty real (N,E) matrix: one row per token and one column per expert.",
+    "Assign each token to its largest logit, breaking ties by lower expert index. Let fractions[e] be the fraction assigned to expert e, and probabilities[e] the mean stable-softmax probability for expert e.",
+    "Return a dictionary with fractions, probabilities and loss=E*sum(fractions*probabilities). The vectors have shape (E,); loss is a scalar. This is a top-one auxiliary statistic, not a capacity-limited dispatcher or a training update.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Uniform tied logits",
+      "input": "router_logits=[[0,0]]",
+      "output": "fractions=[1,0], probabilities=[0.5,0.5], loss=1"
+    },
+    {
+      "name": "Balanced preferences",
+      "input": "router_logits=[[log(3),0],[0,log(3)]]",
+      "output": "fractions=[0.5,0.5], probabilities=[0.5,0.5], loss=1"
+    },
+    {
+      "name": "Confident shared preference",
+      "input": "router_logits=[[log(3),0],[log(3),0]]",
+      "output": "fractions=[1,0], probabilities=[0.75,0.25], loss=1.5"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Measure two different distributions",
+      "body": "Hard argmax frequencies and mean softmax probabilities generally differ."
+    },
+    {
+      "title": "Check the uniform-probability case",
+      "body": "When every soft probability is 1/E, the loss is one even if index-order ties send every token to one expert."
+    }
+  ],
+  "explanation": [
+    "Balanced hard loads give loss one, but a value of one does not certify balanced routing. Uniform tied probabilities also give one while the hard assignments may all select the first expert.",
+    "Confident collapse can drive the loss toward E. One is not a universal mathematical lower bound for this finite-batch statistic, so inspect the two returned distributions instead of treating the scalar as a balance certificate.",
+    "Ported the upstream top-one load-balancing statistic to NumPy with stable softmax and deterministic index-order ties. Exposed the hard fractions and mean probabilities for direct inspection."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

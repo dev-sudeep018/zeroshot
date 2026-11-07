@@ -1,0 +1,46 @@
+{
+  "intro": "An inner-product graph decoder turns node embeddings into pairwise edge probabilities. Its geometry imposes symmetry and a particular behavior on self-pairs.",
+  "task": "Decode every pair of supplied node embeddings with a stable sigmoid. Inspect which graph structures this decoder can express and which assumptions come from the formula itself.",
+  "signature": "decode_graph(embeddings)",
+  "requirements": [
+    "embeddings is a nonempty real matrix of shape (N,D). Compute scores=embeddings@embeddings.T and return sigmoid(scores) as an (N,N) NumPy array.",
+    "Evaluate sigmoid stably for both positive and negative scores. Return probabilities without thresholding, row normalization or removing diagonal entries.",
+    "This lesson adapts only the graph autoencoder\u2019s decoder. The embeddings are supplied; no graph convolution encoder, random weights, reconstruction training or negative-edge sampling is included.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "No geometric evidence",
+      "input": "embeddings=[[0],[0]]",
+      "output": "[[0.5,0.5],[0.5,0.5]]"
+    },
+    {
+      "name": "Opposite embeddings",
+      "input": "embeddings=[[1],[-1]]",
+      "output": "[[0.73105858,0.26894142],[0.26894142,0.73105858]]"
+    },
+    {
+      "name": "Orthogonal nodes",
+      "input": "embeddings=[[1,0],[0,1]]",
+      "output": "[[0.73105858,0.5],[0.5,0.73105858]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Build all pairwise inner products",
+      "body": "Multiplying embeddings.T@embeddings would compare feature dimensions instead of nodes."
+    },
+    {
+      "title": "Inspect the diagonal",
+      "body": "A node dotted with itself has nonnegative score. Its returned self-pair probability must therefore be at least one half."
+    }
+  ],
+  "explanation": [
+    "The score matrix is symmetric, so this decoder cannot independently represent two directions of an edge. Orthogonal node embeddings produce probability one half, not zero.",
+    "Every diagonal score is a squared norm. The resulting self-pair probability is at least one half; applications that omit self-edges must handle that in their data or loss rather than silently altering this decoder.",
+    "Extracted and ported the upstream graph-autoencoder inner-product decoder to NumPy with stable sigmoid branches. The upstream randomly initialized two-layer encoder is deliberately outside this supplied-embedding contract."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

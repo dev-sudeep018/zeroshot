@@ -1,0 +1,46 @@
+{
+  "intro": "Some attention variants replace softmax with a positive feature map. Associativity then lets them combine keys and values before evaluating each query.",
+  "task": "Implement ELU-plus-one kernel attention with an explicit denominator regularizer. Compare the associative calculation with a small, directly constructed kernel matrix.",
+  "signature": "linear_attention(queries, keys, values)",
+  "requirements": [
+    "queries has nonempty shape (Q,D), keys is (K,D), and values is (K,V), with K,V>0. Query and key sequence lengths may differ.",
+    "Use phi(x)=x+1 when x>0, and phi(x)=exp(x) otherwise. Compute numerator=phi(queries)@(phi(keys).T@values) and denominator=phi(queries)@sum(phi(keys),axis=0).",
+    "Return numerator/(denominator[:,None]+1e-6) as a (Q,V) array. The epsilon is added, not used as a lower clamp. This operation is bidirectional kernel attention, not softmax attention or a causal recurrence.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One unit kernel weight",
+      "input": "queries=keys=[[0]], values=[[2]]",
+      "output": "[[1.999998]]"
+    },
+    {
+      "name": "Two equal keys",
+      "input": "queries=[[0]], keys=[[0],[0]], values=[[2],[6]]",
+      "output": "[[3.999998]]"
+    },
+    {
+      "name": "Small positive feature maps",
+      "input": "queries=keys=[[log(0.5)]], values=[[4]]",
+      "output": "[[3.999984]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Build a feature-by-value summary",
+      "body": "phi(keys).T@values has shape (D,V), independent of the query count."
+    },
+    {
+      "title": "Evaluate the feature map by branches",
+      "body": "Use exp only for nonpositive entries. Computing exp for every entry before selecting can overflow on large positive inputs."
+    }
+  ],
+  "explanation": [
+    "Without epsilon, the output is a normalized weighted sum with weights given by positive feature inner products. The additive epsilon slightly reduces the total weight, especially when the kernel mass is very small.",
+    "The feature map changes the attention rule. Reassociation is algebraically valid for this kernel, but it does not make the result equal to ordinary softmax attention.",
+    "Adapted the upstream associative ELU-plus-one attention and its additive 1e-6 denominator. Used direct exp(x) on the negative branch to avoid cancellation and masked branch evaluation to avoid positive exponential overflow."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

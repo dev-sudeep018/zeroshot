@@ -1,0 +1,46 @@
+{
+  "intro": "A sum of neighbor features retains multiplicity that a mean can erase. A GIN-style layer combines that sum with a weighted self feature before applying a two-layer transformation.",
+  "task": "Compute the neighbor sum and self contribution, then apply a two-layer MLP. Compare repeated neighbors with a single neighbor and inspect where the activation belongs.",
+  "signature": "gin_layer(adjacency, features, w1, b1, w2, b2, epsilon=0.0)",
+  "requirements": [
+    "features has nonempty shape (N,F). adjacency is a nonnegative (N,N) matrix with zero diagonal; adjacency[i,j] weights the message from node j to node i. It need not be symmetric.",
+    "w1 is (F,H), b1 is (H,), w2 is (H,O), and b2 is (O,), with H,O>0. epsilon is a finite real scalar and may be negative.",
+    "Compute combined=(1+epsilon)*features+adjacency@features, hidden=max(combined@w1+b1,0), and output=hidden@w2+b2. Return shape (N,O); there is no final ReLU or degree normalization.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two connected nodes",
+      "input": "adjacency=[[0,1],[1,0]], features=[[1],[2]], w1=w2=[[1]], b1=b2=[0], epsilon=0",
+      "output": "[[3],[3]]"
+    },
+    {
+      "name": "Increase the self contribution",
+      "input": "adjacency=[[0,1],[1,0]], features=[[1],[2]], w1=w2=[[1]], b1=b2=[0], epsilon=1",
+      "output": "[[4],[5]]"
+    },
+    {
+      "name": "Linear final layer",
+      "input": "adjacency=[[0,1],[1,0]], features=[[1],[2]], w1=[[1]], w2=[[-1]], b1=b2=[0]",
+      "output": "[[-3],[-3]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Do not average the neighbor messages",
+      "body": "Two identical neighbors contribute twice as much as one identical neighbor."
+    },
+    {
+      "title": "Track both biases and the activation",
+      "body": "Only the hidden layer uses ReLU. Negative final outputs are valid."
+    }
+  ],
+  "explanation": [
+    "The self coefficient 1+epsilon controls how the node\u2019s own features enter the aggregate. The zero-diagonal contract prevents accidental double counting through the adjacency matrix.",
+    "Changing a sum to a mean removes neighborhood-count information. This lesson demonstrates the layer calculation; it does not claim every parameter choice distinguishes every pair of graphs.",
+    "Ported the upstream GIN sum-and-MLP equation to NumPy with explicit edge direction, supplied weights and strict shapes. Kept the final output linear and epsilon unrestricted in sign."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

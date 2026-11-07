@@ -1,5 +1,66 @@
 # Verification record
 
+## Curriculum production workflow — 25 October 2026
+
+The published catalog remains 81 lessons plus one project checkpoint. This change
+removes repeated production work: one reusable draft packager, one workflow per
+feature PR update, one tested build shared across all browser jobs, and two
+independent browser workers. See [the production guide](content-production.md).
+
+Local `pnpm check` passed types, lint, formatting, 26 Vitest tests, 65 Python test
+methods, all 82 content packages and the 94-page export. Seven new tests cover
+source/license tampering, draft output, public evaluator execution, existing-file
+preservation, path traversal, malformed later entries, sample correspondence and
+reading upstream snapshots without executing them.
+
+Repackaging the existing twelve-lesson third platform batch produced twelve draft
+packages with all 144 reference cases passing, three samples per package and
+incomplete starters rejected. These copies remain outside the published catalog
+and do not add to its count.
+
+The same 26 Chromium/WebKit checks used for the previous batch passed with two
+workers in 1.9 minutes, compared with the recorded 3.0 minutes at one worker.
+That is roughly 37% less elapsed time for this local check, not a guaranteed
+curriculum-authoring speedup. All 300 tests remain in the full browser suite.
+GitHub PR checks record the result of downloading and testing the shared artifact
+in each browser; no browser job builds a second copy.
+
+The previous batch's eight GitHub checks all passed at `d560c46` (PR #18).
+No product UI, lesson content or runner isolation boundary changed in this pass.
+
+## Third platform batch — 24 October 2026
+
+Twelve further licensed adaptations bring the catalog to 81 lessons plus one
+project checkpoint, with 998 public cases. The paths contain 19 mathematics/ML,
+40 deep learning and 22 engineering lessons. See
+[the batch record](platform-batch-03.md) for the distinct objectives, changed
+interfaces and source provenance.
+
+Local `pnpm check` passed metadata/prerequisite validation for 82 packages, types,
+lint, formatting, 26 Vitest tests, 58 Python test methods and the 94-page export.
+The focused content check passed twelve references and 144 public cases, including
+starter, sample-count and trivial-wrong-answer checks. Fourteen added Python
+methods cover independent numerical oracles, geometric and objective identities,
+a synthetic diffusion trajectory, locality, expert dispatch, twelve plausible
+conceptual mistakes rejected on valid input, and retained upstream notices.
+
+All twelve new references and the learning-entry-point, library-filter and
+experiment navigation regression passed in both Chromium and WebKit:
+26 browser checks. The full browser suite discovers 100 tests per engine,
+300 total; GitHub checks record the complete-suite results at the tested commit.
+
+Five desktop/mobile captures of the policy-objective and expert-mixture lessons
+were inspected after the editor loaded. Examples, hints, solution credits and the
+mobile reading/editing switch worked. No document overflow was measured at 320,
+390 or 1440 pixels, and no page errors occurred in those checks. Twelve upstream
+task hashes and the license hash matched the pinned snapshots. All twelve
+generated browser references exactly matched their credited source files, and
+the two inspected solution views retained the full MIT notices.
+
+The preceding batch's eight GitHub push and pull-request checks all passed at
+`652cfda` (PR #17), including complete Chromium, Firefox and WebKit suites.
+The Windows Firefox, physical-device and learner-review limitations below remain.
+
 ## Second platform batch — 24 October 2026
 
 Twelve further licensed adaptations bring the catalog to 69 lessons plus one

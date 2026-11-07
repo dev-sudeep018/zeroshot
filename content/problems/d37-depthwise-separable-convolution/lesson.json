@@ -1,0 +1,46 @@
+{
+  "intro": "A depthwise separable convolution first filters each channel independently, then mixes channels at each location. That factorization restricts the filters a layer can represent.",
+  "task": "Implement valid spatial cross-correlation per channel followed by a pointwise linear mixture. Trace the two stages on inputs whose channels have very different magnitudes.",
+  "signature": "depthwise_separable(images, depthwise_weights, pointwise_weights)",
+  "requirements": [
+    "images has nonempty shape (B,C,H,W). depthwise_weights has shape (C,Kh,Kw), with 1<=Kh<=H and 1<=Kw<=W. pointwise_weights has shape (O,C), with O>0.",
+    "Use stride one, no padding and no bias. For each channel, sum image[b,c,y+u,x+v]*depthwise_weights[c,u,v] over the kernel axes without flipping the kernel.",
+    "Mix the filtered channels with pointwise_weights: output[b,o,y,x]=sum_c pointwise_weights[o,c]*filtered[b,c,y,x]. Return shape (B,O,H-Kh+1,W-Kw+1).",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Filter then scale",
+      "input": "images=[[[[1,2],[3,4]]]], depthwise_weights=[[[1]]], pointwise_weights=[[2]]",
+      "output": "[[[[2,4],[6,8]]]]"
+    },
+    {
+      "name": "Do not flip the spatial kernel",
+      "input": "images=[[[[1,2],[3,4]]]], depthwise_weights=[[[1,0],[0,-1]]], pointwise_weights=[[1]]",
+      "output": "[[[[-3]]]]"
+    },
+    {
+      "name": "Mix two independent channels",
+      "input": "images=[[[[1]],[[10]]]], depthwise_weights=[[[2]],[[3]]], pointwise_weights=[[1,1],[1,-1]]",
+      "output": "[[[[32]],[[-28]]]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep channels separate during spatial filtering",
+      "body": "The first stage does not sum across the input channel axis."
+    },
+    {
+      "title": "Mix only after filtering",
+      "body": "Each pointwise output channel is a weighted sum of the filtered input channels at the same spatial position."
+    }
+  ],
+  "explanation": [
+    "The equivalent dense kernel is W[o,c,u,v]=pointwise_weights[o,c]*depthwise_weights[c,u,v]. For a given input channel, every output uses a scaled version of the same spatial filter.",
+    "This factorization uses C*Kh*Kw+O*C weights instead of O*C*Kh*Kw. It changes expressiveness as well as parameter count; arbitrary dense kernels need not factor this way.",
+    "Adapted the upstream depthwise and pointwise operations to NumPy with explicit spatial slices. Removed singleton weight axes and retained valid stride-one cross-correlation semantics."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

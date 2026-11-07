@@ -10,7 +10,7 @@ The working branch adds twelve original lessons, three guided paths, four intera
 
 ## Continuing work
 
-The third curriculum batch added 30 distinct activities, followed by eighteen MIT-licensed platform adaptations. There are now 69 lessons plus one project checkpoint, with 854 public cases. The three paths contain 17, 32 and 20 lessons. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
+The third curriculum batch added 30 distinct activities, followed by thirty MIT-licensed platform adaptations. There are now 81 lessons plus one project checkpoint, with 998 public cases. The three paths contain 19, 40 and 22 lessons. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
 
 The [platform pilot](platform-pilot.md) adapts Pyre-Code exercises for RMSNorm,
 RoPE, LoRA, cosine scheduling, focal loss and INT8 quantization. Source revisions,
@@ -22,6 +22,11 @@ activations, gated projections, training statistics, target distributions,
 contrastive learning, graph aggregation/readout, image patches, diffusion schedules,
 cached causal attention and decoding distributions. Independent tests check
 mathematical properties and plausible misconceptions for all twelve.
+
+The [third platform batch](platform-batch-03.md) adds twelve distinct objectives
+on policy and preference losses, flow and diffusion, attention variants, graph
+reconstruction, separable convolution and expert routing. It adds 144 public cases
+and keeps the source revision, notices and adaptation boundaries explicit.
 
 The retrieval project now connects the document-term, BM25 and context-budget
 lessons to inspectable scores and evidence selection. Its version 2 report

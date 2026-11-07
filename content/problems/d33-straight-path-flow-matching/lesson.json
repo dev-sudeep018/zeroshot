@@ -1,0 +1,46 @@
+{
+  "intro": "A straight path between a noise sample and a data sample has a time-dependent position but a constant target velocity. Flow matching trains a predictor against that velocity.",
+  "task": "Return the interpolated points, target velocities and prediction loss. Inspect what changes with time and what stays fixed when the endpoints are held constant.",
+  "signature": "flow_matching(x0, x1, times, predicted_velocity)",
+  "requirements": [
+    "x0, x1 and predicted_velocity have the same nonempty shape (B,D). times is a vector of length B with entries in [0,1].",
+    "Compute point[b]=(1-times[b])*x0[b]+times[b]*x1[b] and velocity=x1-x0. Time zero is the noise endpoint x0; time one is the data endpoint x1.",
+    "Return a dictionary with point, velocity and loss. The first two are (B,D) arrays; loss is mean((predicted_velocity-velocity)**2) over all B*D elements. No model or sampling trajectory is executed.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Exact velocity at the midpoint",
+      "input": "x0=[[0,0]], x1=[[2,4]], times=[0.5], predicted_velocity=[[2,4]]",
+      "output": "point=[[1,2]], velocity=[[2,4]], loss=0"
+    },
+    {
+      "name": "Wrong velocity at the start",
+      "input": "x0=[[0,0]], x1=[[2,4]], times=[0], predicted_velocity=[[0,0]]",
+      "output": "point=[[0,0]], velocity=[[2,4]], loss=10"
+    },
+    {
+      "name": "Different times per example",
+      "input": "x0=[[1],[2]], x1=[[3],[6]], times=[0,1], predicted_velocity=[[0],[0]]",
+      "output": "point=[[1],[6]], velocity=[[2],[4]], loss=10"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Give time a feature axis",
+      "body": "A (B,1) time array broadcasts across each row without mixing examples."
+    },
+    {
+      "title": "Differentiate the straight path",
+      "body": "The derivative with respect to time is x1-x0. The target is a velocity, not the current position."
+    }
+  ],
+  "explanation": [
+    "Changing time moves the point along the segment, but it does not change the target velocity for fixed endpoints. A model prediction would usually depend on that point and time; here it is supplied explicitly.",
+    "The mean includes both the batch and feature axes. Summing feature errors before averaging the batch introduces an extra factor of D.",
+    "Adapted the upstream velocity MSE and added an inspectable straight-path interpolation. Inputs and outputs are NumPy arrays, and no trained generative model is implied."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

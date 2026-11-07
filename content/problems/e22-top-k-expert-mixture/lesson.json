@@ -1,0 +1,47 @@
+{
+  "intro": "A mixture-of-experts router selects several expert outputs for each token and combines them with normalized gate weights. The selected experts and their relative weights answer different questions.",
+  "task": "Select exactly k experts per token, normalize their router logits and mix their supplied output vectors. Return the route and weights so the mixture can be inspected.",
+  "signature": "mix_experts(router_logits, expert_outputs, k)",
+  "requirements": [
+    "router_logits is a nonempty (N,E) matrix. expert_outputs has shape (N,E,O), with O>0. k is an integer in [1,E], excluding booleans.",
+    "For each token, select exactly k experts by descending logit, breaking ties by lower expert index. Compute stable softmax weights over only those selected logits.",
+    "Return a dictionary with output of shape (N,O), indices as an integer array of shape (N,k) in selection order, and weights of shape (N,k). output is the weighted sum of the selected expert vectors.",
+    "Expert outputs are supplied, so this demonstrates routing and mixing without evaluating expert networks, enforcing capacity limits, dropping tokens or claiming sparse-execution speedups.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Choose one expert",
+      "input": "router_logits=[[1,3,2]], expert_outputs=[[[10],[20],[30]]], k=1",
+      "output": "output=[[20]], indices=[[1]], weights=[[1]]"
+    },
+    {
+      "name": "Mix two selected experts",
+      "input": "router_logits=[[0,log(3),-10]], expert_outputs=[[[4],[8],[100]]], k=2",
+      "output": "output=[[7]], indices=[[1,0]], weights=[[0.75,0.25]]"
+    },
+    {
+      "name": "Resolve tied gates",
+      "input": "router_logits=[[0,0,0]], expert_outputs=[[[2],[6],[100]]], k=2",
+      "output": "output=[[4]], indices=[[0,1]], weights=[[0.5,0.5]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Normalize after selection",
+      "body": "Softmax over all experts leaves the retained weights summing to less than one when k<E."
+    },
+    {
+      "title": "Keep routes aligned with outputs",
+      "body": "The weight in column j belongs to expert indices[token,j], not necessarily expert j."
+    }
+  ],
+  "explanation": [
+    "With k=1 the selected output is returned exactly. With larger k, each token receives a convex combination of its selected expert vectors, and unselected expert outputs cannot affect it.",
+    "Stable index-order ties keep the routing deterministic. This contract chooses an exact count even when several experts share the boundary score.",
+    "Adapted the upstream top-k gate and weighted expert mixture to NumPy using supplied expert outputs. Removed learned router/expert layers and made exact index-order tie handling explicit."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

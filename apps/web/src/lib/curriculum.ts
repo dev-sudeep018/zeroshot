@@ -21,9 +21,9 @@ export const paths = [
     slug: "mathematics-to-ml",
     title: "Mathematics to Machine Learning",
     description:
-      "Connect vectors, probabilities, gradients, preprocessing, and evaluation to the behavior of a model.",
+      "Connect vectors, probabilities, gradients, preprocessing, and policy objectives to the behavior of a model.",
     outcome:
-      "Build and evaluate numerical models, inspect feature geometry, and preserve training/evaluation boundaries.",
+      "Build and evaluate numerical models, preserve evaluation boundaries, and compare policy and preference objectives.",
     items: [
       "m01",
       "m02",
@@ -42,6 +42,8 @@ export const paths = [
       "m15",
       "m16",
       "m17",
+      "m18",
+      "m19",
     ],
   },
   {
@@ -50,7 +52,7 @@ export const paths = [
     description:
       "Check derivatives, trace activation gradients, and inspect the operations and controls used in neural networks.",
     outcome:
-      "Trace neural-network operations and gradients, update optimizer state, and prepare sequence representations.",
+      "Trace neural-network operations, inspect attention and graph representations, and follow generative-model steps.",
     items: [
       "d01",
       "d02",
@@ -84,15 +86,23 @@ export const paths = [
       "d30",
       "d31",
       "d32",
+      "d33",
+      "d34",
+      "d35",
+      "d36",
+      "d37",
+      "d38",
+      "d39",
+      "d40",
     ],
   },
   {
     slug: "ai-engineering",
     title: "Practical AI Engineering",
     description:
-      "Turn documents into retrieval vectors, combine and diversify results, then evaluate relevance and ranking quality.",
+      "Turn documents into retrieval vectors, evaluate results, and inspect generation, caching, and expert routing.",
     outcome:
-      "Represent text, rank and select evidence, inspect tokenization, and evaluate predictions and probabilities.",
+      "Rank and select evidence, evaluate predictions, and trace decoding distributions, caches, and expert mixtures.",
     items: [
       "e01",
       "e02",
@@ -114,6 +124,8 @@ export const paths = [
       "e18",
       "e19",
       "e20",
+      "e21",
+      "e22",
     ],
   },
 ];

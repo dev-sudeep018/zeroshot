@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "checked_on": "2026-10-24",
-  "scope": "Source research includes repository metadata, exact license files and selected official pages. Each entry records its own inspection date. See batch-03-provenance.json, platform-pilot-provenance.json and platform-batch-02-provenance.json for actual adaptations; source listings do not count as published activities.",
+  "scope": "Source research includes repository metadata, exact license files and selected official pages. Each entry records its own inspection date. See batch-03-provenance.json, platform-pilot-provenance.json, platform-batch-02-provenance.json and platform-batch-03-provenance.json for actual adaptations; source listings do not count as published activities.",
   "sources": [
     {
       "id": "numpy-tutorials",
@@ -361,7 +361,7 @@
         "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/LICENSE"
       ],
       "decision": "adapt-first",
-      "runtime_fit": "PyTorch tasks need NumPy ports; eighteen activities adapted across platform-pilot-provenance.json and platform-batch-02-provenance.json.",
+      "runtime_fit": "PyTorch tasks need NumPy ports; thirty activities adapted across platform-pilot-provenance.json, platform-batch-02-provenance.json and platform-batch-03-provenance.json.",
       "topics": ["deep learning", "inference", "optimization"],
       "notes": "License identifies TorchCode-derived tasks and retains duoan/kiren copyrights. Preserve both full notices in each adapted reference. Forks and framework variants are not additional unique learning objectives.",
       "checked_on": "2026-10-24"

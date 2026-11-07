@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d37",
+  "kind": "lesson",
+  "slug": "depthwise-separable-convolution",
+  "version": 1,
+  "title": "Separate Spatial Filtering from Channel Mixing",
+  "summary": "A depthwise separable convolution first filters each channel independently, then mixes channels at each location. That factorization restricts the filters a layer can represent.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Convolution", "Channel factorization"],
+  "prerequisites": ["d09", "d11"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "depthwise_separable",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors; adapted from Pyre-Code / TorchCode",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Adapted MIT-licensed implementation: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/depthwise_conv.py",
+      "Upstream copyright (c) 2024 duoan and (c) 2024 kiren; full MIT notice retained in reference solution and THIRD_PARTY_NOTICE.md. Original additions: Apache-2.0; original prose: CC-BY-SA-4.0.",
+    ],
+}

@@ -24,7 +24,7 @@ Three connected entry points: guided learning, project-first learning, and open 
 
 ## Capabilities and Constraints
 
-The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The current 69 lessons include two debugging investigations, with three paths and a mini retrieval project. They establish reusable learning formats, not the final product size. All three entry points share content and progress.
+The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The current 81 lessons include two debugging investigations, with three paths and a mini retrieval project. They establish reusable learning formats, not the final product size. All three entry points share content and progress.
 
 Only implemented and validated activities count as available. Planned content and generated variants must not be presented as 2,000 distinct completed lessons. Per-item content and evaluators load on demand so the browser does not download the whole curriculum.
 
