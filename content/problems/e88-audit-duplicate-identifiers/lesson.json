@@ -1,0 +1,44 @@
+{
+  "intro": "A duplicate flag alone does not show where a collision came from. Grouping all occurrence positions supplies enough evidence to inspect every conflicting row.",
+  "task": "Report each duplicated ID with all zero-based occurrence positions.",
+  "signature": "duplicate_positions(ids)",
+  "requirements": [
+    "ids contains nonempty strings. Return only IDs appearing at least twice, mapped to all their zero-based positions in original order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Nonadjacent duplicates",
+      "input": "duplicate_positions(['a','b','a','a','b'])",
+      "output": "{'a': [0, 2, 3], 'b': [1, 4]}"
+    },
+    {
+      "name": "Unique IDs",
+      "input": "duplicate_positions(['a','b'])",
+      "output": "{}"
+    },
+    {
+      "name": "Adjacent duplicates",
+      "input": "duplicate_positions(['x','x'])",
+      "output": "{'x': [0, 1]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Collect every position first, then remove groups containing only one position."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Include the first occurrence in a duplicate group, not only the repeats."
+    }
+  ],
+  "explanation": [
+    "A duplicate flag alone does not show where a collision came from. Grouping all occurrence positions supplies enough evidence to inspect every conflicting row.",
+    "The first occurrence belongs in the report because it is part of the conflict. This audit intentionally keeps source rows untouched instead of choosing a winner."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

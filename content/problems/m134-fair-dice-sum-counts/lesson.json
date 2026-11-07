@@ -1,0 +1,45 @@
+{
+  "intro": "Exact outcome counts preserve the combinatorial structure before probability normalization. Middle totals have more realizations than edge totals even though individual faces are uniform.",
+  "task": "Build exact sum counts for a bounded number of fair dice and convert counts into probabilities.",
+  "signature": "fair_dice_counts(dice, sides)",
+  "requirements": [
+    "dice is an integer in 1..8 and sides is an integer in 2..12. Each die is uniform on 1..sides and independent.",
+    "Return {\"sums\": integers dice..dice*sides, \"counts\": exact Python integer outcome counts, \"probabilities\": counts/(sides**dice)}.",
+    "Build sum counts by repeated accumulation; do not enumerate all sides**dice tuples.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two six-sided dice",
+      "input": "fair_dice_counts(2,6)",
+      "output": "{'sums': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],\n 'counts': [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1],\n 'probabilities': [0.02777777778, 0.05555555556, 0.08333333333, 0.1111111111,\n                   0.1388888889, 0.1666666667, 0.1388888889, 0.1111111111,\n                   0.08333333333, 0.05555555556, 0.02777777778]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One small die",
+      "input": "fair_dice_counts(1,3)",
+      "output": "{'sums': [1, 2, 3],\n 'counts': [1, 1, 1],\n 'probabilities': [0.3333333333, 0.3333333333, 0.3333333333]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Three coin-like dice",
+      "input": "fair_dice_counts(3,2)",
+      "output": "{'sums': [3, 4, 5, 6],\n 'counts': [1, 3, 3, 1],\n 'probabilities': [0.125, 0.375, 0.375, 0.125]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Track how many ordered outcomes reach each total after each additional die."
+    },
+    {
+      "title": "Build the result",
+      "body": "For every current total, add its count to each total reachable by one new face."
+    }
+  ],
+  "explanation": [
+    "Exact outcome counts preserve the combinatorial structure before probability normalization. Middle totals have more realizations than edge totals even though individual faces are uniform.",
+    "The counts must sum to sides raised to dice, and the distribution is symmetric around dice*(sides+1)/2. Both checks are independent of the accumulation implementation."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

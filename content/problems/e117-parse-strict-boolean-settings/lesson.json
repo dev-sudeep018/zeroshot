@@ -1,0 +1,44 @@
+{
+  "intro": "Configuration values often arrive as text. Treating any nonempty string as true turns the literal false into a dangerous configuration error.",
+  "task": "Convert explicit true/false/yes/no/1/0 strings after trimming and case normalization.",
+  "signature": "parse_boolean_settings(values)",
+  "requirements": [
+    "values is a sequence of strings. Strip whitespace and lowercase each; true, yes, 1 map to True and false, no, 0 map to False. Reject any other token. Return a bool list aligned to input.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Named values",
+      "input": "parse_boolean_settings(['true','false'])",
+      "output": "[True, False]"
+    },
+    {
+      "name": "Trim and case",
+      "input": "parse_boolean_settings([' YES ','No'])",
+      "output": "[True, False]"
+    },
+    {
+      "name": "Numeric strings",
+      "input": "parse_boolean_settings(['1','0'])",
+      "output": "[True, False]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use an explicit lookup table rather than Python truthiness."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "The nonempty string false is truthy in Python; parsing must inspect its contents."
+    }
+  ],
+  "explanation": [
+    "Configuration values often arrive as text. Treating any nonempty string as true turns the literal false into a dangerous configuration error.",
+    "A small accepted vocabulary makes this conversion auditable. Unknown values are rejected rather than guessed, which helps callers catch misspellings early."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

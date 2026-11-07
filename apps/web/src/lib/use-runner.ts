@@ -8,7 +8,7 @@ import {
   RunnerMessageSchema,
   type RunRequest,
   type RunResult,
-} from "@mastery/runner-protocol";
+} from "@zeroshot/runner-protocol";
 
 export function useRunner(problemId: string, problemVersion: number) {
   const frame = useRef<HTMLIFrameElement>(null);

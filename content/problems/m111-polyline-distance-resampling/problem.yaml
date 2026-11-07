@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m111",
+  "kind": "lesson",
+  "slug": "polyline-distance-resampling",
+  "version": 1,
+  "title": "Sample a Path by Traveled Distance",
+  "summary": "Interpolate positions at cumulative path distances while skipping zero-length segments.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Sample a Path by Traveled Distance"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "resample_polyline",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

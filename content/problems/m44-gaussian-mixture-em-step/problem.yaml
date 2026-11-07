@@ -20,12 +20,12 @@
     },
   "estimated_minutes": 25,
   "status": "validated",
-  "author": "Project Mastery contributors",
+  "author": "ZeroShot contributors",
   "license": "CC-BY-SA-4.0",
   "code_license": "Apache-2.0",
   "attribution":
     [
-      "Original Project Mastery lesson, fixtures, and implementation.",
+      "Original ZeroShot lesson, fixtures, and implementation.",
       "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/mixture.html",
     ],
 }

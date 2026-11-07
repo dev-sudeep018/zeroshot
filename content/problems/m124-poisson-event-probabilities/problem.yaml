@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m124",
+  "kind": "lesson",
+  "slug": "poisson-event-probabilities",
+  "version": 1,
+  "title": "Count Events under a Poisson Model",
+  "summary": "Compute probabilities for requested integer counts and the expected count for a bounded positive rate.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Count Events under a Poisson Model"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "poisson_counts",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

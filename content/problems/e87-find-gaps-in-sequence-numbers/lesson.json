@@ -1,0 +1,44 @@
+{
+  "intro": "Sequence audits need explicit expected boundaries. Inferring the range from observed IDs would miss gaps before the first observed item or after the last.",
+  "task": "Return missing integer sequence IDs between explicit inclusive bounds.",
+  "signature": "missing_sequence_ids(ids, start, end)",
+  "requirements": [
+    "start and end are integers 0..1e9 with start <= end and end-start <= 1000. ids contains integers within that inclusive range; duplicates and unsorted IDs are allowed. Return all absent IDs in ascending order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Interior gaps",
+      "input": "missing_sequence_ids([2,4], 1, 5)",
+      "output": "[1, 3, 5]"
+    },
+    {
+      "name": "Duplicates ignored",
+      "input": "missing_sequence_ids([3,1,1], 1, 3)",
+      "output": "[2]"
+    },
+    {
+      "name": "Complete range",
+      "input": "missing_sequence_ids([0,1,2], 0, 2)",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Build a membership set from observed IDs, then scan the explicit range."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "The end is inclusive; include end when it has not been observed."
+    }
+  ],
+  "explanation": [
+    "Sequence audits need explicit expected boundaries. Inferring the range from observed IDs would miss gaps before the first observed item or after the last.",
+    "Duplicates do not fill additional sequence positions. A set removes repeated observations, while an ascending range provides deterministic missing-ID order."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

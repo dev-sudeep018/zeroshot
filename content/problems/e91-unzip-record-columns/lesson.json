@@ -1,0 +1,44 @@
+{
+  "intro": "Column extraction changes storage layout while preserving row alignment. Keeping every column in the same row order is essential for later model features and targets.",
+  "task": "Extract aligned lists from records according to an explicit field order.",
+  "signature": "record_columns(records, fields)",
+  "requirements": [
+    "fields is a list of unique nonempty strings. Every record must contain every selected field. Return a dictionary field -> list of copied values in row order; ignore unselected fields.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Aligned columns",
+      "input": "record_columns([{'a':1,'b':2},{'a':3,'b':4}], ['b','a'])",
+      "output": "{'b': [2, 4], 'a': [1, 3]}"
+    },
+    {
+      "name": "Ignore extra fields",
+      "input": "record_columns([{'x':1,'y':9}], ['x'])",
+      "output": "{'x': [1]}"
+    },
+    {
+      "name": "Empty rows",
+      "input": "record_columns([], ['x','y'])",
+      "output": "{'x': [], 'y': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Create one list for each selected field and preserve row order in every list."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A missing field is an error here; it must not silently become a padded value."
+    }
+  ],
+  "explanation": [
+    "Column extraction changes storage layout while preserving row alignment. Keeping every column in the same row order is essential for later model features and targets.",
+    "This strict schema differs from projection with missing-value filling. It catches incomplete records before they enter a rectangular dataset."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Serialization must quote separators, line breaks, and quotes consistently to remain readable by another parser. Explicit field order gives the file a stable schema.",
+  "task": "Write CSV rows with quoting and explicit columns, requiring every field.",
+  "signature": "serialize_csv_records(records, fields)",
+  "requirements": [
+    "fields is a nonempty list of unique nonempty strings. Every selected cell must be a string and present in each record; extra fields are ignored. Return csv.writer output with comma delimiter, minimal double-quote quoting, and LF line endings including a final LF.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Column order",
+      "input": "serialize_csv_records([{'a':'1','b':'2'}], ['b','a'])",
+      "output": "'b,a\\n2,1\\n'"
+    },
+    {
+      "name": "Quoted comma",
+      "input": "serialize_csv_records([{'x':'a,b'}], ['x'])",
+      "output": "'x\\n\"a,b\"\\n'"
+    },
+    {
+      "name": "Embedded quote",
+      "input": "serialize_csv_records([{'x':'a\"b'}], ['x'])",
+      "output": "'x\\n\"a\"\"b\"\\n'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Pass cells in the schema order to a real CSV writer."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Require string cells so None and numbers are not silently converted into ambiguous text."
+    }
+  ],
+  "explanation": [
+    "Serialization must quote separators, line breaks, and quotes consistently to remain readable by another parser. Explicit field order gives the file a stable schema.",
+    "Keeping conversion strict preserves the distinction between a missing value and an empty string. The final newline and line-ending choice are part of the output contract."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

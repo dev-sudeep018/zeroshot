@@ -1,0 +1,44 @@
+{
+  "intro": "A plateau policy keeps learning rate steady while validation improves and lowers it after repeated stalls.",
+  "task": "Return the learning rate to use after each epoch\u2019s validation, including repeated reductions down to a floor.",
+  "signature": "plateau_rates(losses, initial_rate, factor, patience, min_rate)",
+  "requirements": [
+    "losses is nonnegative; 0<=min_rate<=initial_rate<=1; factor lies strictly between zero and one; patience is an integer 1..64.",
+    "Epoch zero initializes the best loss. A strict new minimum resets stalls. Otherwise increment stalls; at patience stalls set rate=max(min_rate,rate*factor) and reset stalls to zero. Retain the best loss across reductions. Return a rate vector. No cooldown or min_delta is used.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repeated plateaus",
+      "input": "plateau_rates([3,3,3,3,3],1,0.5,2,0.1)",
+      "output": "[1.0, 1.0, 0.5, 0.5, 0.25]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Rate floor",
+      "input": "plateau_rates([2,2,2,2],0.4,0.5,1,0.15)",
+      "output": "[0.4, 0.2, 0.15, 0.15]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Improvement resets",
+      "input": "plateau_rates([3,3,2,2,2],1,0.5,2,0)",
+      "output": "[1.0, 1.0, 1.0, 1.0, 0.5]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Track best loss, consecutive stalls, and current rate as separate variables."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Record the rate after processing the epoch, so the reduction appears at that index."
+    }
+  ],
+  "explanation": [
+    "Reducing the step size can permit finer updates near a plateau. The explicit floor prevents repeated reductions from making the rate arbitrarily small.",
+    "A reduction does not erase the best validation observation. Keeping that reference avoids treating unchanged performance as an improvement merely because the optimizer rate changed."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

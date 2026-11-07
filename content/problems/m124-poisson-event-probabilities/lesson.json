@@ -1,0 +1,45 @@
+{
+  "intro": "A Poisson model describes a count using a nonnegative event rate; the expected count equals that rate. Evaluating selected masses differs from constructing a normalized truncated distribution.",
+  "task": "Compute probabilities for requested integer counts and the expected count for a bounded positive rate.",
+  "signature": "poisson_counts(rate, counts)",
+  "requirements": [
+    "rate is in [1e-6,100]. counts is a nonempty vector of integer-valued requested counts in 0..100, in any order.",
+    "Return {\"probabilities\": P(X=k) for each requested k, \"mean\": rate}. Repeated counts remain repeated.",
+    "Use exp(-rate+k*log(rate)-lgamma(k+1)) to avoid factorial overflow. Requested probabilities need not sum to one.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Rate two",
+      "input": "poisson_counts(2,[0,1,2,3])",
+      "output": "{'probabilities': [0.1353352832, 0.2706705665, 0.2706705665, 0.1804470443], 'mean': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Rare events",
+      "input": "poisson_counts(.1,[0,1,2])",
+      "output": "{'probabilities': [0.904837418, 0.0904837418, 0.00452418709], 'mean': 0.1}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Repeated requests",
+      "input": "poisson_counts(3,[2,0,2])",
+      "output": "{'probabilities': [0.2240418077, 0.04978706837, 0.2240418077], 'mean': 3.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "The logarithm of k! is lgamma(k+1), including the k=0 case."
+    },
+    {
+      "title": "Build the result",
+      "body": "Evaluate each requested count separately and preserve its original position."
+    }
+  ],
+  "explanation": [
+    "A Poisson model describes a count using a nonnegative event rate; the expected count equals that rate. Evaluating selected masses differs from constructing a normalized truncated distribution.",
+    "Logarithms avoid forming enormous factorials or powers before division. Exponentiating the final log probability is both simpler and more stable for larger requested counts."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Imported tags often differ only in surrounding whitespace or letter case. Cleaning before deduplication lets equivalent labels share one identity while preserving the first-seen ordering.",
+  "task": "Strip and lowercase tags, discard blanks, preserve first occurrence.",
+  "signature": "clean_tags(tags)",
+  "requirements": [
+    "Return a list of stripped, lowercased nonblank string tags. Keep only the first occurrence after normalization.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Whitespace and duplicates",
+      "input": "clean_tags([' AI ','ai','Data'])",
+      "output": "['ai', 'data']"
+    },
+    {
+      "name": "Blank tags",
+      "input": "clean_tags([' ', '', 'ML'])",
+      "output": "['ml']"
+    },
+    {
+      "name": "Order matters",
+      "input": "clean_tags(['Z','A','z'])",
+      "output": "['z', 'a']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Normalize each tag before deciding whether it has already appeared."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Skip a tag whose stripped form is empty; do not remove internal spaces."
+    }
+  ],
+  "explanation": [
+    "Imported tags often differ only in surrounding whitespace or letter case. Cleaning before deduplication lets equivalent labels share one identity while preserving the first-seen ordering.",
+    "A set alone loses the output sequence. Keep a result list for order and optionally a separate set for membership; normalization is deliberately lower(), not Unicode casefold()."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

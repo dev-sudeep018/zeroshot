@@ -1,0 +1,45 @@
+{
+  "intro": "The probability of a first success depends on every earlier failure. This distinction matters in retry systems and changing reliability conditions.",
+  "task": "Compute first-success probabilities and the leftover no-success mass from independent changing success rates.",
+  "signature": "first_success(rates)",
+  "requirements": [
+    "rates is a length 1..64 vector of independent trial success probabilities in [0,1]; probabilities may change between trials.",
+    "Return {\"first\": probability first success occurs at each zero-based trial, \"none\": probability all trials fail}.",
+    "After a certain success, all later first-success probabilities are zero.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Changing rates",
+      "input": "first_success([.2,.5,.25])",
+      "output": "{'first': [0.2, 0.4, 0.1], 'none': 0.3}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Certain later success",
+      "input": "first_success([0,1,.5])",
+      "output": "{'first': [0.0, 1.0, 0.0], 'none': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "All fail",
+      "input": "first_success([0,0,0])",
+      "output": "{'first': [0.0, 0.0, 0.0], 'none': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Carry the probability of surviving all earlier trials without a success."
+    },
+    {
+      "title": "Build the result",
+      "body": "Multiply survival by this trial success rate, then update survival with its failure rate."
+    }
+  ],
+  "explanation": [
+    "The probability of a first success depends on every earlier failure. This distinction matters in retry systems and changing reliability conditions.",
+    "The first-success masses plus the final failure mass form a complete partition. Their sum is one even when rates are zero or one, without a special geometric-series formula."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

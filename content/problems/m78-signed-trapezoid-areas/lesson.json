@@ -1,0 +1,45 @@
+{
+  "intro": "The trapezoidal rule integrates the straight line joining each adjacent pair of measurements. This makes it exact for a globally linear signal even on an uneven time grid.",
+  "task": "Return each signed trapezoidal area and cumulative integral for timestamped measurements.",
+  "signature": "trapezoid_integral(times, values)",
+  "requirements": [
+    "times is strictly increasing with at least two entries and values has the same length.",
+    "Each interval area is (times[i+1]-times[i])*(values[i]+values[i+1])/2. Return {\"area\": interval areas, \"cumulative\": [0] followed by their cumulative sums}.",
+    "Areas are signed; negative measurements contribute negative area. Nonuniform spacing is valid.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Uneven grid",
+      "input": "trapezoid_integral([0,1,3],[0,2,2])",
+      "output": "{'area': [1.0, 4.0], 'cumulative': [0.0, 1.0, 5.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Signed cancellation",
+      "input": "trapezoid_integral([0,1,2],[-1,0,1])",
+      "output": "{'area': [-0.5, 0.5], 'cumulative': [0.0, -0.5, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant signal",
+      "input": "trapezoid_integral([1,3,6],[2,2,2])",
+      "output": "{'area': [4.0, 6.0], 'cumulative': [0.0, 4.0, 10.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute a separate width for every neighboring timestamp pair."
+    },
+    {
+      "title": "Build the result",
+      "body": "Multiply each width by the average endpoint height, then prefix the running total with zero."
+    }
+  ],
+  "explanation": [
+    "The trapezoidal rule integrates the straight line joining each adjacent pair of measurements. This makes it exact for a globally linear signal even on an uneven time grid.",
+    "Returning interval contributions as well as the cumulative integral exposes where positive and negative area enters. The first cumulative value is zero because no interval has been traversed yet."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

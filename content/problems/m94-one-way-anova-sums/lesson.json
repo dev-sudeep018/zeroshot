@@ -1,0 +1,44 @@
+{
+  "intro": "Total variation can be split into variation of group means around the grand mean and variation of observations around their own group means. Unequal group sizes require weighting the first part by group counts.",
+  "task": "Compute grand mean, between-group and within-group sums of squares from labeled numeric observations.",
+  "signature": "anova_partition(values, labels, groups)",
+  "requirements": [
+    "groups is an integer in 1..64. labels is an integer-valued vector matching values, using every class ID 0..groups-1 at least once.",
+    "Return {\"grand_mean\": scalar, \"group_mean\": means ordered by ID, \"between\": sum(n_g*(mean_g-grand_mean)**2), \"within\": sum((x-mean_of_its_group)**2), \"total\": sum((x-grand_mean)**2)}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Separated groups",
+      "input": "anova_partition([1,3,6,8],[0,0,1,1],2)",
+      "output": "{'grand_mean': 4.5,\n 'group_mean': [2.0, 7.0],\n 'between': 25.0,\n 'within': 4.0,\n 'total': 29.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One group",
+      "input": "anova_partition([1,2,4],[0,0,0],1)",
+      "output": "{'grand_mean': 2.333333333,\n 'group_mean': [2.333333333],\n 'between': 0.0,\n 'within': 4.666666667,\n 'total': 4.666666667}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Each value a group",
+      "input": "anova_partition([1,3,8],[0,1,2],3)",
+      "output": "{'grand_mean': 4.0,\n 'group_mean': [1.0, 3.0, 8.0],\n 'between': 26.0,\n 'within': 0.0,\n 'total': 26.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute each group count and mean before its contribution to between-group variation."
+    },
+    {
+      "title": "Build the result",
+      "body": "Subtract the corresponding group mean from each observation to isolate within-group variation."
+    }
+  ],
+  "explanation": [
+    "Total variation can be split into variation of group means around the grand mean and variation of observations around their own group means. Unequal group sizes require weighting the first part by group counts.",
+    "The identity total=between+within is a numerical and conceptual check. This exercise reports descriptive sums of squares without claiming a hypothesis-test result or requiring distributional assumptions."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

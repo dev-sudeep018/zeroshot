@@ -1,0 +1,45 @@
+{
+  "intro": "The closing edge is easy to omit when vertices are stored without repeating the start. Treating the sequence cyclically ensures both perimeter and area include that edge.",
+  "task": "Compute perimeter and signed shoelace area without requiring a repeated closing vertex.",
+  "signature": "polygon_measurements(vertices)",
+  "requirements": [
+    "vertices is an (n,2) matrix with 3..64 rows. The final closing vertex is implicit; do not require repeating the first row.",
+    "Return {\"perimeter\": sum of edge lengths including last-to-first, \"signed_area\": shoelace sum/2}. For self-intersecting inputs the signed area is algebraic, not the area of the union.",
+    "Repeated or collinear vertices are allowed and contribute zero-length edges or zero signed area as appropriate.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Rectangle",
+      "input": "polygon_measurements([[0,0],[4,0],[4,3],[0,3]])",
+      "output": "{'perimeter': 14.0, 'signed_area': 12.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Clockwise triangle",
+      "input": "polygon_measurements([[0,0],[0,3],[4,0]])",
+      "output": "{'perimeter': 12.0, 'signed_area': -6.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Collinear vertices",
+      "input": "polygon_measurements([[0,0],[1,0],[3,0]])",
+      "output": "{'perimeter': 6.0, 'signed_area': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Pair each vertex with the next and wrap the last pair back to the first."
+    },
+    {
+      "title": "Build the result",
+      "body": "Use edge lengths for perimeter and cross products of vertex pairs for signed area."
+    }
+  ],
+  "explanation": [
+    "The closing edge is easy to omit when vertices are stored without repeating the start. Treating the sequence cyclically ensures both perimeter and area include that edge.",
+    "Perimeter is unchanged when traversal direction reverses, but signed shoelace area changes sign. For a simple polygon its absolute value is geometric area; self-crossing paths need a different interpretation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

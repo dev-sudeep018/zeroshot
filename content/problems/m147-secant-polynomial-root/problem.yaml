@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m147",
+  "kind": "lesson",
+  "slug": "secant-polynomial-root",
+  "version": 1,
+  "title": "Update a Root Estimate from Two Function Values",
+  "summary": "Apply a fixed number of secant iterations with clear zero-denominator handling.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Update a Root Estimate from Two Function Values"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "secant_polynomial",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

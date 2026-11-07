@@ -10,7 +10,13 @@ import {
 
 export const root = fileURLToPath(new URL("../", import.meta.url));
 export async function loadContent() {
-  const base = path.join(root, "content/problems");
+  const entries = await loadPackages(path.join(root, "content/problems"));
+  validateCatalog(entries.map((e) => e.problem));
+  return entries;
+}
+
+/** Read packages without assuming their prerequisites are in this directory. */
+export async function loadPackages(base: string) {
   const dirs = await readdir(base, { withFileTypes: true });
   const entries = await Promise.all(
     dirs
@@ -43,6 +49,5 @@ export async function loadContent() {
         };
       }),
   );
-  validateCatalog(entries.map((e) => e.problem));
   return entries.sort((a, b) => a.problem.id.localeCompare(b.problem.id));
 }

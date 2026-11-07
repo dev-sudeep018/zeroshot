@@ -1,0 +1,45 @@
+{
+  "intro": "A prefix table stores the sum from the origin to each boundary. Inclusion and exclusion of its four corners removes the unwanted strips while restoring the strip intersection.",
+  "task": "Use a summed-area table to answer half-open rectangular grid queries, including empty rectangles.",
+  "signature": "rectangle_sums(grid, rectangles)",
+  "requirements": [
+    "rectangles has shape (q,4), each integer-valued row [top,left,bottom,right] describing a half-open rectangle inside grid bounds.",
+    "Allow top==bottom or left==right and return zero for an empty rectangle. Reject reversed or outside bounds.",
+    "Return a NumPy vector of sums in query order. Build a padded two-dimensional cumulative sum to answer each query from four corners.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Whole and corner",
+      "input": "rectangle_sums([[1,2],[3,4]],[[0,0,2,2],[1,1,2,2]])",
+      "output": "[10.0, 4.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Empty rectangles",
+      "input": "rectangle_sums([[1,2]],[[0,0,0,2],[0,1,1,1]])",
+      "output": "[0.0, 0.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Overlapping queries",
+      "input": "rectangle_sums([[1,2,3],[4,5,6]],[[0,0,2,2],[0,1,2,3]])",
+      "output": "[12.0, 16.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Pad the cumulative-sum table with a zero row and column."
+    },
+    {
+      "title": "Build the result",
+      "body": "Combine bottom-right minus top strip minus left strip plus their overlap."
+    }
+  ],
+  "explanation": [
+    "A prefix table stores the sum from the origin to each boundary. Inclusion and exclusion of its four corners removes the unwanted strips while restoring the strip intersection.",
+    "Half-open rectangles compose cleanly: adjacent regions share a boundary but never share a cell. The same formula also handles empty rectangles without a special numerical case."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

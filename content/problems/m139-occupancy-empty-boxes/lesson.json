@@ -1,0 +1,45 @@
+{
+  "intro": "Empty boxes are not independent: placing an item into one box changes the composition of the remaining empty-box count. Summing only individual variances would ignore this dependence.",
+  "task": "Compute expected empty boxes and their variance for uniform independent placement.",
+  "signature": "empty_box_moments(boxes, placements)",
+  "requirements": [
+    "boxes is an integer in 1..10000 and placements is an integer in 0..10000. Each placement independently chooses a uniform box.",
+    "Return {\"mean\": expected number of empty boxes, \"variance\": variance of that count}.",
+    "For no placements all boxes are empty with variance zero. For one box, the count is deterministic. Otherwise use individual and paired empty-box probabilities.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two balls two boxes",
+      "input": "empty_box_moments(2,2)",
+      "output": "{'mean': 0.5, 'variance': 0.25}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No placements",
+      "input": "empty_box_moments(5,0)",
+      "output": "{'mean': 5.0, 'variance': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One box",
+      "input": "empty_box_moments(1,4)",
+      "output": "{'mean': 0.0, 'variance': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use an indicator for each box being empty, with probability (1-1/boxes)^placements."
+    },
+    {
+      "title": "Build the result",
+      "body": "Variance includes covariance between different empty-box indicators; their joint empty probability uses 1-2/boxes."
+    }
+  ],
+  "explanation": [
+    "Empty boxes are not independent: placing an item into one box changes the composition of the remaining empty-box count. Summing only individual variances would ignore this dependence.",
+    "Pairwise empty probabilities supply the covariance correction. Deterministic edge cases, such as no placements or one placement, are useful checks on the cancellation in the variance formula."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

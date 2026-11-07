@@ -1,0 +1,44 @@
+{
+  "intro": "Searching by a small query dictionary separates record order from matching criteria. Every requested field must agree, while additional record fields are allowed.",
+  "task": "Select the first record matching every supplied field and return its index.",
+  "signature": "first_match(records, query)",
+  "requirements": [
+    "Return the zero-based index of the first record containing every query key with an equal value, or -1. An empty query matches the first record. Missing differs from a present key whose value is None.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Several constraints",
+      "input": "first_match([{'a':1,'b':2},{'a':1,'b':3}], {'a':1,'b':3})",
+      "output": "1"
+    },
+    {
+      "name": "Missing is not None",
+      "input": "first_match([{}, {'a':None}], {'a':None})",
+      "output": "1"
+    },
+    {
+      "name": "First duplicate wins",
+      "input": "first_match([{'x':2},{'x':2}], {'x':2})",
+      "output": "0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Check key presence before comparing a value."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Stop immediately after the first match; do not return the last matching index."
+    }
+  ],
+  "explanation": [
+    "Searching by a small query dictionary separates record order from matching criteria. Every requested field must agree, while additional record fields are allowed.",
+    "Using row.get(key) alone confuses a missing field with an explicitly stored None. Checking membership first retains that distinction and makes empty-query behavior well defined."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "An implicit line equation can be multiplied by any nonzero constant without changing the geometric line. Dividing by the normal length removes that arbitrary scale from the distance.",
+  "task": "Return signed distance and perpendicular foot for a nondegenerate implicit 2D line.",
+  "signature": "point_line_projection(point, normal, offset)",
+  "requirements": [
+    "point and normal are length-two vectors. The line is normal dot x + offset = 0. Require norm(normal)>=1e-6.",
+    "Return {\"signed_distance\": (normal dot point+offset)/norm(normal), \"foot\": perpendicular nearest point on the line}. The normal direction determines the sign.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Horizontal line",
+      "input": "point_line_projection([2,4],[0,2],-2)",
+      "output": "{'signed_distance': 3.0, 'foot': [2.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Vertical line",
+      "input": "point_line_projection([-3,2],[1,0],-1)",
+      "output": "{'signed_distance': -4.0, 'foot': [1.0, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Sloping line",
+      "input": "point_line_projection([2,0],[1,1],-1)",
+      "output": "{'signed_distance': 0.7071067812, 'foot': [1.5, -0.5]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Evaluate the line equation at the point to obtain an unnormalized signed offset."
+    },
+    {
+      "title": "Build the result",
+      "body": "Normalize by the normal length, then move the point against the unit normal by that distance."
+    }
+  ],
+  "explanation": [
+    "An implicit line equation can be multiplied by any nonzero constant without changing the geometric line. Dividing by the normal length removes that arbitrary scale from the distance.",
+    "The foot must satisfy the line equation, and the displacement from the query must be parallel to the normal. Those two conditions characterize a perpendicular projection."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A local kernel deep in a network depends on a wider span of the original input. Stride changes the spacing of those dependencies.",
+  "task": "Trace theoretical receptive-field span and input-space jump after every layer.",
+  "signature": "receptive_fields(kernels, strides, dilations)",
+  "requirements": [
+    "The three inputs are equal-length integer vectors, length 1..8, entries 1..8. Start with field r=1 and jump j=1.",
+    "For each layer set r=r+(kernel-1)*dilation*j, then j=j*stride. Return {\"field\": vector, \"jump\": vector}. Compute spans on an unbounded one-dimensional input, without boundary padding.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two local layers",
+      "input": "receptive_fields([3,3],[1,1],[1,1])",
+      "output": "{'field': [3, 5], 'jump': [1, 1]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Early stride",
+      "input": "receptive_fields([3,3],[2,1],[1,1])",
+      "output": "{'field': [3, 7], 'jump': [2, 2]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Dilated layer",
+      "input": "receptive_fields([3,3],[1,1],[1,2])",
+      "output": "{'field': [3, 7], 'jump': [1, 1]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "The previous jump converts a kernel offset to input-space distance."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Expand the field before applying the current layer\u2019s stride."
+    }
+  ],
+  "explanation": [
+    "Composing local dependencies produces a larger receptive field. Jump tracks the spacing between consecutive output centers, so early strides magnify the effect of later kernels.",
+    "This theoretical span may contain gaps from dilation. It says which input range could matter, not that every location contributes equally on every example."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

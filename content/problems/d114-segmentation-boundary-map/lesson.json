@@ -1,0 +1,44 @@
+{
+  "intro": "Region boundaries reveal where neighboring pixels receive different class labels. Mark both sides of each local disagreement.",
+  "task": "Return a boolean map marking pixels with at least one differently labeled four-connected in-bounds neighbor.",
+  "signature": "segmentation_boundaries(labels)",
+  "requirements": [
+    "labels is a matrix of integer class IDs 0..1000000. Four-connected means above, below, left and right, excluding diagonals.",
+    "Treat positions outside the image as absent, not as background. A uniform image therefore has no boundary pixels, including at its outer edge.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Vertical split",
+      "input": "segmentation_boundaries([[1,1,2],[1,1,2]])",
+      "output": "[[False, True, True], [False, True, True]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Uniform region",
+      "input": "segmentation_boundaries(np.ones((3,3)))",
+      "output": "[[False, False, False], [False, False, False], [False, False, False]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Single pixel",
+      "input": "segmentation_boundaries([[4]])",
+      "output": "[[False]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Compare adjacent rows and adjacent columns, marking both members of each unequal pair."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Do not wrap around the image when checking an edge."
+    }
+  ],
+  "explanation": [
+    "A boundary map converts a region labeling into local transitions. Marking both sides avoids selecting an arbitrary foreground class and works for multiple semantic classes.",
+    "The neighborhood and outside-image convention are part of the definition. Diagonal-only contact does not count here, and the image border becomes a boundary only when an actual in-bounds neighbor differs."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,51 +1,65 @@
 ---
-name: Project Mastery
-description: A clear practice workbench for reading, coding, and interpreting feedback.
+name: ZeroShot
+description: A dark learning workspace with a separate public introduction.
 colors:
-  bg: "#0a0a0a"
-  surface: "#121212"
-  raised: "#1b1b1b"
-  hover: "#272727"
-  border: "#383838"
-  border-strong: "#7a7a7a"
-  text: "#ededed"
-  muted: "#b8b8b8"
-  subtle: "#9e9e9e"
-  accent: "#d4d4d4"
-  accent-ink: "#101010"
-  accent-hover: "#f0f0f0"
-  accent-soft: "#2b2b2b"
-  selection: "#4a4a4a"
-  code: "#d6d6d6"
-  success: "#84dba2"
-  danger: "#ff8f96"
-  danger-surface: "#2a171a"
-  warning: "#f1c979"
-  warning-surface: "#2a2316"
-  info: "#8fbaff"
-  syntax-keyword: "#b4b6ff"
-  syntax-string: "#9ed7bc"
-  syntax-number: "#edc391"
+  bg: "#101416"
+  surface: "#171d20"
+  raised: "#1e2629"
+  hover: "#253033"
+  border: "#303b3f"
+  border-strong: "#647571"
+  text: "#eceee9"
+  muted: "#a5afad"
+  subtle: "#95a29f"
+  accent: "#b6dac6"
+  accent-ink: "#13241b"
+  accent-hover: "#cce8d9"
+  accent-soft: "#22372d"
+  selection: "#345749"
+  code: "#d5ded9"
+  success: "#91d5a8"
+  danger: "#f3a0a6"
+  danger-surface: "#362126"
+  warning: "#e6c187"
+  warning-surface: "#342c1e"
+  info: "#9ebee8"
+  syntax-keyword: "#c4b7ef"
+  syntax-string: "#a5d7b8"
+  syntax-number: "#e4bd8d"
+  topic-math: "#a7ceba"
+  topic-math-surface: "#21332c"
+  topic-deep: "#a9bedc"
+  topic-deep-surface: "#242e3d"
+  topic-engineering: "#d7bd95"
+  topic-engineering-surface: "#342e24"
+  public-surface: "#141b1c"
+  portal-navigation: "#141a1c"
 typography:
+  display:
+    fontFamily: '"Manrope", "Segoe UI", sans-serif'
+    fontSize: "clamp(54px, 5.55vw, 78px)"
+    fontWeight: 600
+    lineHeight: 1.1
+    letterSpacing: "-0.04em"
   headline:
-    fontFamily: '"Segoe UI", system-ui, sans-serif'
-    fontSize: "27px"
+    fontFamily: '"Manrope", "Segoe UI", system-ui, sans-serif'
+    fontSize: "30px"
     fontWeight: 600
     lineHeight: 1.3
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.03em"
   title:
-    fontFamily: '"Segoe UI", system-ui, sans-serif'
+    fontFamily: '"Manrope", "Segoe UI", system-ui, sans-serif'
     fontSize: "20px"
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: "-0.015em"
   body:
-    fontFamily: '"Segoe UI", system-ui, sans-serif'
+    fontFamily: '"Manrope", "Segoe UI", system-ui, sans-serif'
     fontSize: "14px"
     lineHeight: 1.6
   label:
-    fontFamily: '"Segoe UI", system-ui, sans-serif'
-    fontSize: "11px"
+    fontFamily: '"Manrope", "Segoe UI", system-ui, sans-serif'
+    fontSize: "12px"
     fontWeight: 600
   code:
     fontFamily: 'Consolas, "Liberation Mono", monospace'
@@ -53,8 +67,8 @@ typography:
     lineHeight: "24px"
 rounded:
   compact: "4px"
-  control: "6px"
-  content: "7px"
+  field: "6px"
+  control: "7px"
   standard: "8px"
   container: "10px"
   working-panel: "12px"
@@ -65,165 +79,113 @@ spacing:
   content: "16px"
   section: "20px"
   roomy: "24px"
+  group: "32px"
+  page: "40px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.accent-ink}"
-    typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "8px 12px"
+    padding: "11px 17px"
   button-secondary:
-    backgroundColor: "{colors.hover}"
-    rounded: "{rounded.control}"
-    typography: "{typography.label}"
-    padding: "8px 12px"
-  search-field:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text}"
     rounded: "{rounded.control}"
-    padding: "11px"
-    width: "300px"
-  problem-card:
+    padding: "9px 15px"
+  public-primary:
+    backgroundColor: "{colors.accent}"
+    rounded: "{rounded.field}"
+    padding: "14px 21px"
+  auth-field:
     backgroundColor: "{colors.surface}"
-    rounded: "{rounded.container}"
-    padding: "25px"
+    textColor: "{colors.text}"
+    rounded: "{rounded.field}"
+    padding: "10px 13px"
+  topic-label:
+    rounded: "{rounded.compact}"
+    padding: "3px 7px"
+  working-panel:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.working-panel}"
+    padding: "26px"
 ---
 
-# Design System: Project Mastery
+# Design System: ZeroShot
 
 ## Overview
 
 **Creative North Star: "A clear practice workbench"**
 
-The user-selected dark workspace uses restrained light grey accents to keep reading, editing, and diagnostic feedback central. Black grounds and charcoal surfaces make a compact, familiar tool environment. System UI type is intentional for this code workspace; monospaced code and mathematical notation retain their own functional voices.
+A clear practice workbench. Charcoal grounds, warm off-white type, and restrained seafoam actions support reading, experimentation, and code. This records the implemented dark system on 7 November 2026 and supersedes the earlier light-theme notes, following the user's explicit direction.
 
-The source is the implemented global stylesheet and workspace, shell, learning, experiment, and retrieval-project components. This record captures shipped choices rather than introducing a new identity. Dense controls serve the work, while larger reading regions retain generous line height. Motion is limited to control feedback, expanding results, and running state.
+The public introduction and learning portal share typography, color, and the compact ZeroShot mark. Their navigation and density stay distinct: broad public compositions explain the product; the portal puts the next task, saved work, and tools within reach. Component boundaries use tone and thin lines. Images of fictional users, decorative dashboards, and unsupported claims have no role in this system.
+
+Implementation sources are the global, marketing, portal, and authentication stylesheets, their current components, and the desktop/mobile review captures. This is a visual specification, not a release or accessibility certification.
 
 **Key Characteristics:**
 
-- Black and charcoal surfaces with light grey actions and selections, plus distinct semantic feedback colors.
-- Compact controls, readable prose, and real monospaced code.
-- Flat bordered panels with feedback adjacent to the editor.
-- Connected reading, experiment, and project surfaces with responsive navigation and a mobile description/code switch.
+- Charcoal grounds, warm off-white type, and restrained seafoam actions.
+- Shared typography and identity with separate public and learning navigation.
+- Flat surfaces, thin borders, readable lesson rows, and explicit status text.
+- Self-hosted Manrope for the interface and monospace for code.
 
 ## Colors
 
-The user-selected black and light grey base uses distinct colors for semantic feedback and Python syntax; ordinary actions and charts retain neutral tones. The frontmatter is the normative primitive source; repeated values represent distinct semantic roles.
+Seafoam is the primary action and selection accent. Use its dark ink for filled actions and its soft surface for selected navigation. The hover shade provides immediate feedback without glow.
 
-### Primary
+Charcoal background, surface, raised, and hover tokens form the neutral depth scale. Warm white carries headings and reading content; muted and subtle text serve secondary explanations and metadata. Strong borders identify editable fields and secondary actions. Public panels and the fixed portal navigation have their own closely related dark surfaces.
 
-- **Light grey** (`accent`): actions, selected controls, links, focus outlines, and measured values. `accent-hover` lightens primary action hover and `accent-soft` fills selected states.
-- **Black action ink** (`accent-ink`): text on light grey actions.
+Topic colors distinguish mathematics, deep learning, and engineering with muted green, blue, and sand pairs. They support category labels and diagrams rather than recoloring whole pages. Syntax colors belong to code. Success, danger, warning, and information tokens are semantic, with dark error and warning surfaces.
 
-### Neutral
-
-- **Black ground** (`bg`): page canvas and inset reading regions.
-- **Charcoal surface** (`surface`): editor, fields, and workbench.
-- **Raised charcoal** (`raised`) and **hover charcoal** (`hover`): distinct working and interactive surfaces.
-- **Grey boundaries** (`border`, `border-strong`): panel separation and stronger field/action outlines respectively.
-- **Reading white** (`text`), **muted grey** (`muted`), and **subtle grey** (`subtle`): content hierarchy.
-- **Selection grey** (`selection`) and **code grey** (`code`): selected text and code reading.
-
-### Semantic feedback and syntax
-
-- **Success green** (`success`): passed tests, completion indicators, and successful backup or report notices.
-- **Error red** (`danger`, with `danger-surface`): failed checks, errors, and unexpected brackets.
-- **Warning amber** (`warning`, with `warning-surface`): timeouts, replacement confirmations, and storage cautions.
-- **Information blue** (`info`): running, cancelled, and informational states.
-- **Syntax lavender**, **mint**, and **warm tan** (`syntax-keyword`, `syntax-string`, `syntax-number`): differentiated Python tokens. Keywords remain bold and comments italic.
-
-Explicit wording and icons accompany state colors; color alone does not communicate an outcome.
-
-### Named Rules
-
-**The Explicit State Rule.** Pair semantic colors with icons and wording: green success, red failure, amber caution, and blue information. Keep ordinary actions and working surfaces neutral.
+**The Explicit State Rule.** Pair every diagnostic color with meaningful text or an icon. Accent indicates interaction; it does not imply that a lesson has passed.
 
 ## Typography
 
-**Body and heading font:** Segoe UI with system-ui and sans-serif fallbacks.
-**Code font:** Consolas with Liberation Mono and monospace fallbacks.
-**Formula font:** Georgia with serif fallback.
+Manrope is self-hosted in the web public fonts directory with its license. Use the existing system fallbacks; no runtime font-provider request is required. Consolas and Liberation Mono carry code, filenames, and numeric operation previews.
 
-The hierarchy is functional rather than promotional. UI labels remain compact; prose line height increases in explanation regions. No separate display face is established.
+The public display role is broad and tightly spaced, with seafoam emphasis inside the headline. Section headings are smaller and remain sentence case. Portal titles are compact; body text preserves a comfortable reading line and long lesson descriptions stay around 68–75 characters wide. Metadata is deliberately smaller than explanatory prose.
 
-### Hierarchy
-
-- **Headline:** the frontmatter headline role is the default exercise title; it reduces to 24px below 1250px and 23px below 700px. General page headings use 35px and reduce to 29px on mobile. Connected learning headings use 36px, a 24ch maximum width, and 28px on mobile.
-- **Title:** the frontmatter title role serves content sections; smaller section headings use 15px at weight 600.
-- **Body:** the frontmatter body role is the base. Exercise prose uses 13px with 1.85 line height, growing to 14px on large desktops. Page lead copy uses 15px with 1.8 line height and a 620px maximum width.
-- **Label:** compact primary and secondary actions use the frontmatter label role. Supporting controls and navigation commonly use 12–13px.
-- **Code:** the editor uses the code role, wrapping long lines. Inline code is 0.92em; reference and diagnostic blocks use smaller monospaced text.
-
-**The Separate Reading Roles Rule.** Use UI type for explanations and controls, monospace for code and filenames, and serif notation only for mathematics.
+At narrow widths, the public headline resolves to 43px and the portal title to 26px. Account inputs use 16px text below 600px, while labels remain visually subordinate. Do not transplant public display scale into task screens.
 
 ## Layout
 
-Desktop uses a fixed left sidebar and a flexible main region. The sidebar is 216px by default, 240px from 1600px, 185px at 1250px and below, and a 67px icon rail at 950px and below. At 700px and below it becomes a wrapping header with a horizontally scrollable navigation row above the content.
+The public site uses a centered container capped at 1376px with 56px side padding, reduced to 36px at 1100px and 22px at 500px. Its desktop header is horizontal. At 800px navigation wraps into a second row and major two-column sections stack. The interactive explanation moves from three columns to two, then a single reading sequence at the narrowest breakpoint.
 
-The workbench uses a description/editor grid with a 7px separator. The initial description width is 44%; pointer and keyboard resizing constrain it to 30–62%. Toolbars align across the two panes at 46px high. The editor, run controls, and results form one vertical working column. Desktop panels scroll internally; focus mode expands the editor across the workbench.
+The portal has a fixed 224px left navigation column above 1099px. The content area begins beside it, with a 64px breadcrumb bar and a centered main region capped at 1360px. Page padding steps from 40px to 28px and then 20px. At 1099px the navigation becomes a top row with a labelled menu button. The expanded menu uses three columns, then two below 720px.
 
-At 700px and below, a two-option switch presents description or code in a single column. The separator disappears, content flows vertically, and run buttons share the available width. Inline replacement confirmations wrap above the editor. General content pages use a centered 1070px maximum width, with 54px/44px desktop vertical/horizontal entry padding and 32px/20px mobile padding.
+The dashboard's primary learning column and 280px companion column remain distinct until 720px, where they stack. The library uses readable, alternating lesson rows and explicit filters. Coding retains resizable panels and the existing narrow-screen reading/code switch. Account forms are centered at a maximum 420px; account management uses the portal shell and a maximum 960px region.
 
-Connected learning pages extend to a 1160px maximum width, keep prose within 72ch, and use divider-led lesson rows. Learning entry sections use a 1.2fr/1fr grid; open experiments use a 210px topic column beside the working surface. Comparison controls use two columns and rankings three. At 1100px, continuation/project introductions stack and search spans the filter grid; at 700px, learning, experiment, and comparison layouts become single-column, with horizontally scrolling experiment topics. Tables retain horizontal overflow within their container.
-
-Spacing favors compact 4–12px control gaps and 16–28px content insets. Preserve room for explanatory prose rather than applying the toolbar density to every region.
+**The Separate Destinations Rule.** The public home explains ZeroShot and links into `/learn/`; it does not impersonate the learner's personal dashboard. Keep return links visible in both environments.
 
 ## Elevation & Depth
 
-The application stylesheet defines no box shadows. Depth comes from tonal surface differences and thin grey boundaries. The workbench is one enclosing container with internal dividers, not a pile of independently elevated cards. Monaco owns its editor overlays.
+The current interface is flat. Tone, spacing, one-pixel borders, and selected fills separate regions. The public preview and next-lesson panel have contained surfaces, while path lists, curriculum rows, and account sections rely on dividers. Do not add floating shadows or ambient glow to ordinary controls.
 
-**The Flat Workbench Rule.** Separate adjacent working regions with tone and borders; retain the existing flat surface treatment.
+Hover and selection change color or background. The public diagram and result bars reflect actual inputs; they are not background decoration. Respect the existing reduced-motion rules. Short control transitions communicate state without delaying actions.
 
 ## Shapes
 
-Corners are restrained: compact badges and icon controls use the compact radius; ordinary actions, navigation, and search use the control radius; examples, hints, and reference code use the content radius; major workbench and catalog containers use the container radius. Continuation, project entry, and experiment panels use the working-panel radius. Borders are generally 1px. Icons are stroke SVGs, not textual glyph substitutes.
+Small rectangular controls use gentle corners. Metadata uses the compact radius; form fields and public calls to action use the field radius; portal buttons use the control radius. Larger working panels use the working-panel radius. Rows and account sections remain flat and square-edged.
+
+The compact ZeroShot letter mark and wordmark are reused across public, portal, and authentication headers. Topic diagrams use thin neutral geometry derived from their subject. Avoid adding unrelated decorative symbols.
 
 ## Components
 
-### Buttons
-
-Compact and legible. Primary actions use light grey with dark ink; secondary actions use a dark charcoal fill and subdued border. Both use the frontmatter control shape and padding, with a 35px minimum height and a 7px icon gap. Primary hover lightens the fill over 0.16 seconds; secondary actions retain their fill and use the stronger boundary. Disabled buttons reduce opacity to 0.48 and use a not-allowed cursor. Keyboard focus uses a 2px accent outline offset by 4px. Icon buttons are 29px squares with compact corners and a charcoal hover fill.
-
-### Chips
-
-The difficulty badge is a passive label: a soft charcoal fill, light grey text, compact corners, and 2px/8px vertical/horizontal padding. Do not imply filter behavior for this noninteractive badge.
-
-### Cards / Containers
-
-Catalog cards use the frontmatter container style, a thin boundary, and a horizontal content/action arrangement. Mobile cards wrap with 20px padding and place the action after the description. Hints use disclosure controls; examples and code references use darker inset surfaces. Containers do not gain hover elevation.
-
-### Inputs / Fields
-
-Search uses a bordered charcoal field with an icon, transparent input, and muted placeholder. Its width becomes fluid on mobile. A 2px accent outline with a 2px offset surrounds the whole field on focus-within. No error variant for general text fields is established.
-
-### Navigation
-
-Navigation links have compact corners, muted text, and SVG icons. Hover uses a raised charcoal surface; the current page has a soft charcoal fill and pale text. The rail becomes icon-only at the medium breakpoint; mobile restores text labels and horizontal scrolling above content. Resource tabs use text emphasis and a 2px accent underline, with keyboard arrow navigation. The mobile workspace switch uses filled selection rather than an underline.
-
-### Connected learning and experiment surfaces
-
-Lesson rows use a bottom divider, compact metadata, a clear title, and a trailing continuation or completion indicator; hover changes the background to the raised surface. Continuation and project entry panels use a raised fill, thin border, and larger working-panel corners.
-
-Experiments place native range controls beside visible outputs, explanatory prose, and SVG or CSS diagrams. Measurements use tabular figures; definition-list values and table cells use Consolas. Reading pages use underlined light grey text links to connect lessons, experiments, and projects. Project evidence uses native disclosure rows, comparison tables, rankings, and a resizable reflection textarea. Selects and textareas use charcoal surfaces, stronger boundaries, control corners, 10px/12px padding, and visible focus outlines.
-
-### Editor and feedback
-
-The Monaco theme shares the charcoal surface with its surrounding workbench. Line numbers, indentation, current line, and selection use distinct subdued tones; syntax uses differentiated keyword, string, and number colors with bold keywords and italic comments. Theme inheritance is disabled and the default token uses the neutral text color; editor overlays, selection, and cursor use the shared grey roles. Editor errors, warnings, and information use their semantic colors. Bracket colorization is disabled at the editor and model levels; ordinary brackets remain neutral and unexpected brackets use the error role. Minimap, folding, and glyph margin are disabled, with 20px editor top/bottom padding and 4-space tabs.
-
-Run controls sit directly above diagnostic results. Individual test rows are expandable and pair passed/failed wording with icons and color. Result chevrons rotate over 0.18 seconds. A spinner indicates running work. Reduced-motion preference disables CSS transitions and animations. Confirmation prompts for replacing code remain inline, use warning tones, and wrap rather than becoming a modal. Timeout feedback uses warning amber; running and cancelled states use information blue. Successful completion and export/import notices use success green, while storage cautions use warning amber.
+- **Actions:** filled seafoam is the primary action, bordered dark surfaces are secondary, and supporting links use text with underline on hover. Disabled buttons visibly dim. Keyboard focus is an explicit two-pixel outline with space from the control.
+- **Navigation:** public links show the active destination with text and an underline. Portal navigation shows the active destination with a soft accent fill and persistent label. The narrow portal menu exposes its expanded state and remains keyboard operable.
+- **Learning rows:** a title, concise explanation, topic, difficulty, and progress state establish a scan order. Alternate surface tone aids reading without turning every lesson into a floating card.
+- **Working panels:** experiments, next lessons, progress, and backups use contained sections only where content needs grouping. Keep the relevant action close to its explanation.
+- **Authentication:** visible email/password labels, a password visibility button, request status, and a separate guest action stay readable at mobile widths. Error notices receive focus and use alert semantics; success notices use status semantics. Account copy explicitly explains that sign-in does not synchronize code or progress yet.
+- **Feedback:** test results pair color with text, expandable details, and recovery controls. Optional momentum records practice and does not imply expertise or remove progress after a missed week.
 
 ## Do's and Don'ts
 
-### Do:
-
-- **Do** retain dark charcoal working surfaces and light grey interaction emphasis with explicitly labelled diagnostic states.
-- **Do** preserve distinct UI, code, and mathematics type roles.
-- **Do** keep keyboard focus visible and pair result color with explicit status text.
-- **Do** adapt navigation and workspace panels to the available width.
-
-### Don't:
-
-- **Don't** turn restrained accents into large bright decorative panels.
-- **Don't** replace the flat workbench with shadow-heavy floating cards.
-- **Don't** encode success or failure through color alone.
-- **Don't** apply dense toolbar typography to long instructional paragraphs.
+- Do preserve the dark palette and distinguish the public website from the learning portal.
+- Do use real interactive examples and actual learner state where available.
+- Do keep focus visible, input labels explicit, and touch actions reachable.
+- Do preserve guest learning and accurate local-storage explanations.
+- Do keep code, content, and navigation in a readable order on narrow screens.
+- Don't reintroduce the rejected light theme or merge the public home into the dashboard.
+- Don't fabricate learners, outcomes, testimonials, or synchronization capabilities.
+- Don't use color alone to explain success, error, topic, or selection.
+- Don't add decorative gradients, glow, or shadow-heavy containers to this flat system.

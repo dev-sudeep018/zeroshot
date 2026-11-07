@@ -1,0 +1,44 @@
+{
+  "intro": "Round-wise interleaving combines sources fairly by position while preserving order within every source. It differs from ranked deduplication because repeated items remain legitimate occurrences.",
+  "task": "Take one item from each nonempty stream per round until all are exhausted.",
+  "signature": "interleave_streams(streams)",
+  "requirements": [
+    "streams is a sequence of item sequences. Take one item from each stream in original stream order per round, skipping exhausted streams. Return one copied flat list; no deduplication.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Unequal stream lengths",
+      "input": "interleave_streams([[1,2,3],['a']])",
+      "output": "[1, 'a', 2, 3]"
+    },
+    {
+      "name": "Empty middle stream",
+      "input": "interleave_streams([[1],[],[2,3]])",
+      "output": "[1, 2, 3]"
+    },
+    {
+      "name": "Two full rounds",
+      "input": "interleave_streams([[1,2],[3,4]])",
+      "output": "[1, 3, 2, 4]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Track the round index and check it against each stream length before reading."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Exhaustion removes only that stream from later rounds, not the remaining items elsewhere."
+    }
+  ],
+  "explanation": [
+    "Round-wise interleaving combines sources fairly by position while preserving order within every source. It differs from ranked deduplication because repeated items remain legitimate occurrences.",
+    "The number of output items equals the sum of input stream lengths. Empty streams contribute nothing and should not terminate processing of other streams."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,46 @@
+{
+  "intro": "Two learning objectives may request opposing movements of shared parameters. Inspect their pairwise direction agreement.",
+  "task": "Return cosine similarities and a boolean matrix identifying negative direction agreement, treating absolute cosine values at most 1e-12 as numerical zero.",
+  "signature": "gradient_conflicts(gradients)",
+  "requirements": [
+    "gradients is tasks-by-parameters. Define cosine as zero whenever either row has zero norm.",
+    "Round cosine values with absolute magnitude at most 1e-12 to zero before identifying conflicts. This numerical zero band makes orthogonal-gradient decisions consistent across native and browser runtimes. Normalize nonzero rows without underflowing their norms.",
+    "Return {\"cosine\": square matrix, \"conflict\": boolean square matrix}. Nonzero rows have self-cosine one; zero rows have self-cosine zero.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Opposing tasks",
+      "input": "gradient_conflicts([[1,0],[-1,0],[0,1]])",
+      "output": "{'cosine': [[1.0, -1.0, 0.0], [-1.0, 1.0, 0.0], [0.0, 0.0, 1.0]],\n 'conflict': [[False, True, False],\n              [True, False, False],\n              [False, False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Zero task",
+      "input": "gradient_conflicts([[0,0],[2,1]])",
+      "output": "{'cosine': [[0.0, 0.0], [0.0, 1.0]],\n 'conflict': [[False, False], [False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Same direction",
+      "input": "gradient_conflicts([[1,2],[2,4]])",
+      "output": "{'cosine': [[1.0, 1.0], [1.0, 1.0]],\n 'conflict': [[False, False], [False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Normalize nonzero rows, then form their Gram matrix."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Opposite vectors conflict, while perpendicular and zero vectors do not."
+    }
+  ],
+  "explanation": [
+    "A negative dot product means a step improving one linearized task can worsen the other. Cosine similarity removes magnitude to isolate this directional disagreement.",
+    "The audit is local to the supplied gradients. It does not modify them or establish long-term task incompatibility, and zero gradients have no defined direction under the chosen zero convention.",
+    "Orthogonal directions can produce a tiny signed residual because floating-point reductions differ across runtimes. The explicit 1e-12 zero band prevents that residual from becoming a conflict. Scale each nonzero row before taking its norm so extremely small gradients retain their direction."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

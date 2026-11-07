@@ -1,0 +1,44 @@
+{
+  "intro": "An optimizer can transform gradients before producing a direction. Apply parameter shrinkage independently of that transformed direction.",
+  "task": "Return the proposed parameters and separate optimization and decay changes.",
+  "signature": "decoupled_decay(weights, direction, learning_rate, decay)",
+  "requirements": [
+    "weights and direction are matching vectors; learning_rate and decay lie in [0,1]. direction is already computed by an optimizer.",
+    "Return {\"weights\": w-lr*direction-lr*decay*w, \"optimizer_delta\": -lr*direction, \"decay_delta\": -lr*decay*w}. Both terms use the original weights.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two update sources",
+      "input": "decoupled_decay([2,-4],[1,-2],0.1,0.5)",
+      "output": "{'weights': [1.8, -3.6],\n 'optimizer_delta': [-0.1, 0.2],\n 'decay_delta': [-0.1, 0.2]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Decay only",
+      "input": "decoupled_decay([2,-2],[0,0],0.5,0.2)",
+      "output": "{'weights': [1.8, -1.8],\n 'optimizer_delta': [-0.0, -0.0],\n 'decay_delta': [-0.2, 0.2]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "No decay",
+      "input": "decoupled_decay([1,2],[3,4],0.1,0)",
+      "output": "{'weights': [0.7, 1.6],\n 'optimizer_delta': [-0.3, -0.4],\n 'decay_delta': [-0.0, -0.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Compute both changes from the same starting parameter state."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Applying decay to the already updated weights introduces a different cross term."
+    }
+  ],
+  "explanation": [
+    "Decoupling makes the parameter shrinkage independent of the optimizer\u2019s transformation of the gradient. The direction could already include momentum or adaptive scaling.",
+    "In plain SGD this expression can coincide with an L2-gradient update. That equivalence does not generally hold after nonlinear or coordinate-dependent gradient transformations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

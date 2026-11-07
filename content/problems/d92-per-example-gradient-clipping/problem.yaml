@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d92",
+  "kind": "lesson",
+  "slug": "per-example-gradient-clipping",
+  "version": 1,
+  "title": "Clip Individual Gradients before Averaging",
+  "summary": "A single example can dominate a batch update. Restrict each example\u2019s contribution before reducing the batch.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Clip Individual Gradients before Averaging"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "clip_example_gradients",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1607.00133",
+    ],
+}

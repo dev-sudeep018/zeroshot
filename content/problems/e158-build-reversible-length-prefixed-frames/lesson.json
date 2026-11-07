@@ -1,0 +1,44 @@
+{
+  "intro": "Length-prefixed frames can carry text containing any delimiter without escaping it. The length counts bytes so a decoder can locate the next frame before interpreting text.",
+  "task": "Encode and decode UTF-8 text frames with decimal byte lengths and reject malformed frames.",
+  "signature": "text_frames(value, mode)",
+  "requirements": [
+    "For mode=\"encode\", value is a sequence of strings: return bytes formed by decimal UTF-8 byte length, colon, then payload for each string, with no separator between frames. Reject encoding if the complete framed stream would exceed 10000000 bytes, including headers. For mode=\"decode\", value is bytes of at most 10000000 bytes: return decoded strings. Length headers must contain 1..8 ASCII digits with no leading zero except \"0\". Reject missing/truncated frames, invalid UTF-8, or decoded strings over 10000 characters or more than 1000 frames.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Encode empty and ASCII",
+      "input": "text_frames(['a','',':'],'encode')",
+      "output": "b'1:a0:1::'"
+    },
+    {
+      "name": "Decode embedded delimiter",
+      "input": "text_frames(b'3:a:b0:','decode')",
+      "output": "['a:b', '']"
+    },
+    {
+      "name": "Decode multibyte text",
+      "input": "text_frames(b'2:\\xc3\\xa9','decode')",
+      "output": "['\u00e9']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Advance by the declared byte length, not by searching for the next colon in a payload."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Decode UTF-8 only after extracting exactly one byte payload."
+    }
+  ],
+  "explanation": [
+    "Length-prefixed frames can carry text containing any delimiter without escaping it. The length counts bytes so a decoder can locate the next frame before interpreting text.",
+    "Strict length syntax removes alternate encodings of the same frame. Truncation and invalid UTF-8 must be reported rather than returning a partial decoded result."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m150",
+  "kind": "lesson",
+  "slug": "bernoulli-naive-bayes-scores",
+  "version": 1,
+  "title": "Score Binary Features with Both Outcomes",
+  "summary": "Compute class log scores from priors and conditional feature probabilities, including absent features.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Score Binary Features with Both Outcomes"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bernoulli_log_scores",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

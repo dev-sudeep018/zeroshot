@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m75",
+  "kind": "lesson",
+  "slug": "seasonal-difference-reconstruction",
+  "version": 1,
+  "title": "Remove and Restore a Seasonal Lag",
+  "summary": "Compute lagged differences and reconstruct the signal from its initial season and differences.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Remove and Restore a Seasonal Lag"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "seasonal_differences",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html",
+    ],
+}

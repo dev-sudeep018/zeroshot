@@ -1,0 +1,44 @@
+{
+  "intro": "Deterministic query encoding helps compare URLs and generate repeatable requests. Sorting keys removes mapping insertion order while preserving repeated-value order.",
+  "task": "Encode string multimap keys in sorted order while preserving each key's value order.",
+  "signature": "encode_query_values(values)",
+  "requirements": [
+    "values maps nonempty string keys to sequences of strings. Visit keys in Unicode sort order and values in their existing order; omit keys with no values. Percent-encode UTF-8 with urllib.parse.quote_plus safe=\"\" and join key=value pairs with &.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Sorted keys repeated values",
+      "input": "encode_query_values({'z':['2','1'],'a':['x']})",
+      "output": "'a=x&z=2&z=1'"
+    },
+    {
+      "name": "Space and plus",
+      "input": "encode_query_values({'q':['a b+c']})",
+      "output": "'q=a+b%2Bc'"
+    },
+    {
+      "name": "Unicode",
+      "input": "encode_query_values({'name':['caf\u00e9']})",
+      "output": "'name=caf%C3%A9'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Sort only keys; the order of values within a key is meaningful."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Encode each component before joining pairs with structural separators."
+    }
+  ],
+  "explanation": [
+    "Deterministic query encoding helps compare URLs and generate repeatable requests. Sorting keys removes mapping insertion order while preserving repeated-value order.",
+    "An empty list contributes no pair, while an empty string contributes key=. These distinct states must not be collapsed by a truthiness check."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

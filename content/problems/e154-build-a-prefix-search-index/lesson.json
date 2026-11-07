@@ -1,0 +1,44 @@
+{
+  "intro": "A prefix index trades memory for quick autocomplete lookup. Shared prefixes point to every matching term rather than only the first insertion.",
+  "task": "Map each nonempty term prefix to sorted unique matching terms.",
+  "signature": "prefix_index(terms)",
+  "requirements": [
+    "terms is a sequence of nonempty strings, each at most 100 characters. For each nonempty Unicode-code-point prefix, map it to the sorted unique terms that start with it. Return a dictionary with keys in Unicode sort order. Matching is case-sensitive.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Shared prefixes",
+      "input": "prefix_index(['car','cat'])",
+      "output": "{'c': ['car', 'cat'],\n 'ca': ['car', 'cat'],\n 'car': ['car'],\n 'cat': ['cat']}"
+    },
+    {
+      "name": "Remove duplicate terms",
+      "input": "prefix_index(['a','ab','a'])",
+      "output": "{'a': ['a', 'ab'], 'ab': ['ab']}"
+    },
+    {
+      "name": "Case-sensitive",
+      "input": "prefix_index(['a','A'])",
+      "output": "{'A': ['A'], 'a': ['a']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Deduplicate and sort terms before adding them to each prefix bucket."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Include the full term as one of its prefixes, but omit the empty prefix."
+    }
+  ],
+  "explanation": [
+    "A prefix index trades memory for quick autocomplete lookup. Shared prefixes point to every matching term rather than only the first insertion.",
+    "Unicode code points define the slice boundaries in this exercise. The result is case-sensitive and does not perform accent folding or linguistic collation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

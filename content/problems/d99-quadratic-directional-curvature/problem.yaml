@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d99",
+  "kind": "lesson",
+  "slug": "quadratic-directional-curvature",
+  "version": 1,
+  "title": "Probe Curvature along an Optimization Direction",
+  "summary": "A descent direction\u2019s slope and curvature play different roles. For a quadratic objective they can be computed and checked exactly.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Probe Curvature along an Optimization Direction"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "quadratic_probe",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/",
+    ],
+}

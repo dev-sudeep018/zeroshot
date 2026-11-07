@@ -1,0 +1,44 @@
+{
+  "intro": "Category validation protects a fixed vocabulary from unexpected labels or inconsistent types. It reports all offending rows so ingestion can produce a complete quality report.",
+  "task": "Report row indices whose category is outside a supplied vocabulary, including missing values.",
+  "signature": "invalid_categories(records, field, allowed)",
+  "requirements": [
+    "allowed contains unique strings, including optional empty strings. For each record, report its index when field is absent, None, not a string, or not exactly in allowed. Non-string cells are data-quality issues, not malformed input, provided they satisfy the plain-data contract.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Missing and unknown",
+      "input": "invalid_categories([{'x':'a'},{'x':'b'},{}], 'x', ['a'])",
+      "output": "[1, 2]"
+    },
+    {
+      "name": "Null and number issues",
+      "input": "invalid_categories([{'x':None},{'x':1}], 'x', ['1'])",
+      "output": "[0, 1]"
+    },
+    {
+      "name": "Empty string allowed",
+      "input": "invalid_categories([{'x':''}], 'x', [''])",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Validate the vocabulary once, then audit every row against it."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Return the row index for bad cell values rather than coercing them to text."
+    }
+  ],
+  "explanation": [
+    "Category validation protects a fixed vocabulary from unexpected labels or inconsistent types. It reports all offending rows so ingestion can produce a complete quality report.",
+    "Coercing numeric cells to strings would hide an input-type error. Explicitly allowing an empty string is possible, but it must appear in the supplied vocabulary."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

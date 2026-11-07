@@ -1,0 +1,45 @@
+{
+  "intro": "Monotone movement creates an acyclic dependency structure. Every path reaching a cell must arrive from exactly one of two preceding neighbors, so their path counts add.",
+  "task": "Use dynamic programming to count right/down lattice routes while respecting blocked endpoints.",
+  "signature": "blocked_grid_paths(blocked)",
+  "requirements": [
+    "blocked is a nonempty boolean matrix with each axis in 1..32. True cells are impassable.",
+    "Return an exact Python integer counting paths from top-left to bottom-right that move only right or down.",
+    "A blocked start or destination gives zero. The unblocked 1x1 grid has one path.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Open rectangle",
+      "input": "blocked_grid_paths([[False,False,False],[False,False,False]])",
+      "output": "3\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Blocked center",
+      "input": "blocked_grid_paths([[False,False,False],[False,True,False],[False,False,False]])",
+      "output": "2\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Blocked start",
+      "input": "blocked_grid_paths([[True,False],[False,False]])",
+      "output": "0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "A reachable cell receives paths from the cell above and the cell to its left."
+    },
+    {
+      "title": "Build the result",
+      "body": "Carry one row of exact counts; a blocked cell must reset its count to zero."
+    }
+  ],
+  "explanation": [
+    "Monotone movement creates an acyclic dependency structure. Every path reaching a cell must arrive from exactly one of two preceding neighbors, so their path counts add.",
+    "Boundary initialization matters: the start contributes one empty path only when it is open. Exact Python integers retain large combinatorial counts that fixed-width integer arrays could overflow."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

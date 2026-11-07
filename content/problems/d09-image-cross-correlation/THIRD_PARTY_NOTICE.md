@@ -7,7 +7,7 @@ Upstream license: MIT No Attribution (MIT-0), as published in LICENSE-SAMPLECODE
 The reference's nested sliding-window loop is adapted to NumPy. Changes include
 argument names, finite-value/shape validation, and an explicit NumPy reduction.
 The lesson prose, examples, public tests, starter, and added validation are original
-Project Mastery contributions. Original contributions use the repository's
+ZeroShot contributions. Original contributions use the repository's
 Apache-2.0 code / CC-BY-SA-4.0 prose terms. The upstream permission is preserved below.
 
 ## Upstream notice

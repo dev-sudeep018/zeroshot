@@ -1,0 +1,44 @@
+{
+  "intro": "Convolution can be represented as matrix multiplication after gathering local windows. Make the window order explicit.",
+  "task": "Extract valid image patches as flattened rows and return their top-left coordinates.",
+  "signature": "image_patch_matrix(image, kernel_size, stride)",
+  "requirements": [
+    "image is a single-channel height-by-width matrix. kernel_size and stride are two-entry integer vectors in 1..64. The kernel must fit the image.",
+    "Use no padding. Visit top-left positions row first, then column, stepping by stride. Flatten each patch in row-major order. Return {\"patches\": matrix, \"positions\": integer matrix with [row,column] per patch}.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Overlapping patches",
+      "input": "image_patch_matrix(np.arange(9).reshape(3,3),[2,2],[1,1])",
+      "output": "{'patches': [[0.0, 1.0, 3.0, 4.0],\n             [1.0, 2.0, 4.0, 5.0],\n             [3.0, 4.0, 6.0, 7.0],\n             [4.0, 5.0, 7.0, 8.0]],\n 'positions': [[0, 0], [0, 1], [1, 0], [1, 1]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Full image patch",
+      "input": "image_patch_matrix([[1,2],[3,4]],[2,2],[1,1])",
+      "output": "{'patches': [[1.0, 2.0, 3.0, 4.0]], 'positions': [[0, 0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Pointwise patches",
+      "input": "image_patch_matrix([[1,2],[3,4]],[1,1],[1,1])",
+      "output": "{'patches': [[1.0], [2.0], [3.0], [4.0]],\n 'positions': [[0, 0], [0, 1], [1, 0], [1, 1]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "A valid top-left coordinate leaves the entire kernel inside the image."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Row-major flattening visits adjacent columns before the next patch row."
+    }
+  ],
+  "explanation": [
+    "The patch matrix makes local receptive fields explicit. Multiplying its rows by flattened kernel weights produces the corresponding valid convolution outputs.",
+    "Overlapping patches duplicate image values in this representation. That duplication can increase memory use even though a direct convolution could reuse the original pixels."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

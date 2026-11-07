@@ -1,0 +1,44 @@
+{
+  "intro": "Token spans connect a processed word back to its source text. That alignment supports highlighting, annotation, and debugging a text pipeline.",
+  "task": "Extract ASCII alphabetic words and their original half-open character spans.",
+  "signature": "word_spans(text)",
+  "requirements": [
+    "Return a list of [word, start, end] for maximal ASCII letter runs [A-Za-z]+. Offsets count Python Unicode code points; end is exclusive. Digits, accents, and punctuation separate words.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Punctuation boundaries",
+      "input": "word_spans('Hi, ML!')",
+      "output": "[['Hi', 0, 2], ['ML', 4, 6]]"
+    },
+    {
+      "name": "Non-ASCII separator",
+      "input": "word_spans('\u00e9AI caf\u00e9')",
+      "output": "[['AI', 1, 3], ['caf', 4, 7]]"
+    },
+    {
+      "name": "Numbers separate",
+      "input": "word_spans('r2d2')",
+      "output": "[['r', 0, 1], ['d', 2, 3]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Find maximal contiguous letter runs rather than splitting on spaces."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Compute positions in the original text before any normalization."
+    }
+  ],
+  "explanation": [
+    "Token spans connect a processed word back to its source text. That alignment supports highlighting, annotation, and debugging a text pipeline.",
+    "This tokenizer is intentionally ASCII-specific. It does not claim to tokenize every language; its explicit alphabet makes the boundary behavior testable."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

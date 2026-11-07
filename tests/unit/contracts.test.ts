@@ -15,7 +15,7 @@ describe("versioned content", () => {
   it("loads complete content packages", async () => {
     const entries = await loadContent();
     expect(entries.filter((e) => e.problem.kind === "lesson")).toHaveLength(
-      200,
+      450,
     );
     expect(entries.filter((e) => e.problem.kind === "project")).toHaveLength(1);
     for (const entry of entries) {

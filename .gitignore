@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.next-auth/
 next-env.d.ts
 out/
 dist/
@@ -24,3 +25,6 @@ apps/web/src/generated/
 .impeccable/cache/
 .impeccable/questions/
 work/
+
+# Local service CLI diagnostics may include credentials.
+*-debug.log

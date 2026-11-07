@@ -1,0 +1,44 @@
+{
+  "intro": "Incremental builds avoid repeating work whose inputs and dependencies are unchanged. Fingerprint changes seed a dirty set that propagates through the dependency graph.",
+  "task": "Propagate changed input fingerprints through a DAG and return affected tasks in dependency order.",
+  "signature": "incremental_rebuild(dependencies, previous, current)",
+  "requirements": [
+    "dependencies is a DAG mapping task IDs to unique prerequisite IDs. previous and current map exactly the same task IDs to nonempty string fingerprints. A task is dirty if its own fingerprint changed or any prerequisite is dirty. Return dirty task IDs in stable topological order, choosing the earliest dictionary key among currently ready tasks. Reject graph cycles, unknown dependencies, and missing or extra fingerprint keys.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Propagate changed source",
+      "input": "incremental_rebuild({'a':[],'b':['a'],'c':['b']},{'a':'1','b':'1','c':'1'},{'a':'2','b':'1','c':'1'})",
+      "output": "['a', 'b', 'c']"
+    },
+    {
+      "name": "Only changed leaf",
+      "input": "incremental_rebuild({'a':[],'b':['a']},{'a':'1','b':'1'},{'a':'1','b':'2'})",
+      "output": "['b']"
+    },
+    {
+      "name": "No changes",
+      "input": "incremental_rebuild({'a':[]},{'a':'1'},{'a':'1'})",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Visit prerequisites before dependents so dirty status is already known when processing a task."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Unchanged local input is not enough to reuse a result if one of its dependencies must rebuild."
+    }
+  ],
+  "explanation": [
+    "Incremental builds avoid repeating work whose inputs and dependencies are unchanged. Fingerprint changes seed a dirty set that propagates through the dependency graph.",
+    "The returned order is executable because prerequisites appear first. This model assumes fingerprints describe all local inputs; omitted dependencies can make any incremental planner reuse stale results."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

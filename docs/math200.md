@@ -2,7 +2,7 @@
 
 This batch adds 40 original, executable NumPy lessons. Each package includes three worked examples, progressive hints, a reference, an unfinished starter, an explanation, and 10–11 public cases. The batch has 406 public cases and 23 independent numerical/property test methods in `tests/python/test_math200.py`.
 
-The packages are original Project Mastery work: prose under CC-BY-SA-4.0 and code under Apache-2.0. No platform exercise text, reference code, or tests were imported. Primary documentation checked for conceptual conventions is linked below and in the corresponding packages.
+The packages are original ZeroShot work: prose under CC-BY-SA-4.0 and code under Apache-2.0. No platform exercise text, reference code, or tests were imported. Primary documentation checked for conceptual conventions is linked below and in the corresponding packages.
 
 ## Learning objectives
 

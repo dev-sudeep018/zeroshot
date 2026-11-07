@@ -1,0 +1,44 @@
+{
+  "intro": "Distillation transfers a teacher\u2019s distribution over alternatives. Temperature smooths both distributions and changes the scale of their gradients.",
+  "task": "Compute T-squared-scaled mean KL(teacher||student) and the gradient with respect to student logits.",
+  "signature": "distillation_kl(student, teacher, temperature)",
+  "requirements": [
+    "student and teacher are matching batch-by-classes logit matrices, with at least two classes. temperature T is a scalar in [0.1,100].",
+    "Apply stable log-softmax to logits/T. Return {\"loss\": T*T*mean(sum(q*(log(q)-log(p)), axis=1)), \"gradient\": T*(p-q)/batch}, with q=teacher probabilities and p=student probabilities.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Teacher favors one class",
+      "input": "distillation_kl([[0,0]],[[0,2]],1)",
+      "output": "{'loss': 0.327813325473, 'gradient': [[0.380797077978, -0.380797077978]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Matching predictions",
+      "input": "distillation_kl([[1,2]],[[1,2]],2)",
+      "output": "{'loss': 0.0, 'gradient': [[0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Hotter predictions",
+      "input": "distillation_kl([[1,-1]],[[0,2]],3)",
+      "output": "{'loss': 1.92907642519, 'gradient': [[0.964538212595, -0.964538212595]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Subtract the row maximum before exponentiating and calculate log probabilities without logging underflowed probabilities."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Differentiating logits/T cancels one factor of the T-squared loss scale."
+    }
+  ],
+  "explanation": [
+    "KL direction matters: the teacher distribution weights the comparison. A student matching the teacher exactly has zero loss and zero gradient at every supported temperature.",
+    "The T-squared multiplier is a training convention that compensates for much of the gradient shrinking caused by smoothing. The teacher logits are fixed targets in this exercise."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

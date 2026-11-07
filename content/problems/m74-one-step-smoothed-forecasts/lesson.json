@@ -1,0 +1,45 @@
+{
+  "intro": "The ordering of prediction and update is the central lesson. Returning the updated level as the forecast would use information that was unavailable at prediction time.",
+  "task": "Produce one-step exponential-smoothing forecasts and the final level without leaking the current observation.",
+  "signature": "smoothed_forecasts(values, alpha, initial)",
+  "requirements": [
+    "alpha is a scalar in [0,1]; initial is the level available before the first observation.",
+    "For each observation x, first output the current level as its forecast, then update level=(1-alpha)*level+alpha*x.",
+    "Return {\"forecast\": vector with one prediction per observation, \"level\": final scalar level}. The current observation must not affect its own forecast.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Partial updates",
+      "input": "smoothed_forecasts([4,8,2],.5,0)",
+      "output": "{'forecast': [0.0, 2.0, 5.0], 'level': 3.5}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No updating",
+      "input": "smoothed_forecasts([4,8],0,3)",
+      "output": "{'forecast': [3.0, 3.0], 'level': 3.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Last-observation forecast",
+      "input": "smoothed_forecasts([4,8,2],1,0)",
+      "output": "{'forecast': [0.0, 4.0, 8.0], 'level': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Store the old level before reading the observation into the update."
+    },
+    {
+      "title": "Build the result",
+      "body": "The forecast array has n entries; the final updated level is a separate output."
+    }
+  ],
+  "explanation": [
+    "The ordering of prediction and update is the central lesson. Returning the updated level as the forecast would use information that was unavailable at prediction time.",
+    "Alpha controls how quickly older information fades. At zero the initial level never changes, while at one the next forecast becomes the previous observation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

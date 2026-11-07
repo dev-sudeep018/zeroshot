@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e82",
+  "kind": "lesson",
+  "slug": "interleave-unequal-streams",
+  "version": 1,
+  "title": "Interleave Unequal Streams",
+  "summary": "Take one item from each nonempty stream per round until all are exhausted.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": ["e79"],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "interleave_streams",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A symmetric matrix contains redundant mirrored entries. Fixed upper-triangle traversal preserves the independent values while making serialization order deterministic.",
+  "task": "Validate symmetry and serialize the upper triangle in a fixed order for lossless reconstruction.",
+  "signature": "pack_symmetric(matrix)",
+  "requirements": [
+    "matrix is square and symmetric within absolute tolerance 1e-10 and zero relative tolerance.",
+    "Return {\"packed\": upper triangle including diagonal in row-major order, \"reconstructed\": symmetric reconstruction}. The upper triangle is authoritative within the symmetry tolerance.",
+    "For n rows, packed has n*(n+1)/2 entries. Do not include lower-triangle duplicates.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three by three",
+      "input": "pack_symmetric([[1,2,3],[2,4,5],[3,5,6]])",
+      "output": "{'packed': [1.0, 2.0, 3.0, 4.0, 5.0, 6.0],\n 'reconstructed': [[1.0, 2.0, 3.0], [2.0, 4.0, 5.0], [3.0, 5.0, 6.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single entry",
+      "input": "pack_symmetric([[7]])",
+      "output": "{'packed': [7.0], 'reconstructed': [[7.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Diagonal matrix",
+      "input": "pack_symmetric([[2,0],[0,3]])",
+      "output": "{'packed': [2.0, 0.0, 3.0], 'reconstructed': [[2.0, 0.0], [0.0, 3.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Walk rows and start each inner column loop at the current row index."
+    },
+    {
+      "title": "Build the result",
+      "body": "For each stored entry, place its value at both symmetric coordinates."
+    }
+  ],
+  "explanation": [
+    "A symmetric matrix contains redundant mirrored entries. Fixed upper-triangle traversal preserves the independent values while making serialization order deterministic.",
+    "Validation should happen before packing, since otherwise an asymmetric matrix would silently lose information. The reconstruction uses exactly the chosen upper values rather than averaging conflicting observations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

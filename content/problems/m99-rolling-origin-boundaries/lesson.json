@@ -1,0 +1,45 @@
+{
+  "intro": "Forecast evaluation must respect what information was available at each prediction time. Expanding-window splits represent repeated training on everything observed before a new validation horizon.",
+  "task": "Produce expanding-window training and validation index boundaries with a fixed horizon and stride.",
+  "signature": "rolling_origin_splits(length, initial, horizon, stride)",
+  "requirements": [
+    "length is an integer in 2..64; initial,horizon,stride are positive integers at most 64 with initial+horizon<=length.",
+    "Return an integer matrix with rows [0,train_end,train_end,validation_end] for half-open training and validation slices. Start train_end=initial, then advance by stride while the FULL horizon fits.",
+    "Training expands from index zero. Validation windows may overlap when stride<horizon, but no validation index occurs inside its own training window.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Expanding origins",
+      "input": "rolling_origin_splits(10,4,2,2)",
+      "output": "[[0, 4, 4, 6], [0, 6, 6, 8], [0, 8, 8, 10]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Overlapping windows",
+      "input": "rolling_origin_splits(7,3,2,1)",
+      "output": "[[0, 3, 3, 5], [0, 4, 4, 6], [0, 5, 5, 7]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One full horizon",
+      "input": "rolling_origin_splits(6,4,2,3)",
+      "output": "[[0, 4, 4, 6]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Track the training endpoint and derive each validation endpoint from the fixed horizon."
+    },
+    {
+      "title": "Build the result",
+      "body": "Stop before a horizon would cross the dataset length instead of truncating the last validation fold."
+    }
+  ],
+  "explanation": [
+    "Forecast evaluation must respect what information was available at each prediction time. Expanding-window splits represent repeated training on everything observed before a new validation horizon.",
+    "The stride controls how often the origin advances; it does not change the horizon. Distinguishing them allows overlapping evaluation windows while preserving the causal boundary within every split."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

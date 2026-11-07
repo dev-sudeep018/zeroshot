@@ -1,0 +1,44 @@
+{
+  "intro": "Large residuals dominate squared error. Huber loss keeps a quadratic center while making the tails grow linearly.",
+  "task": "Return each residual\u2019s Huber loss and derivative, plus the mean loss and the gradient of that mean.",
+  "signature": "huber_residuals(residuals, delta)",
+  "requirements": [
+    "residuals is a nonempty vector of prediction-minus-target errors. delta is a scalar in [1e-6,1000000].",
+    "For abs(r)<=delta use loss=0.5*r*r and derivative=r. Otherwise use loss=delta*(abs(r)-0.5*delta) and derivative=delta*sign(r). Return {\"per_item\": vector, \"derivative\": vector, \"mean_loss\": scalar, \"mean_gradient\": derivative/number of residuals}.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Center and tails",
+      "input": "huber_residuals([-3,-1,0,1,3],1)",
+      "output": "{'per_item': [2.5, 0.5, 0.0, 0.5, 2.5],\n 'derivative': [-1.0, -1.0, 0.0, 1.0, 1.0],\n 'mean_loss': 1.2,\n 'mean_gradient': [-0.2, -0.2, 0.0, 0.2, 0.2]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "All quadratic",
+      "input": "huber_residuals([-0.5,0.5],1)",
+      "output": "{'per_item': [0.125, 0.125],\n 'derivative': [-0.5, 0.5],\n 'mean_loss': 0.125,\n 'mean_gradient': [-0.25, 0.25]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Exact thresholds",
+      "input": "huber_residuals([-2,2],2)",
+      "output": "{'per_item': [2.0, 2.0],\n 'derivative': [-2.0, 2.0],\n 'mean_loss': 2.0,\n 'mean_gradient': [-1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Both branches agree in value and slope at the threshold."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The derivative points in the residual\u2019s direction but its magnitude stops growing beyond delta."
+    }
+  ],
+  "explanation": [
+    "The quadratic region is sensitive to small errors, while the linear tails limit the effect of large residuals on the gradient. Delta controls where that transition happens.",
+    "The derivative of the mean differs from the per-item derivative by the number of items. This scaling matters when connecting a loss implementation to a batch optimizer."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

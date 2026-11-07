@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m148",
+  "kind": "lesson",
+  "slug": "jacobi-linear-iteration",
+  "version": 1,
+  "title": "Update a Linear Solve without Reusing New Values",
+  "summary": "Compute a fixed number of Jacobi iterations from an initial vector and return the residual.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Update a Linear Solve without Reusing New Values"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "jacobi_iterations",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Ordinary percentage error divides only by the actual value and becomes undefined near a zero target. This symmetric denominator makes the scale depend on both the target and prediction.",
+  "task": "Compute symmetric absolute percentage errors with a both-zero convention and their mean.",
+  "signature": "symmetric_percentage_errors(actual, predicted)",
+  "requirements": [
+    "actual and predicted are equal-length vectors. For each pair use 2*abs(predicted-actual)/(abs(actual)+abs(predicted)); a both-zero pair contributes zero.",
+    "Return {\"per_item\": vector, \"mean\": scalar}. Values are fractions in [0,2], not multiplied by 100.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Mixed errors",
+      "input": "symmetric_percentage_errors([10,20,0],[12,10,0])",
+      "output": "{'per_item': [0.1818181818, 0.6666666667, 0.0], 'mean': 0.2828282828}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero against nonzero",
+      "input": "symmetric_percentage_errors([0,2],[3,0])",
+      "output": "{'per_item': [2.0, 2.0], 'mean': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Opposite signs",
+      "input": "symmetric_percentage_errors([-2,4],[2,-4])",
+      "output": "{'per_item': [2.0, 2.0], 'mean': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Build an absolute-magnitude denominator from both observations in each pair."
+    },
+    {
+      "title": "Build the result",
+      "body": "Write zero for the both-zero case before averaging the bounded per-item errors."
+    }
+  ],
+  "explanation": [
+    "Ordinary percentage error divides only by the actual value and becomes undefined near a zero target. This symmetric denominator makes the scale depend on both the target and prediction.",
+    "The measure is unchanged when actual and predicted are exchanged. It can still saturate at two for opposite signs, so it should be interpreted alongside errors in original units."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

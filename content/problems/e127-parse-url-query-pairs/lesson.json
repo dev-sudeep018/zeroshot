@@ -1,0 +1,44 @@
+{
+  "intro": "Query parameters can repeat, so parsing into a single value per key loses information. A multimap preserves repeated filters and their order.",
+  "task": "Decode repeated query parameters into ordered value lists, retaining blank values.",
+  "signature": "parse_query_values(query)",
+  "requirements": [
+    "Parse a query string without a leading ?. Separate pairs with &, split the first =, and treat absent = as a blank value. Decode + as space and percent escapes as strict UTF-8. Reject malformed percent escapes and empty decoded keys. Return each key mapped to values in occurrence order; ignore empty & segments.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Repeated key",
+      "input": "parse_query_values('x=1&x=2&y=')",
+      "output": "{'x': ['1', '2'], 'y': ['']}"
+    },
+    {
+      "name": "Space and plus",
+      "input": "parse_query_values('q=a+b%2Bc')",
+      "output": "{'q': ['a b+c']}"
+    },
+    {
+      "name": "UTF-8 escape",
+      "input": "parse_query_values('name=caf%C3%A9')",
+      "output": "{'name': ['caf\u00e9']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Decode key and value after splitting the structural separators."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep repeated values in lists; a plain dictionary assignment would lose earlier values."
+    }
+  ],
+  "explanation": [
+    "Query parameters can repeat, so parsing into a single value per key loses information. A multimap preserves repeated filters and their order.",
+    "Decoding happens after structural splitting because an encoded ampersand belongs inside a value. Strict percent and UTF-8 validation avoids silently replacing malformed data."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

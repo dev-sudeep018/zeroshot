@@ -1,0 +1,44 @@
+{
+  "intro": "Ragged rows can misalign features and targets when imported into a table. Reporting both row position and observed width makes the mismatch actionable.",
+  "task": "Identify ragged rows against an expected schema width and retain each actual width.",
+  "signature": "row_width_issues(rows, expected_width)",
+  "requirements": [
+    "rows contains item sequences. expected_width is an integer 0..1000. Return [row_index, actual_width] for rows whose width differs, keeping source order; valid rows produce no report.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Both ragged directions",
+      "input": "row_width_issues([[1,2],[3],[],[4,5,6]], 2)",
+      "output": "[[1, 1], [2, 0], [3, 3]]"
+    },
+    {
+      "name": "All aligned",
+      "input": "row_width_issues([[1],[2]], 1)",
+      "output": "[]"
+    },
+    {
+      "name": "Zero-width schema",
+      "input": "row_width_issues([[],[1]], 0)",
+      "output": "[[1, 1]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compare each row length against the explicit schema width."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Count cells at one level; a list-valued cell is still one cell."
+    }
+  ],
+  "explanation": [
+    "Ragged rows can misalign features and targets when imported into a table. Reporting both row position and observed width makes the mismatch actionable.",
+    "The expected width comes from the schema, not the first row. Otherwise a malformed first row could redefine what every later row is judged against."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Monotonicity audits identify records that arrive out of expected temporal order. Sorting first would hide the very issue the audit needs to expose.",
+  "task": "Report every adjacent timestamp decrease without sorting the observations.",
+  "signature": "timestamp_decreases(times)",
+  "requirements": [
+    "times contains integer timestamps in +/-1e9. Return [index, previous, current] for every adjacent decrease where current < previous. Equal timestamps are allowed; do not sort or compare only against the running maximum.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Two local decreases",
+      "input": "timestamp_decreases([3,1,2,0])",
+      "output": "[[1, 3, 1], [3, 2, 0]]"
+    },
+    {
+      "name": "Ties allowed",
+      "input": "timestamp_decreases([1,1,2])",
+      "output": "[]"
+    },
+    {
+      "name": "Negative timestamps",
+      "input": "timestamp_decreases([-1,-3,-2])",
+      "output": "[[1, -1, -3]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compare each timestamp with exactly its preceding observation."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep original positions so the report points to the observed ordering error."
+    }
+  ],
+  "explanation": [
+    "Monotonicity audits identify records that arrive out of expected temporal order. Sorting first would hide the very issue the audit needs to expose.",
+    "A local decrease differs from being below the historical maximum. After one decrease, later increasing timestamps are valid adjacent transitions even if still below an earlier peak."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

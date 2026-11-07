@@ -1,0 +1,44 @@
+{
+  "intro": "For equal distances, a slower segment consumes more time and therefore has more influence on the journey average. This is why the harmonic mean of speeds gives the correct rate.",
+  "task": "Compute harmonic mean speed and total travel time for equal-distance segments with varying speeds.",
+  "signature": "equal_distance_rates(speeds, distance)",
+  "requirements": [
+    "Each speed and distance are at least 1e-6. Every segment has the SAME distance.",
+    "Return {\"segment_time\": distance/speeds, \"total_time\": sum of times, \"mean_speed\": total distance divided by total time}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Slow return trip",
+      "input": "equal_distance_rates([20,60],10)",
+      "output": "{'segment_time': [0.5, 0.1666666667], 'total_time': 0.6666666667, 'mean_speed': 30.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equal speeds",
+      "input": "equal_distance_rates([4,4,4],2)",
+      "output": "{'segment_time': [0.5, 0.5, 0.5], 'total_time': 1.5, 'mean_speed': 4.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One segment",
+      "input": "equal_distance_rates([3],9)",
+      "output": "{'segment_time': [3.0], 'total_time': 3.0, 'mean_speed': 3.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute each duration from distance divided by speed."
+    },
+    {
+      "title": "Build the result",
+      "body": "The overall rate uses total distance over total time, not the arithmetic average of the input speeds."
+    }
+  ],
+  "explanation": [
+    "For equal distances, a slower segment consumes more time and therefore has more influence on the journey average. This is why the harmonic mean of speeds gives the correct rate.",
+    "Returning segment durations exposes the weighting mechanism. Multiplying every distance by the same positive factor changes travel time but leaves the average speed unchanged."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

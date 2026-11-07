@@ -1,0 +1,45 @@
+{
+  "intro": "The number of distinct observed categories is a sum of presence indicators. Expected values add even though observing one category changes what other categories can have appeared in a fixed number of draws.",
+  "task": "Compute per-category appearance probabilities and expected distinct categories after independent draws.",
+  "signature": "expected_distinct(probabilities, draws)",
+  "requirements": [
+    "probabilities is a probability vector; draws is an integer in 0..10000 representing independent draws with replacement.",
+    "Return {\"seen\": probability each category appears at least once, \"expected\": expected number of distinct categories}.",
+    "For zero draws return all zeros. Otherwise the appearance probability is 1-(1-p)^draws.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two fair categories",
+      "input": "expected_distinct([.5,.5],2)",
+      "output": "{'seen': [0.75, 0.75], 'expected': 1.5}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No draws",
+      "input": "expected_distinct([.2,.8],0)",
+      "output": "{'seen': [0.0, 0.0], 'expected': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One draw",
+      "input": "expected_distinct([.1,.2,.7],1)",
+      "output": "{'seen': [0.1, 0.2, 0.7], 'expected': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use the complement: a category is unseen only if every draw avoids it."
+    },
+    {
+      "title": "Build the result",
+      "body": "Add appearance probabilities using linearity of expectation; their indicator variables need not be independent."
+    }
+  ],
+  "explanation": [
+    "The number of distinct observed categories is a sum of presence indicators. Expected values add even though observing one category changes what other categories can have appeared in a fixed number of draws.",
+    "The unseen probability decays as (1-p)^n. Using log1p and expm1 helps retain small appearance probabilities without subtracting nearly equal floating-point numbers."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

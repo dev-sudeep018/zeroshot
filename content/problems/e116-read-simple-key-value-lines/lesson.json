@@ -1,0 +1,44 @@
+{
+  "intro": "Small configuration formats need an explicit grammar even when they look simple. Splitting only the first equals sign permits values such as tokens or expressions containing equals signs.",
+  "task": "Parse nonblank key=value lines, splitting only the first separator and rejecting duplicate keys.",
+  "signature": "parse_settings(text)",
+  "requirements": [
+    "Process nonblank lines after stripping outer whitespace. Split the first = only, trim key and value, and return a dictionary. Keys must be nonempty and unique. Values may be empty or contain more = characters; comments have no special syntax.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Trim fields",
+      "input": "parse_settings(' x = 1\\ny= two ')",
+      "output": "{'x': '1', 'y': 'two'}"
+    },
+    {
+      "name": "First separator only",
+      "input": "parse_settings('token=a=b=c')",
+      "output": "{'token': 'a=b=c'}"
+    },
+    {
+      "name": "Empty value",
+      "input": "parse_settings('x=')",
+      "output": "{'x': ''}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use split with a maximum of one split so values retain extra separators."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Check key presence before assignment to avoid silently replacing earlier settings."
+    }
+  ],
+  "explanation": [
+    "Small configuration formats need an explicit grammar even when they look simple. Splitting only the first equals sign permits values such as tokens or expressions containing equals signs.",
+    "Rejecting duplicate keys makes ambiguity visible. A parser that silently keeps the final value can hide a copied setting or a configuration mistake."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

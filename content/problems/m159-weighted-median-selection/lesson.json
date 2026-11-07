@@ -1,0 +1,45 @@
+{
+  "intro": "A weighted median balances cumulative observation weight rather than observation count. It minimizes weighted absolute deviations and remains tied to an observed value under this convention.",
+  "task": "Sort value-weight pairs and return the smallest value whose cumulative weight reaches half the total.",
+  "signature": "weighted_median(values, weights)",
+  "requirements": [
+    "values and weights are equal-length vectors. Weights are nonnegative and their sum must be positive.",
+    "Return the smallest observed value whose cumulative sorted weight reaches at least half the total weight.",
+    "Ignore zero-weight observations. For an exact half-weight boundary choose the lower value; never average neighboring values.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Unequal weights",
+      "input": "weighted_median([1,3,8],[1,5,2])",
+      "output": "3.0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Exact half boundary",
+      "input": "weighted_median([1,9],[1,1])",
+      "output": "1.0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unsorted values",
+      "input": "weighted_median([8,1,4],[1,1,4])",
+      "output": "4.0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sort values while keeping their weights paired, then remove zero-weight entries."
+    },
+    {
+      "title": "Build the result",
+      "body": "Find the first cumulative weight at or above half the total, using a left-sided search."
+    }
+  ],
+  "explanation": [
+    "A weighted median balances cumulative observation weight rather than observation count. It minimizes weighted absolute deviations and remains tied to an observed value under this convention.",
+    "The exact-half convention matters when several values minimize that objective. Selecting the lower endpoint yields a deterministic answer without inventing an average observation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

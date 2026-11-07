@@ -1,0 +1,44 @@
+{
+  "intro": "A sequence of requests shares state: an earlier fulfillment changes what later requests can receive. Taking min(requested, available) prevents negative stock and records shortages explicitly.",
+  "task": "Fill each request from remaining stock and return fulfilled and unfilled quantities.",
+  "signature": "fill_requests(stock, requests)",
+  "requirements": [
+    "stock maps item IDs to nonnegative integer quantities. requests is a sequence of [item_id, quantity] pairs, quantity 0..1e9. Unknown items have zero stock. Process in order and return remaining stock, filled quantities, and unfilled quantities.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Sequential stock use",
+      "input": "fill_requests({'a':5}, [['a',3],['a',4]])",
+      "output": "{'remaining': {'a': 0}, 'filled': [3, 2], 'unfilled': [0, 2]}"
+    },
+    {
+      "name": "Unknown item",
+      "input": "fill_requests({}, [['x',2]])",
+      "output": "{'remaining': {}, 'filled': [0], 'unfilled': [2]}"
+    },
+    {
+      "name": "Zero request",
+      "input": "fill_requests({'a':2}, [['a',0]])",
+      "output": "{'remaining': {'a': 2}, 'filled': [0], 'unfilled': [0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use the current remaining stock, not the original stock, for each request."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Unknown items must not become new stock keys merely because they were requested."
+    }
+  ],
+  "explanation": [
+    "A sequence of requests shares state: an earlier fulfillment changes what later requests can receive. Taking min(requested, available) prevents negative stock and records shortages explicitly.",
+    "The output separates requested demand into filled and unfilled quantities. For each item, original stock equals remaining stock plus total fulfilled demand, which provides a useful conservation check."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

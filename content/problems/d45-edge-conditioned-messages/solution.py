@@ -32,7 +32,7 @@
 #
 # The adaptation retains the upstream message/update structure with caller-supplied matrices and explicit edge orientation.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

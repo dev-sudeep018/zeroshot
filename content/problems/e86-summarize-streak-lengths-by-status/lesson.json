@@ -1,0 +1,44 @@
+{
+  "intro": "A longest streak describes persistence rather than total frequency. A status appearing many times in isolated positions can still have a maximum streak of one.",
+  "task": "Find the longest consecutive streak for each status value.",
+  "signature": "longest_streaks(statuses)",
+  "requirements": [
+    "Return each nonempty string status mapped to its longest consecutive run length. Separate runs do not add together; an empty sequence returns an empty dictionary.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Separated runs",
+      "input": "longest_streaks(['a','a','b','a'])",
+      "output": "{'a': 2, 'b': 1}"
+    },
+    {
+      "name": "Longer later run",
+      "input": "longest_streaks(['a','b','a','a','a'])",
+      "output": "{'a': 3, 'b': 1}"
+    },
+    {
+      "name": "Single item",
+      "input": "longest_streaks(['x'])",
+      "output": "{'x': 1}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Reset the current run length whenever the status changes."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Update the maximum for the current status without erasing maxima from earlier runs."
+    }
+  ],
+  "explanation": [
+    "A longest streak describes persistence rather than total frequency. A status appearing many times in isolated positions can still have a maximum streak of one.",
+    "The current run and the best run are different pieces of state. Maintaining both allows a single pass without storing every run boundary."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Three noncollinear points define a plane. A cross product provides a direction perpendicular to both edges, and normalization makes the plane equation yield signed distances.",
+  "task": "Normalize a cross product into a plane normal and compute its offset, rejecting collinear points.",
+  "signature": "plane_from_points(a, b, c)",
+  "requirements": [
+    "a,b,c are length-three vectors. Require norm(cross(b-a,c-a)) >= 1e-6.",
+    "Return {\"normal\": unit cross-product normal, \"offset\": -normal dot a} so normal dot x + offset = 0. Vertex order determines orientation.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Horizontal plane",
+      "input": "plane_from_points([0,0,2],[1,0,2],[0,1,2])",
+      "output": "{'normal': [0.0, 0.0, 1.0], 'offset': -2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Reverse orientation",
+      "input": "plane_from_points([0,0,2],[0,1,2],[1,0,2])",
+      "output": "{'normal': [0.0, 0.0, -1.0], 'offset': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Sloping plane",
+      "input": "plane_from_points([1,0,0],[0,1,0],[0,0,1])",
+      "output": "{'normal': [0.5773502692, 0.5773502692, 0.5773502692], 'offset': -0.5773502692}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Construct two edge vectors lying within the plane."
+    },
+    {
+      "title": "Build the result",
+      "body": "Normalize their cross product, then choose the offset that makes one given vertex satisfy the plane equation."
+    }
+  ],
+  "explanation": [
+    "Three noncollinear points define a plane. A cross product provides a direction perpendicular to both edges, and normalization makes the plane equation yield signed distances.",
+    "Swapping two vertices reverses both normal and offset without changing the geometric plane. Collinear points do not determine a unique plane and must be rejected."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

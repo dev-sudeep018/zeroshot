@@ -1,0 +1,44 @@
+{
+  "intro": "Temperature scaling adjusts confidence while preserving class ranking. Optimize its single positive scalar using held-out labeled examples.",
+  "task": "Return mean negative log likelihood and the derivative with respect to temperature.",
+  "signature": "temperature_nll(logits, targets, temperature)",
+  "requirements": [
+    "logits is a batch-by-class matrix with at least two classes. targets is one integer class index per example. temperature T lies in [0.1,100].",
+    "Use p=softmax(logits/T). Return {\"loss\": mean(-log(p[target])), \"temperature_gradient\": mean(logits[target]-sum(p*logits,axis=1))/(T*T)}. Use stable log probabilities.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Correct confident class",
+      "input": "temperature_nll([[0,2]],[1],1)",
+      "output": "{'loss': 0.126928011043, 'temperature_gradient': 0.238405844044}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Wrong confident class",
+      "input": "temperature_nll([[0,2]],[0],1)",
+      "output": "{'loss': 2.12692801104, 'temperature_gradient': -1.76159415596}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Uniform scores",
+      "input": "temperature_nll([[3,3]],[0],2)",
+      "output": "{'loss': 0.69314718056, 'temperature_gradient': 0.0}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Differentiate each scaled logit z/T with respect to T."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Subtracting a common constant from every class in a row should change neither result."
+    }
+  ],
+  "explanation": [
+    "The temperature gradient compares the observed class score with the score expected under the current predicted distribution. Its sign indicates whether more or less smoothing would reduce this labeled loss locally.",
+    "This is a calibration calculation on supplied data. It does not guarantee calibrated probabilities on a shifted population, and optimization should use data separate from final evaluation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

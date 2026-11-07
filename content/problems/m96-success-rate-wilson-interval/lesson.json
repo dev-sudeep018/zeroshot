@@ -1,0 +1,45 @@
+{
+  "intro": "Using a symmetric interval centered on the raw sample proportion can produce impossible negative probabilities or values above one. The Wilson construction adjusts the center as well as the width.",
+  "task": "Compute a Wilson score interval from successes, trials and a supplied positive z value.",
+  "signature": "wilson_interval(successes, trials, z)",
+  "requirements": [
+    "trials is an integer in 1..10000, successes is an integer in 0..trials, and z is a scalar in [1e-6,10].",
+    "Let p=successes/trials and d=1+z*z/trials. Return [center-half,center+half], where center=(p+z*z/(2*trials))/d and half=z*sqrt(p*(1-p)/trials+z*z/(4*trials**2))/d.",
+    "Clip tiny floating-point boundary drift into [0,1]. z is supplied by the caller; do not infer a confidence level.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Balanced count",
+      "input": "wilson_interval(5,10,1.96)",
+      "output": "[0.2365895936, 0.7634104064]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No successes",
+      "input": "wilson_interval(0,10,1.96)",
+      "output": "[0.0, 0.2775401688]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "All successes",
+      "input": "wilson_interval(10,10,1.96)",
+      "output": "[0.7224598312, 1.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the shared denominator and adjusted center before the half-width."
+    },
+    {
+      "title": "Build the result",
+      "body": "The adjustment changes both center and width, especially near zero or one observed proportion."
+    }
+  ],
+  "explanation": [
+    "Using a symmetric interval centered on the raw sample proportion can produce impossible negative probabilities or values above one. The Wilson construction adjusts the center as well as the width.",
+    "An observed rate of zero does not imply that the true success probability is exactly zero. The interval remains nontrivial at either boundary, and increasing the supplied z makes the interval wider."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

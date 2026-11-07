@@ -1,0 +1,44 @@
+{
+  "intro": "A small rule engine separates the data being audited from the audit policy. Named rules make reports understandable when several checks target the same field.",
+  "task": "Combine required-field and range rules into per-row violation lists with stable rule order.",
+  "signature": "quality_violations(records, rules)",
+  "requirements": [
+    "Each rule is [name,\"required\",field] or [name,\"range\",field,low,high]; names are unique nonempty strings and bounds are finite with low<=high. required fails for absent or None cells. range fails for absent, None, nonnumeric, or out-of-range values; bool is nonnumeric. Return one list of failed rule names per row in rule order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Stable rule order",
+      "input": "quality_violations([{}, {'x':3},{'x':1}], [['present','required','x'],['bounded','range','x',0,2]])",
+      "output": "[['present', 'bounded'], ['bounded'], []]"
+    },
+    {
+      "name": "False present but not numeric",
+      "input": "quality_violations([{'x':False}], [['p','required','x'],['r','range','x',0,1]])",
+      "output": "[['r']]"
+    },
+    {
+      "name": "Inclusive limits",
+      "input": "quality_violations([{'x':0},{'x':2}], [['r','range','x',0,2]])",
+      "output": "[[], []]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Validate rule definitions before applying them to rows."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A row can fail several rules; retain every failure in the given rule order."
+    }
+  ],
+  "explanation": [
+    "A small rule engine separates the data being audited from the audit policy. Named rules make reports understandable when several checks target the same field.",
+    "Rule failure is different from an invalid rule definition. The former belongs in a per-row report, while malformed definitions should stop the audit with an error."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m117",
+  "kind": "lesson",
+  "slug": "point-cloud-inertia",
+  "version": 1,
+  "title": "Summarize a Planar Mass Distribution",
+  "summary": "Compute mass-weighted center and second-moment inertia components around that center.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Summarize a Planar Mass Distribution"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "planar_mass_moments",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

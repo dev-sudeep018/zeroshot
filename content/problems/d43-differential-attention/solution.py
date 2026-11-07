@@ -32,7 +32,7 @@
 #
 # This port takes the two query/key subspaces separately instead of splitting a projected feature tensor as the upstream implementation does.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

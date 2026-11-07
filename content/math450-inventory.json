@@ -1,0 +1,1408 @@
+{
+  "batch": "m60-m159",
+  "lesson_count": 100,
+  "beginner_count": 80,
+  "public_case_count": 1006,
+  "lessons": [
+    {
+      "id": "m60",
+      "title": "Calibrate and Limit Sensor Channels",
+      "slug": "calibrated-sensor-table",
+      "objective": "Broadcast channel gains and offsets over readings, then clip each channel to its physical range.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m61",
+      "title": "Summarize Only Observed Cells",
+      "slug": "masked-column-summary",
+      "objective": "Compute column counts and means under an explicit observation mask, with a defined empty-column fallback.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m62",
+      "title": "Aggregate a Grid into Partial Blocks",
+      "slug": "partial-grid-block-sums",
+      "objective": "Sum nonoverlapping grid blocks while preserving partial bottom and right boundary blocks.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m63",
+      "title": "Accumulate Repeated Grid Measurements",
+      "slug": "coordinate-grid-accumulation",
+      "objective": "Scatter repeated integer grid coordinates into separate sum and count grids.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m64",
+      "title": "Pack a Symmetric Measurement Matrix",
+      "slug": "symmetric-triangle-packing",
+      "objective": "Validate symmetry and serialize the upper triangle in a fixed order for lossless reconstruction.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m65",
+      "title": "Convert Counts into Conditional Rows",
+      "slug": "conditional-count-table",
+      "objective": "Derive conditional row probabilities and row masses from a nonnegative count table, keeping empty rows zero.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m66",
+      "title": "Summarize a Matrix by Diagonal Offset",
+      "slug": "matrix-diagonal-profile",
+      "objective": "Compute counts and means for every diagonal of a rectangular matrix with explicit offset order.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m67",
+      "title": "Answer Rectangular Sum Queries",
+      "slug": "rectangle-sum-queries",
+      "objective": "Use a summed-area table to answer half-open rectangular grid queries, including empty rectangles.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m68",
+      "title": "Locate Pixels inside Image Tiles",
+      "slug": "pixel-tile-coordinates",
+      "objective": "Convert flat pixel indices into tile coordinates and within-tile coordinates for uneven image boundaries.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m69",
+      "title": "Build an Independence Baseline for a Table",
+      "slug": "independent-expected-counts",
+      "objective": "Derive expected cell counts from observed row and column totals and report observed-minus-expected residuals.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m70",
+      "title": "Measure Four-Connected Grid Regions",
+      "slug": "connected-grid-regions",
+      "objective": "Label true-cell components in row-major discovery order and report their sizes and exposed-edge perimeters.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m71",
+      "title": "Find Peaks without Double-Counting Plateaus",
+      "slug": "plateau-peak-locations",
+      "objective": "Return midpoints of flat local maxima with strict lower neighbors and explicit endpoint exclusion.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m72",
+      "title": "Measure Change on an Uneven Time Grid",
+      "slug": "irregular-sample-velocity",
+      "objective": "Compute interval velocities and their midpoint timestamps from strictly increasing sample times.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m73",
+      "title": "Smooth a Signal at Its Boundaries",
+      "slug": "centered-window-smoothing",
+      "objective": "Average centered windows with shrinking boundaries and return the contributing counts.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m74",
+      "title": "Separate a Forecast from Its Update",
+      "slug": "one-step-smoothed-forecasts",
+      "objective": "Produce one-step exponential-smoothing forecasts and the final level without leaking the current observation.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m75",
+      "title": "Remove and Restore a Seasonal Lag",
+      "slug": "seasonal-difference-reconstruction",
+      "objective": "Compute lagged differences and reconstruct the signal from its initial season and differences.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m76",
+      "title": "Compare a Signal with Its Delayed Self",
+      "slug": "lagged-signal-products",
+      "objective": "Compute raw lag products with biased or overlap-count normalization and return counts.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m77",
+      "title": "Find Sign Changes through Exact Zeros",
+      "slug": "zero-crossing-brackets",
+      "objective": "Track consecutive nonzero samples and return brackets for sign reversals, ignoring zero runs.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m78",
+      "title": "Accumulate Area on an Uneven Grid",
+      "slug": "signed-trapezoid-areas",
+      "objective": "Return each signed trapezoidal area and cumulative integral for timestamped measurements.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m79",
+      "title": "Resample between Known Measurements",
+      "slug": "piecewise-linear-resampling",
+      "objective": "Interpolate queries on a strictly increasing grid with constant endpoint extension and preserved query order.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m80",
+      "title": "Reduce Outlier Influence by Trimming",
+      "slug": "trimmed-sample-summary",
+      "objective": "Sort observations, trim a fixed count from both tails, and report the retained mean and count.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m81",
+      "title": "Flag Outliers Using Median Deviations",
+      "slug": "median-deviation-flags",
+      "objective": "Compute a median center and median absolute deviation, then flag strict threshold exceedances including a zero-MAD policy.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m82",
+      "title": "Explain Which Tail Contains an Outlier",
+      "slug": "tukey-outlier-fences",
+      "objective": "Compute linear-interpolated quartiles and Tukey fences, and classify lower and upper outliers separately.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m83",
+      "title": "Combine Multiplicative Growth Factors",
+      "slug": "geometric-growth-summary",
+      "objective": "Use logarithms to compute a geometric mean factor and cumulative factors from bounded positive changes.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m84",
+      "title": "Average Rates over Equal Distances",
+      "slug": "harmonic-rate-summary",
+      "objective": "Compute harmonic mean speed and total travel time for equal-distance segments with varying speeds.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m85",
+      "title": "Compare Typical and Peak Signal Size",
+      "slug": "signal-crest-factor",
+      "objective": "Compute RMS amplitude, peak absolute amplitude, and crest factor with an explicit all-zero convention.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m86",
+      "title": "Compare Dispersion across Units",
+      "slug": "relative-dispersion",
+      "objective": "Compute population mean, standard deviation, and coefficient of variation for positive observations.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m87",
+      "title": "Measure Asymmetry and Tail Shape",
+      "slug": "central-shape-moments",
+      "objective": "Compute standardized third and fourth central moments with a defined constant-sample convention.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m88",
+      "title": "Make Histogram Areas Sum to One",
+      "slug": "weighted-density-histogram",
+      "objective": "Accumulate nonnegative sample weights into uneven bins and divide by total weight and bin widths.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m89",
+      "title": "Transfer Histogram Mass to New Bins",
+      "slug": "histogram-overlap-rebinning",
+      "objective": "Redistribute piecewise-uniform bin mass according to interval overlaps between two edge grids.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m90",
+      "title": "Describe Concentration with a Lorenz Curve",
+      "slug": "lorenz-curve-area",
+      "objective": "Sort nonnegative amounts, build cumulative population and value shares, and derive Gini from trapezoidal area.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m91",
+      "title": "Report Every Most Frequent Value",
+      "slug": "empirical-mode-ties",
+      "objective": "Return sorted tied modes, their shared frequency, and the number of unique observed values.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m92",
+      "title": "Compute Every Leave-One-Out Mean",
+      "slug": "leave-one-out-means",
+      "objective": "Compute omitted-observation means and the jackknife mean estimate without refitting each sample.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m93",
+      "title": "Separate Within-Group Scatter from Group Means",
+      "slug": "pooled-within-group-variance",
+      "objective": "Combine group sizes and sample variances using residual degrees of freedom without adding between-group variation.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m94",
+      "title": "Partition Variation between Groups",
+      "slug": "one-way-anova-sums",
+      "objective": "Compute grand mean, between-group and within-group sums of squares from labeled numeric observations.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m95",
+      "title": "Measure How Concentrated Weights Are",
+      "slug": "weighted-effective-sample-size",
+      "objective": "Normalize nonnegative weights and compute inverse squared-mass effective sample size and maximum weight share.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m96",
+      "title": "Build a Bounded Interval for a Success Rate",
+      "slug": "success-rate-wilson-interval",
+      "objective": "Compute a Wilson score interval from successes, trials and a supplied positive z value.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m97",
+      "title": "Audit Relative Errors near Zero",
+      "slug": "symmetric-percentage-errors",
+      "objective": "Compute symmetric absolute percentage errors with a both-zero convention and their mean.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m98",
+      "title": "Compare Forecast Errors with a Naive Baseline",
+      "slug": "scaled-forecast-error",
+      "objective": "Normalize evaluation absolute error by training seasonal-naive absolute error with an explicit zero-scale policy.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m99",
+      "title": "Keep Forecast Training before Validation",
+      "slug": "rolling-origin-boundaries",
+      "objective": "Produce expanding-window training and validation index boundaries with a fixed horizon and stride.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m100",
+      "title": "Find the Nearest Point on a Segment",
+      "slug": "point-segment-projection",
+      "objective": "Project a point onto a finite 2D segment, clamp the parameter and return squared distance.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m101",
+      "title": "Measure Triangle Orientation and Size",
+      "slug": "signed-triangle-area",
+      "objective": "Use a 2D cross product to return signed area and orientation, including collinear points.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m102",
+      "title": "Walk a Closed Polygon",
+      "slug": "polygon-perimeter-area",
+      "objective": "Compute perimeter and signed shoelace area without requiring a repeated closing vertex.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m103",
+      "title": "Measure Perpendicular Distance to a Line",
+      "slug": "point-line-distance",
+      "objective": "Return signed distance and perpendicular foot for a nondegenerate implicit 2D line.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m104",
+      "title": "Describe a Point Cloud with a Bounding Box",
+      "slug": "point-cloud-bounds",
+      "objective": "Compute coordinatewise bounds, center, side lengths and volume for a point cloud.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m105",
+      "title": "Rotate Points around a Chosen Pivot",
+      "slug": "rotate-around-pivot",
+      "objective": "Translate to a pivot, apply a 2D rotation in radians and translate back without modifying inputs.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m106",
+      "title": "Convert Cartesian Positions to Canonical Polar Form",
+      "slug": "polar-coordinate-canonicalization",
+      "objective": "Compute radii and angles in [0,2*pi), using zero angle at the origin.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m107",
+      "title": "Locate a Point Relative to a Triangle",
+      "slug": "barycentric-triangle-coordinates",
+      "objective": "Solve barycentric weights and test inclusive membership for a nondegenerate 2D triangle.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m108",
+      "title": "Intersect Two Nonparallel Segments",
+      "slug": "segment-intersection-parameters",
+      "objective": "Solve line intersection parameters and report whether their shared point lies on both finite segments.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m109",
+      "title": "Reflect Points across an Implicit Line",
+      "slug": "reflection-across-line",
+      "objective": "Use signed line offsets to reflect a batch of 2D points across a nonzero-normal line.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m110",
+      "title": "Clip a Segment to a Rectangle",
+      "slug": "axis-aligned-box-clipping",
+      "objective": "Compute the visible parameter interval of a 2D segment inside a closed axis-aligned rectangle.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m111",
+      "title": "Sample a Path by Traveled Distance",
+      "slug": "polyline-distance-resampling",
+      "objective": "Interpolate positions at cumulative path distances while skipping zero-length segments.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m112",
+      "title": "Split a Vector into Parallel and Perpendicular Parts",
+      "slug": "orthogonal-vector-components",
+      "objective": "Project a vector onto a nonzero direction and return orthogonal residual and squared lengths.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m113",
+      "title": "Construct an Oriented Plane from Three Points",
+      "slug": "plane-from-three-points",
+      "objective": "Normalize a cross product into a plane normal and compute its offset, rejecting collinear points.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m114",
+      "title": "Rotate a 3D Vector around an Axis",
+      "slug": "axis-angle-rotation",
+      "objective": "Apply Rodrigues rotation using a normalized nonzero axis and a supplied angle.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m115",
+      "title": "Classify Points against a Polygon Boundary",
+      "slug": "point-in-simple-polygon",
+      "objective": "Use horizontal ray crossings to test membership in a simple polygon, treating boundary points as inside.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m116",
+      "title": "Recover a Triangle from Side Lengths",
+      "slug": "cosine-rule-triangle",
+      "objective": "Validate strict triangle inequalities and compute angles and area with clipped cosine roundoff.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m117",
+      "title": "Summarize a Planar Mass Distribution",
+      "slug": "point-cloud-inertia",
+      "objective": "Compute mass-weighted center and second-moment inertia components around that center.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m118",
+      "title": "Measure Covered Length without Double Counting",
+      "slug": "interval-union-length",
+      "objective": "Merge overlapping or touching real intervals and report their union length.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m119",
+      "title": "Measure Overlap between Two Disks",
+      "slug": "circle-circle-overlap",
+      "objective": "Handle disjoint, contained and partial-overlap circles with the lens-area formula.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m120",
+      "title": "Combine Events in a Finite Sample Space",
+      "slug": "finite-event-probability",
+      "objective": "Use probability masses and two event masks to compute union, intersection and conditional probability.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m121",
+      "title": "Combine Independent Discrete Measurements",
+      "slug": "independent-sum-distribution",
+      "objective": "Convolve two finite integer-supported probability vectors and track the resulting support offset.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m122",
+      "title": "Count Successes in a Sample without Replacement",
+      "slug": "sampling-without-replacement",
+      "objective": "Compute a complete hypergeometric mass function and its feasible support.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m123",
+      "title": "Track the First Success before a Deadline",
+      "slug": "first-success-waiting",
+      "objective": "Compute first-success probabilities and the leftover no-success mass from independent changing success rates.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m124",
+      "title": "Count Events under a Poisson Model",
+      "slug": "poisson-event-probabilities",
+      "objective": "Compute probabilities for requested integer counts and the expected count for a bounded positive rate.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m125",
+      "title": "Turn Fixed Uniform Draws into Categories",
+      "slug": "discrete-inverse-cdf",
+      "objective": "Build a categorical CDF and choose the first cumulative mass strictly above each supplied draw.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m126",
+      "title": "Predict How Many Categories Will Be Seen",
+      "slug": "coupon-distinct-expectation",
+      "objective": "Compute per-category appearance probabilities and expected distinct categories after independent draws.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m127",
+      "title": "Find the Chance of a Repeated Label",
+      "slug": "birthday-collision-probability",
+      "objective": "Compute collision probability for uniform independent labels using the no-collision product.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m128",
+      "title": "Combine Three Overlapping Events",
+      "slug": "inclusion-exclusion-three-events",
+      "objective": "Compute union and exactly-one/exactly-two probabilities from all intersections and validate nonnegative atomic regions.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m129",
+      "title": "Condition a Joint Table on Selected Columns",
+      "slug": "conditional-table-distribution",
+      "objective": "Restrict a joint probability table to an event and return event probability and conditional row distribution.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m130",
+      "title": "Separate Within-Case and Between-Case Uncertainty",
+      "slug": "law-total-variance",
+      "objective": "Combine mixture weights, conditional means and variances into a total mean and variance.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m131",
+      "title": "Move Probability through a Transition Table",
+      "slug": "markov-distribution-steps",
+      "objective": "Propagate a probability row vector through a stochastic matrix for a fixed number of steps.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m132",
+      "title": "Track Survival before an Absorbing State",
+      "slug": "absorbing-chain-survival",
+      "objective": "Propagate transient mass through a substochastic matrix and report per-step absorption probabilities.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m133",
+      "title": "Separate No Event, One Event and Several Events",
+      "slug": "competing-independent-events",
+      "objective": "Use independent event probabilities to compute the full count distribution and aggregate categories.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m134",
+      "title": "Count Dice Outcomes before Normalizing",
+      "slug": "fair-dice-sum-counts",
+      "objective": "Build exact sum counts for a bounded number of fair dice and convert counts into probabilities.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m135",
+      "title": "Decode a Combination from Its Lexicographic Rank",
+      "slug": "combinations-by-rank",
+      "objective": "Unrank fixed-size subsets using binomial block sizes without enumerating every subset.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m136",
+      "title": "Measure Disorder in a Permutation",
+      "slug": "permutation-inversion-count",
+      "objective": "Validate a permutation and count inversions and its even/odd parity.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m137",
+      "title": "Count Monotone Routes around Blocked Cells",
+      "slug": "lattice-path-counts",
+      "objective": "Use dynamic programming to count right/down lattice routes while respecting blocked endpoints.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m138",
+      "title": "Count Assignments with No Fixed Points",
+      "slug": "derangement-counts",
+      "objective": "Build exact derangement counts by recurrence and return the no-fixed-point probability.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m139",
+      "title": "Estimate How Many Boxes Stay Empty",
+      "slug": "occupancy-empty-boxes",
+      "objective": "Compute expected empty boxes and their variance for uniform independent placement.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m140",
+      "title": "Evaluate a Polynomial and Its Slope Together",
+      "slug": "polynomial-horner-derivative",
+      "objective": "Apply a coupled Horner recurrence to descending coefficients at a batch of query points.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m141",
+      "title": "Integrate a Polynomial between Bounds",
+      "slug": "polynomial-antiderivative-area",
+      "objective": "Build antiderivative coefficients and evaluate signed definite integrals for paired bounds.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m142",
+      "title": "Keep a Root inside a Shrinking Bracket",
+      "slug": "bisection-polynomial-root",
+      "objective": "Bisect a continuous polynomial on a sign-changing interval for a fixed number of steps.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 12,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m143",
+      "title": "Trace Newton Updates toward a Square Root",
+      "slug": "newton-square-root-trace",
+      "objective": "Run a bounded number of Newton iterations from a positive initial guess and return every estimate.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m144",
+      "title": "Integrate Evenly Spaced Samples with Simpson Weights",
+      "slug": "composite-simpson-area",
+      "objective": "Validate odd sample count and apply alternating interior weights to a fixed-spacing sample vector.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m145",
+      "title": "Recover a Quadratic through Three Samples",
+      "slug": "quadratic-interpolation",
+      "objective": "Solve three-point Lagrange interpolation for distinct nodes and evaluate a batch of queries.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m146",
+      "title": "Step through a First-Order Cooling Model",
+      "slug": "euler-cooling-trajectory",
+      "objective": "Apply explicit Euler updates to a linear relaxation equation with bounded steps and report the trajectory.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m147",
+      "title": "Update a Root Estimate from Two Function Values",
+      "slug": "secant-polynomial-root",
+      "objective": "Apply a fixed number of secant iterations with clear zero-denominator handling.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m148",
+      "title": "Update a Linear Solve without Reusing New Values",
+      "slug": "jacobi-linear-iteration",
+      "objective": "Compute a fixed number of Jacobi iterations from an initial vector and return the residual.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m149",
+      "title": "Solve a Small System with Partial Pivoting",
+      "slug": "gaussian-elimination-pivot",
+      "objective": "Perform elimination and back substitution with row pivoting and a documented singularity threshold.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m150",
+      "title": "Score Binary Features with Both Outcomes",
+      "slug": "bernoulli-naive-bayes-scores",
+      "objective": "Compute class log scores from priors and conditional feature probabilities, including absent features.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m151",
+      "title": "Fit a Line and Explain Its Residuals",
+      "slug": "least-squares-line-fit",
+      "objective": "Compute ordinary least-squares slope/intercept and residual sum of squares for paired observations.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m152",
+      "title": "Compare a Regressor with the Mean Baseline",
+      "slug": "regression-r-squared",
+      "objective": "Compute residual and total sums of squares and R-squared with an explicit constant-target convention.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m153",
+      "title": "Ignore Errors inside a Tolerance Band",
+      "slug": "epsilon-insensitive-error",
+      "objective": "Compute mean epsilon-insensitive absolute loss and its prediction subgradient with zero derivative at the boundary.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m154",
+      "title": "Compare Agreement with Its Chance Baseline",
+      "slug": "cohen-label-agreement",
+      "objective": "Compute observed agreement, marginal chance agreement and Cohen's kappa for paired categorical labels.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m155",
+      "title": "Give Each Class Equal Total Training Weight",
+      "slug": "class-balanced-sample-weights",
+      "objective": "Compute inverse-frequency sample weights scaled to mean one from integer class labels.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m156",
+      "title": "Classify by Learned Class Means",
+      "slug": "nearest-centroid-classifier",
+      "objective": "Fit centroids for each contiguous class ID and predict nearest centroid with smallest-ID tie breaking.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m157",
+      "title": "Predict from Ordered Regression Bins",
+      "slug": "piecewise-constant-regression",
+      "objective": "Assign numeric queries to right-sided split intervals and return their piecewise constant predictions and bin indices.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m158",
+      "title": "Minimize One Ridge Coordinate Exactly",
+      "slug": "ridge-single-coordinate-update",
+      "objective": "Update one linear coefficient from the residual excluding that feature under a fixed squared-error and L2 convention.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m159",
+      "title": "Find a Median under Unequal Observation Weights",
+      "slug": "weighted-median-selection",
+      "objective": "Sort value-weight pairs and return the smallest value whose cumulative weight reaches half the total.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Occlusion augmentation removes a selected spatial region. Clip the requested rectangle to the image and record the region actually changed.",
+  "task": "Replace the pixels in a half-open rectangle with a fill value and return an erased-position mask.",
+  "signature": "erase_rectangle(image, rectangle, fill)",
+  "requirements": [
+    "image is a matrix. rectangle is [top,left,bottom,right] with integer entries in -64..128; top<=bottom and left<=right. fill is a real scalar.",
+    "Clip each coordinate to the corresponding image bounds. Replace rows top:bottom and columns left:right. Return {\"image\": new matrix, \"mask\": boolean matrix}. Empty or fully outside rectangles change nothing.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Interior rectangle",
+      "input": "erase_rectangle(np.arange(9).reshape(3,3),[1,1,3,3],-1)",
+      "output": "{'image': [[0.0, 1.0, 2.0], [3.0, -1.0, -1.0], [6.0, -1.0, -1.0]],\n 'mask': [[False, False, False], [False, True, True], [False, True, True]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Clip negative origin",
+      "input": "erase_rectangle(np.ones((3,3)),[-2,-1,2,2],0)",
+      "output": "{'image': [[0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [1.0, 1.0, 1.0]],\n 'mask': [[True, True, False], [True, True, False], [False, False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Fully outside",
+      "input": "erase_rectangle(np.ones((2,2)),[3,3,4,4],0)",
+      "output": "{'image': [[1.0, 1.0], [1.0, 1.0]], 'mask': [[False, False], [False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Clip boundaries before constructing the region; negative Python slice indices would mean something different."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Half-open coordinates make erased area equal to height times width after clipping."
+    }
+  ],
+  "explanation": [
+    "A deterministic erasing primitive lets a separate sampling policy decide location and size. Returning the mask makes the actual intervention observable for tests or paired tasks.",
+    "The rectangle can cross image boundaries, so requested area and effective area may differ. Preserving the original input prevents an augmentation from unexpectedly changing another training view."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

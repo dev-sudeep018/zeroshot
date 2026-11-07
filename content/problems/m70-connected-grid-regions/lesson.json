@@ -1,0 +1,45 @@
+{
+  "intro": "Flood fill explores the full region reachable through edge-sharing moves. Marking a cell when it is scheduled prevents two neighboring cells from adding it twice.",
+  "task": "Label true-cell components in row-major discovery order and report their sizes and exposed-edge perimeters.",
+  "signature": "connected_grid_regions(mask)",
+  "requirements": [
+    "mask is a nonempty boolean matrix with axes 1..64. True cells connect only through shared up/down/left/right edges.",
+    "Return {\"labels\": integer matrix with background -1, \"sizes\": component sizes, \"perimeters\": exposed-edge counts}. Discover component seeds in row-major order and label them 0,1,... .",
+    "An exposed edge borders false background or lies outside the grid. Diagonal contact does not connect cells; an all-false grid returns empty size/perimeter vectors.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Diagonal separation",
+      "input": "connected_grid_regions([[True,False],[False,True]])",
+      "output": "{'labels': [[0, -1], [-1, 1]], 'sizes': [1, 1], 'perimeters': [4, 4]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Solid square",
+      "input": "connected_grid_regions([[True,True],[True,True]])",
+      "output": "{'labels': [[0, 0], [0, 0]], 'sizes': [4], 'perimeters': [8]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No foreground",
+      "input": "connected_grid_regions([[False,False]])",
+      "output": "{'labels': [[-1, -1]], 'sizes': [], 'perimeters': []}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Scan row-major for unlabeled true cells; each becomes a flood-fill seed."
+    },
+    {
+      "title": "Build the result",
+      "body": "Mark a neighbor when adding it to the work list, and count any edge that cannot enter a true cell."
+    }
+  ],
+  "explanation": [
+    "Flood fill explores the full region reachable through edge-sharing moves. Marking a cell when it is scheduled prevents two neighboring cells from adding it twice.",
+    "Perimeter counts local exposed edges, so both outside borders and enclosed holes contribute. Summing component sizes recovers the total number of true cells, while diagonal contacts leave separate labels."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

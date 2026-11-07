@@ -1,0 +1,44 @@
+{
+  "intro": "Resource paths often need lexical normalization before lookup. A stack resolves dot segments while preserving ordinary segment names and their order.",
+  "task": "Resolve dot and dot-dot path segments while rejecting traversal above the root.",
+  "signature": "normalize_resource_path(path)",
+  "requirements": [
+    "Use relative slash-separated paths only: reject a leading slash, backslash, colon, or NUL anywhere. Ignore empty segments and .; resolve .. by removing one prior segment, rejecting traversal above root. Return remaining segments joined with /; an empty result is valid.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Resolve dot segments",
+      "input": "normalize_resource_path('a/./b/../c')",
+      "output": "'a/c'"
+    },
+    {
+      "name": "Repeated separators",
+      "input": "normalize_resource_path('a//b/')",
+      "output": "'a/b'"
+    },
+    {
+      "name": "Return root",
+      "input": "normalize_resource_path('a/..')",
+      "output": "''"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Treat segments as a stack; .. removes the most recent normal segment."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Reject an attempted pop from an empty stack instead of quietly discarding it."
+    }
+  ],
+  "explanation": [
+    "Resource paths often need lexical normalization before lookup. A stack resolves dot segments while preserving ordinary segment names and their order.",
+    "This is a lexical resource-name exercise, not a filesystem security check. It does not resolve symlinks, percent escapes, or operating-system path aliases."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "An arithmetic average of multiplicative factors does not preserve compounded growth. The geometric mean is the constant factor that produces the same final product over the same number of steps.",
+  "task": "Use logarithms to compute a geometric mean factor and cumulative factors from bounded positive changes.",
+  "signature": "growth_summary(factors)",
+  "requirements": [
+    "factors is a vector of 1..50 multiplicative changes, each in [1e-6,10000].",
+    "Return {\"geometric_mean\": exp(mean(log(factors))), \"cumulative\": cumulative products}. The cumulative vector includes each prefix, with no initial 1 entry.",
+    "Compute through log sums; the maximum 50 factors keeps the resulting positive products representable for these bounds.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Growth then decline",
+      "input": "growth_summary([1.2,.5,2])",
+      "output": "{'geometric_mean': 1.062658569, 'cumulative': [1.2, 0.6, 1.2]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No change",
+      "input": "growth_summary([1,1,1])",
+      "output": "{'geometric_mean': 1.0, 'cumulative': [1.0, 1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Opposite scales",
+      "input": "growth_summary([.01,100])",
+      "output": "{'geometric_mean': 1.0, 'cumulative': [0.01, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Products become sums after taking logarithms."
+    },
+    {
+      "title": "Build the result",
+      "body": "The mean log factor gives one typical multiplicative step; prefix log sums give accumulated growth."
+    }
+  ],
+  "explanation": [
+    "An arithmetic average of multiplicative factors does not preserve compounded growth. The geometric mean is the constant factor that produces the same final product over the same number of steps.",
+    "Cumulative factors reveal the path, while the geometric mean only summarizes the endpoint relationship. Logs also let very different positive scales combine without multiplying intermediate values prematurely."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

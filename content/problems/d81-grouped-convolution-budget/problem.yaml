@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d81",
+  "kind": "lesson",
+  "slug": "grouped-convolution-budget",
+  "version": 1,
+  "title": "Budget Shared Convolution Weights",
+  "summary": "A convolution reuses its kernel across spatial positions. Grouping controls channel connectivity while image size controls compute.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Budget Shared Convolution Weights"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "convolution_budget",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/convolutional-networks/",
+    ],
+}

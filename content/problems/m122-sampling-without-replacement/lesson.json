@@ -1,0 +1,45 @@
+{
+  "intro": "Without replacement, successive draws are dependent. Counting subsets captures that dependence without simulating draw order.",
+  "task": "Compute a complete hypergeometric mass function and its feasible support.",
+  "signature": "hypergeometric_distribution(population, successes, draws)",
+  "requirements": [
+    "population is an integer in 1..64; successes and draws are integers in 0..population.",
+    "Return {\"support\": all feasible success counts, \"probabilities\": their masses} in ascending support order.",
+    "Use C(successes,k)*C(population-successes,draws-k)/C(population,draws). Sampling is uniform without replacement.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Mixed small population",
+      "input": "hypergeometric_distribution(5,2,2)",
+      "output": "{'support': [0, 1, 2], 'probabilities': [0.3, 0.6, 0.1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Entire population",
+      "input": "hypergeometric_distribution(6,4,6)",
+      "output": "{'support': [4], 'probabilities': [1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No draws",
+      "input": "hypergeometric_distribution(8,3,0)",
+      "output": "{'support': [0], 'probabilities': [1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "The support is restricted by both the available successes and the available failures."
+    },
+    {
+      "title": "Build the result",
+      "body": "Count successful and unsuccessful subsets separately, then divide by the number of all equally likely draw subsets."
+    }
+  ],
+  "explanation": [
+    "Without replacement, successive draws are dependent. Counting subsets captures that dependence without simulating draw order.",
+    "The feasible support can start above zero when too few failures exist to fill the sample. Checking both support bounds prevents invalid binomial coefficients and describes forced outcomes correctly."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

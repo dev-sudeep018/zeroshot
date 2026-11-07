@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d124",
+  "kind": "lesson",
+  "slug": "orthogonal-column-penalty",
+  "version": 1,
+  "title": "Differentiate an Orthogonality Penalty",
+  "summary": "Correlated feature directions can duplicate information. A Gram-matrix penalty encourages columns to have unit norm and be mutually orthogonal.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Differentiate an Orthogonality Penalty"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "orthogonality_penalty",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html",
+    ],
+}

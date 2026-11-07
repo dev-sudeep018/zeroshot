@@ -1,0 +1,44 @@
+{
+  "intro": "Pooling within-group variances combines scatter around each group mean. It intentionally excludes differences between the group means themselves.",
+  "task": "Combine group sizes and sample variances using residual degrees of freedom without adding between-group variation.",
+  "signature": "pooled_variance(sizes, variances)",
+  "requirements": [
+    "sizes is an integer-valued vector with every size in 2..64. variances contains nonnegative sample variances with the same length.",
+    "Return {\"variance\": sum((size-1)*variance)/sum(size-1), \"degrees_freedom\": sum(size-1)}. No between-group mean differences enter this quantity.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Unequal group sizes",
+      "input": "pooled_variance([3,5],[1,4])",
+      "output": "{'variance': 3.0, 'degrees_freedom': 6}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equal sizes",
+      "input": "pooled_variance([4,4],[2,8])",
+      "output": "{'variance': 5.0, 'degrees_freedom': 6}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero variance group",
+      "input": "pooled_variance([2,3],[0,6])",
+      "output": "{'variance': 4.0, 'degrees_freedom': 3}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "A sample variance represents its residual sum of squares divided by size minus one."
+    },
+    {
+      "title": "Build the result",
+      "body": "Recover those sums of squares and divide their total by total residual degrees of freedom."
+    }
+  ],
+  "explanation": [
+    "Pooling within-group variances combines scatter around each group mean. It intentionally excludes differences between the group means themselves.",
+    "Weighting by group size would be slightly wrong because each estimated mean consumes one degree of freedom. Groups with identical sample variances retain that variance regardless of their different sizes."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Fixed batching bounds the number of records processed in one call. Unlike padded token batching, this contract ignores record sizes and partitions only by count.",
+  "task": "Create full and final partial batches without padding or losing records.",
+  "signature": "fixed_batches(items, size)",
+  "requirements": [
+    "size is an integer 1..1000. Return consecutive copied batches of at most size items. Keep a shorter final batch and return no batches for an empty input.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Partial tail",
+      "input": "fixed_batches([1,2,3,4,5], 2)",
+      "output": "[[1, 2], [3, 4], [5]]"
+    },
+    {
+      "name": "Exact multiple",
+      "input": "fixed_batches([1,2,3,4], 2)",
+      "output": "[[1, 2], [3, 4]]"
+    },
+    {
+      "name": "Empty input",
+      "input": "fixed_batches([], 3)",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Move the slice start by size each time; the end may exceed the list length safely."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not append an empty final batch when length is an exact multiple of size."
+    }
+  ],
+  "explanation": [
+    "Fixed batching bounds the number of records processed in one call. Unlike padded token batching, this contract ignores record sizes and partitions only by count.",
+    "Concatenating all output batches must recover the original item sequence. The final partial batch preserves records that would otherwise be lost by integer division."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

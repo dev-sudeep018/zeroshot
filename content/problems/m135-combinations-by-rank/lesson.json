@@ -1,0 +1,45 @@
+{
+  "intro": "Ranking lets a large family of combinations be addressed without storing it. Binomial coefficients tell us exactly how many completions share each prefix.",
+  "task": "Unrank fixed-size subsets using binomial block sizes without enumerating every subset.",
+  "signature": "unrank_combination(size, chosen, rank)",
+  "requirements": [
+    "size is an integer in 0..64; chosen is in 0..size. rank is a zero-based Python integer in 0..C(size,chosen)-1.",
+    "Return the strictly increasing list of chosen indices from range(size) at that lexicographic rank.",
+    "Skip blocks with C(remaining positions, remaining choices). Do not enumerate every combination. Integer rank may exceed 10000.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Middle pair",
+      "input": "unrank_combination(5,2,4)",
+      "output": "[1, 2]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "First triple",
+      "input": "unrank_combination(6,3,0)",
+      "output": "[0, 1, 2]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Last triple",
+      "input": "unrank_combination(6,3,19)",
+      "output": "[3, 4, 5]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "All combinations beginning with a given next index form a contiguous lexicographic block."
+    },
+    {
+      "title": "Build the result",
+      "body": "Subtract a whole block when rank lies beyond it; otherwise accept that index and descend into the block."
+    }
+  ],
+  "explanation": [
+    "Ranking lets a large family of combinations be addressed without storing it. Binomial coefficients tell us exactly how many completions share each prefix.",
+    "Lexicographic order compares the first differing selected index. Choosing the next index by block sizes preserves that order and supports large ranks with exact integer arithmetic."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

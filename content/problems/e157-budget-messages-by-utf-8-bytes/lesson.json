@@ -1,0 +1,44 @@
+{
+  "intro": "Payload budgets often count bytes on the wire rather than visible characters. UTF-8 characters can occupy different numbers of bytes, making character counts unreliable.",
+  "task": "Keep the longest whole-message prefix fitting a byte budget including separators.",
+  "signature": "budget_messages(messages, budget, separator)",
+  "requirements": [
+    "messages is a sequence of strings, separator a string, and budget an integer >=0. Keep the longest whole-message prefix whose UTF-8 encoding after joining with separator fits budget bytes. Stop at the first message that would exceed the budget; do not skip it. Return kept messages, used_bytes, and remaining_bytes.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Include separator cost",
+      "input": "budget_messages(['ab','cd','e'],5,'|')",
+      "output": "{'kept': ['ab', 'cd'], 'used_bytes': 5, 'remaining_bytes': 0}"
+    },
+    {
+      "name": "UTF-8 bytes",
+      "input": "budget_messages(['\u00e9','\ud83d\ude42','x'],6,'')",
+      "output": "{'kept': ['\u00e9', '\ud83d\ude42'], 'used_bytes': 6, 'remaining_bytes': 0}"
+    },
+    {
+      "name": "Do not skip long message",
+      "input": "budget_messages(['long','x'],1,'')",
+      "output": "{'kept': [], 'used_bytes': 0, 'remaining_bytes': 1}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Count encoded bytes, not Python characters."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A separator is needed after any kept message, even an empty string."
+    }
+  ],
+  "explanation": [
+    "Payload budgets often count bytes on the wire rather than visible characters. UTF-8 characters can occupy different numbers of bytes, making character counts unreliable.",
+    "Keeping a prefix preserves chronological message order. A later short message cannot bypass an earlier message that does not fit under this policy."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

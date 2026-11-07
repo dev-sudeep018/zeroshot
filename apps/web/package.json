@@ -1,5 +1,5 @@
 {
-  "name": "@mastery/web",
+  "name": "@zeroshot/web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,9 +9,10 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@mastery/problem-schema": "workspace:*",
-    "@mastery/runner-protocol": "workspace:*",
     "@monaco-editor/react": "4.7.0",
+    "@zeroshot/problem-schema": "workspace:*",
+    "@zeroshot/runner-protocol": "workspace:*",
+    "firebase": "13.2.0",
     "lucide-react": "0.468.0",
     "monaco-editor": "0.57.0",
     "next": "16.4.2",

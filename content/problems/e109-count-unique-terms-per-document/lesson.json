@@ -1,0 +1,44 @@
+{
+  "intro": "Document frequency measures how widespread a term is across a corpus. It differs from raw token frequency because repetition in one document supplies only one presence observation.",
+  "task": "Compute document frequencies, counting repeated terms once per document.",
+  "signature": "document_frequencies(documents)",
+  "requirements": [
+    "documents contains sequences of nonempty string terms. Return a term-to-integer dictionary counting how many documents contain each term. Repetitions inside one document count once; repeated documents count separately.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Within-document duplicates",
+      "input": "document_frequencies([['a','a','b'],['a','c']])",
+      "output": "{'a': 2, 'b': 1, 'c': 1}"
+    },
+    {
+      "name": "Repeated documents",
+      "input": "document_frequencies([['x'],['x']])",
+      "output": "{'x': 2}"
+    },
+    {
+      "name": "Empty documents",
+      "input": "document_frequencies([[],['a'],[]])",
+      "output": "{'a': 1}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Deduplicate each document before updating global counts."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not deduplicate the outer list: two identical documents are two observations."
+    }
+  ],
+  "explanation": [
+    "Document frequency measures how widespread a term is across a corpus. It differs from raw token frequency because repetition in one document supplies only one presence observation.",
+    "This statistic is a building block for information retrieval and vocabulary audits. Its count is always between one and the number of documents for every reported term."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

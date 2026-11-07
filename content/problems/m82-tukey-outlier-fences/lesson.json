@@ -1,0 +1,44 @@
+{
+  "intro": "An outlier fence is a descriptive rule about unusual distances from the central half of a sample. Reporting a signed tail label distinguishes unusually low observations from unusually high ones.",
+  "task": "Compute linear-interpolated quartiles and Tukey fences, and classify lower and upper outliers separately.",
+  "signature": "tukey_fences(values, multiplier)",
+  "requirements": [
+    "multiplier is nonnegative. Use linear-interpolated 25th and 75th percentiles: rank=(n-1)*q and interpolate neighboring sorted observations.",
+    "Return {\"quartiles\": [q1,q3], \"fences\": [q1-m*IQR,q3+m*IQR], \"tail\": integer vector}. tail is -1 strictly below the lower fence, +1 strictly above the upper fence, and 0 otherwise.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Upper outlier",
+      "input": "tukey_fences([0,1,2,3,20],1.5)",
+      "output": "{'quartiles': [1.0, 3.0], 'fences': [-2.0, 6.0], 'tail': [0, 0, 0, 0, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Both tails",
+      "input": "tukey_fences([-30,0,1,2,3,4,40],1)",
+      "output": "{'quartiles': [0.5, 3.5], 'fences': [-2.5, 6.5], 'tail': [-1, 0, 0, 0, 0, 0, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Fence equality",
+      "input": "tukey_fences([0,1,2],.5)",
+      "output": "{'quartiles': [0.5, 1.5], 'fences': [0.0, 2.0], 'tail': [0, 0, 0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the IQR from interpolated quartiles before expanding the fences."
+    },
+    {
+      "title": "Build the result",
+      "body": "Apply lower and upper strict comparisons separately to preserve the direction of each flag."
+    }
+  ],
+  "explanation": [
+    "An outlier fence is a descriptive rule about unusual distances from the central half of a sample. Reporting a signed tail label distinguishes unusually low observations from unusually high ones.",
+    "Quantile definitions differ for small samples, so the interpolation convention is part of the contract. Values exactly on a fence remain unflagged; replacing strict comparisons with inclusive ones changes the rule."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

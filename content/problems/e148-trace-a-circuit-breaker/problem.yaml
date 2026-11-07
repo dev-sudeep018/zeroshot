@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e148",
+  "kind": "lesson",
+  "slug": "trace-a-circuit-breaker",
+  "version": 1,
+  "title": "Trace a Circuit Breaker",
+  "summary": "Open after consecutive failures and reset on success under a simple no-timer state machine.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "circuit_trace",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

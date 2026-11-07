@@ -1,0 +1,3664 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-01",
+  "previous_lessons": 200,
+  "added_lessons": 250,
+  "published_lessons": 450,
+  "beginner_lessons": 205,
+  "added_beginner_lessons": 195,
+  "project_checkpoints": 1,
+  "public_cases": 4762,
+  "added_public_cases": 2518,
+  "items": [
+    {
+      "id": "d100",
+      "title": "Build Next-Token Training Pairs",
+      "objective": "Shift a padded token batch into aligned inputs and targets, and mark the valid prediction positions.",
+      "folder": "d100-shifted-language-model-batch",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://huggingface.co/docs/transformers/tasks/language_modeling"
+      ]
+    },
+    {
+      "id": "d101",
+      "title": "Average Loss over Real Tokens Only",
+      "objective": "Return per-token negative log likelihood with zeros at masked positions and its mean over valid positions.",
+      "folder": "d101-masked-token-negative-log-likelihood",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d100"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+      ]
+    },
+    {
+      "id": "d102",
+      "title": "Choose Decoder Inputs with Scheduled Teacher Forcing",
+      "objective": "Build decoder input tokens, beginning with a start token and then selecting the previous gold or predicted token.",
+      "folder": "d102-scheduled-teacher-forcing-inputs",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d100"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1506.03099"
+      ]
+    },
+    {
+      "id": "d103",
+      "title": "Decode a CTC Alignment Path",
+      "objective": "Merge consecutive identical path IDs, then remove blank IDs, returning the remaining token IDs.",
+      "folder": "d103-ctc-path-collapse",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://www.cs.toronto.edu/~graves/icml_2006.pdf"
+      ]
+    },
+    {
+      "id": "d104",
+      "title": "Gather the Final Real Sequence State",
+      "objective": "Gather one hidden vector per example using valid lengths, returning zeros for empty sequences.",
+      "folder": "d104-last-valid-hidden-state",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.utils.rnn.pack_padded_sequence.html"
+      ]
+    },
+    {
+      "id": "d105",
+      "title": "Measure How Broadly Attention Is Spread",
+      "objective": "Return attention entropy in natural units, exponential effective support, and the largest weight per query.",
+      "folder": "d105-attention-effective-support",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2005.00928"
+      ]
+    },
+    {
+      "id": "d106",
+      "title": "Compose Residual Attention across Layers",
+      "objective": "Return layer-by-layer cumulative token mixing matrices after residual addition and row normalization.",
+      "folder": "d106-residual-attention-rollout",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2005.00928"
+      ]
+    },
+    {
+      "id": "d107",
+      "title": "Carry a Causal Convolution across Chunks",
+      "objective": "Compute outputs for the new chunk and return the history needed for the next call.",
+      "folder": "d107-streaming-causal-convolution",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1609.03499"
+      ]
+    },
+    {
+      "id": "d108",
+      "title": "Turn Image Windows into Matrix Rows",
+      "objective": "Extract valid image patches as flattened rows and return their top-left coordinates.",
+      "folder": "d108-image-to-patch-matrix",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.Unfold.html"
+      ]
+    },
+    {
+      "id": "d109",
+      "title": "Move Subpixel Channels into Image Space",
+      "objective": "Perform a channel-first pixel shuffle without interpolation.",
+      "folder": "d109-pixel-shuffle-upscaling",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.PixelShuffle.html"
+      ]
+    },
+    {
+      "id": "d110",
+      "title": "Resize Class Labels without Inventing Classes",
+      "objective": "Resize an integer label map with the documented nearest-neighbor coordinate rule.",
+      "folder": "d110-nearest-segmentation-resize",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.functional.interpolate.html"
+      ]
+    },
+    {
+      "id": "d111",
+      "title": "Interpolate an Image with Aligned Corners",
+      "objective": "Resize a single-channel image using bilinear interpolation with aligned corners.",
+      "folder": "d111-bilinear-align-corners-resize",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.functional.interpolate.html"
+      ]
+    },
+    {
+      "id": "d112",
+      "title": "Restore Max-Pooled Values at Saved Locations",
+      "objective": "Scatter pooled values to distinct flattened output indices and fill all other positions with zero.",
+      "folder": "d112-switch-guided-max-unpool",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.MaxUnpool2d.html"
+      ]
+    },
+    {
+      "id": "d113",
+      "title": "Pool an Image into a Requested Grid",
+      "objective": "Average the documented floor-to-ceil regions for every output location.",
+      "folder": "d113-adaptive-spatial-average-pooling",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.AdaptiveAvgPool2d.html"
+      ]
+    },
+    {
+      "id": "d114",
+      "title": "Mark Boundaries between Segmentation Regions",
+      "objective": "Return a boolean map marking pixels with at least one differently labeled four-connected in-bounds neighbor.",
+      "folder": "d114-segmentation-boundary-map",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries"
+      ]
+    },
+    {
+      "id": "d115",
+      "title": "Locate a Landmark from All Heatmap Mass",
+      "objective": "Return each heatmap\u2019s total mass and mass-weighted center in zero-based row-column coordinates.",
+      "folder": "d115-heatmap-center-of-mass",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.center_of_mass.html"
+      ]
+    },
+    {
+      "id": "d116",
+      "title": "Decode the Strongest Heatmap Location",
+      "objective": "Return the row-column coordinates and value of the first maximum in each heatmap.",
+      "folder": "d116-heatmap-peak-coordinates",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.argmax.html"
+      ]
+    },
+    {
+      "id": "d117",
+      "title": "Erase a Clipped Image Rectangle",
+      "objective": "Replace the pixels in a half-open rectangle with a fill value and return an erased-position mask.",
+      "folder": "d117-rectangle-erasing-augmentation",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1708.04896"
+      ]
+    },
+    {
+      "id": "d118",
+      "title": "Mix Labels Using the Actual CutMix Area",
+      "objective": "Replace a clipped rectangle of the first image with the second image and return the area-correct soft label.",
+      "folder": "d118-cutmix-effective-area",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d117"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1905.04899"
+      ]
+    },
+    {
+      "id": "d119",
+      "title": "Interpolate Training Examples and Their Labels Together",
+      "objective": "Mix a feature batch and probability-label batch with a supplied partner permutation.",
+      "folder": "d119-paired-batch-mixup",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1710.09412"
+      ]
+    },
+    {
+      "id": "d120",
+      "title": "Restore Visible Patches to Their Original Positions",
+      "objective": "Scatter visible patch embeddings into their original positions and fill all other positions with a mask token.",
+      "folder": "d120-restore-masked-patch-order",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2111.06377"
+      ]
+    },
+    {
+      "id": "d121",
+      "title": "Restrict Reconstruction Loss to Masked Patches",
+      "objective": "Return the mean squared error over masked patch features and its gradient with respect to the prediction.",
+      "folder": "d121-masked-reconstruction-objective",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": ["d120"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2111.06377"
+      ]
+    },
+    {
+      "id": "d122",
+      "title": "Separate Codebook and Commitment Gradients",
+      "objective": "Compute mean codebook and commitment losses with their separate gradients for already matched code vectors.",
+      "folder": "d122-vector-quantization-loss-gradients",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1711.00937"
+      ]
+    },
+    {
+      "id": "d123",
+      "title": "Control a Linear Layer\u2019s Maximum Gain",
+      "objective": "Scale a nonzero weight matrix so its largest singular value equals a requested positive bound.",
+      "folder": "d123-spectral-weight-normalization",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1802.05957"
+      ]
+    },
+    {
+      "id": "d124",
+      "title": "Differentiate an Orthogonality Penalty",
+      "objective": "Return the squared Frobenius penalty on W.T@W-I and its gradient with respect to W.",
+      "folder": "d124-orthogonal-column-penalty",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html"
+      ]
+    },
+    {
+      "id": "d125",
+      "title": "Compare Soft Teacher and Student Predictions",
+      "objective": "Compute T-squared-scaled mean KL(teacher||student) and the gradient with respect to student logits.",
+      "folder": "d125-temperature-distillation-kl",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1503.02531"
+      ]
+    },
+    {
+      "id": "d126",
+      "title": "Fold Evaluation Batch Normalization into a Linear Layer",
+      "objective": "Return folded weights and bias for batch normalization applied to x@weights+bias.",
+      "folder": "d126-fold-batchnorm-affine",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/tutorials/intermediate/torch_compile_conv_bn_fuser.html"
+      ]
+    },
+    {
+      "id": "d127",
+      "title": "Reorder Hidden Neurons without Changing a Network",
+      "objective": "Apply a hidden-neuron permutation to both sides of a two-layer network.",
+      "folder": "d127-hidden-neuron-permutation",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d128",
+      "title": "Differentiate a Calibration Temperature",
+      "objective": "Return mean negative log likelihood and the derivative with respect to temperature.",
+      "folder": "d128-temperature-calibration-gradient",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1706.04599"
+      ]
+    },
+    {
+      "id": "d129",
+      "title": "Limit Outlier Influence with Huber Loss",
+      "objective": "Return each residual\u2019s Huber loss and derivative, plus the mean loss and the gradient of that mean.",
+      "folder": "d129-huber-residual-gradient",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html"
+      ]
+    },
+    {
+      "id": "d80",
+      "title": "Count Parameters across a Dense Network",
+      "objective": "Return per-layer weight, bias, and total counts, plus the total network parameter count.",
+      "folder": "d80-dense-parameter-budget",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d81",
+      "title": "Budget Shared Convolution Weights",
+      "objective": "Count weight parameters, optional biases, and multiply-accumulates for one output image.",
+      "folder": "d81-grouped-convolution-budget",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/convolutional-networks/"
+      ]
+    },
+    {
+      "id": "d82",
+      "title": "Trace a Stack\u2019s Receptive Field",
+      "objective": "Trace theoretical receptive-field span and input-space jump after every layer.",
+      "folder": "d82-receptive-field-trace",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/convolutional-networks/"
+      ]
+    },
+    {
+      "id": "d83",
+      "title": "Respect Frozen Parameters during SGD",
+      "objective": "Apply SGD only to trainable coordinates and report their changes.",
+      "folder": "d83-frozen-parameter-step",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/"
+      ]
+    },
+    {
+      "id": "d84",
+      "title": "Compare Fan-Based Initialization Scales",
+      "objective": "Compare Xavier and He weight variances and resulting pre-activation variances.",
+      "folder": "d84-initialization-variance-budget",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-2/"
+      ]
+    },
+    {
+      "id": "d85",
+      "title": "Find Inactive ReLU Neurons",
+      "objective": "Return activity fractions, mean ReLU outputs, and batch inactivity flags.",
+      "folder": "d85-relu-activity-audit",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d05"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d86",
+      "title": "Audit Sigmoid Saturation",
+      "objective": "Compute probabilities, mean local derivatives, and saturation fractions per unit.",
+      "folder": "d86-sigmoid-saturation-audit",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d08"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d87",
+      "title": "Predict Inverted Dropout Moments",
+      "objective": "Return elementwise mean, variance, and second moment under independent inverted dropout.",
+      "folder": "d87-dropout-moment-prediction",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d06"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-2/"
+      ]
+    },
+    {
+      "id": "d88",
+      "title": "Interpret the Top Two Class Scores",
+      "objective": "Return the winning class, runner-up class, and logit margin for every example.",
+      "folder": "d88-classifier-logit-margins",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d89",
+      "title": "Compare Ensemble Probabilities and Votes",
+      "objective": "Average model probabilities and measure the fraction of votes outside the majority class.",
+      "folder": "d89-ensemble-vote-disagreement",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/"
+      ]
+    },
+    {
+      "id": "d90",
+      "title": "Explain a Neuron through Feature Contributions",
+      "objective": "Return each feature contribution and the resulting affine score for every example.",
+      "folder": "d90-affine-feature-contributions",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d91",
+      "title": "Trace a Class Score Back to Input Features",
+      "objective": "Return selected class scores, input gradients, and input-times-gradient attributions.",
+      "folder": "d91-linear-input-saliency",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": ["d90"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/"
+      ]
+    },
+    {
+      "id": "d92",
+      "title": "Clip Individual Gradients before Averaging",
+      "objective": "Clip every gradient row by its own L2 norm, then return the clipped rows, scale factors, and mean gradient.",
+      "folder": "d92-per-example-gradient-clipping",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1607.00133"
+      ]
+    },
+    {
+      "id": "d93",
+      "title": "Detect Conflicting Task Gradients",
+      "objective": "Return cosine similarities and a boolean matrix identifying negative direction agreement, treating absolute cosine values at most 1e-12 as numerical zero.",
+      "folder": "d93-gradient-conflict-audit",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2001.06782"
+      ]
+    },
+    {
+      "id": "d94",
+      "title": "Compare Update Size with Parameter Scale",
+      "objective": "Return parameter norms, update norms, and stabilized update-to-weight ratios for each row.",
+      "folder": "d94-relative-parameter-update-audit",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/"
+      ]
+    },
+    {
+      "id": "d95",
+      "title": "Stop Training after Sustained Validation Stalls",
+      "objective": "Replay early stopping and return the best epoch, stopping epoch, and observed stall counts.",
+      "folder": "d95-early-stopping-trace",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://keras.io/api/callbacks/early_stopping/"
+      ]
+    },
+    {
+      "id": "d96",
+      "title": "Reduce Learning Rate on a Validation Plateau",
+      "objective": "Return the learning rate to use after each epoch\u2019s validation, including repeated reductions down to a floor.",
+      "folder": "d96-plateau-learning-rate-trace",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html"
+      ]
+    },
+    {
+      "id": "d97",
+      "title": "Apply Weight Decay Separately from the Optimizer Direction",
+      "objective": "Return the proposed parameters and separate optimization and decay changes.",
+      "folder": "d97-decoupled-weight-decay-step",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1711.05101"
+      ]
+    },
+    {
+      "id": "d98",
+      "title": "Update Momentum from a Lookahead Gradient",
+      "objective": "Return the lookahead point, new velocity, and updated parameters using the velocity-as-displacement convention.",
+      "folder": "d98-nesterov-velocity-update",
+      "domain": "deep-learning",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/"
+      ]
+    },
+    {
+      "id": "d99",
+      "title": "Probe Curvature along an Optimization Direction",
+      "objective": "Return the objective value, directional slope, directional curvature, and unconstrained minimizing step along the direction.",
+      "folder": "d99-quadratic-directional-curvature",
+      "domain": "deep-learning",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, implementation and test fixtures.",
+        "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/"
+      ]
+    },
+    {
+      "id": "e100",
+      "title": "Reconcile Ordered Membership Lists",
+      "objective": "Split candidate IDs into accepted and rejected lists using allow and deny sets.",
+      "folder": "e100-reconcile-ordered-membership-lists",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e101",
+      "title": "Merge Sorted Event Streams",
+      "objective": "Merge two already sorted timestamp streams stably with left-first ties.",
+      "folder": "e101-merge-sorted-event-streams",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e102",
+      "title": "Track Open and Closed Tasks",
+      "objective": "Replay open/close events and report remaining IDs with invalid transition indices.",
+      "folder": "e102-track-open-and-closed-tasks",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e85"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e103",
+      "title": "Normalize Whitespace in Text",
+      "objective": "Collapse Unicode whitespace while preserving case and punctuation.",
+      "folder": "e103-normalize-whitespace-in-text",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e104",
+      "title": "Tokenize ASCII Words with Offsets",
+      "objective": "Extract ASCII alphabetic words and their original half-open character spans.",
+      "folder": "e104-tokenize-ascii-words-with-offsets",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e105",
+      "title": "Replace Whole Tokens from a Glossary",
+      "objective": "Map whitespace-delimited tokens with case-sensitive whole-token replacement.",
+      "folder": "e105-replace-whole-tokens-from-a-glossary",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e103"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e106",
+      "title": "Redact Explicit Character Spans",
+      "objective": "Mask the union of validated spans while keeping text length and untouched characters.",
+      "folder": "e106-redact-explicit-character-spans",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e107",
+      "title": "Extract Bounded Context Windows",
+      "objective": "Return left, match, and right context around validated text spans.",
+      "folder": "e107-extract-bounded-context-windows",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e108",
+      "title": "Match Case-Insensitive Exact Answers",
+      "objective": "Normalize casefolded whitespace and compare against multiple accepted answers.",
+      "folder": "e108-match-case-insensitive-exact-answers",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e103"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e109",
+      "title": "Count Unique Terms Per Document",
+      "objective": "Compute document frequencies, counting repeated terms once per document.",
+      "folder": "e109-count-unique-terms-per-document",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e110",
+      "title": "Filter Stopwords Without Reordering",
+      "objective": "Remove exact stopword tokens while retaining repetition and original order.",
+      "folder": "e110-filter-stopwords-without-reordering",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e111",
+      "title": "Build UTF-8 Character Offset Maps",
+      "objective": "Return the byte offset of every Unicode code point boundary, including the final boundary.",
+      "folder": "e111-build-utf-8-character-offset-maps",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e112",
+      "title": "Encode Tokens with an Unknown ID",
+      "objective": "Map tokens through a validated vocabulary and return unknown-token positions.",
+      "folder": "e112-encode-tokens-with-an-unknown-id",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e113",
+      "title": "Decode Token IDs with Explicit Fallback",
+      "objective": "Resolve IDs through a vocabulary, preserving order and recording unknown IDs.",
+      "folder": "e113-decode-token-ids-with-explicit-fallback",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e112"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e114",
+      "title": "Measure Truncation of Token Sequences",
+      "objective": "Truncate each sequence and report original lengths and dropped counts.",
+      "folder": "e114-measure-truncation-of-token-sequences",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e115",
+      "title": "Validate BIO Entity Tag Transitions",
+      "objective": "Report I-type tags lacking an immediately preceding B-type or I-type tag of the same entity type.",
+      "folder": "e115-validate-bio-entity-tag-transitions",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e116",
+      "title": "Read Simple Key-Value Lines",
+      "objective": "Parse nonblank key=value lines, splitting only the first separator and rejecting duplicate keys.",
+      "folder": "e116-read-simple-key-value-lines",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e117",
+      "title": "Parse Strict Boolean Settings",
+      "objective": "Convert explicit true/false/yes/no/1/0 strings after trimming and case normalization.",
+      "folder": "e117-parse-strict-boolean-settings",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e118",
+      "title": "Parse Bounded Decimal Integers",
+      "objective": "Parse signed ASCII decimal strings without accepting floats, exponent notation, or underscores.",
+      "folder": "e118-parse-bounded-decimal-integers",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e119",
+      "title": "Parse Durations with Explicit Units",
+      "objective": "Convert integer ms, s, and m durations into milliseconds with full-string matching.",
+      "folder": "e119-parse-durations-with-explicit-units",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e118"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e120",
+      "title": "Parse Semantic Version Triples",
+      "objective": "Parse and compare strict numeric major.minor.patch versions without prerelease syntax.",
+      "folder": "e120-parse-semantic-version-triples",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e118"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e121",
+      "title": "Parse CSV Records by Header",
+      "objective": "Read quoted CSV text into records, rejecting duplicate headers and unequal row widths.",
+      "folder": "e121-parse-csv-records-by-header",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e122",
+      "title": "Serialize CSV Records in Schema Order",
+      "objective": "Write CSV rows with quoting and explicit columns, requiring every field.",
+      "folder": "e122-serialize-csv-records-in-schema-order",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e121"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e123",
+      "title": "Parse JSON Lines with Error Positions",
+      "objective": "Read one JSON object per nonblank line and return valid objects plus rejected line numbers.",
+      "folder": "e123-parse-json-lines-with-error-positions",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e124",
+      "title": "Canonicalize JSON for Cache Keys",
+      "objective": "Produce deterministic compact JSON with sorted object keys and finite numbers only.",
+      "folder": "e124-canonicalize-json-for-cache-keys",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e125",
+      "title": "Validate an ASCII Slug",
+      "objective": "Normalize ASCII names into lower-case hyphenated slugs and reject names with no letters or digits.",
+      "folder": "e125-validate-an-ascii-slug",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e126",
+      "title": "Normalize Relative Resource Paths",
+      "objective": "Resolve dot and dot-dot path segments while rejecting traversal above the root.",
+      "folder": "e126-normalize-relative-resource-paths",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e127",
+      "title": "Parse URL Query Pairs",
+      "objective": "Decode repeated query parameters into ordered value lists, retaining blank values.",
+      "folder": "e127-parse-url-query-pairs",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e128",
+      "title": "Encode Query Parameters Deterministically",
+      "objective": "Encode string multimap keys in sorted order while preserving each key's value order.",
+      "folder": "e128-encode-query-parameters-deterministically",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e127"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e129",
+      "title": "Audit Tabular Row Widths",
+      "objective": "Identify ragged rows against an expected schema width and retain each actual width.",
+      "folder": "e129-audit-tabular-row-widths",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e130",
+      "title": "Detect Mixed Primitive Column Types",
+      "objective": "Report which primitive types occur in each named column, separating booleans and numbers.",
+      "folder": "e130-detect-mixed-primitive-column-types",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e131",
+      "title": "Find Blank and Missing Cells",
+      "objective": "Return row and field locations of absent, None, or whitespace-only string cells.",
+      "folder": "e131-find-blank-and-missing-cells",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e132",
+      "title": "Check Monotonic Event Times",
+      "objective": "Report every adjacent timestamp decrease without sorting the observations.",
+      "folder": "e132-check-monotonic-event-times",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e133",
+      "title": "Validate Unique Composite Keys",
+      "objective": "Detect duplicate combinations of configured record fields and report occurrence groups.",
+      "folder": "e133-validate-unique-composite-keys",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e88"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e134",
+      "title": "Forward-Fill Missing Values with a Limit",
+      "objective": "Carry earlier observed values through bounded None runs without using future data.",
+      "folder": "e134-forward-fill-missing-values-with-a-limit",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e135",
+      "title": "Check Allowed Category Values",
+      "objective": "Report row indices whose category is outside a supplied vocabulary, including missing values.",
+      "folder": "e135-check-allowed-category-values",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e136",
+      "title": "Apply Training Category Maps",
+      "objective": "Fit a vocabulary on training categories only, then encode heldout unknowns distinctly.",
+      "folder": "e136-apply-training-category-maps",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e112"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e137",
+      "title": "Summarize Rule-Based Data Quality",
+      "objective": "Combine required-field and range rules into per-row violation lists with stable rule order.",
+      "folder": "e137-summarize-rule-based-data-quality",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e98", "e94"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e138",
+      "title": "Audit Multilabel Hamming Errors",
+      "objective": "Count missing and extra labels per example and divide total mismatches by examples times vocabulary size.",
+      "folder": "e138-audit-multilabel-hamming-errors",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e139",
+      "title": "Score Exact-Match Predictions by Group",
+      "objective": "Report correct and total counts per group plus accuracy with explicit empty behavior.",
+      "folder": "e139-score-exact-match-predictions-by-group",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e140",
+      "title": "Compute Retrieval Precision at a Cutoff",
+      "objective": "Count unique relevant retrieved IDs in the first k positions with duplicate slots consuming rank.",
+      "folder": "e140-compute-retrieval-precision-at-a-cutoff",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e141",
+      "title": "Measure Ranking Coverage Across Queries",
+      "objective": "Report unique retrieved corpus IDs, coverage fraction, and out-of-corpus IDs.",
+      "folder": "e141-measure-ranking-coverage-across-queries",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e142",
+      "title": "Find Pairwise Result-Set Disagreements",
+      "objective": "Compare two per-query result sets and preserve query order in overlap and exclusive outputs.",
+      "folder": "e142-find-pairwise-result-set-disagreements",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e143",
+      "title": "Build Deterministic Holdout by ID Hash",
+      "objective": "Assign each distinct string ID to a stable split using a documented SHA-256 bucket.",
+      "folder": "e143-build-deterministic-holdout-by-id-hash",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 13,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e144",
+      "title": "Assign Events to Fixed Time Windows",
+      "objective": "Aggregate event counts into half-open integer windows anchored at a supplied origin.",
+      "folder": "e144-assign-events-to-fixed-time-windows",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e145",
+      "title": "Sessionize Events by Inactivity",
+      "objective": "Start a new session only when the sorted timestamp gap strictly exceeds a timeout.",
+      "folder": "e145-sessionize-events-by-inactivity",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e146",
+      "title": "Deduplicate Idempotency Keys",
+      "objective": "Replay request keys with a bounded seen-key history and return accepted indices.",
+      "folder": "e146-deduplicate-idempotency-keys",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e147",
+      "title": "Schedule Bounded Retries",
+      "objective": "Generate capped exponential delays and total elapsed delay from attempt count.",
+      "folder": "e147-schedule-bounded-retries",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e148",
+      "title": "Trace a Circuit Breaker",
+      "objective": "Open after consecutive failures and reset on success under a simple no-timer state machine.",
+      "folder": "e148-trace-a-circuit-breaker",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e149",
+      "title": "Simulate a FIFO Work Queue",
+      "objective": "Replay enqueue/dequeue operations and return served IDs plus final queue.",
+      "folder": "e149-simulate-a-fifo-work-queue",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e150",
+      "title": "Simulate a Bounded Priority Queue",
+      "objective": "Choose highest-priority pending work with FIFO ties and reject inserts when full.",
+      "folder": "e150-simulate-a-bounded-priority-queue",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e151",
+      "title": "Compute Worker Makespan",
+      "objective": "Assign each job to the currently least-loaded worker with lowest-index ties.",
+      "folder": "e151-compute-worker-makespan",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e152",
+      "title": "Select Jobs by Dependencies",
+      "objective": "Return a stable topological order or reject cycles and missing dependencies.",
+      "folder": "e152-select-jobs-by-dependencies",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e153",
+      "title": "Find Transitive Dependency Impact",
+      "objective": "Return all downstream components affected by changed IDs, excluding seeds from results.",
+      "folder": "e153-find-transitive-dependency-impact",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e154",
+      "title": "Build a Prefix Search Index",
+      "objective": "Map each nonempty term prefix to sorted unique matching terms.",
+      "folder": "e154-build-a-prefix-search-index",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e155",
+      "title": "Match Multiword Phrases Exactly",
+      "objective": "Find all overlapping token starts matching a phrase without case normalization.",
+      "folder": "e155-match-multiword-phrases-exactly",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e156",
+      "title": "Segment Sentences with a Small State Machine",
+      "objective": "Split on .!? runs and retain closing punctuation without claiming linguistic completeness.",
+      "folder": "e156-segment-sentences-with-a-small-state-machine",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e157",
+      "title": "Budget Messages by UTF-8 Bytes",
+      "objective": "Keep the longest whole-message prefix fitting a byte budget including separators.",
+      "folder": "e157-budget-messages-by-utf-8-bytes",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e158",
+      "title": "Build Reversible Length-Prefixed Frames",
+      "objective": "Encode and decode UTF-8 text frames with decimal byte lengths and reject malformed frames.",
+      "folder": "e158-build-reversible-length-prefixed-frames",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e159",
+      "title": "Verify Payload Digests",
+      "objective": "Compare lowercase SHA-256 digests for byte payloads and return mismatched indices.",
+      "folder": "e159-verify-payload-digests",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e160",
+      "title": "Apply a Versioned Cache Policy",
+      "objective": "Accept entries only when version matches and age is within an explicit TTL interval.",
+      "folder": "e160-apply-a-versioned-cache-policy",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e161",
+      "title": "Reconcile Append-Only Checkpoints",
+      "objective": "Advance a contiguous completed offset only across gap-free acknowledged sequence IDs.",
+      "folder": "e161-reconcile-append-only-checkpoints",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e162",
+      "title": "Plan a Minimal Incremental Rebuild",
+      "objective": "Propagate changed input fingerprints through a DAG and return affected tasks in dependency order.",
+      "folder": "e162-plan-a-minimal-incremental-rebuild",
+      "domain": "engineering",
+      "difficulty": "intermediate",
+      "prerequisites": ["e152", "e153"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e63",
+      "title": "Normalize and Deduplicate Tags",
+      "objective": "Strip and lowercase tags, discard blanks, preserve first occurrence.",
+      "folder": "e63-normalize-and-deduplicate-tags",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e64",
+      "title": "Route Support Tickets",
+      "objective": "Partition ticket IDs into urgent and normal queues using priority and blocked status.",
+      "folder": "e64-route-support-tickets",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e65",
+      "title": "Reconcile Stock Requests",
+      "objective": "Fill each request from remaining stock and return fulfilled and unfilled quantities.",
+      "folder": "e65-reconcile-stock-requests",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e64"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e66",
+      "title": "Summarize Completed Orders",
+      "objective": "Aggregate integer cent amounts by customer, ignoring cancelled orders.",
+      "folder": "e66-summarize-completed-orders",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e64"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e67",
+      "title": "Apply Sequential Balance Changes",
+      "objective": "Trace account balance while rejecting withdrawals that exceed available funds.",
+      "folder": "e67-apply-sequential-balance-changes",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e68",
+      "title": "Find the First Matching Record",
+      "objective": "Select the first record matching every supplied field and return its index.",
+      "folder": "e68-find-the-first-matching-record",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e69",
+      "title": "Extract Optional Record Fields",
+      "objective": "Collect a requested field with an explicit fallback while retaining falsy values.",
+      "folder": "e69-extract-optional-record-fields",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e68"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e70",
+      "title": "Project Records to a Schema",
+      "objective": "Build uniform records from an ordered field list, filling absent fields with None.",
+      "folder": "e70-project-records-to-a-schema",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e69"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e71",
+      "title": "Rename Record Fields Safely",
+      "objective": "Rename selected keys and reject collisions without modifying input records.",
+      "folder": "e71-rename-record-fields-safely",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e72",
+      "title": "Index Unique Records",
+      "objective": "Create an ID lookup and reject duplicate identifiers instead of silently overwriting.",
+      "folder": "e72-index-unique-records",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e68"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e73",
+      "title": "Group Records by Category",
+      "objective": "Create groups retaining original record order and explicit missing-category bucket.",
+      "folder": "e73-group-records-by-category",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e74",
+      "title": "Deduplicate Records by Latest Position",
+      "objective": "Keep each ID's last record while ordering results by last occurrence.",
+      "folder": "e74-deduplicate-records-by-latest-position",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e75",
+      "title": "Compare Two Inventories",
+      "objective": "Report added, removed, and changed quantities in sorted item order.",
+      "folder": "e75-compare-two-inventories",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e76",
+      "title": "Merge Configuration Layers",
+      "objective": "Apply ordered shallow overrides while treating None as deletion.",
+      "folder": "e76-merge-configuration-layers",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e77",
+      "title": "Resolve Configuration Defaults",
+      "objective": "Fill only absent configuration keys and preserve explicit zero, false, and None.",
+      "folder": "e77-resolve-configuration-defaults",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e76"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e78",
+      "title": "Invert a Many-to-One Lookup",
+      "objective": "Collect source keys per target value in original mapping order.",
+      "folder": "e78-invert-a-many-to-one-lookup",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e73"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e79",
+      "title": "Allocate Round-Robin Work",
+      "objective": "Distribute ordered task IDs among workers and retain empty worker queues.",
+      "folder": "e79-allocate-round-robin-work",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e80",
+      "title": "Split Work into Fixed Batches",
+      "objective": "Create full and final partial batches without padding or losing records.",
+      "folder": "e80-split-work-into-fixed-batches",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e81",
+      "title": "Paginate Records with Metadata",
+      "objective": "Return an offset page together with total count and the next offset.",
+      "folder": "e81-paginate-records-with-metadata",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e80"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e82",
+      "title": "Interleave Unequal Streams",
+      "objective": "Take one item from each nonempty stream per round until all are exhausted.",
+      "folder": "e82-interleave-unequal-streams",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e79"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e83",
+      "title": "Flatten One Level of Records",
+      "objective": "Flatten batches exactly one level, preserving nested record payloads.",
+      "folder": "e83-flatten-one-level-of-records",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e80"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e84",
+      "title": "Expand Repeated Job Requests",
+      "objective": "Expand count-coded jobs into a bounded ordered work queue.",
+      "folder": "e84-expand-repeated-job-requests",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e85",
+      "title": "Count Adjacent Status Transitions",
+      "objective": "Count each ordered pair of adjacent statuses, including self transitions.",
+      "folder": "e85-count-adjacent-status-transitions",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e86",
+      "title": "Summarize Streak Lengths by Status",
+      "objective": "Find the longest consecutive streak for each status value.",
+      "folder": "e86-summarize-streak-lengths-by-status",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e85"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e87",
+      "title": "Find Gaps in Sequence Numbers",
+      "objective": "Return missing integer sequence IDs between explicit inclusive bounds.",
+      "folder": "e87-find-gaps-in-sequence-numbers",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e88",
+      "title": "Audit Duplicate Identifiers",
+      "objective": "Report each duplicated ID with all zero-based occurrence positions.",
+      "folder": "e88-audit-duplicate-identifiers",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e89",
+      "title": "Match Ordered IDs to Records",
+      "objective": "Resolve a requested ID list against unique records and retain missing positions.",
+      "folder": "e89-match-ordered-ids-to-records",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e90",
+      "title": "Zip Unequal Columns Explicitly",
+      "objective": "Combine columns into rows up to the longest column using None padding.",
+      "folder": "e90-zip-unequal-columns-explicitly",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e91",
+      "title": "Unzip Record Columns",
+      "objective": "Extract aligned lists from records according to an explicit field order.",
+      "folder": "e91-unzip-record-columns",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e92",
+      "title": "Build a Multi-Key Stable Sort",
+      "objective": "Sort records by category then descending integer priority, keeping exact ties stable.",
+      "folder": "e92-build-a-multi-key-stable-sort",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e93",
+      "title": "Select the Best Record Per Group",
+      "objective": "Pick the highest-score record per group with first-occurrence tie handling.",
+      "folder": "e93-select-the-best-record-per-group",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e73"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e94",
+      "title": "Filter Records by Inclusive Ranges",
+      "objective": "Retain numeric records satisfying every configured field range.",
+      "folder": "e94-filter-records-by-inclusive-ranges",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e95",
+      "title": "Report Field-Level Changes",
+      "objective": "Return added, removed, and changed fields between two shallow records.",
+      "folder": "e95-report-field-level-changes",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e75"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e96",
+      "title": "Apply Explicit Record Patches",
+      "objective": "Interpret set and delete operations in order, rejecting deletion of absent keys.",
+      "folder": "e96-apply-explicit-record-patches",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e76", "e95"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e97",
+      "title": "Build a Quantity Histogram",
+      "objective": "Bucket nonnegative integer quantities by explicit increasing upper bounds.",
+      "folder": "e97-build-a-quantity-histogram",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e98",
+      "title": "Validate a Required-Field Schema",
+      "objective": "Report missing and unexpected fields per record without dropping rows.",
+      "folder": "e98-validate-a-required-field-schema",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e99",
+      "title": "Validate Foreign-Key References",
+      "objective": "Return child row indices whose key does not occur in the parent ID list.",
+      "folder": "e99-validate-foreign-key-references",
+      "domain": "engineering",
+      "difficulty": "beginner",
+      "prerequisites": ["e72", "e98"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "m100",
+      "title": "Find the Nearest Point on a Segment",
+      "objective": "Project a point onto a finite 2D segment, clamp the parameter and return squared distance.",
+      "folder": "m100-point-segment-projection",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m101",
+      "title": "Measure Triangle Orientation and Size",
+      "objective": "Use a 2D cross product to return signed area and orientation, including collinear points.",
+      "folder": "m101-signed-triangle-area",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m102",
+      "title": "Walk a Closed Polygon",
+      "objective": "Compute perimeter and signed shoelace area without requiring a repeated closing vertex.",
+      "folder": "m102-polygon-perimeter-area",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m103",
+      "title": "Measure Perpendicular Distance to a Line",
+      "objective": "Return signed distance and perpendicular foot for a nondegenerate implicit 2D line.",
+      "folder": "m103-point-line-distance",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m104",
+      "title": "Describe a Point Cloud with a Bounding Box",
+      "objective": "Compute coordinatewise bounds, center, side lengths and volume for a point cloud.",
+      "folder": "m104-point-cloud-bounds",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m105",
+      "title": "Rotate Points around a Chosen Pivot",
+      "objective": "Translate to a pivot, apply a 2D rotation in radians and translate back without modifying inputs.",
+      "folder": "m105-rotate-around-pivot",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m106",
+      "title": "Convert Cartesian Positions to Canonical Polar Form",
+      "objective": "Compute radii and angles in [0,2*pi), using zero angle at the origin.",
+      "folder": "m106-polar-coordinate-canonicalization",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m107",
+      "title": "Locate a Point Relative to a Triangle",
+      "objective": "Solve barycentric weights and test inclusive membership for a nondegenerate 2D triangle.",
+      "folder": "m107-barycentric-triangle-coordinates",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m108",
+      "title": "Intersect Two Nonparallel Segments",
+      "objective": "Solve line intersection parameters and report whether their shared point lies on both finite segments.",
+      "folder": "m108-segment-intersection-parameters",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m109",
+      "title": "Reflect Points across an Implicit Line",
+      "objective": "Use signed line offsets to reflect a batch of 2D points across a nonzero-normal line.",
+      "folder": "m109-reflection-across-line",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m110",
+      "title": "Clip a Segment to a Rectangle",
+      "objective": "Compute the visible parameter interval of a 2D segment inside a closed axis-aligned rectangle.",
+      "folder": "m110-axis-aligned-box-clipping",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m111",
+      "title": "Sample a Path by Traveled Distance",
+      "objective": "Interpolate positions at cumulative path distances while skipping zero-length segments.",
+      "folder": "m111-polyline-distance-resampling",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m112",
+      "title": "Split a Vector into Parallel and Perpendicular Parts",
+      "objective": "Project a vector onto a nonzero direction and return orthogonal residual and squared lengths.",
+      "folder": "m112-orthogonal-vector-components",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m113",
+      "title": "Construct an Oriented Plane from Three Points",
+      "objective": "Normalize a cross product into a plane normal and compute its offset, rejecting collinear points.",
+      "folder": "m113-plane-from-three-points",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m114",
+      "title": "Rotate a 3D Vector around an Axis",
+      "objective": "Apply Rodrigues rotation using a normalized nonzero axis and a supplied angle.",
+      "folder": "m114-axis-angle-rotation",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m115",
+      "title": "Classify Points against a Polygon Boundary",
+      "objective": "Use horizontal ray crossings to test membership in a simple polygon, treating boundary points as inside.",
+      "folder": "m115-point-in-simple-polygon",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m116",
+      "title": "Recover a Triangle from Side Lengths",
+      "objective": "Validate strict triangle inequalities and compute angles and area with clipped cosine roundoff.",
+      "folder": "m116-cosine-rule-triangle",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m117",
+      "title": "Summarize a Planar Mass Distribution",
+      "objective": "Compute mass-weighted center and second-moment inertia components around that center.",
+      "folder": "m117-point-cloud-inertia",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m118",
+      "title": "Measure Covered Length without Double Counting",
+      "objective": "Merge overlapping or touching real intervals and report their union length.",
+      "folder": "m118-interval-union-length",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m119",
+      "title": "Measure Overlap between Two Disks",
+      "objective": "Handle disjoint, contained and partial-overlap circles with the lens-area formula.",
+      "folder": "m119-circle-circle-overlap",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m120",
+      "title": "Combine Events in a Finite Sample Space",
+      "objective": "Use probability masses and two event masks to compute union, intersection and conditional probability.",
+      "folder": "m120-finite-event-probability",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m121",
+      "title": "Combine Independent Discrete Measurements",
+      "objective": "Convolve two finite integer-supported probability vectors and track the resulting support offset.",
+      "folder": "m121-independent-sum-distribution",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m122",
+      "title": "Count Successes in a Sample without Replacement",
+      "objective": "Compute a complete hypergeometric mass function and its feasible support.",
+      "folder": "m122-sampling-without-replacement",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m123",
+      "title": "Track the First Success before a Deadline",
+      "objective": "Compute first-success probabilities and the leftover no-success mass from independent changing success rates.",
+      "folder": "m123-first-success-waiting",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m124",
+      "title": "Count Events under a Poisson Model",
+      "objective": "Compute probabilities for requested integer counts and the expected count for a bounded positive rate.",
+      "folder": "m124-poisson-event-probabilities",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m125",
+      "title": "Turn Fixed Uniform Draws into Categories",
+      "objective": "Build a categorical CDF and choose the first cumulative mass strictly above each supplied draw.",
+      "folder": "m125-discrete-inverse-cdf",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m126",
+      "title": "Predict How Many Categories Will Be Seen",
+      "objective": "Compute per-category appearance probabilities and expected distinct categories after independent draws.",
+      "folder": "m126-coupon-distinct-expectation",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m127",
+      "title": "Find the Chance of a Repeated Label",
+      "objective": "Compute collision probability for uniform independent labels using the no-collision product.",
+      "folder": "m127-birthday-collision-probability",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m128",
+      "title": "Combine Three Overlapping Events",
+      "objective": "Compute union and exactly-one/exactly-two probabilities from all intersections and validate nonnegative atomic regions.",
+      "folder": "m128-inclusion-exclusion-three-events",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m129",
+      "title": "Condition a Joint Table on Selected Columns",
+      "objective": "Restrict a joint probability table to an event and return event probability and conditional row distribution.",
+      "folder": "m129-conditional-table-distribution",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m130",
+      "title": "Separate Within-Case and Between-Case Uncertainty",
+      "objective": "Combine mixture weights, conditional means and variances into a total mean and variance.",
+      "folder": "m130-law-total-variance",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m131",
+      "title": "Move Probability through a Transition Table",
+      "objective": "Propagate a probability row vector through a stochastic matrix for a fixed number of steps.",
+      "folder": "m131-markov-distribution-steps",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m132",
+      "title": "Track Survival before an Absorbing State",
+      "objective": "Propagate transient mass through a substochastic matrix and report per-step absorption probabilities.",
+      "folder": "m132-absorbing-chain-survival",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m133",
+      "title": "Separate No Event, One Event and Several Events",
+      "objective": "Use independent event probabilities to compute the full count distribution and aggregate categories.",
+      "folder": "m133-competing-independent-events",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m134",
+      "title": "Count Dice Outcomes before Normalizing",
+      "objective": "Build exact sum counts for a bounded number of fair dice and convert counts into probabilities.",
+      "folder": "m134-fair-dice-sum-counts",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m135",
+      "title": "Decode a Combination from Its Lexicographic Rank",
+      "objective": "Unrank fixed-size subsets using binomial block sizes without enumerating every subset.",
+      "folder": "m135-combinations-by-rank",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m136",
+      "title": "Measure Disorder in a Permutation",
+      "objective": "Validate a permutation and count inversions and its even/odd parity.",
+      "folder": "m136-permutation-inversion-count",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m137",
+      "title": "Count Monotone Routes around Blocked Cells",
+      "objective": "Use dynamic programming to count right/down lattice routes while respecting blocked endpoints.",
+      "folder": "m137-lattice-path-counts",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m138",
+      "title": "Count Assignments with No Fixed Points",
+      "objective": "Build exact derangement counts by recurrence and return the no-fixed-point probability.",
+      "folder": "m138-derangement-counts",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m139",
+      "title": "Estimate How Many Boxes Stay Empty",
+      "objective": "Compute expected empty boxes and their variance for uniform independent placement.",
+      "folder": "m139-occupancy-empty-boxes",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m140",
+      "title": "Evaluate a Polynomial and Its Slope Together",
+      "objective": "Apply a coupled Horner recurrence to descending coefficients at a batch of query points.",
+      "folder": "m140-polynomial-horner-derivative",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m141",
+      "title": "Integrate a Polynomial between Bounds",
+      "objective": "Build antiderivative coefficients and evaluate signed definite integrals for paired bounds.",
+      "folder": "m141-polynomial-antiderivative-area",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m142",
+      "title": "Keep a Root inside a Shrinking Bracket",
+      "objective": "Bisect a continuous polynomial on a sign-changing interval for a fixed number of steps.",
+      "folder": "m142-bisection-polynomial-root",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m143",
+      "title": "Trace Newton Updates toward a Square Root",
+      "objective": "Run a bounded number of Newton iterations from a positive initial guess and return every estimate.",
+      "folder": "m143-newton-square-root-trace",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m144",
+      "title": "Integrate Evenly Spaced Samples with Simpson Weights",
+      "objective": "Validate odd sample count and apply alternating interior weights to a fixed-spacing sample vector.",
+      "folder": "m144-composite-simpson-area",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m145",
+      "title": "Recover a Quadratic through Three Samples",
+      "objective": "Solve three-point Lagrange interpolation for distinct nodes and evaluate a batch of queries.",
+      "folder": "m145-quadratic-interpolation",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m146",
+      "title": "Step through a First-Order Cooling Model",
+      "objective": "Apply explicit Euler updates to a linear relaxation equation with bounded steps and report the trajectory.",
+      "folder": "m146-euler-cooling-trajectory",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m147",
+      "title": "Update a Root Estimate from Two Function Values",
+      "objective": "Apply a fixed number of secant iterations with clear zero-denominator handling.",
+      "folder": "m147-secant-polynomial-root",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m148",
+      "title": "Update a Linear Solve without Reusing New Values",
+      "objective": "Compute a fixed number of Jacobi iterations from an initial vector and return the residual.",
+      "folder": "m148-jacobi-linear-iteration",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m149",
+      "title": "Solve a Small System with Partial Pivoting",
+      "objective": "Perform elimination and back substitution with row pivoting and a documented singularity threshold.",
+      "folder": "m149-gaussian-elimination-pivot",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m150",
+      "title": "Score Binary Features with Both Outcomes",
+      "objective": "Compute class log scores from priors and conditional feature probabilities, including absent features.",
+      "folder": "m150-bernoulli-naive-bayes-scores",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m151",
+      "title": "Fit a Line and Explain Its Residuals",
+      "objective": "Compute ordinary least-squares slope/intercept and residual sum of squares for paired observations.",
+      "folder": "m151-least-squares-line-fit",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m152",
+      "title": "Compare a Regressor with the Mean Baseline",
+      "objective": "Compute residual and total sums of squares and R-squared with an explicit constant-target convention.",
+      "folder": "m152-regression-r-squared",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m153",
+      "title": "Ignore Errors inside a Tolerance Band",
+      "objective": "Compute mean epsilon-insensitive absolute loss and its prediction subgradient with zero derivative at the boundary.",
+      "folder": "m153-epsilon-insensitive-error",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m154",
+      "title": "Compare Agreement with Its Chance Baseline",
+      "objective": "Compute observed agreement, marginal chance agreement and Cohen's kappa for paired categorical labels.",
+      "folder": "m154-cohen-label-agreement",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m155",
+      "title": "Give Each Class Equal Total Training Weight",
+      "objective": "Compute inverse-frequency sample weights scaled to mean one from integer class labels.",
+      "folder": "m155-class-balanced-sample-weights",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m156",
+      "title": "Classify by Learned Class Means",
+      "objective": "Fit centroids for each contiguous class ID and predict nearest centroid with smallest-ID tie breaking.",
+      "folder": "m156-nearest-centroid-classifier",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m157",
+      "title": "Predict from Ordered Regression Bins",
+      "objective": "Assign numeric queries to right-sided split intervals and return their piecewise constant predictions and bin indices.",
+      "folder": "m157-piecewise-constant-regression",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m158",
+      "title": "Minimize One Ridge Coordinate Exactly",
+      "objective": "Update one linear coefficient from the residual excluding that feature under a fixed squared-error and L2 convention.",
+      "folder": "m158-ridge-single-coordinate-update",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m159",
+      "title": "Find a Median under Unequal Observation Weights",
+      "objective": "Sort value-weight pairs and return the smallest value whose cumulative weight reaches half the total.",
+      "folder": "m159-weighted-median-selection",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html"
+      ]
+    },
+    {
+      "id": "m60",
+      "title": "Calibrate and Limit Sensor Channels",
+      "objective": "Broadcast channel gains and offsets over readings, then clip each channel to its physical range.",
+      "folder": "m60-calibrated-sensor-table",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m61",
+      "title": "Summarize Only Observed Cells",
+      "objective": "Compute column counts and means under an explicit observation mask, with a defined empty-column fallback.",
+      "folder": "m61-masked-column-summary",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m62",
+      "title": "Aggregate a Grid into Partial Blocks",
+      "objective": "Sum nonoverlapping grid blocks while preserving partial bottom and right boundary blocks.",
+      "folder": "m62-partial-grid-block-sums",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m63",
+      "title": "Accumulate Repeated Grid Measurements",
+      "objective": "Scatter repeated integer grid coordinates into separate sum and count grids.",
+      "folder": "m63-coordinate-grid-accumulation",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m64",
+      "title": "Pack a Symmetric Measurement Matrix",
+      "objective": "Validate symmetry and serialize the upper triangle in a fixed order for lossless reconstruction.",
+      "folder": "m64-symmetric-triangle-packing",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m65",
+      "title": "Convert Counts into Conditional Rows",
+      "objective": "Derive conditional row probabilities and row masses from a nonnegative count table, keeping empty rows zero.",
+      "folder": "m65-conditional-count-table",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m66",
+      "title": "Summarize a Matrix by Diagonal Offset",
+      "objective": "Compute counts and means for every diagonal of a rectangular matrix with explicit offset order.",
+      "folder": "m66-matrix-diagonal-profile",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m67",
+      "title": "Answer Rectangular Sum Queries",
+      "objective": "Use a summed-area table to answer half-open rectangular grid queries, including empty rectangles.",
+      "folder": "m67-rectangle-sum-queries",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m68",
+      "title": "Locate Pixels inside Image Tiles",
+      "objective": "Convert flat pixel indices into tile coordinates and within-tile coordinates for uneven image boundaries.",
+      "folder": "m68-pixel-tile-coordinates",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m69",
+      "title": "Build an Independence Baseline for a Table",
+      "objective": "Derive expected cell counts from observed row and column totals and report observed-minus-expected residuals.",
+      "folder": "m69-independent-expected-counts",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m70",
+      "title": "Measure Four-Connected Grid Regions",
+      "objective": "Label true-cell components in row-major discovery order and report their sizes and exposed-edge perimeters.",
+      "folder": "m70-connected-grid-regions",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m71",
+      "title": "Find Peaks without Double-Counting Plateaus",
+      "objective": "Return midpoints of flat local maxima with strict lower neighbors and explicit endpoint exclusion.",
+      "folder": "m71-plateau-peak-locations",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m72",
+      "title": "Measure Change on an Uneven Time Grid",
+      "objective": "Compute interval velocities and their midpoint timestamps from strictly increasing sample times.",
+      "folder": "m72-irregular-sample-velocity",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m73",
+      "title": "Smooth a Signal at Its Boundaries",
+      "objective": "Average centered windows with shrinking boundaries and return the contributing counts.",
+      "folder": "m73-centered-window-smoothing",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m74",
+      "title": "Separate a Forecast from Its Update",
+      "objective": "Produce one-step exponential-smoothing forecasts and the final level without leaking the current observation.",
+      "folder": "m74-one-step-smoothed-forecasts",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m75",
+      "title": "Remove and Restore a Seasonal Lag",
+      "objective": "Compute lagged differences and reconstruct the signal from its initial season and differences.",
+      "folder": "m75-seasonal-difference-reconstruction",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m76",
+      "title": "Compare a Signal with Its Delayed Self",
+      "objective": "Compute raw lag products with biased or overlap-count normalization and return counts.",
+      "folder": "m76-lagged-signal-products",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m77",
+      "title": "Find Sign Changes through Exact Zeros",
+      "objective": "Track consecutive nonzero samples and return brackets for sign reversals, ignoring zero runs.",
+      "folder": "m77-zero-crossing-brackets",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m78",
+      "title": "Accumulate Area on an Uneven Grid",
+      "objective": "Return each signed trapezoidal area and cumulative integral for timestamped measurements.",
+      "folder": "m78-signed-trapezoid-areas",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m79",
+      "title": "Resample between Known Measurements",
+      "objective": "Interpolate queries on a strictly increasing grid with constant endpoint extension and preserved query order.",
+      "folder": "m79-piecewise-linear-resampling",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
+      "id": "m80",
+      "title": "Reduce Outlier Influence by Trimming",
+      "objective": "Sort observations, trim a fixed count from both tails, and report the retained mean and count.",
+      "folder": "m80-trimmed-sample-summary",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m81",
+      "title": "Flag Outliers Using Median Deviations",
+      "objective": "Compute a median center and median absolute deviation, then flag strict threshold exceedances including a zero-MAD policy.",
+      "folder": "m81-median-deviation-flags",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m82",
+      "title": "Explain Which Tail Contains an Outlier",
+      "objective": "Compute linear-interpolated quartiles and Tukey fences, and classify lower and upper outliers separately.",
+      "folder": "m82-tukey-outlier-fences",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m83",
+      "title": "Combine Multiplicative Growth Factors",
+      "objective": "Use logarithms to compute a geometric mean factor and cumulative factors from bounded positive changes.",
+      "folder": "m83-geometric-growth-summary",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m84",
+      "title": "Average Rates over Equal Distances",
+      "objective": "Compute harmonic mean speed and total travel time for equal-distance segments with varying speeds.",
+      "folder": "m84-harmonic-rate-summary",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m85",
+      "title": "Compare Typical and Peak Signal Size",
+      "objective": "Compute RMS amplitude, peak absolute amplitude, and crest factor with an explicit all-zero convention.",
+      "folder": "m85-signal-crest-factor",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m86",
+      "title": "Compare Dispersion across Units",
+      "objective": "Compute population mean, standard deviation, and coefficient of variation for positive observations.",
+      "folder": "m86-relative-dispersion",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m87",
+      "title": "Measure Asymmetry and Tail Shape",
+      "objective": "Compute standardized third and fourth central moments with a defined constant-sample convention.",
+      "folder": "m87-central-shape-moments",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m88",
+      "title": "Make Histogram Areas Sum to One",
+      "objective": "Accumulate nonnegative sample weights into uneven bins and divide by total weight and bin widths.",
+      "folder": "m88-weighted-density-histogram",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m89",
+      "title": "Transfer Histogram Mass to New Bins",
+      "objective": "Redistribute piecewise-uniform bin mass according to interval overlaps between two edge grids.",
+      "folder": "m89-histogram-overlap-rebinning",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m90",
+      "title": "Describe Concentration with a Lorenz Curve",
+      "objective": "Sort nonnegative amounts, build cumulative population and value shares, and derive Gini from trapezoidal area.",
+      "folder": "m90-lorenz-curve-area",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m91",
+      "title": "Report Every Most Frequent Value",
+      "objective": "Return sorted tied modes, their shared frequency, and the number of unique observed values.",
+      "folder": "m91-empirical-mode-ties",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m92",
+      "title": "Compute Every Leave-One-Out Mean",
+      "objective": "Compute omitted-observation means and the jackknife mean estimate without refitting each sample.",
+      "folder": "m92-leave-one-out-means",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m93",
+      "title": "Separate Within-Group Scatter from Group Means",
+      "objective": "Combine group sizes and sample variances using residual degrees of freedom without adding between-group variation.",
+      "folder": "m93-pooled-within-group-variance",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m94",
+      "title": "Partition Variation between Groups",
+      "objective": "Compute grand mean, between-group and within-group sums of squares from labeled numeric observations.",
+      "folder": "m94-one-way-anova-sums",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m95",
+      "title": "Measure How Concentrated Weights Are",
+      "objective": "Normalize nonnegative weights and compute inverse squared-mass effective sample size and maximum weight share.",
+      "folder": "m95-weighted-effective-sample-size",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m96",
+      "title": "Build a Bounded Interval for a Success Rate",
+      "objective": "Compute a Wilson score interval from successes, trials and a supplied positive z value.",
+      "folder": "m96-success-rate-wilson-interval",
+      "domain": "foundations",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m97",
+      "title": "Audit Relative Errors near Zero",
+      "objective": "Compute symmetric absolute percentage errors with a both-zero convention and their mean.",
+      "folder": "m97-symmetric-percentage-errors",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m98",
+      "title": "Compare Forecast Errors with a Naive Baseline",
+      "objective": "Normalize evaluation absolute error by training seasonal-naive absolute error with an explicit zero-scale policy.",
+      "folder": "m98-scaled-forecast-error",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    },
+    {
+      "id": "m99",
+      "title": "Keep Forecast Training before Validation",
+      "objective": "Produce expanding-window training and validation index boundaries with a fixed horizon and stride.",
+      "folder": "m99-rolling-origin-boundaries",
+      "domain": "foundations",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot prose, implementation and fixtures.",
+        "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html"
+      ]
+    }
+  ]
+}

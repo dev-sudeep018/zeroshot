@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m87",
+  "kind": "lesson",
+  "slug": "central-shape-moments",
+  "version": 1,
+  "title": "Measure Asymmetry and Tail Shape",
+  "summary": "Compute standardized third and fourth central moments with a defined constant-sample convention.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Measure Asymmetry and Tail Shape"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "shape_moments",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html",
+    ],
+}

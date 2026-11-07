@@ -1,0 +1,44 @@
+{
+  "intro": "A cache may contain structurally valid values produced by an obsolete computation version. Version and age checks jointly determine whether a value can be reused.",
+  "task": "Accept entries only when version matches and age is within an explicit TTL interval.",
+  "signature": "valid_cache_entries(entries, now, version, ttl)",
+  "requirements": [
+    "entries maps IDs to records with timestamp (integer), version (nonempty string), and value (bounded plain data). now is an integer, requested version a nonempty string, ttl an integer >=0. Return ID-to-value for matching version entries with 0<=now-timestamp<ttl; omit future, expired, or different-version entries. Preserve entry order and copy returned values.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Fresh matching value",
+      "input": "valid_cache_entries({'x':{'timestamp':8,'version':'v1','value':[1]}},10,'v1',3)",
+      "output": "{'x': [1]}"
+    },
+    {
+      "name": "Expiry boundary excluded",
+      "input": "valid_cache_entries({'x':{'timestamp':7,'version':'v1','value':1}},10,'v1',3)",
+      "output": "{}"
+    },
+    {
+      "name": "Future entry excluded",
+      "input": "valid_cache_entries({'x':{'timestamp':11,'version':'v1','value':1}},10,'v1',3)",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Check both freshness and version; either mismatch invalidates the entry."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use a half-open age interval so an entry at exactly TTL has expired."
+    }
+  ],
+  "explanation": [
+    "A cache may contain structurally valid values produced by an obsolete computation version. Version and age checks jointly determine whether a value can be reused.",
+    "Future timestamps are excluded instead of receiving extra lifetime. Copying accepted values prevents a caller from accidentally mutating the cache through the returned mapping."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

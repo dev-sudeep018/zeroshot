@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d114",
+  "kind": "lesson",
+  "slug": "segmentation-boundary-map",
+  "version": 1,
+  "title": "Mark Boundaries between Segmentation Regions",
+  "summary": "Region boundaries reveal where neighboring pixels receive different class labels. Mark both sides of each local disagreement.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Mark Boundaries between Segmentation Regions"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "segmentation_boundaries",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries",
+    ],
+}

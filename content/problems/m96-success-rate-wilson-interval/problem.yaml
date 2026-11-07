@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m96",
+  "kind": "lesson",
+  "slug": "success-rate-wilson-interval",
+  "version": 1,
+  "title": "Build a Bounded Interval for a Success Rate",
+  "summary": "Compute a Wilson score interval from successes, trials and a supplied positive z value.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Build a Bounded Interval for a Success Rate"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "wilson_interval",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html",
+    ],
+}

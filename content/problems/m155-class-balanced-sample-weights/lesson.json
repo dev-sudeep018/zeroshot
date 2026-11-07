@@ -1,0 +1,45 @@
+{
+  "intro": "Frequency-balanced sample weights change the contribution of each class without duplicating observations. Scaling the weights to mean one keeps their overall magnitude interpretable.",
+  "task": "Compute inverse-frequency sample weights scaled to mean one from integer class labels.",
+  "signature": "balanced_sample_weights(labels, classes)",
+  "requirements": [
+    "classes is an integer in 1..64. labels is a nonempty integer-valued vector in 0..classes-1 and every declared class must appear.",
+    "Return {\"counts\": per-class counts, \"weights\": per-observation weights n/(classes*count[label])}.",
+    "Weights have mean one and each class receives equal total weight. Preserve sample order.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Imbalanced binary classes",
+      "input": "balanced_sample_weights([0,0,0,1],2)",
+      "output": "{'counts': [3, 1], 'weights': [0.6666666667, 0.6666666667, 0.6666666667, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Balanced classes",
+      "input": "balanced_sample_weights([0,1,2,0,1,2],3)",
+      "output": "{'counts': [2, 2, 2], 'weights': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One class",
+      "input": "balanced_sample_weights([0,0,0],1)",
+      "output": "{'counts': [3], 'weights': [1.0, 1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Count class occurrences before looking up weights for individual samples."
+    },
+    {
+      "title": "Build the result",
+      "body": "A class with fewer observations needs larger individual weights to reach the same class-total weight."
+    }
+  ],
+  "explanation": [
+    "Frequency-balanced sample weights change the contribution of each class without duplicating observations. Scaling the weights to mean one keeps their overall magnitude interpretable.",
+    "Requiring every declared class to appear prevents division by zero. Equal total weight across classes is the defining invariant, not equal weight across samples."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

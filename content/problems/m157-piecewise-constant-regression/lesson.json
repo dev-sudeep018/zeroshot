@@ -1,0 +1,45 @@
+{
+  "intro": "Piecewise-constant regression represents a numeric function by intervals and one prediction per interval. Boundary conventions are part of the model and must be consistent during evaluation.",
+  "task": "Assign numeric queries to right-sided split intervals and return their piecewise constant predictions and bin indices.",
+  "signature": "regression_bins(splits, values, queries)",
+  "requirements": [
+    "splits is a strictly increasing vector of length 1..63. values has length len(splits)+1; queries is a nonempty vector.",
+    "Return {\"indices\": bin index for each query, \"predictions\": values at those indices}. A query equal to a split belongs to the bin on its right.",
+    "The first and final bins extend without bound; queries need not lie within the split range.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Boundary decisions",
+      "input": "regression_bins([0,2],[10,20,30],[-1,0,1,2,3])",
+      "output": "{'indices': [0, 1, 1, 2, 2], 'predictions': [10.0, 20.0, 20.0, 30.0, 30.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single split",
+      "input": "regression_bins([5],[-1,1],[4,5,6])",
+      "output": "{'indices': [0, 1, 1], 'predictions': [-1.0, 1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unsorted queries",
+      "input": "regression_bins([-2,0,3],[1,2,3,4],[4,-3,0])",
+      "output": "{'indices': [3, 0, 2], 'predictions': [4.0, 1.0, 3.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "A bin index equals the number of split values less than or equal to the query."
+    },
+    {
+      "title": "Build the result",
+      "body": "Use those indices to gather predictions from the bin-value vector."
+    }
+  ],
+  "explanation": [
+    "Piecewise-constant regression represents a numeric function by intervals and one prediction per interval. Boundary conventions are part of the model and must be consistent during evaluation.",
+    "A right-sided split convention makes equal-to-threshold values move into the next interval. Separating returned indices from predictions helps diagnose routing errors even when adjacent bins share a value."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

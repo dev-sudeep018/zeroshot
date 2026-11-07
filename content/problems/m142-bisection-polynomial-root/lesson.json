@@ -1,0 +1,45 @@
+{
+  "intro": "Bisection trades speed for a strong geometric guarantee: a continuous function with opposite endpoint signs has a root inside the bracket. Every ordinary iteration halves that bracket.",
+  "task": "Bisect a continuous polynomial on a sign-changing interval for a fixed number of steps.",
+  "signature": "bisect_polynomial(coefficients, lower, upper, steps)",
+  "requirements": [
+    "coefficients has length 2..7. lower<upper are in [-10,10], and steps is an integer in 0..64. Endpoint values must have opposite signs unless an endpoint is exactly a root.",
+    "Return {\"root\": midpoint of final bracket, \"bracket\": [left,right]}. Perform exactly steps midpoint checks unless an exact root is found.",
+    "An exact root collapses both bracket ends to that value. Otherwise preserve opposite endpoint signs at every update.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Square root of two",
+      "input": "bisect_polynomial([1,0,-2],0,2,8)",
+      "output": "{'root': 1.41796875, 'bracket': [1.4140625, 1.421875]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Exact midpoint root",
+      "input": "bisect_polynomial([1,-1],0,2,4)",
+      "output": "{'root': 1.0, 'bracket': [1.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Endpoint root",
+      "input": "bisect_polynomial([1,-2],0,2,3)",
+      "output": "{'root': 2.0, 'bracket': [2.0, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Evaluate the two endpoint signs before the loop and handle exact endpoint roots."
+    },
+    {
+      "title": "Build the result",
+      "body": "Retain the half whose endpoints have opposite signs; update its stored endpoint value too."
+    }
+  ],
+  "explanation": [
+    "Bisection trades speed for a strong geometric guarantee: a continuous function with opposite endpoint signs has a root inside the bracket. Every ordinary iteration halves that bracket.",
+    "The midpoint is an estimate with error bounded by half the bracket width. Compare signs directly: multiplying tiny endpoint values can underflow and lose their sign relationship. Exact floating-point zero is handled separately from the fixed iteration budget."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

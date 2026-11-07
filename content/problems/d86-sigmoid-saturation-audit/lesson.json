@@ -1,0 +1,44 @@
+{
+  "intro": "A confident sigmoid can transmit almost no local gradient. Measure confidence extremes and sensitivity together.",
+  "task": "Compute probabilities, mean local derivatives, and saturation fractions per unit.",
+  "signature": "sigmoid_audit(logits, threshold)",
+  "requirements": [
+    "logits is a batch-by-unit matrix; threshold lies strictly between 0 and 0.5. Use a numerically stable sigmoid.",
+    "Return {\"probabilities\": matrix, \"mean_derivative\": vector, \"saturated_fraction\": vector}. Derivative is p*(1-p); saturation means p<=threshold or p>=1-threshold, including equality.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Center and extremes",
+      "input": "sigmoid_audit([[0,1000],[0,-1000]],0.1)",
+      "output": "{'probabilities': [[0.5, 1.0], [0.5, 0.0]],\n 'mean_derivative': [0.25, 0.0],\n 'saturated_fraction': [0, 1]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Central unit",
+      "input": "sigmoid_audit([[0]],0.2)",
+      "output": "{'probabilities': [[0.5]],\n 'mean_derivative': [0.25],\n 'saturated_fraction': [0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Positive threshold equality",
+      "input": "sigmoid_audit([[np.log(3)]],0.25)",
+      "output": "{'probabilities': [[0.75]],\n 'mean_derivative': [0.1875],\n 'saturated_fraction': [1]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "At logit zero the probability is one half and sensitivity is maximal."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Separate positive and negative exponential formulas for extreme logits."
+    }
+  ],
+  "explanation": [
+    "The derivative measures a probability\u2019s response to a small logit change. It approaches zero when probabilities approach either endpoint, which can slow gradient transmission.",
+    "Saturation is defined here by a chosen diagnostic threshold. Its batch frequency distinguishes consistently saturated units from occasional confident responses."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

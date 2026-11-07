@@ -1,0 +1,45 @@
+{
+  "intro": "The secant method estimates a derivative from two function values, so it can approach a root without an analytic derivative. Unlike bisection it does not retain a guaranteed bracket.",
+  "task": "Apply a fixed number of secant iterations with clear zero-denominator handling.",
+  "signature": "secant_polynomial(coefficients, first, second, steps)",
+  "requirements": [
+    "coefficients has length 2..7. first and second are distinct scalars in [-10,10]. steps is an integer in 0..16.",
+    "Return the estimate list beginning with first,second. Update x2=x1-f(x1)*(x1-x0)/(f(x1)-f(x0)), then shift the previous pair.",
+    "If the latest value is exactly a root, repeat it for remaining steps. Otherwise reject a denominator with magnitude <1e-12 or any next estimate outside [-10,10].",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Square root two",
+      "input": "secant_polynomial([1,0,-2],1,2,5)",
+      "output": "[1.0, 2.0, 1.333333333, 1.4, 1.414634146, 1.414211438, 1.414213562]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Linear root",
+      "input": "secant_polynomial([2,-4],0,3,4)",
+      "output": "[0.0, 3.0, 2.0, 2.0, 2.0, 2.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Latest estimate root",
+      "input": "secant_polynomial([1,-2],0,2,3)",
+      "output": "[0.0, 2.0, 2.0, 2.0, 2.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Reuse the last two estimates and their function values to form a secant slope."
+    },
+    {
+      "title": "Build the result",
+      "body": "Check the denominator before division and retain both old estimates until the new one is computed."
+    }
+  ],
+  "explanation": [
+    "The secant method estimates a derivative from two function values, so it can approach a root without an analytic derivative. Unlike bisection it does not retain a guaranteed bracket.",
+    "Flat secants and escaping estimates need explicit policies. The bounded contract makes such failures visible instead of returning a misleading large or nonfinite value."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

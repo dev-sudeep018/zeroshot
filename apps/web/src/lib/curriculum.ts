@@ -1,5 +1,5 @@
 import catalogData from "../generated/catalog.json";
-import type { Problem } from "@mastery/problem-schema";
+import type { Problem } from "@zeroshot/problem-schema";
 
 export const allItems = catalogData as unknown as Problem[];
 export const catalog = allItems
@@ -8,7 +8,7 @@ export const catalog = allItems
     const order = ["foundations", "deep-learning", "engineering"];
     return (
       order.indexOf(a.domain) - order.indexOf(b.domain) ||
-      a.id.localeCompare(b.id)
+      a.id.localeCompare(b.id, "en", { numeric: true })
     );
   });
 export const domains: Record<Problem["domain"], string> = {
@@ -16,6 +16,28 @@ export const domains: Record<Problem["domain"], string> = {
   "deep-learning": "Deep learning",
   engineering: "AI engineering",
 };
+// Curated starting points reuse catalog lessons and their existing progress.
+// They are not additional lessons or replacements for the three full paths.
+export const beginnerTracks = [
+  {
+    title: "Work with real records",
+    description:
+      "Clean messy labels, reconcile requests, and organize records without losing information. You will use Python functions, loops, lists, and dictionaries.",
+    items: ["e63", "e65", "e66", "e69", "e72", "e73"],
+  },
+  {
+    title: "Reason with arrays and measurements",
+    description:
+      "Calibrate readings, handle missing observations, and summarize grids. Predict the output on a small example before writing the array operations.",
+    items: ["m60", "m61", "m62", "m63", "m65", "m67"],
+  },
+  {
+    title: "Understand a small neural network",
+    description:
+      "Count parameters, inspect activations, and follow training decisions. Small supplied arrays let you investigate one behavior at a time.",
+    items: ["d80", "d84", "d85", "d90", "d95", "d100"],
+  },
+];
 export const paths = [
   {
     slug: "mathematics-to-ml",
@@ -45,6 +67,7 @@ export const paths = [
       "m18",
       "m19",
       ...Array.from({ length: 40 }, (_, index) => `m${index + 20}`),
+      ...Array.from({ length: 100 }, (_, index) => `m${index + 60}`),
     ],
   },
   {
@@ -96,6 +119,7 @@ export const paths = [
       "d39",
       "d40",
       ...Array.from({ length: 39 }, (_, index) => `d${index + 41}`),
+      ...Array.from({ length: 50 }, (_, index) => `d${index + 80}`),
     ],
   },
   {
@@ -129,6 +153,7 @@ export const paths = [
       "e21",
       "e22",
       ...Array.from({ length: 40 }, (_, index) => `e${index + 23}`),
+      ...Array.from({ length: 100 }, (_, index) => `e${index + 63}`),
     ],
   },
 ];

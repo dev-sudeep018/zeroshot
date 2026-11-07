@@ -32,7 +32,7 @@
 #
 # This adapts the upstream tensor-parallel MLP arithmetic to supplied NumPy shards. The operation illustrates the reduction semantics without launching distributed workers.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

@@ -1,0 +1,44 @@
+{
+  "intro": "Routing combines independent conditions into one operational decision. A high-priority ticket and a blocked low-priority ticket both need the urgent queue, but an item must not be appended twice.",
+  "task": "Partition ticket IDs into urgent and normal queues using priority and blocked status.",
+  "signature": "route_tickets(tickets)",
+  "requirements": [
+    "Each record has id (nonempty string), priority (integer 0..5), and blocked (bool). Return urgent and normal ID lists in input order. Urgent means priority >= 4 OR blocked is true; other fields are ignored.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Priority route",
+      "input": "route_tickets([dict(id='a',priority=4,blocked=False),dict(id='b',priority=2,blocked=False)])",
+      "output": "{'urgent': ['a'], 'normal': ['b']}"
+    },
+    {
+      "name": "Blocked low priority",
+      "input": "route_tickets([dict(id='x',priority=0,blocked=True)])",
+      "output": "{'urgent': ['x'], 'normal': []}"
+    },
+    {
+      "name": "Boundary three",
+      "input": "route_tickets([dict(id='x',priority=3,blocked=False)])",
+      "output": "{'urgent': [], 'normal': ['x']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Write the urgent predicate separately and append each ID to exactly one list."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "The word OR means a blocked ticket stays urgent even at priority zero."
+    }
+  ],
+  "explanation": [
+    "Routing combines independent conditions into one operational decision. A high-priority ticket and a blocked low-priority ticket both need the urgent queue, but an item must not be appended twice.",
+    "Partitioning preserves every input occurrence and its order within a queue. Repeated IDs are retained because this function routes events rather than deduplicating tickets."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

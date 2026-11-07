@@ -1,0 +1,45 @@
+{
+  "intro": "Pairwise intersections overlap one another in the triple intersection. Treating them as disjoint overcounts outcomes and can hide impossible probability specifications.",
+  "task": "Compute union and exactly-one/exactly-two probabilities from all intersections and validate nonnegative atomic regions.",
+  "signature": "three_event_regions(a, b, c, ab, ac, bc, abc)",
+  "requirements": [
+    "Inputs are probabilities of A, B, C, their three pairwise intersections and their triple intersection. All are in [0,1].",
+    "Return {\"union\", \"exactly_one\", \"exactly_two\", \"all_three\", \"none\"}. Pairwise intersection inputs include the triple region.",
+    "Compute all eight disjoint atomic regions. Reject if any is below -1e-10; clip only tiny negative roundoff to zero before summing.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three independent fair events",
+      "input": "three_event_regions(.5,.5,.5,.25,.25,.25,.125)",
+      "output": "{'union': 0.875,\n 'exactly_one': 0.375,\n 'exactly_two': 0.375,\n 'all_three': 0.125,\n 'none': 0.125}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Disjoint events",
+      "input": "three_event_regions(.2,.3,.1,0,0,0,0)",
+      "output": "{'union': 0.6, 'exactly_one': 0.6, 'exactly_two': 0.0, 'all_three': 0.0, 'none': 0.4}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Identical events",
+      "input": "three_event_regions(.4,.4,.4,.4,.4,.4,.4)",
+      "output": "{'union': 0.4, 'exactly_one': 0.0, 'exactly_two': 0.0, 'all_three': 0.4, 'none': 0.6}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Subtract the triple region from every pairwise intersection to get exactly-two regions."
+    },
+    {
+      "title": "Build the result",
+      "body": "Remove pairwise overlaps from each single event, adding the triple region back once."
+    }
+  ],
+  "explanation": [
+    "Pairwise intersections overlap one another in the triple intersection. Treating them as disjoint overcounts outcomes and can hide impossible probability specifications.",
+    "The eight atomic regions form a partition of the sample space. Checking their nonnegativity validates more than individual bounds and allows union and exact-count probabilities to be assembled directly."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

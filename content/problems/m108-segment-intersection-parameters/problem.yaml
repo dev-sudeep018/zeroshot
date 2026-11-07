@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m108",
+  "kind": "lesson",
+  "slug": "segment-intersection-parameters",
+  "version": 1,
+  "title": "Intersect Two Nonparallel Segments",
+  "summary": "Solve line intersection parameters and report whether their shared point lies on both finite segments.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Intersect Two Nonparallel Segments"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "segment_intersection",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

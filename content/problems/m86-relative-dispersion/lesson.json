@@ -1,0 +1,44 @@
+{
+  "intro": "Standard deviation carries the units of the measured quantity. The coefficient of variation divides by its mean, giving a dimensionless measure for positive ratio-scale data.",
+  "task": "Compute population mean, standard deviation, and coefficient of variation for positive observations.",
+  "signature": "relative_dispersion(values)",
+  "requirements": [
+    "All values are at least 1e-6. Return {\"mean\": arithmetic mean, \"std\": population standard deviation, \"cv\": std/mean}.",
+    "Use population variance (divide squared centered distances by n). A singleton has std=cv=0.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Unequal measurements",
+      "input": "relative_dispersion([1,2,3])",
+      "output": "{'mean': 2.0, 'std': 0.8164965809, 'cv': 0.4082482905}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant sample",
+      "input": "relative_dispersion([5,5,5])",
+      "output": "{'mean': 5.0, 'std': 0.0, 'cv': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single observation",
+      "input": "relative_dispersion([2])",
+      "output": "{'mean': 2.0, 'std': 0.0, 'cv': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Center the observations before averaging squared distances."
+    },
+    {
+      "title": "Build the result",
+      "body": "Divide the resulting standard deviation by the positive mean to remove the measurement unit."
+    }
+  ],
+  "explanation": [
+    "Standard deviation carries the units of the measured quantity. The coefficient of variation divides by its mean, giving a dimensionless measure for positive ratio-scale data.",
+    "A change of measurement units multiplies both mean and standard deviation by the same factor, leaving CV unchanged. Adding a constant instead changes the mean alone, so CV is not translation invariant."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m71",
+  "kind": "lesson",
+  "slug": "plateau-peak-locations",
+  "version": 1,
+  "title": "Find Peaks without Double-Counting Plateaus",
+  "summary": "Return midpoints of flat local maxima with strict lower neighbors and explicit endpoint exclusion.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Find Peaks without Double-Counting Plateaus"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "plateau_peaks",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html",
+    ],
+}

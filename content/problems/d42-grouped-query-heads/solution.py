@@ -32,7 +32,7 @@
 #
 # The NumPy port makes the upstream repeat-interleave head mapping explicit, without allocating repeated key/value arrays.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

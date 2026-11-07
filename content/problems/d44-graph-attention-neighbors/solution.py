@@ -32,7 +32,7 @@
 #
 # The port retains the upstream additive scoring equation and changes isolated-node handling from an all-masked softmax to an explicit zero output.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

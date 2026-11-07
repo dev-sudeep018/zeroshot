@@ -1,0 +1,45 @@
+{
+  "intro": "Absorption differs from ordinary stochastic propagation because probability can leave the tracked states. Renormalizing would erase survival information and answer a different conditional question.",
+  "task": "Propagate transient mass through a substochastic matrix and report per-step absorption probabilities.",
+  "signature": "absorption_trace(initial, transient, steps)",
+  "requirements": [
+    "initial is a probability vector over transient states. transient is a square nonnegative matrix with row sums <=1; missing row mass leads to absorption.",
+    "steps is an integer in 0..64. Return {\"survival\": masses still transient from time zero through steps, \"absorbed\": newly absorbed mass at each of the steps, \"remaining\": final transient-state vector}.",
+    "Do not renormalize the transient vector after a step; its shrinking mass is the survival probability.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "One-state survival",
+      "input": "absorption_trace([1],[[.5]],3)",
+      "output": "{'survival': [1.0, 0.5, 0.25, 0.125],\n 'absorbed': [0.5, 0.25, 0.125],\n 'remaining': [0.125]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Two transient states",
+      "input": "absorption_trace([1,0],[[.5,.25],[0,.5]],3)",
+      "output": "{'survival': [1.0, 0.75, 0.5, 0.3125],\n 'absorbed': [0.25, 0.25, 0.1875],\n 'remaining': [0.125, 0.1875]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No absorption",
+      "input": "absorption_trace([.2,.8],[[1,0],[0,1]],2)",
+      "output": "{'survival': [1.0, 1.0, 1.0], 'absorbed': [0.0, 0.0], 'remaining': [0.2, 0.8]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Missing mass in a transition row represents leaving the transient state space permanently."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compare total mass before and after each multiplication, and retain the unnormalized state vector."
+    }
+  ],
+  "explanation": [
+    "Absorption differs from ordinary stochastic propagation because probability can leave the tracked states. Renormalizing would erase survival information and answer a different conditional question.",
+    "The newly absorbed masses plus final survival sum to one. The survival curve is nonincreasing, which provides a second independent check on the trajectory."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

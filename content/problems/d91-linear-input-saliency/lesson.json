@@ -1,0 +1,44 @@
+{
+  "intro": "For a linear classifier, sensitivity is determined by the weights of the selected class. Pair that gradient with the observed input.",
+  "task": "Return selected class scores, input gradients, and input-times-gradient attributions.",
+  "signature": "linear_saliency(features, weights, classes)",
+  "requirements": [
+    "features has shape batch-by-features and weights features-by-classes. classes has one integer class index per example. No bias is used.",
+    "Return {\"scores\": vector, \"gradient\": batch-by-features matrix, \"input_times_gradient\": matrix}. Different examples may request different classes.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Different classes",
+      "input": "linear_saliency([[1,2],[3,4]],[[1,-1],[2,3]],[0,1])",
+      "output": "{'scores': [5.0, 9.0],\n 'gradient': [[1.0, 2.0], [-1.0, 3.0]],\n 'input_times_gradient': [[1.0, 4.0], [-3.0, 12.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Zero input",
+      "input": "linear_saliency([[0,0]],[[2],[-3]],[0])",
+      "output": "{'scores': [0.0],\n 'gradient': [[2.0, -3.0]],\n 'input_times_gradient': [[0.0, -0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "One feature",
+      "input": "linear_saliency([[2],[-2]],[[3,4]],[1,0])",
+      "output": "{'scores': [8.0, -6.0],\n 'gradient': [[4.0], [3.0]],\n 'input_times_gradient': [[8.0], [-6.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "The derivative of a weighted sum with respect to one input is its coefficient."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Gather weight columns per example, then transpose the gathered result."
+    }
+  ],
+  "explanation": [
+    "Input gradients measure local score sensitivity. For an affine function the gradient does not depend on the input location, although the requested class determines which weight column is relevant.",
+    "Multiplying the gradient by the input gives a zero-baseline contribution. Its row sum recovers the bias-free score; absolute gradients would lose that signed reconstruction."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

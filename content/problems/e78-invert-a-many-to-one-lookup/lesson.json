@@ -1,0 +1,44 @@
+{
+  "intro": "Inverting a lookup changes the direction of access. A many-to-one forward mapping becomes one-to-many in reverse, so overwriting would discard valid source keys.",
+  "task": "Collect source keys per target value in original mapping order.",
+  "signature": "invert_lookup(mapping)",
+  "requirements": [
+    "Input maps nonempty string source keys to nonempty string targets. Return target -> list of source keys, preserving source insertion order within each list.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Shared target",
+      "input": "invert_lookup({'a':'x','b':'y','c':'x'})",
+      "output": "{'x': ['a', 'c'], 'y': ['b']}"
+    },
+    {
+      "name": "One mapping",
+      "input": "invert_lookup({'a':'z'})",
+      "output": "{'z': ['a']}"
+    },
+    {
+      "name": "Empty lookup",
+      "input": "invert_lookup({})",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Multiple source keys can share a target, so the inverted value must be a list."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Append in iteration order instead of sorting the sources."
+    }
+  ],
+  "explanation": [
+    "Inverting a lookup changes the direction of access. A many-to-one forward mapping becomes one-to-many in reverse, so overwriting would discard valid source keys.",
+    "Retaining insertion order allows the reverse groups to reflect the source catalog order. The function deliberately does not require target values to be unique."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Priority queues let urgent tasks overtake lower-priority tasks while retaining a stable order among equals. Bounded capacity makes overload behavior explicit.",
+  "task": "Choose highest-priority pending work with FIFO ties and reject inserts when full.",
+  "signature": "priority_queue(operations, capacity)",
+  "requirements": [
+    "capacity is an integer 1..1000. Operations are [\"put\",id,priority] with nonempty string ID and integer priority, or [\"take\"]. Remove the highest priority, using earliest arrival for ties. A put when full is rejected without eviction. Return served IDs (None for empty take), rejected operation indices, and pending IDs in future service order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Highest priority first",
+      "input": "priority_queue([['put','a',1],['put','b',3],['take']],2)",
+      "output": "{'served': ['b'], 'rejected': [], 'pending': ['a']}"
+    },
+    {
+      "name": "FIFO ties",
+      "input": "priority_queue([['put','a',2],['put','b',2],['take']],2)",
+      "output": "{'served': ['a'], 'rejected': [], 'pending': ['b']}"
+    },
+    {
+      "name": "Reject full insert",
+      "input": "priority_queue([['put','a',1],['put','b',9],['take']],1)",
+      "output": "{'served': ['a'], 'rejected': [1], 'pending': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use arrival index as a secondary sort key so equal priorities remain FIFO."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Validate a put even when the queue is full; malformed operations are not ordinary rejections."
+    }
+  ],
+  "explanation": [
+    "Priority queues let urgent tasks overtake lower-priority tasks while retaining a stable order among equals. Bounded capacity makes overload behavior explicit.",
+    "This policy rejects new work when full, even if the new job has a higher priority. Evicting existing work would require a different contract and accounting model."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

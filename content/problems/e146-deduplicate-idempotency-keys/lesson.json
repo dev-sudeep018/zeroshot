@@ -1,0 +1,44 @@
+{
+  "intro": "Idempotency history prevents a replayed request from being applied twice while its key remains remembered. Bounded memory necessarily limits that protection.",
+  "task": "Replay request keys with a bounded seen-key history and return accepted indices.",
+  "signature": "idempotent_accepts(keys, capacity)",
+  "requirements": [
+    "keys contains nonempty string request keys; capacity is an integer 1..1000. Keep a FIFO history of the last capacity accepted distinct-at-insertion keys. Reject a key already in that history without refreshing its position. Return accepted indices and final history oldest first.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Replay within history",
+      "input": "idempotent_accepts(['a','a','b','a'],2)",
+      "output": "{'accepted': [0, 2], 'history': ['a', 'b']}"
+    },
+    {
+      "name": "Evicted key accepted",
+      "input": "idempotent_accepts(['a','b','c','a'],2)",
+      "output": "{'accepted': [0, 1, 2, 3], 'history': ['c', 'a']}"
+    },
+    {
+      "name": "No refresh on rejection",
+      "input": "idempotent_accepts(['a','b','a','c','a'],2)",
+      "output": "{'accepted': [0, 1, 3, 4], 'history': ['c', 'a']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Only accepted requests enter the FIFO history."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A duplicate does not refresh recency; this differs from an LRU cache."
+    }
+  ],
+  "explanation": [
+    "Idempotency history prevents a replayed request from being applied twice while its key remains remembered. Bounded memory necessarily limits that protection.",
+    "The FIFO policy is defined by accepted requests, not all observed requests. An evicted key is accepted again, illustrating why durable idempotency stores use explicit retention guarantees."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

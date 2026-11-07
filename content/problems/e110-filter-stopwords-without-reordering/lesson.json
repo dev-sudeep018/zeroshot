@@ -1,0 +1,44 @@
+{
+  "intro": "Stopword filtering removes a supplied vocabulary from tokenized text. Retaining repetition matters because later frequency-based features still need the number of surviving occurrences.",
+  "task": "Remove exact stopword tokens while retaining repetition and original order.",
+  "signature": "remove_stopwords(tokens, stopwords)",
+  "requirements": [
+    "Both inputs are sequences of strings, including optional empty strings. Return tokens not exactly present in stopwords, preserving order and repetitions. Matching is case-sensitive; do not normalize or deduplicate output.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Keep repeated content",
+      "input": "remove_stopwords(['the','cat','cat','and','dog'], ['the','and'])",
+      "output": "['cat', 'cat', 'dog']"
+    },
+    {
+      "name": "Case matters",
+      "input": "remove_stopwords(['The','the'], ['the'])",
+      "output": "['The']"
+    },
+    {
+      "name": "No stopwords",
+      "input": "remove_stopwords(['a','b'], [])",
+      "output": "['a', 'b']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use a set only for membership lookup."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Build output by walking tokens so source order and duplicates survive."
+    }
+  ],
+  "explanation": [
+    "Stopword filtering removes a supplied vocabulary from tokenized text. Retaining repetition matters because later frequency-based features still need the number of surviving occurrences.",
+    "The policy is explicit rather than language-dependent. Case folding or punctuation stripping must happen in a separate stage if a pipeline wants those behaviors."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

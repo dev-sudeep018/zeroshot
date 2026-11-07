@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m137",
+  "kind": "lesson",
+  "slug": "lattice-path-counts",
+  "version": 1,
+  "title": "Count Monotone Routes around Blocked Cells",
+  "summary": "Use dynamic programming to count right/down lattice routes while respecting blocked endpoints.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Count Monotone Routes around Blocked Cells"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "blocked_grid_paths",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

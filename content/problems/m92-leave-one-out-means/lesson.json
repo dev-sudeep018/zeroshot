@@ -1,0 +1,44 @@
+{
+  "intro": "Leave-one-out estimates reveal how sensitive a statistic is to each observation. For the mean, subtracting an observation from the total gives every refitted estimate in linear time.",
+  "task": "Compute omitted-observation means and the jackknife mean estimate without refitting each sample.",
+  "signature": "leave_one_out_mean(values)",
+  "requirements": [
+    "values has at least two entries. Return {\"estimates\": mean after omitting each corresponding observation, \"mean_estimate\": mean of those estimates, \"jackknife_se\": sqrt((n-1)/n * sum((estimate-mean_estimate)**2))}.",
+    "Preserve omission order. The jackknife standard error here estimates uncertainty of the sample mean.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three measurements",
+      "input": "leave_one_out_mean([1,2,6])",
+      "output": "{'estimates': [4.0, 3.5, 1.5], 'mean_estimate': 3.0, 'jackknife_se': 1.527525232}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Two measurements",
+      "input": "leave_one_out_mean([2,8])",
+      "output": "{'estimates': [8.0, 2.0], 'mean_estimate': 5.0, 'jackknife_se': 3.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant data",
+      "input": "leave_one_out_mean([4,4,4])",
+      "output": "{'estimates': [4.0, 4.0, 4.0], 'mean_estimate': 4.0, 'jackknife_se': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "A shared total sum lets you omit one value without rebuilding each sample."
+    },
+    {
+      "title": "Build the result",
+      "body": "Measure variation among the leave-one-out estimates using the specified jackknife scaling."
+    }
+  ],
+  "explanation": [
+    "Leave-one-out estimates reveal how sensitive a statistic is to each observation. For the mean, subtracting an observation from the total gives every refitted estimate in linear time.",
+    "The estimates are highly dependent because their samples overlap. The jackknife standard-error factor accounts for that structure; taking their ordinary standard deviation would use the wrong scale."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

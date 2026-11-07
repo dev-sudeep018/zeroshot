@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m157",
+  "kind": "lesson",
+  "slug": "piecewise-constant-regression",
+  "version": 1,
+  "title": "Predict from Ordered Regression Bins",
+  "summary": "Assign numeric queries to right-sided split intervals and return their piecewise constant predictions and bin indices.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Predict from Ordered Regression Bins"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "regression_bins",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

@@ -1,2 +1,1 @@
-/* The operate surface intentionally uses native UI and coding fonts.
-   No third-party font requests, tracking, or runtime font downloads. */
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("/fonts/manrope-variable.ttf") format("truetype"); }

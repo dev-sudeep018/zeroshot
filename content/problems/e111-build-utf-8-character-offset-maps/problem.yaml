@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e111",
+  "kind": "lesson",
+  "slug": "build-utf-8-character-offset-maps",
+  "version": 1,
+  "title": "Build UTF-8 Character Offset Maps",
+  "summary": "Return the byte offset of every Unicode code point boundary, including the final boundary.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": ["e104"],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "utf8_offsets",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

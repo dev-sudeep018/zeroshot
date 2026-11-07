@@ -1,4 +1,4 @@
-# Project Mastery
+# ZeroShot
 
 <!-- impeccable:product-schema 1 -->
 
@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Confirmed in the supplied founding plan: Next.js App Router, TypeScript, pnpm workspaces, Monaco, Pyodide and NumPy, versioned YAML/Markdown/Python content. Static frontend with a separately hosted, sandboxed runner. Optional Supabase accounts belong to a later milestone.
+Confirmed in the supplied founding plan: Next.js App Router, TypeScript, pnpm workspaces, Monaco, Pyodide and NumPy, versioned YAML/Markdown/Python content. Static frontend with a separately hosted, sandboxed runner. Optional Firebase Authentication provides email/password accounts on the free Spark plan. Learning data remains local until account synchronization is implemented.
 
 ## Users
 
@@ -24,7 +24,7 @@ Three connected entry points: guided learning, project-first learning, and open 
 
 ## Capabilities and Constraints
 
-The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The current 200 lessons include two debugging investigations, with three paths and a mini retrieval project. They establish reusable learning formats, not the final product size. All three entry points share content and progress.
+The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The current 450 lessons include 205 beginner lessons and two debugging investigations, with three full paths, a curated beginner route, and a mini retrieval project. They establish reusable learning formats, not the final product size. All three entry points share content and progress.
 
 Only implemented and validated activities count as available. Planned content and generated variants must not be presented as 2,000 distinct completed lessons. Per-item content and evaluators load on demand so the browser does not download the whole curriculum.
 
@@ -32,7 +32,7 @@ Learner code must not access application credentials. Workers alone are not the 
 
 ## Brand Commitments
 
-Project Mastery is the working name, with no OpenAI affiliation. Retain the user's black and light grey base. The latest user request adds distinct colors according to meaning: green for success, red for errors, amber for warnings, and blue for information or running/stopped states. Use differentiated Python syntax colors. Keep explicit icons and labels so color is not the only signal. The supplied brief specifies readability, useful feedback, accessibility, and resizable editor panels.
+ZeroShot is the project name, with no OpenAI affiliation. The latest user direction requires a dark public website separate from the learning portal. The landing page and About explain the product; /learn/ and the existing lesson, path, project, lab, and progress routes form a task-focused portal. Charcoal surfaces, warm off-white type, and restrained seafoam actions replace the rejected light design. Semantic green success, red errors, amber warnings, and blue information remain paired with labels. Local Manrope typography, accessible controls, and resizable editor panels remain requirements.
 
 ## Evidence on Hand
 
@@ -44,4 +44,8 @@ Free learning; explanations and experiments before scoring; connected projects; 
 
 ## Open Decisions
 
-Public launch date, final brand, production hosting, and account synchronization remain later decisions.
+Public launch date, production hosting, and account synchronization remain later decisions.
+
+## Personal learning momentum
+
+Optional practice XP, milestones, a chosen track, and flexible weekly goals support the learning loop. No competitive rankings or daily penalties. XP records checked practice on current lesson versions, not expertise. See [the evidence and implementation plan](docs/research/gamification-evidence.md). Existing local storage and legacy backups survive the ZeroShot rename.

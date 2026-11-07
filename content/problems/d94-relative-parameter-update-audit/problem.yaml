@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d94",
+  "kind": "lesson",
+  "slug": "relative-parameter-update-audit",
+  "version": 1,
+  "title": "Compare Update Size with Parameter Scale",
+  "summary": "The same absolute update can be tiny for one parameter block and overwhelming for another. Compare updates with each block\u2019s existing scale.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Compare Update Size with Parameter Scale"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "update_ratios",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-3/",
+    ],
+}

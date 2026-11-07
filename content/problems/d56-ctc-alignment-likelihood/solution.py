@@ -1,6 +1,6 @@
-# Original Project Mastery reference implementation; Apache-2.0.
+# Original ZeroShot reference implementation; Apache-2.0.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

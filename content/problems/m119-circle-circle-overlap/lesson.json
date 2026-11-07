@@ -1,0 +1,45 @@
+{
+  "intro": "Circle overlap changes formula across geometric regimes. Containment and disjointness are simple, while partial overlap forms a lens bounded by two arcs.",
+  "task": "Handle disjoint, contained and partial-overlap circles with the lens-area formula.",
+  "signature": "disk_overlap(radius_a, radius_b, distance)",
+  "requirements": [
+    "Both radii are in [1e-6,10000]; center distance is nonnegative.",
+    "Return overlap area. Disjoint or externally tangent disks have area zero. If one disk contains the other, return pi times the smaller radius squared.",
+    "For partial overlap use the two circular sectors minus their shared triangle area; clip inverse-cosine arguments and the square-root radicand for roundoff.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Equal partial overlap",
+      "input": "disk_overlap(1,1,1)",
+      "output": "1.228369699\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Separated disks",
+      "input": "disk_overlap(1,2,4)",
+      "output": "0.0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Contained disk",
+      "input": "disk_overlap(3,1,1)",
+      "output": "3.141592654\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Handle disjointness and containment before the lens formula, which divides by center distance."
+    },
+    {
+      "title": "Build the result",
+      "body": "In the partial-overlap case, use each radius for its own sector and subtract the shared triangle contribution."
+    }
+  ],
+  "explanation": [
+    "Circle overlap changes formula across geometric regimes. Containment and disjointness are simple, while partial overlap forms a lens bounded by two arcs.",
+    "Checking the regimes first handles coincident centers without division by zero. Symmetry in the two radii, bounds by the smaller disk area and quadratic scaling with length are useful checks."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

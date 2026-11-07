@@ -1,0 +1,45 @@
+{
+  "intro": "An epsilon-insensitive loss ignores deviations that lie within a practical tolerance. Larger deviations are penalized linearly by only the amount beyond that tolerance.",
+  "task": "Compute mean epsilon-insensitive absolute loss and its prediction subgradient with zero derivative at the boundary.",
+  "signature": "epsilon_insensitive_loss(predictions, targets, epsilon)",
+  "requirements": [
+    "predictions and targets are equal-length vectors. epsilon is a nonnegative scalar.",
+    "Return {\"loss\": mean(max(abs(prediction-target)-epsilon,0)), \"gradient\": prediction subgradient of the mean loss}.",
+    "The gradient is sign(prediction-target)/n strictly outside the band and zero inside or exactly on either boundary.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Inside and outside band",
+      "input": "epsilon_insensitive_loss([0,2,5],[1,1,2],1)",
+      "output": "{'loss': 0.6666666667, 'gradient': [0.0, 0.0, 0.3333333333]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Boundary gradients",
+      "input": "epsilon_insensitive_loss([-1,1],[0,0],1)",
+      "output": "{'loss': 0.0, 'gradient': [0.0, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero tolerance",
+      "input": "epsilon_insensitive_loss([-2,0,3],[0,0,0],0)",
+      "output": "{'loss': 1.666666667, 'gradient': [-0.3333333333, 0.0, 0.3333333333]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute signed residuals, then use their absolute values to decide which observations leave the band."
+    },
+    {
+      "title": "Build the result",
+      "body": "Only outside observations contribute a sign gradient, scaled by the number of observations."
+    }
+  ],
+  "explanation": [
+    "An epsilon-insensitive loss ignores deviations that lie within a practical tolerance. Larger deviations are penalized linearly by only the amount beyond that tolerance.",
+    "The loss is nondifferentiable at the band edges. Defining the subgradient there as zero makes the implementation deterministic and separates this loss from smooth quadratic penalties."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

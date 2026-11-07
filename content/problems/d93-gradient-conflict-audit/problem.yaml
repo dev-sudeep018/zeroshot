@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d93",
+  "kind": "lesson",
+  "slug": "gradient-conflict-audit",
+  "version": 1,
+  "title": "Detect Conflicting Task Gradients",
+  "summary": "Two learning objectives may request opposing movements of shared parameters. Inspect their pairwise direction agreement.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Detect Conflicting Task Gradients"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gradient_conflicts",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2001.06782",
+    ],
+}

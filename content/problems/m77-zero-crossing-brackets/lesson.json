@@ -1,0 +1,45 @@
+{
+  "intro": "A run of exact zeros can separate a negative and positive region without specifying one unique crossing sample. Returning a bracket states what the measurements actually establish.",
+  "task": "Track consecutive nonzero samples and return brackets for sign reversals, ignoring zero runs.",
+  "signature": "zero_crossing_brackets(values)",
+  "requirements": [
+    "Ignore exact-zero samples when comparing signs. For consecutive nonzero observations with opposite signs, output their original indices as one bracket.",
+    "Return an integer matrix of shape (number_of_crossings,2), including shape (0,2) when there are none.",
+    "Leading/trailing zeros alone do not create crossings. Brackets are reported left to right.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Direct crossing",
+      "input": "zero_crossing_brackets([-2,3])",
+      "output": "[[0, 1]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero run bridge",
+      "input": "zero_crossing_brackets([-2,0,0,3])",
+      "output": "[[0, 3]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Several crossings",
+      "input": "zero_crossing_brackets([1,-1,0,2,-3])",
+      "output": "[[0, 1], [1, 3], [3, 4]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Collect original indices of nonzero samples before comparing neighboring signs."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compare sign predicates rather than multiplying large or tiny magnitudes."
+    }
+  ],
+  "explanation": [
+    "A run of exact zeros can separate a negative and positive region without specifying one unique crossing sample. Returning a bracket states what the measurements actually establish.",
+    "Ignoring zero runs also prevents a signal that merely touches zero and returns to the same sign from being counted as a crossing. Original indices preserve the duration of the uncertainty interval."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

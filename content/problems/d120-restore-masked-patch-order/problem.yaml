@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d120",
+  "kind": "lesson",
+  "slug": "restore-masked-patch-order",
+  "version": 1,
+  "title": "Restore Visible Patches to Their Original Positions",
+  "summary": "A masked image encoder processes only visible patches. A decoder needs the original sequence order with placeholders in the missing positions.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Restore Visible Patches to Their Original Positions"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "restore_patches",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2111.06377",
+    ],
+}

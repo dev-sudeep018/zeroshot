@@ -965,9 +965,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m21",
@@ -978,9 +976,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m22",
@@ -991,9 +987,7 @@
       "prerequisites": ["m21"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m23",
@@ -1004,9 +998,7 @@
       "prerequisites": ["m22"],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m24",
@@ -1017,9 +1009,7 @@
       "prerequisites": ["m21", "m22"],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m25",
@@ -1031,7 +1021,7 @@
       "public_cases": 10,
       "status": "validated",
       "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation.",
+        "Original ZeroShot lesson, fixtures, and implementation.",
         "Concept reference only; no source code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.quantile.html"
       ]
     },
@@ -1044,9 +1034,7 @@
       "prerequisites": ["m09"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m27",
@@ -1057,9 +1045,7 @@
       "prerequisites": ["m26"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m28",
@@ -1070,9 +1056,7 @@
       "prerequisites": ["m05", "m25"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m29",
@@ -1083,9 +1067,7 @@
       "prerequisites": ["m09"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m30",
@@ -1096,9 +1078,7 @@
       "prerequisites": ["m15"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m31",
@@ -1109,9 +1089,7 @@
       "prerequisites": ["m30"],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m32",
@@ -1122,9 +1100,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m33",
@@ -1135,9 +1111,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m34",
@@ -1148,9 +1122,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m35",
@@ -1161,9 +1133,7 @@
       "prerequisites": ["m34"],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m36",
@@ -1174,9 +1144,7 @@
       "prerequisites": ["m03", "m04"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m37",
@@ -1187,9 +1155,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m38",
@@ -1200,9 +1166,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m39",
@@ -1213,9 +1177,7 @@
       "prerequisites": ["m38"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m40",
@@ -1226,9 +1188,7 @@
       "prerequisites": [],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m41",
@@ -1239,9 +1199,7 @@
       "prerequisites": ["m14"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m42",
@@ -1252,9 +1210,7 @@
       "prerequisites": ["m12", "m14"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m43",
@@ -1265,9 +1221,7 @@
       "prerequisites": ["m12"],
       "public_cases": 11,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m44",
@@ -1279,7 +1233,7 @@
       "public_cases": 10,
       "status": "validated",
       "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation.",
+        "Original ZeroShot lesson, fixtures, and implementation.",
         "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/mixture.html"
       ]
     },
@@ -1292,9 +1246,7 @@
       "prerequisites": ["m12"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m46",
@@ -1305,9 +1257,7 @@
       "prerequisites": ["m16"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m47",
@@ -1318,9 +1268,7 @@
       "prerequisites": ["m25"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m48",
@@ -1331,9 +1279,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m49",
@@ -1344,9 +1290,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m50",
@@ -1357,9 +1301,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m51",
@@ -1370,9 +1312,7 @@
       "prerequisites": [],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m52",
@@ -1383,9 +1323,7 @@
       "prerequisites": ["m20", "m51"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m53",
@@ -1396,9 +1334,7 @@
       "prerequisites": ["m52"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m54",
@@ -1409,9 +1345,7 @@
       "prerequisites": ["m09", "m29"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m55",
@@ -1423,7 +1357,7 @@
       "public_cases": 10,
       "status": "validated",
       "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation.",
+        "Original ZeroShot lesson, fixtures, and implementation.",
         "Concept reference only; no source code or prose copied: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wasserstein_distance.html"
       ]
     },
@@ -1436,9 +1370,7 @@
       "prerequisites": ["m12"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m57",
@@ -1449,9 +1381,7 @@
       "prerequisites": ["m56"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     },
     {
       "id": "m58",
@@ -1463,7 +1393,7 @@
       "public_cases": 10,
       "status": "validated",
       "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation.",
+        "Original ZeroShot lesson, fixtures, and implementation.",
         "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/generated/sklearn.isotonic.isotonic_regression.html"
       ]
     },
@@ -1476,9 +1406,7 @@
       "prerequisites": ["m25", "m39"],
       "public_cases": 10,
       "status": "validated",
-      "attribution": [
-        "Original Project Mastery lesson, fixtures, and implementation."
-      ]
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
     }
   ]
 }

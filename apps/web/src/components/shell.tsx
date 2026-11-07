@@ -1,17 +1,43 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import {
   ArrowUpRight,
   BookOpen,
-  Braces,
-  Github,
-  Layers3,
-  Route,
-  Sparkles,
-  House,
   FlaskConical,
-  FolderOpen,
-  NotebookPen,
+  FolderCode,
+  Github,
+  House,
+  Menu,
+  Route,
+  TrendingUp,
+  UserRound,
+  X,
 } from "lucide-react";
+
+const navigation = [
+  { key: "home", href: "/learn/", label: "Learning home", icon: House },
+  {
+    key: "practice",
+    href: "/problems/",
+    label: "Lesson library",
+    icon: BookOpen,
+  },
+  { key: "paths", href: "/paths/", label: "Guided paths", icon: Route },
+  {
+    key: "projects",
+    href: "/projects/mini-retrieval/",
+    label: "Projects",
+    icon: FolderCode,
+  },
+  { key: "explore", href: "/explore/", label: "Open lab", icon: FlaskConical },
+  {
+    key: "progress",
+    href: "/progress/",
+    label: "Your progress",
+    icon: TrendingUp,
+  },
+] as const;
 
 export function Shell({
   children,
@@ -26,100 +52,98 @@ export function Shell({
     | "explore"
     | "projects"
     | "progress"
-    | "about";
+    | "about"
+    | "account";
   workspace?: boolean;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div className={`app-shell ${workspace ? "workspace-shell" : ""}`}>
-      <aside className="sidebar">
-        <Link className="brand" href="/">
-          <span className="brand-mark">
-            <Layers3 size={23} />
-          </span>
-          <span>
-            Project
-            <br />
-            <strong>Mastery</strong>
-          </span>
-        </Link>
-        <div className="sidebar-body">
-          <p className="nav-label">Your learning space</p>
+    <div
+      className={`app-shell portal-shell ${workspace ? "workspace-shell" : ""}`}
+    >
+      <aside className="portal-navigation" aria-label="Learning portal">
+        <div className="portal-brand-row">
+          <Link className="portal-brand" href="/learn/" aria-label="ZeroShot">
+            <svg
+              width="27"
+              height="27"
+              viewBox="0 0 28 28"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 5H24L4 23H24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinejoin="round"
+              />
+              <path d="M11 14H17" stroke="currentColor" strokeWidth="2.5" />
+            </svg>
+            <span>ZeroShot</span>
+          </Link>
+          <button
+            className="portal-menu-toggle"
+            aria-label="Toggle learning navigation"
+            aria-expanded={menuOpen}
+            aria-controls="portal-menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+        <div
+          id="portal-menu"
+          className={`portal-menu ${menuOpen ? "is-open" : ""}`}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              setMenuOpen(false);
+              document
+                .querySelector<HTMLButtonElement>(".portal-menu-toggle")
+                ?.focus();
+            }
+          }}
+        >
           <nav aria-label="Main navigation">
-            <Link
-              href="/"
-              aria-current={active === "home" ? "page" : undefined}
-            >
-              <House size={18} />
-              Learning home
-            </Link>
-            <Link
-              href="/problems/"
-              aria-current={active === "practice" ? "page" : undefined}
-            >
-              <Braces size={18} />
-              Lesson library
-            </Link>
-            <Link
-              href="/paths/"
-              aria-current={active === "paths" ? "page" : undefined}
-            >
-              <Route size={18} />
-              Guided paths
-            </Link>
-            <Link
-              href="/projects/mini-retrieval/"
-              aria-current={active === "projects" ? "page" : undefined}
-            >
-              <FolderOpen size={18} />
-              Projects
-            </Link>
-            <Link
-              href="/explore/"
-              aria-current={active === "explore" ? "page" : undefined}
-            >
-              <FlaskConical size={18} />
-              Open lab
-            </Link>
-            <Link
-              href="/progress/"
-              aria-current={active === "progress" ? "page" : undefined}
-            >
-              <NotebookPen size={18} />
-              Your progress
-            </Link>
-            <Link
-              href="/about/"
-              aria-current={active === "about" ? "page" : undefined}
-            >
-              <BookOpen size={18} />
-              About the project
-            </Link>
+            {navigation.map(({ key, href, label, icon: Icon }) => (
+              <Link
+                key={key}
+                href={href}
+                aria-current={active === key ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
+                <span>{label}</span>
+              </Link>
+            ))}
           </nav>
-          <div className="sidebar-note">
-            <Sparkles size={18} />
-            <p>
-              Understanding comes
-              <br />
-              from building.
-            </p>
-            <span>
-              One concept. One experiment.
-              <br />
-              One step further.
-            </span>
+          <div className="portal-support">
+            <Link href="/paths/start-here/" className="portal-start-link">
+              <span>New to AI?</span>
+              <strong>
+                Start with the foundations <ArrowUpRight size={15} />
+              </strong>
+            </Link>
+            <div className="portal-exit-links">
+              <Link
+                href="/account/"
+                aria-current={active === "account" ? "page" : undefined}
+              >
+                <UserRound size={15} /> Your account
+              </Link>
+              <Link href="/">
+                ZeroShot website <ArrowUpRight size={14} />
+              </Link>
+              <a
+                href="https://github.com/dev-sudeep018/zeroshot"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Build with us on GitHub"
+              >
+                <Github size={15} /> GitHub <ArrowUpRight size={14} />
+              </a>
+            </div>
           </div>
         </div>
-        <a
-          className="github-link"
-          href="https://github.com/dev-sudeep018/project-mastery"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Github size={18} />
-          Build with us
-          <ArrowUpRight size={14} />
-        </a>
-        <div className="sidebar-footer">Free to learn. Open to everyone.</div>
       </aside>
       <main id="main-content" className="main-area">
         {children}

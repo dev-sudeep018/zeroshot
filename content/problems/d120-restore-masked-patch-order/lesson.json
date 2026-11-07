@@ -1,0 +1,44 @@
+{
+  "intro": "A masked image encoder processes only visible patches. A decoder needs the original sequence order with placeholders in the missing positions.",
+  "task": "Scatter visible patch embeddings into their original positions and fill all other positions with a mask token.",
+  "signature": "restore_patches(visible, positions, mask_token, total)",
+  "requirements": [
+    "visible is a nonempty patches-by-features matrix. positions is a same-length vector of distinct integer indices in 0..total-1; total is an integer 1..64. mask_token is a feature vector of matching width.",
+    "Return {\"tokens\": total-by-features matrix, \"masked\": boolean vector}. masked is True exactly where no visible embedding was supplied. Visible positions may be unsorted.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Unsorted visible patches",
+      "input": "restore_patches([[5,6],[1,2]],[2,0],[-1,-1],4)",
+      "output": "{'tokens': [[1.0, 2.0], [-1.0, -1.0], [5.0, 6.0], [-1.0, -1.0]],\n 'masked': [False, True, False, True]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "All visible",
+      "input": "restore_patches([[2],[3]],[1,0],[0],2)",
+      "output": "{'tokens': [[3.0], [2.0]], 'masked': [False, False]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "One visible patch",
+      "input": "restore_patches([[7]],[1],[-2],3)",
+      "output": "{'tokens': [[-2.0], [7.0], [-2.0]], 'masked': [True, False, True]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Initialize every row with the mask token, then scatter the supplied rows."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Sorting positions without applying the same permutation to visible would mismatch patches."
+    }
+  ],
+  "explanation": [
+    "Restoring order makes the decoder\u2019s positional layout match the original image grid. The visible rows arrive in encoder order, so the position mapping must be applied to each corresponding embedding.",
+    "A mask token is an embedding rather than a literal zero. Returning the mask separately keeps missingness observable even when a visible embedding happens to equal the token."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

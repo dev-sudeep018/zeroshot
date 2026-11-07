@@ -1,0 +1,44 @@
+{
+  "intro": "A glossary expands known tokens while leaving unknown tokens intact. The matching unit is a complete whitespace-delimited token, which makes the transformation predictable.",
+  "task": "Map whitespace-delimited tokens with case-sensitive whole-token replacement.",
+  "signature": "replace_tokens(text, glossary)",
+  "requirements": [
+    "Split text on Unicode whitespace, replace each complete token using a string-to-string glossary, and join with one ASCII space. Matching is case-sensitive; punctuation remains part of a token. Empty replacement strings are allowed and still occupy a joined token slot.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Whole tokens",
+      "input": "replace_tokens('AI helps AI.', {'AI':'artificial intelligence'})",
+      "output": "'artificial intelligence helps AI.'"
+    },
+    {
+      "name": "Case-sensitive",
+      "input": "replace_tokens('ML ml', {'ML':'model'})",
+      "output": "'model ml'"
+    },
+    {
+      "name": "Whitespace normalized",
+      "input": "replace_tokens(' x\\ty ', {'x':'a'})",
+      "output": "'a y'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Look up one full token at a time in the glossary."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not use global substring replacement; it would alter punctuation-bearing and longer words."
+    }
+  ],
+  "explanation": [
+    "A glossary expands known tokens while leaving unknown tokens intact. The matching unit is a complete whitespace-delimited token, which makes the transformation predictable.",
+    "Joining creates a canonical separator between token slots. An empty replacement is still a slot, so deleting a token entirely would be a different operation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

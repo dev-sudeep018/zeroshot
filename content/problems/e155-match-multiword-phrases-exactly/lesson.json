@@ -1,0 +1,44 @@
+{
+  "intro": "Exact phrase matching is useful for dictionary-based tagging and transparent retrieval filters. Keeping tokens separate avoids accidental substring matches inside words.",
+  "task": "Find all overlapping token starts matching a phrase without case normalization.",
+  "signature": "phrase_starts(tokens, phrase)",
+  "requirements": [
+    "tokens and phrase are sequences of strings; phrase must be nonempty. Return every zero-based start index where consecutive tokens exactly match the phrase. Include overlapping matches and preserve case. Empty tokens may occur as ordinary token values.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Overlapping phrases",
+      "input": "phrase_starts(['a','a','a'],['a','a'])",
+      "output": "[0, 1]"
+    },
+    {
+      "name": "Whole-token matching",
+      "input": "phrase_starts(['cat','cats','cat'],['cat'])",
+      "output": "[0, 2]"
+    },
+    {
+      "name": "Case matters",
+      "input": "phrase_starts(['New','York','new','York'],['New','York'])",
+      "output": "[0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Advance one token after each candidate, even after a successful match."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Compare token slices instead of joining text, which can erase token boundaries."
+    }
+  ],
+  "explanation": [
+    "Exact phrase matching is useful for dictionary-based tagging and transparent retrieval filters. Keeping tokens separate avoids accidental substring matches inside words.",
+    "Overlapping matches are valid occurrences. Jumping ahead by the phrase length after a match would miss repeated-token patterns."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

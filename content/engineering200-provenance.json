@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch": "engineering-200",
   "checked_on": "2026-10-26",
-  "authorship": "Original Project Mastery code, prose, contracts, worked examples, and tests. No third-party exercise text or implementation copied.",
+  "authorship": "Original ZeroShot code, prose, contracts, worked examples, and tests. No third-party exercise text or implementation copied.",
   "code_license": "Apache-2.0",
   "prose_license": "CC-BY-SA-4.0",
   "references": [

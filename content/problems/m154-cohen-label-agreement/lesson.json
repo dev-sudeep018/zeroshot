@@ -1,0 +1,45 @@
+{
+  "intro": "Raw agreement can be high merely because both raters mostly use a common label. Cohen kappa adjusts agreement relative to that marginal-frequency baseline.",
+  "task": "Compute observed agreement, marginal chance agreement and Cohen's kappa for paired categorical labels.",
+  "signature": "cohen_agreement(first, second, classes)",
+  "requirements": [
+    "classes is an integer in 2..64. first and second are matching nonempty integer-valued label vectors with entries in 0..classes-1.",
+    "Return {\"observed\": matching fraction, \"chance\": dot product of empirical label-frequency vectors, \"kappa\": (observed-chance)/(1-chance)}.",
+    "If chance is exactly one, both raters use the same sole label; define kappa as one. Unused classes are allowed.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Partial agreement",
+      "input": "cohen_agreement([0,0,1,1],[0,1,1,1],2)",
+      "output": "{'observed': 0.75, 'chance': 0.5, 'kappa': 0.5}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Perfect agreement",
+      "input": "cohen_agreement([0,1,2],[0,1,2],3)",
+      "output": "{'observed': 1.0, 'chance': 0.3333333333, 'kappa': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Complete reversal",
+      "input": "cohen_agreement([0,0,1,1],[1,1,0,0],2)",
+      "output": "{'observed': 0.0, 'chance': 0.5, 'kappa': -1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Build one empirical label-frequency vector for each rater."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compare actual agreement with the agreement implied by independent draws from those two marginal distributions."
+    }
+  ],
+  "explanation": [
+    "Raw agreement can be high merely because both raters mostly use a common label. Cohen kappa adjusts agreement relative to that marginal-frequency baseline.",
+    "The chance baseline is determined by both raters, so unequal marginals matter. The degenerate shared-constant case needs an explicit convention because its denominator vanishes."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A snapshot comparison needs to distinguish structural changes from changed values. An item newly present with zero stock is added even though it contributes no units.",
+  "task": "Report added, removed, and changed quantities in sorted item order.",
+  "signature": "compare_inventories(before, after)",
+  "requirements": [
+    "Both dictionaries map item IDs to nonnegative integer quantities. Return sorted added and removed ID lists, plus changed as sorted [ID, old_quantity, new_quantity] rows for shared IDs with unequal quantities.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "All change types",
+      "input": "compare_inventories({'a':1,'b':2},{'b':3,'c':0})",
+      "output": "{'added': ['c'], 'removed': ['a'], 'changed': [['b', 2, 3]]}"
+    },
+    {
+      "name": "Unchanged stock",
+      "input": "compare_inventories({'a':0},{'a':0})",
+      "output": "{'added': [], 'removed': [], 'changed': []}"
+    },
+    {
+      "name": "Added zero item",
+      "input": "compare_inventories({}, {'x':0})",
+      "output": "{'added': ['x'], 'removed': [], 'changed': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Separate key-set membership changes from value changes among shared keys."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A zero quantity still means the item exists; it is not equivalent to an absent key."
+    }
+  ],
+  "explanation": [
+    "A snapshot comparison needs to distinguish structural changes from changed values. An item newly present with zero stock is added even though it contributes no units.",
+    "Sorting the output makes reports deterministic across dictionary insertion orders. The changed rows retain both values so a reviewer can reconstruct the quantity difference."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

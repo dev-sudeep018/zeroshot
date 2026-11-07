@@ -1,0 +1,45 @@
+{
+  "intro": "R-squared compares a model with predicting the target mean for every observation. A negative value means the model has more squared error than that baseline.",
+  "task": "Compute residual and total sums of squares and R-squared with an explicit constant-target convention.",
+  "signature": "regression_fit_score(targets, predictions)",
+  "requirements": [
+    "targets and predictions are equal-length vectors with at least two entries.",
+    "Return {\"residual_ss\": sum((target-prediction)^2), \"total_ss\": sum((target-mean(target))^2), \"r_squared\": 1-residual_ss/total_ss}.",
+    "For exactly constant targets use r_squared=1 if predictions exactly equal targets, otherwise 0. Negative scores are allowed. Compute the ratio with scaled residuals for tiny target variation; raise ValueError if the resulting score is not finite.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Good predictions",
+      "input": "regression_fit_score([1,2,3],[1,2,2.5])",
+      "output": "{'residual_ss': 0.25, 'total_ss': 2.0, 'r_squared': 0.875}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Mean baseline",
+      "input": "regression_fit_score([1,2,3],[2,2,2])",
+      "output": "{'residual_ss': 2.0, 'total_ss': 2.0, 'r_squared': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Worse than baseline",
+      "input": "regression_fit_score([0,1],[5,5])",
+      "output": "{'residual_ss': 41.0, 'total_ss': 0.5, 'r_squared': -81.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Measure squared error of the model and of the constant mean predictor separately."
+    },
+    {
+      "title": "Build the result",
+      "body": "Handle constant targets before division, and do not clip a legitimate negative score."
+    }
+  ],
+  "explanation": [
+    "R-squared compares a model with predicting the target mean for every observation. A negative value means the model has more squared error than that baseline.",
+    "Constant targets make the baseline error zero, so a convention is necessary. Keeping the convention explicit avoids accidental division by zero or a misleading infinite score."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

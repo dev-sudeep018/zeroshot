@@ -1,0 +1,45 @@
+{
+  "intro": "Newton updates use a local linear approximation of x squared minus the target. The simplified recurrence avoids explicitly calculating the derivative each time.",
+  "task": "Run a bounded number of Newton iterations from a positive initial guess and return every estimate.",
+  "signature": "newton_sqrt_trace(value, initial, steps)",
+  "requirements": [
+    "value is in [0,10000]; initial is in [1e-6,10000]; steps is an integer in 0..64.",
+    "Return all steps+1 estimates, beginning with initial. Each next estimate is (estimate+value/estimate)/2.",
+    "Even when value is zero, perform the specified number of updates. Do not call a square-root function to replace the iterations.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Estimate square root two",
+      "input": "newton_sqrt_trace(2,1,4)",
+      "output": "[1.0, 1.5, 1.416666667, 1.414215686, 1.414213562]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Already exact",
+      "input": "newton_sqrt_trace(9,3,3)",
+      "output": "[3.0, 3.0, 3.0, 3.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero target",
+      "input": "newton_sqrt_trace(0,8,4)",
+      "output": "[8.0, 4.0, 2.0, 1.0, 0.5]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Store the initial guess before doing any update."
+    },
+    {
+      "title": "Build the result",
+      "body": "Each iteration averages the current estimate and the reciprocal-scaled estimate value/estimate."
+    }
+  ],
+  "explanation": [
+    "Newton updates use a local linear approximation of x squared minus the target. The simplified recurrence avoids explicitly calculating the derivative each time.",
+    "A positive initial guess keeps every estimate positive. For a zero target the estimate halves each time, which makes a useful exact trace check."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

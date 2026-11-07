@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m101",
+  "kind": "lesson",
+  "slug": "signed-triangle-area",
+  "version": 1,
+  "title": "Measure Triangle Orientation and Size",
+  "summary": "Use a 2D cross product to return signed area and orientation, including collinear points.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Measure Triangle Orientation and Size"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "triangle_orientation",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

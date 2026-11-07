@@ -1,0 +1,44 @@
+{
+  "intro": "MixUp creates synthetic examples by interpolating pairs. The same coefficient and pairing must be used for the input and target.",
+  "task": "Mix a feature batch and probability-label batch with a supplied partner permutation.",
+  "signature": "mixup_batch(features, labels, partners, coefficient)",
+  "requirements": [
+    "features is batch-by-features; labels is batch-by-classes with probability rows normalized after a 1e-8 sum-tolerance check. partners is a permutation of 0..batch-1. coefficient is in [0,1].",
+    "Return {\"features\": coefficient*x+(1-coefficient)*x[partners], \"labels\": coefficient*y+(1-coefficient)*y[partners]}. coefficient weights the original example, not its partner.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Halfway pairs",
+      "input": "mixup_batch([[0,2],[4,6]],[[1,0],[0,1]],[1,0],0.5)",
+      "output": "{'features': [[2.0, 4.0], [2.0, 4.0]], 'labels': [[0.5, 0.5], [0.5, 0.5]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Original endpoint",
+      "input": "mixup_batch([[1],[3]],[[1,0],[0,1]],[1,0],1)",
+      "output": "{'features': [[1.0], [3.0]], 'labels': [[1.0, 0.0], [0.0, 1.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Partner endpoint",
+      "input": "mixup_batch([[1],[3]],[[1,0],[0,1]],[1,0],0)",
+      "output": "{'features': [[3.0], [1.0]], 'labels': [[0.0, 1.0], [1.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Use one partner index per example and apply it to both inputs and labels."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The coefficients of each pair add to one, preserving label probability sums."
+    }
+  ],
+  "explanation": [
+    "Pairwise interpolation encourages the model to behave smoothly between training examples. Soft labels express the same mixture used to construct the input.",
+    "Pair selection and coefficient sampling are separate policies. Supplying them explicitly makes this operation deterministic and lets tests catch mismatches between feature and label pairing."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "BIO tags distinguish the beginning and interior of named entity spans. Auditing transitions catches an interior tag that has no compatible predecessor.",
+  "task": "Report I-type tags lacking an immediately preceding B-type or I-type tag of the same entity type.",
+  "signature": "invalid_bio_transitions(tags)",
+  "requirements": [
+    "Each tag is O or B-TYPE or I-TYPE, where TYPE is a nonempty ASCII letter sequence. Return indices of I-TYPE tags whose immediately previous raw tag is neither B-TYPE nor I-TYPE of the same type. An invalid I tag still becomes the raw previous tag for the next position.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Valid entity span",
+      "input": "invalid_bio_transitions(['B-PER','I-PER','O'])",
+      "output": "[]"
+    },
+    {
+      "name": "Initial inside tag",
+      "input": "invalid_bio_transitions(['I-PER','I-PER'])",
+      "output": "[0]"
+    },
+    {
+      "name": "Type mismatch",
+      "input": "invalid_bio_transitions(['B-PER','I-ORG','I-ORG'])",
+      "output": "[1]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Inspect the immediately preceding tag and compare entity types."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep validation of tag syntax separate from reporting invalid transitions."
+    }
+  ],
+  "explanation": [
+    "BIO tags distinguish the beginning and interior of named entity spans. Auditing transitions catches an interior tag that has no compatible predecessor.",
+    "This task reports raw local inconsistencies rather than repairing the sequence. An invalid tag still exists in the raw trace and can be a compatible predecessor for the next tag."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

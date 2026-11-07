@@ -1,0 +1,44 @@
+{
+  "intro": "Transition counts summarize how a process moves between states. They retain direction, so open-to-closed and closed-to-open are separate events.",
+  "task": "Count each ordered pair of adjacent statuses, including self transitions.",
+  "signature": "transition_counts(statuses)",
+  "requirements": [
+    "statuses contains nonempty strings. Return a dictionary keyed by (previous, next) tuples with integer counts for every adjacent pair, including repeated self transitions. Fewer than two statuses gives an empty dictionary.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Self and cross transitions",
+      "input": "transition_counts(['open','open','closed','open'])",
+      "output": "{('open', 'open'): 1, ('open', 'closed'): 1, ('closed', 'open'): 1}"
+    },
+    {
+      "name": "Repeated transition",
+      "input": "transition_counts(['a','b','a','b'])",
+      "output": "{('a', 'b'): 2, ('b', 'a'): 1}"
+    },
+    {
+      "name": "One status",
+      "input": "transition_counts(['a'])",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Pair each observation with the next observation, keeping direction in the tuple."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not skip equal neighbors; remaining in the same state is a transition in this contract."
+    }
+  ],
+  "explanation": [
+    "Transition counts summarize how a process moves between states. They retain direction, so open-to-closed and closed-to-open are separate events.",
+    "This is not run-length compression: self transitions are counted rather than collapsed. For a nonempty trace, the sum of all counts must equal the trace length minus one."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Compact job requests separate a task identity from how many copies should run. Expansion materializes the execution order and makes repetitions explicit.",
+  "task": "Expand count-coded jobs into a bounded ordered work queue.",
+  "signature": "expand_jobs(requests)",
+  "requirements": [
+    "Each request is [nonempty job ID, integer count 0..1000]. Return the ID repeated count times in request order. Reject expansions exceeding 1000 total jobs.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed quantities",
+      "input": "expand_jobs([['a',2],['b',1]])",
+      "output": "['a', 'a', 'b']"
+    },
+    {
+      "name": "Zero skipped",
+      "input": "expand_jobs([['a',0],['b',2]])",
+      "output": "['b', 'b']"
+    },
+    {
+      "name": "Repeated request IDs",
+      "input": "expand_jobs([['x',1],['x',2]])",
+      "output": "['x', 'x', 'x']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Validate the expanded total before extending the queue."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A zero-count request is valid and contributes no output item."
+    }
+  ],
+  "explanation": [
+    "Compact job requests separate a task identity from how many copies should run. Expansion materializes the execution order and makes repetitions explicit.",
+    "A bound on input length alone does not bound expanded output. Checking the cumulative count prevents a small request list from allocating an unexpectedly large queue."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A state transition can be accepted or rejected without changing the number of events in a trace. Keeping both the balance and an acceptance flag makes rejected operations visible.",
+  "task": "Trace account balance while rejecting withdrawals that exceed available funds.",
+  "signature": "balance_trace(initial, changes)",
+  "requirements": [
+    "initial is integer 0..1e9; changes are signed integers within +/-1e9. Apply each change only when resulting balance is nonnegative. Return balances after every attempt and accepted booleans; positive balances may grow beyond 1e9.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Rejected withdrawal",
+      "input": "balance_trace(5, [-3,-4,2])",
+      "output": "{'balances': [2, 2, 4], 'accepted': [True, False, True]}"
+    },
+    {
+      "name": "Exact withdrawal",
+      "input": "balance_trace(5, [-5])",
+      "output": "{'balances': [0], 'accepted': [True]}"
+    },
+    {
+      "name": "Zero change",
+      "input": "balance_trace(0, [0])",
+      "output": "{'balances': [0], 'accepted': [True]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Test the tentative balance before committing the update."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Record a balance after a rejected attempt too, so outputs remain aligned with changes."
+    }
+  ],
+  "explanation": [
+    "A state transition can be accepted or rejected without changing the number of events in a trace. Keeping both the balance and an acceptance flag makes rejected operations visible.",
+    "The invariant is nonnegative balance after every attempt. Rejecting an overdraft must preserve the previous balance rather than clipping it to zero or allowing a later deposit to hide the error."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

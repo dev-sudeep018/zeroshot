@@ -32,7 +32,7 @@
 #
 # This adapts the upstream modulation equation to supplied parameters. It is not an entire AdaLN-Zero transformer block, and it does not include the upstream conditioning projection.
 
-# Original Project Mastery validation helpers, Apache-2.0.
+# Original ZeroShot validation helpers, Apache-2.0.
 import numpy as np
 
 

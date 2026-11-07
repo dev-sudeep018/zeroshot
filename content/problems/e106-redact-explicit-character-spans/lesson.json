@@ -1,0 +1,44 @@
+{
+  "intro": "Span redaction preserves alignment while hiding selected characters. Overlapping spans cover a union of positions, so repeated masking does not change the output length.",
+  "task": "Mask the union of validated spans while keeping text length and untouched characters.",
+  "signature": "redact_spans(text, spans, marker)",
+  "requirements": [
+    "spans contains [start,end] integer code-point bounds with 0 <= start <= end <= len(text). marker is exactly one valid Unicode code point. Replace every position covered by any span with marker. Overlaps and zero-width spans are valid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "One span",
+      "input": "redact_spans('name: Ada', [[6,9]], '*')",
+      "output": "'name: ***'"
+    },
+    {
+      "name": "Overlap union",
+      "input": "redact_spans('abcdef', [[1,4],[3,5]], '#')",
+      "output": "'a####f'"
+    },
+    {
+      "name": "Unicode positions",
+      "input": "redact_spans('a\ud83d\ude42b', [[1,2]], '*')",
+      "output": "'a*b'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Work in a character list so replacement preserves original positions."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not delete text: later span offsets still refer to the original text."
+    }
+  ],
+  "explanation": [
+    "Span redaction preserves alignment while hiding selected characters. Overlapping spans cover a union of positions, so repeated masking does not change the output length.",
+    "Character offsets and byte offsets differ for Unicode. This lesson uses code points, matching Python string indexing, and leaves byte accounting to a separate lesson."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

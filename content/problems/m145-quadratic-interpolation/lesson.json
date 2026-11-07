@@ -1,0 +1,45 @@
+{
+  "intro": "Three distinct sample positions determine a polynomial with at most quadratic degree. Lagrange bases express that polynomial directly without solving a matrix system.",
+  "task": "Solve three-point Lagrange interpolation for distinct nodes and evaluate a batch of queries.",
+  "signature": "quadratic_interpolate(nodes, values, queries)",
+  "requirements": [
+    "nodes and values are length-three vectors. Every pair of nodes must differ by at least 1e-6. queries is a vector; all nodes and queries are in [-10,10].",
+    "Return interpolated values of the unique polynomial of degree at most two through the three given samples.",
+    "Nodes need not be sorted. Evaluate the three Lagrange basis products; queries outside the node range are allowed.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Recover square",
+      "input": "quadratic_interpolate([0,1,2],[0,1,4],[.5,1.5,3])",
+      "output": "[0.25, 2.25, 9.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unsorted nodes",
+      "input": "quadratic_interpolate([2,0,1],[4,0,1],[0,1,2])",
+      "output": "[0.0, 1.0, 4.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant data",
+      "input": "quadratic_interpolate([-1,0,2],[3,3,3],[-2,1])",
+      "output": "[3.0, 3.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Each basis polynomial is one at its own node and zero at the other two nodes."
+    },
+    {
+      "title": "Build the result",
+      "body": "Multiply each basis value by its corresponding sample and sum all three contributions."
+    }
+  ],
+  "explanation": [
+    "Three distinct sample positions determine a polynomial with at most quadratic degree. Lagrange bases express that polynomial directly without solving a matrix system.",
+    "Sorting is unnecessary because each value stays paired with its own node. Evaluating at the nodes must reproduce the original samples, including unsorted inputs."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

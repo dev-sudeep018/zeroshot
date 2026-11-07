@@ -1,0 +1,45 @@
+{
+  "intro": "Coordinate descent reduces a multivariate optimization problem to one variable at a time. For a squared-error objective with L2 regularization that one-dimensional minimizer has a closed form.",
+  "task": "Update one linear coefficient from the residual excluding that feature under a fixed squared-error and L2 convention.",
+  "signature": "ridge_coordinate(matrix, targets, coefficients, coordinate, penalty)",
+  "requirements": [
+    "matrix has shape (samples,features); targets matches samples and coefficients matches features. coordinate is an integer feature index; penalty is nonnegative.",
+    "Minimize one coordinate of objective 0.5*sum((matrix@w-targets)^2)+0.5*penalty*sum(w^2), keeping other coefficients fixed. Return a new coefficient vector.",
+    "Use the residual excluding the chosen feature. Reject if sum(column^2)+penalty is below 1e-10.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "First coordinate update",
+      "input": "ridge_coordinate([[1,0],[1,1],[1,2]],[1,2,3],[0,0],0,1)",
+      "output": "[1.5, 0.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Second coordinate update",
+      "input": "ridge_coordinate([[1,0],[1,1],[1,2]],[1,2,3],[1,0],1,0)",
+      "output": "[1.0, 1.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Shrink one feature",
+      "input": "ridge_coordinate([[1],[2]],[2,4],[7],0,5)",
+      "output": "[1.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Remove the chosen coefficient contribution from current predictions to form its partial residual."
+    },
+    {
+      "title": "Build the result",
+      "body": "The exact one-coordinate minimizer is column dot partial-residual divided by its squared norm plus the penalty."
+    }
+  ],
+  "explanation": [
+    "Coordinate descent reduces a multivariate optimization problem to one variable at a time. For a squared-error objective with L2 regularization that one-dimensional minimizer has a closed form.",
+    "The factor conventions in the objective determine the denominator. Removing the old coordinate contribution avoids double-counting it, and an exact update cannot increase this objective."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

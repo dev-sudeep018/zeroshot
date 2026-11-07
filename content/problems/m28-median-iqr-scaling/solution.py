@@ -1,4 +1,4 @@
-# Original Project Mastery implementation, Apache-2.0.
+# Original ZeroShot implementation, Apache-2.0.
 import numpy as np
 import math
 

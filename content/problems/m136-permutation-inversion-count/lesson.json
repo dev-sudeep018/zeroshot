@@ -1,0 +1,45 @@
+{
+  "intro": "Inversions measure how far an ordering is from ascending order in terms of pair relationships. Adjacent swaps change the inversion count by exactly one.",
+  "task": "Validate a permutation and count inversions and its even/odd parity.",
+  "signature": "permutation_disorder(permutation)",
+  "requirements": [
+    "permutation is a vector containing each integer-valued number 0..n-1 exactly once, with n in 1..64.",
+    "Return {\"inversions\": number of pairs i<j with permutation[i]>permutation[j], \"parity\": \"even\" or \"odd\"}.",
+    "Reject repeats, missing values or out-of-range values instead of silently sorting them.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three inversions",
+      "input": "permutation_disorder([2,1,0])",
+      "output": "{'inversions': 3, 'parity': 'odd'}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Already sorted",
+      "input": "permutation_disorder([0,1,2,3])",
+      "output": "{'inversions': 0, 'parity': 'even'}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One swap",
+      "input": "permutation_disorder([0,2,1,3])",
+      "output": "{'inversions': 1, 'parity': 'odd'}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "An inversion is about order of a pair of positions, not about distance from the correct position."
+    },
+    {
+      "title": "Build the result",
+      "body": "Count each pair once, then take its count modulo two for parity."
+    }
+  ],
+  "explanation": [
+    "Inversions measure how far an ordering is from ascending order in terms of pair relationships. Adjacent swaps change the inversion count by exactly one.",
+    "Parity is more stable than the count under general transformations: every single transposition flips it. Validate the permutation first so the parity has the intended meaning."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

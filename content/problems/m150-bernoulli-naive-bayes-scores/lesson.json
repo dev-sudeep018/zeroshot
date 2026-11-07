@@ -1,0 +1,45 @@
+{
+  "intro": "Bernoulli naive Bayes models both whether a feature occurs and whether it does not. Omitting absent-feature terms changes the model and can reverse class preferences.",
+  "task": "Compute class log scores from priors and conditional feature probabilities, including absent features.",
+  "signature": "bernoulli_log_scores(features, priors, likelihoods)",
+  "requirements": [
+    "features is a binary-valued numeric matrix (samples,features). priors is a strictly positive probability vector; likelihoods has shape (classes,features) with entries strictly between zero and one.",
+    "Return a (samples,classes) matrix: log(prior)+sum(x*log(p)+(1-x)*log(1-p)). Include absent-feature contributions.",
+    "Features must be numeric zero or one, not booleans. Do not normalize scores into probabilities.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Presence and absence",
+      "input": "bernoulli_log_scores([[1,0],[0,1]],[.6,.4],[[.8,.3],[.2,.7]])",
+      "output": "[[-1.090644119, -3.729701449], [-3.324236341, -1.496109227]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "All absent",
+      "input": "bernoulli_log_scores([[0,0]],[.5,.5],[[.2,.4],[.6,.8]])",
+      "output": "[[-1.427116356, -3.218875825]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single class",
+      "input": "bernoulli_log_scores([[1],[0]],[1],[[.25]])",
+      "output": "[[-1.386294361], [-0.2876820725]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use one log-probability term for feature presence and another for absence."
+    },
+    {
+      "title": "Build the result",
+      "body": "Matrix multiplication can sum those contributions for every sample-class pair before adding log priors."
+    }
+  ],
+  "explanation": [
+    "Bernoulli naive Bayes models both whether a feature occurs and whether it does not. Omitting absent-feature terms changes the model and can reverse class preferences.",
+    "Log scores turn products of small conditional probabilities into sums. Their additive normalization is unnecessary when comparing classes, so this exercise returns the unnormalized scores."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

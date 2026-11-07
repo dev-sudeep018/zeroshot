@@ -1,5 +1,23 @@
 # Verification record
 
+## Runtime portability and backup recovery — 1 November 2026
+
+The first full 450-lesson browser run passed 475 of 476 checks in each browser; D93 failed in all three because its native-generated expected boolean treated near-zero floating-point noise as a gradient conflict. D93 now specifies a 1e-12 numerical zero band and preserves tiny nonzero directions during normalization. Two new public cases bring the catalog to 4,762 cases. A new `pnpm test:wasm` quality gate runs all published references against the same pinned WebAssembly runtime and generated evaluators before browser checks. The full browser suite remains required.
+
+Backup merging now preserves valid source calendar dates even when a destination timezone is still on the previous day. Those dates receive no premature local-week credit. Per-item completion and date journals also recover work after malformed aggregate storage. Targeted regressions cover cross-timezone export/import/export/import and malformed aggregate JSON.
+
+## ZeroShot: 450 lessons and personal learning momentum — 31 October 2026
+
+The current catalog contains 450 validated lessons (205 beginner) plus one retrieval project checkpoint, with 4,760 public cases. The expansion adds 250 distinct objectives, including 195 substantive beginner lessons. The three full paths contain 159 mathematics/ML, 129 deep-learning, and 162 engineering lessons. See the [inventory](../content/curriculum-450-inventory.json) and [curriculum record](curriculum-450.md).
+
+Local `pnpm check` passed metadata and prerequisite checks for all 451 packages, TypeScript, lint, formatting, 43 Vitest tests, 237 Python test methods, and a 465-page production export. The Python gate executes every reference against its public cases, rejects unfinished starters and trivial wrong answers, and checks sample cases. The new publication suite also verifies all 750 displayed examples and rejects canned example answers. A YAML/JSON assumption in the engineering test loader was corrected to use the lesson's JSON signature; the complete quality command was rerun successfully afterward.
+
+Seven focused Chromium browser tests passed for beginner discovery/filtering/mobile layout and the new momentum features: legacy progress, chosen goals, quiet mode across tabs, a real full-suite first pass, no sample/repeat credit, backup round trips, and malformed storage. Unit tests cover local week and DST boundaries, unknown/future dates, prerequisite selection, idempotent imports, current-version filtering, level boundaries, and recovery from another tab overwriting aggregate progress. These checks do not establish improved motivation or learning outcomes; the [research plan](research/gamification-evidence.md) describes evaluation limits.
+
+A separate catalog walkthrough found 450 unique lesson links across 19 library pages, correct domain counts, searchable last additions, complete path coverage, and no page errors or horizontal overflow at 1440px and 390px. Home and progress screenshots were inspected at both widths. The ZeroShot rename preserves legacy storage keys and version-1 backups; new version-2 backups include practice preferences and known completion dates. The repository is now `dev-sudeep018/zeroshot`; the existing local directory is intentionally retained for continuation compatibility.
+
+The full browser suite discovers 1,428 checks: 476 each in Chromium, Firefox, and WebKit. GitHub Actions runs those against the single static artifact built by its quality job; the pull request's final-revision checks are the authoritative remote release result. The seven local flow tests are not presented as a full local cross-browser run. Account sync and public production hosting are not delivered by this milestone. The earlier 27 October deadline was missed.
+
 ## 200-lesson expansion — 26 October 2026
 
 The catalog contains 200 published lessons plus one project checkpoint: 119 new
@@ -278,7 +296,7 @@ That earlier release connected three guided paths, four interactive experiments,
 
 Local content validation, TypeScript, ESLint, formatting, 15 Vitest tests, five Python test methods, and the 25-page production export pass. Native validation checks every reference and rejects every incomplete starter and a trivial incorrect implementation. Independent numerical checks cover softmax shift invariance, finite-difference gradients, and attention masking.
 
-The browser suite now contains 28 tests per engine. It covers all 13 published references, connected navigation, filters, experiment controls, retrieval metrics/report export, progress backup merges, preservation of existing drafts, cross-tab completion, mobile navigation, and the existing editor/isolation regressions. An additional manifest test verifies that unknown items and unsupported versions are rejected before execution. All 84 browser tests passed in the clean Linux runs for revision `500b672`; final per-engine results for later revisions are recorded on [pull request #12](https://github.com/dev-sudeep018/project-mastery/pull/12).
+The browser suite now contains 28 tests per engine. It covers all 13 published references, connected navigation, filters, experiment controls, retrieval metrics/report export, progress backup merges, preservation of existing drafts, cross-tab completion, mobile navigation, and the existing editor/isolation regressions. An additional manifest test verifies that unknown items and unsupported versions are rejected before execution. All 84 browser tests passed in the clean Linux runs for revision `500b672`; final per-engine results for later revisions are recorded on [pull request #12](https://github.com/dev-sudeep018/zeroshot/pull/12).
 
 Local Chromium and WebKit runs covered the complete suite. Two backup-test assertions incorrectly read Monaco's input element instead of its rendered code; after correcting that test, all 14 focused checks passed across both engines, including backup import and cross-tab completion. The final editor palette adjustments were also inspected in the rendered browser.
 
@@ -290,7 +308,7 @@ The 2,000-ID prerequisite-graph test validates metadata capacity only. It does n
 
 ## Prior workspace milestone — 20 October 2026
 
-The first workspace milestone is tracked in [pull request #1](https://github.com/dev-sudeep018/project-mastery/pull/1), now merged. The results below describe that earlier revision; the required GitHub checks are authoritative for each tested commit.
+The first workspace milestone is tracked in [pull request #1](https://github.com/dev-sudeep018/zeroshot/pull/1), now merged. The results below describe that earlier revision; the required GitHub checks are authoritative for each tested commit.
 
 ## Recorded local results
 
@@ -315,7 +333,7 @@ Browser tests exercise starter failures, reference success, saved edits after re
 
 ## GitHub verification and maintenance
 
-[GitHub Actions](https://github.com/dev-sudeep018/project-mastery/actions) performs clean Linux installs and runs four required jobs: content/types/lint/format/unit tests/build, plus one browser/isolation job for each of Chromium, Firefox, and WebKit. Use the checks on the pull request to inspect the precise tested commit and any retry. Failure artifacts retain screenshots and traces for seven days.
+[GitHub Actions](https://github.com/dev-sudeep018/zeroshot/actions) performs clean Linux installs and runs four required jobs: content/types/lint/format/unit tests/build, plus one browser/isolation job for each of Chromium, Firefox, and WebKit. Use the checks on the pull request to inspect the precise tested commit and any retry. Failure artifacts retain screenshots and traces for seven days.
 
 The `main` branch requires an up-to-date pull request with those four checks and resolved conversations, including for administrators. Force pushes and deletion are disabled. Private vulnerability reporting is enabled. Dependabot configuration is present on the default branch.
 

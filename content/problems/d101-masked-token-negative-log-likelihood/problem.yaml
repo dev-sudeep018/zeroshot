@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d101",
+  "kind": "lesson",
+  "slug": "masked-token-negative-log-likelihood",
+  "version": 1,
+  "title": "Average Loss over Real Tokens Only",
+  "summary": "Padded tokens must contribute neither loss nor denominator weight. Compute stable categorical loss only at positions selected by the mask.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Average Loss over Real Tokens Only"],
+  "prerequisites": ["d100"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "masked_token_nll",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html",
+    ],
+}

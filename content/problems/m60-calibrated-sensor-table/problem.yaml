@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m60",
+  "kind": "lesson",
+  "slug": "calibrated-sensor-table",
+  "version": 1,
+  "title": "Calibrate and Limit Sensor Channels",
+  "summary": "Broadcast channel gains and offsets over readings, then clip each channel to its physical range.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Calibrate and Limit Sensor Channels"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "calibrate_channels",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html",
+    ],
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Visible patches can be easy to copy. A masked reconstruction objective evaluates only patches withheld from the encoder.",
+  "task": "Return the mean squared error over masked patch features and its gradient with respect to the prediction.",
+  "signature": "masked_reconstruction(prediction, target, masked)",
+  "requirements": [
+    "prediction and target are matching batch-by-patches-by-features tensors. masked is a matching batch-by-patches numeric 0/1 matrix and must select at least one patch.",
+    "Return {\"loss\": scalar, \"gradient\": prediction-shaped tensor}. Average squared errors over all selected scalar feature values, not over all patches. Unselected gradients are zero.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Ignore visible errors",
+      "input": "masked_reconstruction([[[1,3],[100,100]]],[[[0,1],[0,0]]],[[1,0]])",
+      "output": "{'loss': 2.5, 'gradient': [[[1.0, 2.0], [0.0, 0.0]]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "All patches masked",
+      "input": "masked_reconstruction([[[1],[3]]],[[[0],[1]]],[[1,1]])",
+      "output": "{'loss': 2.5, 'gradient': [[[1.0], [2.0]]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Exact prediction",
+      "input": "masked_reconstruction([[[2,4]]],[[[2,4]]],[[1]])",
+      "output": "{'loss': 0.0, 'gradient': [[[0.0, 0.0]]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Expand the patch mask along the feature axis."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The denominator is selected patch count multiplied by feature width."
+    }
+  ],
+  "explanation": [
+    "Masking the objective changes both which residuals contribute and the normalization denominator. A batch with fewer selected patches should not reduce loss merely because more visible patches are ignored.",
+    "The gradient is twice the residual divided by the number of scored scalar features. Keeping zero gradients on unselected positions makes the restricted objective explicit."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

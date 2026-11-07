@@ -1,0 +1,44 @@
+{
+  "intro": "Fixed windows turn irregular event times into an aligned count series. Half-open intervals assign a boundary event to exactly one window.",
+  "task": "Aggregate event counts into half-open integer windows anchored at a supplied origin.",
+  "signature": "fixed_windows(timestamps, width, origin)",
+  "requirements": [
+    "timestamps is a sequence of integers; width is an integer 1..1000000000 and origin is an integer. Return sorted [window_start,count] pairs for occupied half-open windows [start,start+width), where start=origin+floor((t-origin)/width)*width. Negative timestamps are valid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Boundary belongs to next window",
+      "input": "fixed_windows([0,9,10,19,20],10,0)",
+      "output": "[[0, 2], [10, 2], [20, 1]]"
+    },
+    {
+      "name": "Negative offsets",
+      "input": "fixed_windows([-11,-10,-1,0],10,0)",
+      "output": "[[-20, 1], [-10, 2], [0, 1]]"
+    },
+    {
+      "name": "Shifted origin",
+      "input": "fixed_windows([2,3,7,8],5,3)",
+      "output": "[[-2, 1], [3, 2], [8, 1]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Floor division handles negative offsets correctly; truncation toward zero does not."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Count occupied windows, then sort their start values."
+    }
+  ],
+  "explanation": [
+    "Fixed windows turn irregular event times into an aligned count series. Half-open intervals assign a boundary event to exactly one window.",
+    "An origin shifts the entire grid without changing its width. Empty windows are deliberately omitted so sparse event streams stay compact."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Defaults answer an absence question. A user may intentionally disable a setting with False or specify None, and replacing those values would ignore the explicit choice.",
+  "task": "Fill only absent configuration keys and preserve explicit zero, false, and None.",
+  "signature": "apply_defaults(config, defaults)",
+  "requirements": [
+    "Return a copied config supplemented only by keys absent from it. Existing None, False, zero, and empty containers remain unchanged. Values are replaced as whole objects, with no recursive filling.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Fill missing only",
+      "input": "apply_defaults({'a':1}, {'a':9,'b':2})",
+      "output": "{'a': 1, 'b': 2}"
+    },
+    {
+      "name": "Explicit None",
+      "input": "apply_defaults({'x':None}, {'x':3})",
+      "output": "{'x': None}"
+    },
+    {
+      "name": "All falsy values",
+      "input": "apply_defaults({'a':False,'b':0,'c':''}, {'a':1,'b':2,'c':'x'})",
+      "output": "{'a': False, 'b': 0, 'c': ''}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Ask whether the key exists, not whether its current value is truthy."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Treat a nested dictionary as one present value; do not fill inside it."
+    }
+  ],
+  "explanation": [
+    "Defaults answer an absence question. A user may intentionally disable a setting with False or specify None, and replacing those values would ignore the explicit choice.",
+    "Copying the result prevents later configuration edits from changing a defaults template reused elsewhere. This operation differs from override layers because the original config always wins."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

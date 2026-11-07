@@ -23,8 +23,8 @@ import {
   Terminal,
   XCircle,
 } from "lucide-react";
-import { MAX_SOURCE_LENGTH } from "@mastery/runner-protocol";
-import type { LearningItem } from "@mastery/problem-schema";
+import { MAX_SOURCE_LENGTH } from "@zeroshot/runner-protocol";
+import type { LearningItem } from "@zeroshot/problem-schema";
 import { domains, itemById, itemHref, pathFor } from "@/lib/curriculum";
 import {
   draftKey,
@@ -37,6 +37,7 @@ import { Experiment } from "./experiment";
 import { readDraft } from "@/lib/draft";
 import { useRunner } from "@/lib/use-runner";
 import { Shell } from "./shell";
+import { useMomentum } from "@/lib/use-momentum";
 
 const Editor = dynamic(() => import("./python-editor"), {
   ssr: false,
@@ -58,6 +59,8 @@ export function Workspace({ data }: { data: LearningItem }) {
   const [hydrated, setHydrated] = useState(false);
   const [saveState, setSaveState] = useState("Saved on this device");
   const [complete, setComplete] = useState(false);
+  const [earnedXp, setEarnedXp] = useState(0);
+  const { momentum } = useMomentum();
   const [pendingReplacement, setPendingReplacement] = useState<
     "starter" | "reference" | null
   >(null);
@@ -117,13 +120,17 @@ export function Workspace({ data }: { data: LearningItem }) {
   useEffect(() => {
     if (runner.result && runner.mode === "all") {
       try {
-        recordVisit(
+        const firstPass = recordVisit(
           problem.id,
           problem.version,
           runner.result.status === "passed",
         );
+        setEarnedXp(firstPass ? (problem.kind === "project" ? 30 : 10) : 0);
       } catch {
-        /* Draft notice handles unavailable storage. */
+        setEarnedXp(0);
+        setSaveState(
+          "Checks finished, but progress could not be fully saved. Keep a backup or copy your code.",
+        );
       }
     }
     if (runner.result?.status === "passed" && runner.mode === "all") {
@@ -134,7 +141,14 @@ export function Workspace({ data }: { data: LearningItem }) {
         /* Saving status is handled by the draft notice. */
       }
     }
-  }, [runner.result, runner.mode, PROGRESS_KEY, problem.id, problem.version]);
+  }, [
+    runner.result,
+    runner.mode,
+    PROGRESS_KEY,
+    problem.id,
+    problem.version,
+    problem.kind,
+  ]);
   const checkSolution = useCallback(() => {
     if (!busy && code.length <= MAX_SOURCE_LENGTH) runner.run(code, "all");
   }, [busy, code, runner]);
@@ -743,6 +757,29 @@ export function Workspace({ data }: { data: LearningItem }) {
                       </span>
                     </div>
                   </div>
+                  {earnedXp > 0 &&
+                    momentum.enabled &&
+                    runner.mode === "all" &&
+                    runner.result.status === "passed" && (
+                      <div className="completion-reward" role="status">
+                        <CheckCircle2 size={19} aria-hidden="true" />
+                        <div>
+                          <strong>
+                            +{earnedXp} XP · First full check complete
+                          </strong>
+                          <p>
+                            Explain why your solution works, then try the next
+                            idea.
+                          </p>
+                          <Link
+                            className="text-link"
+                            href="/progress/#momentum"
+                          >
+                            See your milestones <ArrowRight size={14} />
+                          </Link>
+                        </div>
+                      </div>
+                    )}
                   {runner.result.error && (
                     <pre className={`error-output ${resultTone}`}>
                       {runner.result.error}

@@ -1,0 +1,45 @@
+{
+  "intro": "Two nonparallel infinite lines always meet, but their finite segments may stop before the intersection. Keeping the solved parameters separates these two questions.",
+  "task": "Solve line intersection parameters and report whether their shared point lies on both finite segments.",
+  "signature": "segment_intersection(a, b, c, d)",
+  "requirements": [
+    "All four inputs are length-two endpoints. Require absolute determinant cross(b-a,d-c) >= 1e-8; parallel and degenerate lines are rejected.",
+    "Return {\"parameters\": [t,u], \"point\": a+t*(b-a), \"intersects\": bool} solving a+t*(b-a)=c+u*(d-c).",
+    "The finite segments intersect when both parameters lie in [-1e-10,1+1e-10], including endpoint contact with a rounding tolerance. Always return the infinite-line intersection point.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Crossing interiors",
+      "input": "segment_intersection([0,0],[2,2],[0,2],[2,0])",
+      "output": "{'parameters': [0.5, 0.5], 'point': [1.0, 1.0], 'intersects': True}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Lines meet outside",
+      "input": "segment_intersection([0,0],[1,0],[2,-1],[2,1])",
+      "output": "{'parameters': [2.0, 0.5], 'point': [2.0, 0.0], 'intersects': False}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Shared endpoint",
+      "input": "segment_intersection([0,0],[1,0],[1,0],[1,2])",
+      "output": "{'parameters': [1.0, 0.0], 'point': [1.0, 0.0], 'intersects': True}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Express each line using an endpoint plus a scalar multiple of its direction."
+    },
+    {
+      "title": "Build the result",
+      "body": "Solve the two coefficients, then check their interval membership to distinguish lines from segments."
+    }
+  ],
+  "explanation": [
+    "Two nonparallel infinite lines always meet, but their finite segments may stop before the intersection. Keeping the solved parameters separates these two questions.",
+    "A parameter of zero or one lies on an endpoint, while a parameter outside the unit interval lies beyond it. Reversing a segment changes its parameter to one minus the original without moving the intersection."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Version ordering is hierarchical. A larger major version wins even if every later component is smaller, and numeric comparison avoids treating 10 as less than 2.",
+  "task": "Parse and compare strict numeric major.minor.patch versions without prerelease syntax.",
+  "signature": "compare_versions(left, right)",
+  "requirements": [
+    "Each trimmed version is three ASCII digit components separated by dots. Each component is 0..1e9; leading zeros are allowed. Return -1, 0, or 1 by numeric lexicographic comparison. Reject prerelease/build suffixes and other component counts.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Numeric rather than text",
+      "input": "compare_versions('1.10.0', '1.2.9')",
+      "output": "1"
+    },
+    {
+      "name": "Equivalent leading zeros",
+      "input": "compare_versions('01.2.003', '1.2.3')",
+      "output": "0"
+    },
+    {
+      "name": "Major component wins",
+      "input": "compare_versions('2.0.0', '1.99.99')",
+      "output": "1"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Parse all three components as integers, then compare tuples."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Stop at the first unequal component; later components cannot override it."
+    }
+  ],
+  "explanation": [
+    "Version ordering is hierarchical. A larger major version wins even if every later component is smaller, and numeric comparison avoids treating 10 as less than 2.",
+    "This exercise implements a restricted triple format, not the complete semantic-version specification. Rejecting unsupported suffixes keeps that distinction explicit."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

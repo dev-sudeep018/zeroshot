@@ -320,7 +320,7 @@ export function RetrievalProject() {
             className="primary"
             onClick={() => {
               downloadJson("mini-retrieval-report.json", {
-                format: "project-mastery-retrieval-report",
+                format: "zeroshot-retrieval-report",
                 version: 2,
                 provenance: dataset.provenance,
                 experiment: report,

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d85",
+  "kind": "lesson",
+  "slug": "relu-activity-audit",
+  "version": 1,
+  "title": "Find Inactive ReLU Neurons",
+  "summary": "An average activation can hide units that never turn on. Inspect each neuron across a batch.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Find Inactive ReLU Neurons"],
+  "prerequisites": ["d05"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "relu_activity",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/",
+    ],
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "CSV is a structured format with quoting rules, not simply text split on commas. A quoted field can include both commas and newlines without creating extra records.",
+  "task": "Read quoted CSV text into records, rejecting duplicate headers and unequal row widths.",
+  "signature": "parse_csv_records(text)",
+  "requirements": [
+    "Parse standard comma-separated CSV with double-quote quoting using strict csv.reader behavior. Require a header row with unique nonempty field names (no trimming). Every later row must match header width; all cells remain strings. Empty text is invalid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Quoted comma",
+      "input": "parse_csv_records('name,note\\nAda,\"x,y\"\\n')",
+      "output": "[{'name': 'Ada', 'note': 'x,y'}]"
+    },
+    {
+      "name": "Quoted newline",
+      "input": "parse_csv_records('x\\n\"a\\nb\"\\n')",
+      "output": "[{'x': 'a\\nb'}]"
+    },
+    {
+      "name": "Escaped quote",
+      "input": "parse_csv_records('x\\n\"a\"\"b\"\\n')",
+      "output": "[{'x': 'a\"b'}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use a CSV parser so quoted separators and line breaks remain inside cells."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Validate row width before zipping; zip alone would silently discard extra cells."
+    }
+  ],
+  "explanation": [
+    "CSV is a structured format with quoting rules, not simply text split on commas. A quoted field can include both commas and newlines without creating extra records.",
+    "A unique header and fixed row width make conversion to dictionaries lossless. Cells stay strings so numeric interpretation can follow an explicit schema later."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

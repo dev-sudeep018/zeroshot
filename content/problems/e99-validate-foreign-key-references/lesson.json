@@ -1,0 +1,44 @@
+{
+  "intro": "Foreign-key validation checks whether a relation points to an existing entity. It catches disconnected records before a join silently drops them.",
+  "task": "Return child row indices whose key does not occur in the parent ID list.",
+  "signature": "orphan_rows(parent_ids, children, field)",
+  "requirements": [
+    "parent_ids are unique nonempty strings. Every child record must contain field with a nonempty string value. Return zero-based child indices whose foreign key is absent from parent_ids.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "One orphan",
+      "input": "orphan_rows(['a'], [{'parent':'a'},{'parent':'b'}], 'parent')",
+      "output": "[1]"
+    },
+    {
+      "name": "No parents",
+      "input": "orphan_rows([], [{'p':'x'},{'p':'y'}], 'p')",
+      "output": "[0, 1]"
+    },
+    {
+      "name": "No children",
+      "input": "orphan_rows(['a'], [], 'p')",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Build a parent membership set once, then check each child row."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Return row indices rather than key values so repeated orphan rows stay visible."
+    }
+  ],
+  "explanation": [
+    "Foreign-key validation checks whether a relation points to an existing entity. It catches disconnected records before a join silently drops them.",
+    "Parent uniqueness ensures each foreign key has at most one target. Child references may repeat, and every offending child row receives its own audit position."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

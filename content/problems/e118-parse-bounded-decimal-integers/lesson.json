@@ -1,0 +1,44 @@
+{
+  "intro": "Strict integer parsing protects data contracts from extra syntax accepted by general-purpose parsers. Decimal strings, floats, and scientific notation are different formats.",
+  "task": "Parse signed ASCII decimal strings without accepting floats, exponent notation, or underscores.",
+  "signature": "parse_decimal_values(values, low, high)",
+  "requirements": [
+    "low and high are integers within +/-1e9 with low <= high. Strip each input string and accept only optional + or - followed by one or more ASCII digits. Return bounded integers; leading zeros and signed zero are allowed.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Signed values",
+      "input": "parse_decimal_values([' -2 ','+3','0'], -3, 3)",
+      "output": "[-2, 3, 0]"
+    },
+    {
+      "name": "Leading zeros",
+      "input": "parse_decimal_values(['0007','-00'], -10, 10)",
+      "output": "[7, 0]"
+    },
+    {
+      "name": "Inclusive bounds",
+      "input": "parse_decimal_values(['-5','5'], -5, 5)",
+      "output": "[-5, 5]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Validate the complete string before converting to int."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Check parsed values against the supplied inclusive interval."
+    }
+  ],
+  "explanation": [
+    "Strict integer parsing protects data contracts from extra syntax accepted by general-purpose parsers. Decimal strings, floats, and scientific notation are different formats.",
+    "Leading zeros do not change the value. Removing redundant zeros before conversion keeps an otherwise valid long zero prefix from depending on interpreter integer-string limits."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

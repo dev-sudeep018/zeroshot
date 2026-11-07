@@ -1,6 +1,6 @@
 # Adapted from Dive into Deep Learning corr2d (MIT-0).
 # https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_convolutional-neural-networks/conv-layer.md
-# Original validation and NumPy adaptation: Project Mastery contributors, Apache-2.0.
+# Original validation and NumPy adaptation: ZeroShot contributors, Apache-2.0.
 # Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this

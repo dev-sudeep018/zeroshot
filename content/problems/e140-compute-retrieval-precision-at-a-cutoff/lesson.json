@@ -1,0 +1,44 @@
+{
+  "intro": "Precision at a cutoff evaluates the usefulness of a fixed number of displayed result slots. Repeating the same relevant item should not earn repeated credit.",
+  "task": "Count unique relevant retrieved IDs in the first k positions with duplicate slots consuming rank.",
+  "signature": "retrieval_precision(ranking, relevant, k)",
+  "requirements": [
+    "ranking contains nonempty ID strings and may repeat IDs; relevant contains unique IDs. k is an integer 1..1000. Inspect ranking[:k], count unique relevant hits, and return hits plus precision=hits/k even if ranking is shorter than k. Duplicate slots consume rank but cannot add another hit.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Duplicates consume rank",
+      "input": "retrieval_precision(['a','a','b'], ['a','b'], 2)",
+      "output": "{'hits': 1, 'precision': 0.5}"
+    },
+    {
+      "name": "Short ranking denominator",
+      "input": "retrieval_precision(['a'], ['a'], 4)",
+      "output": "{'hits': 1, 'precision': 0.25}"
+    },
+    {
+      "name": "Irrelevant result",
+      "input": "retrieval_precision(['x','a'], ['a'], 2)",
+      "output": "{'hits': 1, 'precision': 0.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Apply the rank cutoff before deduplicating IDs."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use the requested k as denominator, including unfilled slots in a short ranking."
+    }
+  ],
+  "explanation": [
+    "Precision at a cutoff evaluates the usefulness of a fixed number of displayed result slots. Repeating the same relevant item should not earn repeated credit.",
+    "Taking unique IDs before truncation would let duplicates disappear and pull later results into the evaluated window. The order of cutoff and deduplication therefore changes the metric."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -49,7 +49,7 @@ IDs support more than two digits. A capacity test validates 2,000 distinct IDs
 and a connected prerequisite graph. This is a structural test, not a claim that
 2,000 complete lessons or their production build performance have been tested.
 
-The current published set contains 200 lessons, four interactive experiments,
+The current published set contains 450 lessons (205 beginner), four interactive experiments,
 and one retrieval project with a Python integration checkpoint. Two lessons start
 with explicitly flawed code for debugging investigations. See [the second batch](curriculum-depth.md)
 for its nine objectives and [batch three](curriculum-batch-03.md) for thirty more,
@@ -57,9 +57,7 @@ including source provenance, explicit conventions, and verification strategy. Th
 [platform pilot](platform-pilot.md), [second platform batch](platform-batch-02.md),
 and [third platform batch](platform-batch-03.md) add thirty licensed adaptations with their own learning contracts. Expanding the
 topic coverage, adding debugging and replication formats, and reviewing each
-new batch remain active work. The [200-lesson expansion](curriculum-200.md) adds
-119 distinct objectives, bringing the three paths to 59 mathematics/ML, 79 deep
-learning, and 62 AI-engineering lessons.
+new batch remain active work. The [450-question expansion](curriculum-450.md) adds 250 distinct objectives, including 195 beginner lessons, bringing the three full paths to 159 mathematics/ML, 129 deep-learning, and 162 engineering lessons. A curated 18-lesson beginner route and a beginner library view reuse the same content and progress.
 
 The [free-resource survey](source-research.md) identifies reusable teaching
 material, linked courses, runtime constraints, and a faster batch workflow.

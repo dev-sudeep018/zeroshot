@@ -1,0 +1,44 @@
+{
+  "intro": "Greedy list scheduling approximates parallel completion time from known job durations. The makespan is the largest final worker load.",
+  "task": "Assign each job to the currently least-loaded worker with lowest-index ties.",
+  "signature": "worker_schedule(durations, workers)",
+  "requirements": [
+    "durations contains finite nonnegative numbers; workers is an integer 1..100. Assign each job in input order to the worker with the smallest current total load, breaking ties by lowest worker index. Return assignments, loads in worker order, and makespan=max(loads).",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Least loaded choice",
+      "input": "worker_schedule([3,2,4,1],2)",
+      "output": "{'assignments': [0, 1, 1, 0], 'loads': [4, 6], 'makespan': 6}"
+    },
+    {
+      "name": "Tie uses first worker",
+      "input": "worker_schedule([2,2,1],2)",
+      "output": "{'assignments': [0, 1, 0], 'loads': [3, 2], 'makespan': 3}"
+    },
+    {
+      "name": "Zero jobs keep ties",
+      "input": "worker_schedule([0,0,1],2)",
+      "output": "{'assignments': [0, 0, 0], 'loads': [1, 0], 'makespan': 1}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Choose a worker before adding the current job duration."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep loads in worker-index order rather than sorting them permanently."
+    }
+  ],
+  "explanation": [
+    "Greedy list scheduling approximates parallel completion time from known job durations. The makespan is the largest final worker load.",
+    "The policy is deterministic and easy to reproduce, but it is not guaranteed to find the globally best assignment. Input order and tie handling can change the outcome."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

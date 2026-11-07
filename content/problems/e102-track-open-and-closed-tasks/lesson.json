@@ -1,0 +1,44 @@
+{
+  "intro": "A small state machine distinguishes syntactically valid events from valid transitions. Reporting a duplicate open rather than raising lets the audit continue through the rest of a trace.",
+  "task": "Replay open/close events and report remaining IDs with invalid transition indices.",
+  "signature": "task_state(events)",
+  "requirements": [
+    "Events are [\"open\" or \"close\", nonempty ID]. Opening an already-open task or closing an absent task is an invalid transition: record its index and leave state unchanged. Return sorted open IDs and invalid_indices. Unknown event names are malformed inputs and raise ValueError.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Normal lifecycle",
+      "input": "task_state([['open','a'],['close','a']])",
+      "output": "{'open_ids': [], 'invalid_indices': []}"
+    },
+    {
+      "name": "Duplicate open",
+      "input": "task_state([['open','a'],['open','a']])",
+      "output": "{'open_ids': ['a'], 'invalid_indices': [1]}"
+    },
+    {
+      "name": "Absent close",
+      "input": "task_state([['close','a'],['open','a']])",
+      "output": "{'open_ids': ['a'], 'invalid_indices': [0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Decide whether a transition is allowed from the current membership state."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "An invalid transition is reported without stopping the replay; malformed event syntax is different."
+    }
+  ],
+  "explanation": [
+    "A small state machine distinguishes syntactically valid events from valid transitions. Reporting a duplicate open rather than raising lets the audit continue through the rest of a trace.",
+    "Invalid transitions must not alter state. The resulting open set therefore reflects only accepted lifecycle events, while their original positions remain available for debugging."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

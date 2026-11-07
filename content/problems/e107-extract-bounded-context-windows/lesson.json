@@ -1,0 +1,44 @@
+{
+  "intro": "Context windows let reviewers inspect a match without reading an entire document. Separate fields make the selected text and its neighboring evidence unambiguous.",
+  "task": "Return left, match, and right context around validated text spans.",
+  "signature": "context_windows(text, spans, radius)",
+  "requirements": [
+    "For each valid [start,end] code-point span, return a dictionary left, match, right. Each side contains at most radius characters clipped to text boundaries. radius is an integer 0..10000. Keep input span order and allow overlapping or empty spans.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Interior match",
+      "input": "context_windows('abcdefgh', [[3,5]], 2)",
+      "output": "[{'left': 'bc', 'match': 'de', 'right': 'fg'}]"
+    },
+    {
+      "name": "Clip at edges",
+      "input": "context_windows('abc', [[0,1]], 9)",
+      "output": "[{'left': '', 'match': 'a', 'right': 'bc'}]"
+    },
+    {
+      "name": "Zero context",
+      "input": "context_windows('abc', [[1,2]], 0)",
+      "output": "[{'left': '', 'match': 'b', 'right': ''}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Slice the match separately from its two surrounding windows."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Clip the left start at zero; a negative slice index would wrap from the end."
+    }
+  ],
+  "explanation": [
+    "Context windows let reviewers inspect a match without reading an entire document. Separate fields make the selected text and its neighboring evidence unambiguous.",
+    "Clipping changes context length near a document boundary. It must not shift the match or invent padding characters."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}
