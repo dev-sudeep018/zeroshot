@@ -10,13 +10,13 @@ The [retrieval project](docs/retrieval-project.md) compares keyword, BM25, vecto
 and hybrid search. Inspect individual term scores, assemble evidence under a word
 budget, and export the dataset, settings, results, and findings together.
 
-![Connected learning home in black and light grey](docs/images/zeroshot-home.jpg)
+The public website at `/` introduces the curriculum and includes an interactive softmax preview. Enter `/learn/` for the separate learning portal, with personal next steps, paths, projects, experiments, and progress. Both use a dark charcoal and seafoam palette.
 
-The screenshot records the ZeroShot learning home with optional personal momentum. Coding lessons start with incomplete code or a clearly labelled debugging investigation. The current interface keeps the black/grey base and uses semantic colors for feedback and Python syntax.
+![ZeroShot public website](docs/images/zeroshot-home.jpg)
 
-![Semantic feedback and Python syntax colors](docs/images/semantic-workspace.jpg)
+![ZeroShot learning portal](docs/images/zeroshot-portal.jpg)
 
-This workspace screenshot shows an existing reference draft passing three example cases. Example-only runs do not record completion.
+Optional Firebase email/password authentication provides sign-up, email verification, sign-in, password recovery, and sign-out. Guest learning remains available. Accounts do not yet synchronize code or progress; backups remain the way to transfer learning data. Without Firebase public configuration, account pages explain that accounts are unavailable while the rest of the app continues to work.
 
 ## Local setup
 
@@ -42,6 +42,12 @@ pnpm test:e2e
 The project is in development. See [verification](docs/verification.md) for what has actually been verified and [architecture](docs/architecture.md) for the execution boundary and limits. Browser results are practice feedback, not tamper-resistant certification.
 
 For fast content iteration, use `pnpm content:check m05 d06 e07` (omit IDs for all packages). See the [free-resource survey and batch workflow](docs/source-research.md) and its [source registry](content/sources.json).
+
+For unpublished batches, `pnpm content:stage <directory> <expected-count>` checks
+schemas, prerequisites, worked examples and executable cases in native and
+WebAssembly Python without changing the catalog. Independent topic oracles and
+editorial review remain required. The [2,000-lesson allocation](docs/curriculum-2000-plan.md)
+records planned objectives separately from published totals.
 
 For larger authored batches, `pnpm content:author` generates draft packages and
 source notices from one JSON file. The [production workflow](docs/content-production.md)

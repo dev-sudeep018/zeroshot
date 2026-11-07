@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./portal.css";
+import "./marketing.css";
+import "./auth.css";
+import { AuthProvider } from "@/components/auth-provider";
 export const metadata: Metadata = {
   title: "ZeroShot | Learn AI by building",
   description:
@@ -16,7 +20,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

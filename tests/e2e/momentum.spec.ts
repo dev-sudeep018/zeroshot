@@ -26,7 +26,7 @@ test("ZeroShot preserves old work, offers chosen goals, and supports quiet mode 
     .getByRole("combobox", { name: "Choose a focus" })
     .selectOption("beginner-arrays");
   const home = await context.newPage();
-  await home.goto("/");
+  await home.goto("/learn/");
   await expect(
     home
       .getByRole("region", { name: "Learning momentum" })

@@ -14,6 +14,7 @@
     "preview": "node scripts/serve.mjs",
     "validate:content": "tsx scripts/validate-content.ts",
     "content:check": "tsx scripts/check-batch.ts",
+    "content:stage": "tsx scripts/check-staged.ts",
     "content:author": "python scripts/author-batch.py",
     "typecheck": "tsc --noEmit && pnpm --filter @zeroshot/web typecheck",
     "lint": "eslint .",

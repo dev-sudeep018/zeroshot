@@ -28,110 +28,6 @@ import { useProgress } from "@/lib/use-progress";
 import { Experiment } from "./experiment";
 import { MomentumPanel } from "./momentum";
 
-export function LearningHome() {
-  const state = useProgress();
-  const latest = catalog
-    .filter((item) => state[`${item.id}:v${item.version}`])
-    .sort(
-      (a, b) =>
-        (state[`${b.id}:v${b.version}`]?.updatedAt ?? 0) -
-        (state[`${a.id}:v${a.version}`]?.updatedAt ?? 0),
-    )[0];
-  const next =
-    latest && !completed(state, latest.id)
-      ? latest
-      : catalog.find(
-          (item) =>
-            !completed(state, item.id) &&
-            item.prerequisites.every((id) => completed(state, id)),
-        );
-  return (
-    <>
-      <h1>Understand it. Experiment. Build it.</h1>
-      <p className="page-lead">
-        A learning space for the ideas behind AI. Follow a sequence, work toward
-        a useful system, or investigate a question that caught your attention.
-      </p>
-      <p className="beginner-link">
-        New to working with data and models?{" "}
-        <Link className="text-link" href="/paths/start-here/">
-          Follow the beginner route <ArrowRight size={16} />
-        </Link>
-      </p>
-      <section className="continue-learning">
-        <div>
-          <h2>{latest ? "Pick up the thread" : "Start with a useful idea"}</h2>
-          <p>
-            {next
-              ? next.summary
-              : "You have explored every published lesson. Revisit a concept or test it in the retrieval project."}
-          </p>
-          {next && (
-            <p className="muted small">
-              {next.prerequisites.length
-                ? "Builds on concepts you have already checked."
-                : "A starting point with no prerequisite lessons."}
-            </p>
-          )}
-        </div>
-        <Link
-          className="primary"
-          href={next ? itemHref(next.id) : "/projects/mini-retrieval/"}
-        >
-          {next?.title ?? "Open the project"}
-          <ArrowRight size={17} />
-        </Link>
-      </section>
-      <MomentumPanel compact />
-      <div className="learning-entries">
-        <section>
-          <h2>Learn with a direction</h2>
-          <p>
-            Three connected paths take you from a concept to working code.
-            Explanations, experiments, and feedback stay together.
-          </p>
-          <Link className="text-link" href="/paths/">
-            Choose a learning path <ArrowRight size={16} />
-          </Link>
-          <ul className="plain-list">
-            {paths.map((path) => (
-              <li key={path.slug}>
-                <Link href={`/paths/${path.slug}/`}>{path.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section>
-          <h2>Build a retrieval system</h2>
-          <p>
-            Inspect a small document collection, compare retrieval methods, and
-            write an evaluation report. Open a related lesson whenever you need
-            the underlying idea.
-          </p>
-          <Link className="text-link" href="/projects/mini-retrieval/">
-            Enter the project <ArrowRight size={16} />
-          </Link>
-        </section>
-        <section>
-          <h2>Follow your curiosity</h2>
-          <p>
-            Move an angle, change a temperature, or shrink a derivative step.
-            Predict what happens and inspect the numbers.
-          </p>
-          <Link className="text-link" href="/explore/">
-            Open the experiment lab <ArrowRight size={16} />
-          </Link>
-        </section>
-      </div>
-      <p className="roadmap-note muted">
-        {catalog.length} published coding lessons · 4 interactive experiments ·
-        1 retrieval project. We are building toward 2,000 learning problems,
-        with review and runnable checks for every published item.
-      </p>
-    </>
-  );
-}
-
 export function PathList({ slug }: { slug?: string }) {
   const state = useProgress();
   const selected = slug ? paths.filter((path) => path.slug === slug) : paths;
@@ -141,7 +37,11 @@ export function PathList({ slug }: { slug?: string }) {
         const done = path.items.filter((id) => completed(state, id)).length;
         const next = path.items.find((id) => !completed(state, id));
         return (
-          <section className="learning-path" key={path.slug}>
+          <section
+            className="learning-path"
+            key={path.slug}
+            data-path={path.slug}
+          >
             <div className="section-heading">
               <div>
                 <h2>{path.title}</h2>
@@ -381,10 +281,18 @@ export function LessonCatalog({
       </p>
       <div className="lesson-list">
         {filtered.slice((page - 1) * 24, page * 24).map((item) => (
-          <Link className="lesson-row" key={item.id} href={itemHref(item.id)}>
+          <Link
+            className="lesson-row"
+            key={item.id}
+            href={itemHref(item.id)}
+            data-domain={item.domain}
+          >
             <div>
-              <span className="muted small">
-                {domains[item.domain]} · {item.estimated_minutes} min
+              <span className="lesson-row-meta">
+                <span className={`topic-label topic-${item.domain}`}>
+                  {domains[item.domain]}
+                </span>
+                <span>{item.estimated_minutes} min</span>
               </span>
               <h2>{item.title}</h2>
               <p>{item.summary}</p>
@@ -524,7 +432,7 @@ export function ProgressView() {
   }
   return (
     <>
-      <h1>Your learning, on this device.</h1>
+      <h1>See how far you’ve come.</h1>
       <p className="page-lead">
         {count} of {catalog.length} lessons checked. Revisit an idea whenever
         you need it; progress is a record of your work, not a ranking.

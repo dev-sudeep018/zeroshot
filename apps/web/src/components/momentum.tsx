@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Circle, Flag, Trophy } from "lucide-react";
+import { ArrowRight, CheckCircle2, Circle, Trophy } from "lucide-react";
 import { completed } from "@/lib/progress";
 import { itemHref } from "@/lib/curriculum";
 import {
@@ -52,9 +52,6 @@ export function MomentumPanel({ compact = false }: { compact?: boolean }) {
         <>
           <div className="momentum-summary">
             <div className="momentum-level">
-              <span className="level-emblem" aria-hidden="true">
-                <Flag size={22} />
-              </span>
               <div>
                 <strong>Practice level {summary.level}</strong>
                 <p className="muted">
@@ -163,7 +160,9 @@ export function MomentumPanel({ compact = false }: { compact?: boolean }) {
               <div className="momentum-milestones">
                 <h3>Milestones you can build on</h3>
                 <p className="muted">
-                  {summary.lessonsCompleted} lessons checked.{" "}
+                  {summary.lessonsCompleted}{" "}
+                  {summary.lessonsCompleted === 1 ? "lesson" : "lessons"}{" "}
+                  checked.{" "}
                   {summary.lessonsCompleted >= summary.nextMilestone
                     ? "You've checked the whole published library."
                     : `Your next practice milestone is ${summary.nextMilestone}.`}

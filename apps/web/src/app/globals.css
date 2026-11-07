@@ -1,30 +1,36 @@
 @import url("/fonts.css");
 :root {
   color-scheme: dark;
-  --bg: #0a0a0a;
-  --surface: #121212;
-  --raised: #1b1b1b;
-  --hover: #272727;
-  --border: #383838;
-  --border-strong: #7a7a7a;
-  --text: #ededed;
-  --muted: #b8b8b8;
-  --subtle: #9e9e9e;
-  --accent: #d4d4d4;
-  --accent-ink: #101010;
-  --accent-hover: #f0f0f0;
-  --accent-soft: #2b2b2b;
-  --selection: #4a4a4a;
-  --code: #d6d6d6;
-  --success: #84dba2;
-  --danger: #ff8f96;
-  --danger-surface: #2a171a;
-  --warning: #f1c979;
-  --warning-surface: #2a2316;
-  --info: #8fbaff;
-  --syntax-keyword: #b4b6ff;
-  --syntax-string: #9ed7bc;
-  --syntax-number: #edc391;
+  --bg: #101416;
+  --surface: #171d20;
+  --raised: #1e2629;
+  --hover: #253033;
+  --border: #303b3f;
+  --border-strong: #647571;
+  --text: #eceee9;
+  --muted: #a5afad;
+  --subtle: #95a29f;
+  --accent: #b6dac6;
+  --accent-ink: #13241b;
+  --accent-hover: #cce8d9;
+  --accent-soft: #22372d;
+  --selection: #345749;
+  --code: #d5ded9;
+  --success: #91d5a8;
+  --danger: #f3a0a6;
+  --danger-surface: #362126;
+  --warning: #e6c187;
+  --warning-surface: #342c1e;
+  --info: #9ebee8;
+  --syntax-keyword: #c4b7ef;
+  --syntax-string: #a5d7b8;
+  --syntax-number: #e4bd8d;
+  --topic-math: #a7ceba;
+  --topic-math-surface: #21332c;
+  --topic-deep: #a9bedc;
+  --topic-deep-surface: #242e3d;
+  --topic-engineering: #d7bd95;
+  --topic-engineering-surface: #342e24;
   --radius: 8px;
 }
 
@@ -37,7 +43,8 @@ body {
   color: var(--text);
   scrollbar-color: var(--border-strong) var(--surface);
   font:
-    14px/1.6 "Segoe UI",
+    14px/1.6 "Manrope",
+    "Segoe UI",
     system-ui,
     sans-serif;
 }
@@ -152,110 +159,6 @@ button svg {
 }
 .skip-link:focus {
   top: 12px;
-}
-.app-shell {
-  display: flex;
-  min-height: 100dvh;
-}
-.sidebar {
-  width: 216px;
-  flex-shrink: 0;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  inset: 0 auto 0 0;
-  z-index: 10;
-}
-.brand {
-  display: flex;
-  gap: 11px;
-  align-items: center;
-  margin: 29px 23px 45px;
-  line-height: 1.15;
-  font-size: 17px;
-  letter-spacing: -0.02em;
-}
-.brand strong {
-  font-weight: 650;
-}
-.brand-mark {
-  width: 37px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  color: var(--accent);
-}
-.sidebar-body {
-  flex: 1;
-}
-.nav-label {
-  font-size: 11px;
-  letter-spacing: 0.025em;
-  color: var(--subtle);
-  margin: 0 24px 12px;
-}
-.sidebar nav {
-  display: grid;
-  gap: 5px;
-  padding: 0 12px;
-}
-.sidebar nav a {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 6px;
-  color: var(--muted);
-  font-size: 13px;
-}
-.sidebar nav a:hover {
-  background: var(--raised);
-  color: var(--text);
-}
-.sidebar nav a[aria-current="page"] {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-.sidebar-note {
-  margin: 59px 24px 20px;
-  color: var(--subtle);
-}
-.sidebar-note p {
-  margin: 12px 0 9px;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.65;
-}
-.sidebar-note > span {
-  font-size: 11px;
-  line-height: 1.9;
-  color: var(--subtle);
-}
-.github-link {
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  font-size: 12px;
-  padding: 12px 24px;
-  color: var(--muted);
-}
-.github-link svg:last-child {
-  margin-left: auto;
-}
-.github-link:hover {
-  color: var(--accent);
-}
-.sidebar-footer {
-  font-size: 10px;
-  color: var(--subtle);
-  margin: 0 24px 23px;
-}
-.main-area {
-  margin-left: 216px;
-  min-width: 0;
-  width: calc(100% - 216px);
 }
 .topbar {
   height: 61px;
@@ -919,7 +822,8 @@ button svg {
   background: var(--surface);
   padding: 9px 13px;
   border-radius: 6px;
-  width: 300px;
+  width: 100%;
+  min-width: 0;
 }
 .search-field input {
   min-width: 0;
@@ -1041,7 +945,7 @@ button svg {
   color: var(--muted);
 }
 .path-list p {
-  font-size: 12px;
+  font-size: 13px;
   margin-top: 4px;
 }
 .path-list a {
@@ -1057,36 +961,7 @@ button svg {
   color: var(--subtle);
   margin-left: 12px;
 }
-.roadmap-note {
-  margin-top: 20px;
-  font-size: 12px;
-}
-.about-copy {
-  max-width: 700px;
-}
-.about-copy h2 {
-  margin: 33px 0 12px;
-}
-.about-copy p {
-  line-height: 1.9;
-  font-size: 14px;
-}
-.about-copy ul {
-  padding-left: 19px;
-  color: var(--muted);
-  line-height: 2;
-}
-.about-copy .primary {
-  margin-top: 24px;
-}
 @media (min-width: 1600px) {
-  .sidebar {
-    width: 240px;
-  }
-  .main-area {
-    margin-left: 240px;
-    width: calc(100% - 240px);
-  }
   .workbench {
     margin-left: 30px;
     margin-right: 30px;
@@ -1105,30 +980,6 @@ button svg {
   }
 }
 @media (max-width: 1250px) {
-  .sidebar {
-    width: 185px;
-  }
-  .main-area {
-    margin-left: 185px;
-    width: calc(100% - 185px);
-  }
-  .brand {
-    margin-left: 18px;
-  }
-  .sidebar nav {
-    padding: 0 8px;
-  }
-  .sidebar nav a {
-    font-size: 12px;
-    gap: 9px;
-  }
-  .sidebar-note {
-    margin-left: 20px;
-  }
-  .sidebar-footer {
-    margin-left: 17px;
-    font-size: 9px;
-  }
   .problem-header {
     padding-left: 23px;
     padding-right: 23px;
@@ -1165,36 +1016,6 @@ button svg {
   }
 }
 @media (max-width: 950px) {
-  .sidebar {
-    width: 67px;
-  }
-  .brand {
-    margin: 23px 15px 40px;
-  }
-  .brand > span:last-child,
-  .nav-label,
-  .sidebar-note,
-  .sidebar-footer,
-  .github-link {
-    display: none;
-  }
-  .sidebar nav {
-    padding: 0 10px;
-  }
-  .sidebar nav a {
-    font-size: 0;
-    padding: 12px;
-    gap: 0;
-    justify-content: center;
-  }
-  .sidebar nav a svg {
-    width: 20px;
-    height: 20px;
-  }
-  .main-area {
-    margin-left: 67px;
-    width: calc(100% - 67px);
-  }
   .workbench {
     min-height: 630px;
   }
@@ -1215,56 +1036,6 @@ button svg {
   }
 }
 @media (max-width: 700px) {
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: 62px;
-    inset: auto;
-    flex-direction: row;
-    align-items: center;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .app-shell {
-    display: block;
-  }
-  .brand {
-    margin: 0 15px;
-    gap: 7px;
-  }
-  .brand-mark {
-    width: 25px;
-  }
-  .brand > span:last-child {
-    display: block;
-    font-size: 12px;
-  }
-  .brand br {
-    display: none;
-  }
-  .brand strong {
-    margin-left: 4px;
-  }
-  .sidebar-body {
-    flex: 1;
-  }
-  .sidebar nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1px;
-    padding-right: 12px;
-  }
-  .sidebar nav a {
-    padding: 10px;
-  }
-  .sidebar nav a svg {
-    width: 18px;
-    height: 18px;
-  }
-  .main-area {
-    margin: 0;
-    width: 100%;
-  }
   .topbar {
     height: 45px;
     padding: 0 18px;
@@ -1417,6 +1188,7 @@ button svg {
   }
   .search-field {
     width: 100%;
+    min-width: 0;
   }
   .problem-card {
     flex-wrap: wrap;
@@ -1454,7 +1226,6 @@ button svg {
     scroll-behavior: auto !important;
   }
 }
-/* Connected learning surfaces share the workspace's monochrome palette. */
 select,
 textarea {
   font: inherit;
@@ -1487,7 +1258,7 @@ textarea {
 .learning-content > h1 {
   max-width: 24ch;
   text-wrap: balance;
-  font-size: 36px;
+  font-size: 30px;
 }
 .learning-content p {
   max-width: 72ch;
@@ -1506,43 +1277,6 @@ textarea {
 }
 .text-link:hover {
   color: var(--accent-hover);
-}
-.continue-learning {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 28px;
-  background: var(--raised);
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin: 30px 0 44px;
-}
-.continue-learning h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-.continue-learning p + p {
-  margin-top: 10px;
-}
-.continue-learning .primary {
-  flex-shrink: 0;
-  max-width: 36%;
-  white-space: normal;
-}
-.learning-entries {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  column-gap: 46px;
-}
-.learning-entries section {
-  border-top: 1px solid var(--border);
-  padding: 24px 0 30px;
-}
-.learning-entries section:first-child {
-  grid-row: span 2;
-}
-.learning-entries p {
-  margin: 14px 0 18px;
 }
 .plain-list {
   list-style: none;
@@ -1602,6 +1336,7 @@ textarea {
   background: var(--surface);
   border-radius: 6px;
   padding: 11px;
+  min-width: 0;
 }
 .search-field input {
   background: transparent;
@@ -2040,57 +1775,19 @@ td {
   }
   .search-field {
     grid-column: 1/-1;
+    min-width: 0;
   }
-  .continue-learning,
   .project-start {
     flex-direction: column;
     align-items: flex-start;
   }
-  .continue-learning .primary {
-    max-width: 100%;
-  }
 }
 @media (max-width: 700px) {
-  .sidebar {
-    height: auto;
-    flex-wrap: wrap;
-    padding: 12px 0 0;
-  }
-  .sidebar-body {
-    flex: 0 0 100%;
-    width: 100%;
-    overflow: hidden;
-  }
-  .sidebar nav {
-    display: flex;
-    overflow-x: auto;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    padding: 8px;
-    gap: 4px;
-  }
-  .sidebar nav a {
-    flex: 0 0 auto;
-    padding: 10px;
-    font-size: 11px;
-    gap: 6px;
-  }
-  .sidebar nav a svg {
-    width: 16px;
-    height: 16px;
-  }
   .learning-content {
     padding: 28px 20px 50px;
   }
   .learning-content > h1 {
     font-size: 28px;
-  }
-  .learning-entries {
-    grid-template-columns: 1fr;
-  }
-  .continue-learning {
-    padding: 22px;
-    margin: 24px 0 32px;
   }
   .section-heading {
     flex-direction: column;
@@ -2405,5 +2102,498 @@ textarea,
   }
   .momentum-milestones li > span {
     padding-left: 30px;
+  }
+}
+.topbar {
+  max-width: 1144px;
+  margin: 0 auto;
+  height: 48px;
+  padding: 0;
+  border-bottom: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.free-label {
+  color: var(--subtle);
+  font-size: 11px;
+}
+.page-content,
+.learning-content {
+  max-width: 1224px;
+  margin: 0 auto;
+  padding: 32px 40px 64px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+.learning-content > h1 {
+  font-size: 30px;
+  letter-spacing: -0.035em;
+  max-width: 26ch;
+}
+.learning-content > .page-lead {
+  margin-top: 16px;
+  margin-bottom: 28px;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 68ch;
+}
+.text-link {
+  text-decoration: none;
+  font-weight: 600;
+}
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.primary {
+  min-height: 42px;
+  border-radius: 7px;
+  padding: 11px 17px;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 10px;
+}
+.secondary {
+  min-height: 40px;
+  border-radius: 7px;
+  padding: 9px 15px;
+  font-size: 12px;
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+.primary,
+.secondary,
+.text-link {
+  transition:
+    background-color 150ms,
+    color 150ms,
+    border-color 150ms;
+}
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.momentum {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 26px;
+  margin: 24px 0 32px;
+}
+.momentum-heading h2 {
+  font-size: 21px;
+}
+.momentum-summary {
+  padding: 20px 0;
+  background: transparent;
+  margin: 22px 0;
+}
+.momentum-level strong {
+  font-size: 20px;
+}
+.momentum p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.momentum-compact {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin: 0;
+}
+.momentum-compact .momentum-heading,
+.momentum-compact .momentum-summary,
+.momentum-compact .momentum-quest {
+  display: block;
+}
+.momentum-compact .momentum-heading h2 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.momentum-compact .momentum-heading .text-link {
+  font-size: 11px;
+}
+.momentum-compact .momentum-summary {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 22px 0 0;
+}
+.momentum-compact .momentum-level {
+  display: block;
+}
+.momentum-compact .momentum-level > div {
+  width: 100%;
+}
+.momentum-compact .momentum-level strong {
+  font-size: 22px;
+}
+.momentum-compact .momentum-week {
+  border-top: 1px solid var(--border);
+  margin-top: 22px;
+  padding-top: 18px;
+}
+.momentum-compact .momentum-week strong {
+  font-size: 12px;
+}
+.momentum-compact .momentum-quest {
+  margin-top: 20px;
+  padding: 18px 0 0;
+  border-color: var(--border);
+}
+.momentum-compact .momentum-quest h3 {
+  font-size: 13px;
+}
+.momentum-compact .momentum-quest .primary {
+  max-width: 100%;
+  padding: 0;
+  min-height: 36px;
+  background: none;
+  color: var(--accent);
+  font-size: 12px;
+  text-align: left;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.momentum-compact .momentum-quest .primary:hover {
+  text-decoration: underline;
+}
+.momentum-compact progress::-webkit-progress-bar {
+  background: var(--hover);
+}
+.momentum-compact progress {
+  background: var(--hover);
+}
+.momentum-toggle {
+  font-size: 12px;
+}
+.pace-options {
+  gap: 10px;
+}
+.pace-options label {
+  min-height: 42px;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 12px;
+}
+.pace-options label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.pace-options legend {
+  font-size: 13px;
+}
+.momentum-quest h3,
+.momentum-milestones h3 {
+  font-size: 17px;
+}
+.quest-select {
+  font-size: 11px;
+}
+.momentum-milestones ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+}
+.momentum-milestones li {
+  gap: 12px;
+  font-size: 12px;
+}
+.momentum-milestones li p {
+  font-size: 12px;
+}
+.momentum-milestones li > span {
+  font-size: 11px;
+}
+.momentum-rules {
+  font-size: 12px;
+}
+.learning-path {
+  margin: 24px 0;
+  padding: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.learning-path .section-heading h2 {
+  font-size: 22px;
+}
+.learning-path .section-heading p {
+  max-width: 72ch;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.learning-path .path-outcome {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 18px 0;
+}
+.learning-path[data-path="mathematics-to-ml"] h2 {
+  color: var(--topic-math);
+}
+.learning-path[data-path="deep-learning"] h2 {
+  color: var(--topic-deep);
+}
+.learning-path[data-path="ai-engineering"] h2 {
+  color: var(--topic-engineering);
+}
+.beginner-entry {
+  background: var(--accent-soft);
+  border: 0;
+  padding: 24px;
+  border-radius: 10px;
+}
+.beginner-link {
+  font-size: 12px;
+  margin: 20px 0;
+}
+.catalog-controls {
+  padding: 20px;
+  background: var(--surface);
+  border-radius: 9px;
+  margin-top: 28px;
+  gap: 12px;
+}
+.catalog-controls select {
+  background: var(--surface);
+  min-height: 42px;
+  border-color: var(--border-strong);
+  border-radius: 6px;
+}
+.search-field {
+  min-height: 42px;
+  border-color: var(--border-strong);
+  padding: 10px 12px;
+  min-width: 0;
+}
+.lesson-list {
+  border-top: 1px solid var(--border);
+}
+.lesson-row {
+  padding: 22px 20px;
+  border-radius: 0;
+  background: var(--bg);
+}
+.lesson-row:nth-child(even) {
+  background: var(--surface);
+}
+.lesson-row:hover {
+  background: var(--raised);
+}
+.lesson-row h2 {
+  font-size: 17px;
+  margin: 9px 0 7px;
+}
+.lesson-row p {
+  max-width: 75ch;
+  font-size: 13px;
+}
+.lesson-row > div > .small {
+  font-size: 11px;
+  color: var(--subtle);
+}
+.lesson-row-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+.topic-label {
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+.topic-foundations {
+  background: var(--topic-math-surface);
+  color: var(--topic-math);
+}
+.topic-deep-learning {
+  background: var(--topic-deep-surface);
+  color: var(--topic-deep);
+}
+.topic-engineering {
+  background: var(--topic-engineering-surface);
+  color: var(--topic-engineering);
+}
+.lesson-state {
+  font-size: 11px;
+}
+.path-list > li {
+  padding-block: 20px;
+}
+.path-list h3 {
+  font-size: 16px;
+}
+.path-list p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.project-progress,
+.backup-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px;
+  margin: 24px 0;
+}
+.backup-section > p {
+  font-size: 13px;
+  line-height: 1.85;
+}
+.workspace-shell {
+  background: var(--bg);
+  color: var(--text);
+}
+.workspace-shell .topbar {
+  max-width: none;
+  height: 42px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--border);
+}
+.workspace-shell .workbench {
+  border-radius: 9px;
+  min-height: 620px;
+  height: calc(100dvh - 285px);
+}
+.workspace-shell .problem-header {
+  padding: 22px 28px;
+}
+.workspace-shell .problem-header h1 {
+  font-size: 27px;
+}
+@media (max-width: 1150px) {
+  .topbar {
+    margin-inline: 40px;
+  }
+}
+@media (max-width: 900px) {
+  .topbar {
+    margin-inline: 28px;
+  }
+  .page-content,
+  .learning-content {
+    padding: 25px 28px 48px;
+  }
+  .momentum-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+  }
+  .momentum-compact .momentum-heading {
+    grid-column: 1 / -1;
+  }
+  .momentum-compact .momentum-summary {
+    margin-top: 18px;
+  }
+  .momentum-compact .momentum-quest {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+    padding: 0 0 0 24px;
+  }
+  .momentum-milestones ul {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .topbar {
+    margin-inline: 20px;
+    height: 42px;
+    font-size: 10px;
+  }
+  .free-label {
+    font-size: 10px;
+  }
+  .page-content,
+  .learning-content {
+    padding: 22px 20px 40px;
+  }
+  .learning-content > h1 {
+    font-size: 30px;
+  }
+  .learning-content > .page-lead {
+    font-size: 13px;
+  }
+  .momentum-compact {
+    display: block;
+    padding: 22px;
+  }
+  .momentum-compact .momentum-quest {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding: 18px 0 0;
+  }
+  .momentum {
+    padding: 20px;
+  }
+  .momentum-summary {
+    padding: 18px;
+  }
+  .momentum-heading h2 {
+    font-size: 20px;
+  }
+  .momentum-milestones li > div {
+    flex-basis: auto;
+  }
+  .momentum-milestones li > span {
+    padding-left: 0;
+  }
+  .learning-path {
+    padding: 20px;
+  }
+  .learning-path .section-heading h2 {
+    font-size: 20px;
+  }
+  .path-list li {
+    gap: 11px;
+  }
+  .beginner-entry {
+    padding: 20px;
+  }
+  .catalog-controls {
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+  }
+  .catalog-controls .search-field {
+    grid-column: 1 / -1;
+  }
+  .catalog-controls > label:last-child {
+    grid-column: 1 / -1;
+  }
+  .lesson-row {
+    padding: 20px 12px;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .lesson-row h2 {
+    font-size: 15px;
+  }
+  .lesson-state {
+    margin-top: 5px;
+  }
+  .lesson-row > div > .small {
+    display: none;
+  }
+  .workspace-shell .topbar {
+    margin: 0;
+    padding-inline: 18px;
+  }
+  .workspace-shell .problem-header {
+    padding: 20px 18px;
+  }
+  .workspace-shell .problem-header h1 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 700px) {
+  .workspace-shell .workbench {
+    height: auto;
+    min-height: 0;
   }
 }
