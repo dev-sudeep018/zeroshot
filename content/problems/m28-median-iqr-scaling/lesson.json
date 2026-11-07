@@ -1,0 +1,45 @@
+{
+  "intro": "Outliers can dominate a mean and standard deviation. Fit a median and interquartile range on training data, then apply that transformation to new rows.",
+  "task": "Return training medians, safe interquartile scales, and transformed values without refitting on the values to transform.",
+  "signature": "robust_scale(train, values)",
+  "requirements": [
+    "train and values are matrices with the same positive feature count. Fit one median and IQR per training column using linear empirical quantiles.",
+    "Return {\"center\": median, \"scale\": safe_iqr, \"values\": (values-median)/safe_iqr}. Replace IQR at or below 1e-12 with one.",
+    "Training rows alone determine center and scale. Do not clamp transformed outliers or recompute statistics on the evaluation rows.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Fit and transform",
+      "input": "robust_scale([[0],[2],[4]],[[2],[6]])",
+      "output": "{\n  \"center\": [\n    2.0\n  ],\n  \"scale\": [\n    2.0\n  ],\n  \"values\": [\n    [\n      0.0\n    ],\n    [\n      2.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Constant column",
+      "input": "robust_scale([[5],[5]],[[5],[7]])",
+      "output": "{\n  \"center\": [\n    5.0\n  ],\n  \"scale\": [\n    1.0\n  ],\n  \"values\": [\n    [\n      0.0\n    ],\n    [\n      2.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Separate columns",
+      "input": "robust_scale([[0,10],[2,14],[4,18]],[[4,10]])",
+      "output": "{\n  \"center\": [\n    2.0,\n    14.0\n  ],\n  \"scale\": [\n    2.0,\n    4.0\n  ],\n  \"values\": [\n    [\n      1.0,\n      -1.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Separate fitting from transforming. Only the training rows should determine the feature statistics."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Compute both quartiles along the sample axis, then substitute a safe scale for a collapsed middle interval."
+    }
+  ],
+  "explanation": [
+    "The median is the center and the middle half of the training distribution sets the scale. A distant evaluation row remains distant instead of changing the training transform.",
+    "A zero IQR contains no usable scale information. Substituting one makes constant columns finite while preserving their deviation from the learned center."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

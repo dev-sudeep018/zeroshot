@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d72",
+  "kind": "lesson",
+  "slug": "one-step-value-targets",
+  "version": 1,
+  "title": "Separate Value Targets from Current Predictions",
+  "summary": "A value update compares a prediction with a target built from the next state. Terminal transitions and rollout cutoffs require different targets.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    [
+      "Reinforcement learning",
+      "Separate Value Targets from Current Predictions",
+    ],
+  "prerequisites": ["d70"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "td_value_targets",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+    ],
+}

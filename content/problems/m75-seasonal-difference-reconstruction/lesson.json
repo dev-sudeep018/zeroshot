@@ -1,0 +1,45 @@
+{
+  "intro": "Seasonal differencing compares corresponding positions in adjacent seasons. It separates changes between seasons from the repeating within-season pattern.",
+  "task": "Compute lagged differences and reconstruct the signal from its initial season and differences.",
+  "signature": "seasonal_differences(values, lag)",
+  "requirements": [
+    "lag is an integer in 1..n-1, where values has length n>=2.",
+    "Return {\"initial\": first lag values, \"difference\": values[lag:]-values[:-lag], \"reconstructed\": full signal rebuilt recursively from initial and difference}.",
+    "Reconstruction uses reconstructed[i-lag]+difference[i-lag], not an ordinary cumulative sum unless lag is one.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Season length two",
+      "input": "seasonal_differences([1,10,3,13,6,17],2)",
+      "output": "{'initial': [1.0, 10.0],\n 'difference': [2.0, 3.0, 3.0, 4.0],\n 'reconstructed': [1.0, 10.0, 3.0, 13.0, 6.0, 17.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "First differences",
+      "input": "seasonal_differences([2,5,4],1)",
+      "output": "{'initial': [2.0], 'difference': [3.0, -1.0], 'reconstructed': [2.0, 5.0, 4.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One difference",
+      "input": "seasonal_differences([1,2,3,8],3)",
+      "output": "{'initial': [1.0, 2.0, 3.0], 'difference': [7.0], 'reconstructed': [1.0, 2.0, 3.0, 8.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Keep the first full season; differences alone cannot recover the starting level."
+    },
+    {
+      "title": "Build the result",
+      "body": "During reconstruction, add each difference to the value one full lag earlier."
+    }
+  ],
+  "explanation": [
+    "Seasonal differencing compares corresponding positions in adjacent seasons. It separates changes between seasons from the repeating within-season pattern.",
+    "The retained initial block supplies the missing boundary conditions. Reconstruction demonstrates that the transformation is reversible when those starting values are kept."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Calibration residuals can turn point predictions into intervals. The finite-sample rank uses n+1, so small calibration sets need special care at high coverage.",
+  "task": "Construct a calibrated interval radius from the corrected finite-sample rank, rejecting a requested rank that cannot produce a finite threshold.",
+  "signature": "conformal_interval(residuals, predictions, alpha)",
+  "requirements": [
+    "residuals is a nonempty vector of nonnegative absolute calibration errors; predictions is a finite vector, possibly empty; 0<alpha<1.",
+    "Use rank k=ceil((n+1)*(1-alpha)), counting from one. Reject when k>n because this finite-valued contract cannot represent the required infinite threshold.",
+    "Let q be the kth smallest residual. Return dict radius as q, lower as predictions-q, and upper as predictions+q. Exchangeability is an interpretation assumption, not a validation check.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Finite sample correction",
+      "input": "conformal_interval([1,2,3,4], [10,20], .4)",
+      "output": "{'radius': 3.0, 'lower': [7.0, 17.0], 'upper': [13.0, 23.0]}"
+    },
+    {
+      "name": "Tied residuals",
+      "input": "conformal_interval([2,2,2], [0], .5)",
+      "output": "{'radius': 2.0, 'lower': [-2.0], 'upper': [2.0]}"
+    },
+    {
+      "name": "Zero residuals",
+      "input": "conformal_interval([0,0], [5], .5)",
+      "output": "{'radius': 0.0, 'lower': [5.0], 'upper': [5.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep ranks one-based until indexing",
+      "body": "Compute the corrected rank before subtracting one for array indexing."
+    },
+    {
+      "title": "Do not silently clip an impossible rank",
+      "body": "A requested finite threshold may not exist for the calibration-set size."
+    }
+  ],
+  "explanation": [
+    "Split conformal uses heldout residuals to choose an error threshold. The corrected rank is more conservative than an ordinary sample percentile and matters most for small samples.",
+    "Coverage interpretation requires exchangeability between calibration and future examples. The code constructs intervals but does not assert that the assumption holds in a deployed system."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

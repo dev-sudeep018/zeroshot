@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e48",
+  "kind": "lesson",
+  "slug": "speculative-token-verification",
+  "version": 1,
+  "title": "Verify Draft Tokens and Correct a Rejection",
+  "summary": "A draft model proposes tokens cheaply, while a target model verifies them. Rejection requires a corrected distribution, not ordinary target resampling.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Decoding", "Sampling"],
+  "prerequisites": ["e20"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "verify_draft",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Leviathan et al., Fast Inference from Transformers via Speculative Decoding. https://proceedings.mlr.press/v202/leviathan23a.html",
+    ],
+}

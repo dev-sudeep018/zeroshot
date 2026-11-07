@@ -1,0 +1,44 @@
+{
+  "intro": "Coverage describes how broadly a retrieval system exposes its corpus across queries. It is different from relevance quality: a system can cover many documents while ranking them poorly.",
+  "task": "Report unique retrieved corpus IDs, coverage fraction, and out-of-corpus IDs.",
+  "signature": "ranking_coverage(rankings, corpus)",
+  "requirements": [
+    "rankings contains lists of nonempty string IDs; corpus contains unique IDs. Return sorted retrieved_corpus_ids, sorted out_of_corpus_ids, and coverage=number of unique retrieved corpus IDs / corpus size, or 0.0 for an empty corpus. Repeated IDs and queries count once for coverage.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Unique corpus coverage",
+      "input": "ranking_coverage([['a','a'],['b','x']], ['a','b','c'])",
+      "output": "{'retrieved_corpus_ids': ['a', 'b'],\n 'out_of_corpus_ids': ['x'],\n 'coverage': 0.6666666666666666}"
+    },
+    {
+      "name": "Empty corpus",
+      "input": "ranking_coverage([['x']], [])",
+      "output": "{'retrieved_corpus_ids': [],\n 'out_of_corpus_ids': ['x'],\n 'coverage': 0.0}"
+    },
+    {
+      "name": "No rankings",
+      "input": "ranking_coverage([], ['a'])",
+      "output": "{'retrieved_corpus_ids': [], 'out_of_corpus_ids': [], 'coverage': 0.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Union all retrieved IDs before comparing with the corpus."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep out-of-corpus IDs separate so they cannot inflate coverage."
+    }
+  ],
+  "explanation": [
+    "Coverage describes how broadly a retrieval system exposes its corpus across queries. It is different from relevance quality: a system can cover many documents while ranking them poorly.",
+    "Reporting unknown retrieved IDs also audits index consistency. IDs absent from the declared corpus are visible but never count toward the coverage numerator."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

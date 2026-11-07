@@ -1,0 +1,44 @@
+{
+  "intro": "Side lengths determine a triangle up to rigid motion and reflection when the strict triangle inequalities hold. The cosine rule recovers its angles without requiring coordinates.",
+  "task": "Validate strict triangle inequalities and compute angles and area with clipped cosine roundoff.",
+  "signature": "triangle_from_sides(sides)",
+  "requirements": [
+    "sides has exactly three entries, each at least 1e-6 and satisfying every strict triangle inequality.",
+    "Return {\"angles\": radians opposite each side in input order, \"area\": Heron area}. Use the cosine rule and clip cosine values into [-1,1] before arccos.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Right triangle",
+      "input": "triangle_from_sides([3,4,5])",
+      "output": "{'angles': [0.6435011088, 0.927295218, 1.570796327], 'area': 6.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equilateral",
+      "input": "triangle_from_sides([2,2,2])",
+      "output": "{'angles': [1.047197551, 1.047197551, 1.047197551], 'area': 1.732050808}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Isosceles",
+      "input": "triangle_from_sides([5,5,6])",
+      "output": "{'angles': [0.927295218, 0.927295218, 1.287002218], 'area': 12.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Each angle uses its opposite side in the subtracted squared term of the cosine rule."
+    },
+    {
+      "title": "Build the result",
+      "body": "For area, combine the semiperimeter with its three differences from the side lengths."
+    }
+  ],
+  "explanation": [
+    "Side lengths determine a triangle up to rigid motion and reflection when the strict triangle inequalities hold. The cosine rule recovers its angles without requiring coordinates.",
+    "Clipping the computed cosine protects arccos from tiny roundoff beyond its domain. It does not make impossible side lengths valid, so triangle validation must occur first."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

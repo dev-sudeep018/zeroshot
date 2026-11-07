@@ -1,0 +1,45 @@
+{
+  "intro": "Soft Dice compares overlap with the total predicted and target mass. Its smoothing convention determines what happens when both masks are empty.",
+  "task": "Implement soft_dice_loss(probabilities, targets, smoothing=1e-6). The objective uses soft predicted mass, so it remains sensitive to confidence without a hard threshold. A perfectly matched binary mask has zero loss.",
+  "signature": "soft_dice_loss(probabilities, targets, smoothing=1e-6)",
+  "requirements": [
+    "probabilities and targets match nonempty (B,D). Probabilities are in [0,1]; targets contain numeric zeros and ones. smoothing is in [1e-12,1].",
+    "For each row compute 1-(2*sum(probabilities*targets)+smoothing)/(sum(probabilities)+sum(targets)+smoothing).",
+    "Return a length-B array. Use linear sums in the denominator, no threshold, no squared probabilities, and no batch pooling.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Exact binary match",
+      "input": "soft_dice_loss([[1,0]],[[1,0]],1)",
+      "output": "[0.0]"
+    },
+    {
+      "name": "Disjoint masks",
+      "input": "soft_dice_loss([[1,0]],[[0,1]],1)",
+      "output": "[0.666666666667]"
+    },
+    {
+      "name": "Both masks empty",
+      "input": "soft_dice_loss([[0,0]],[[0,0]],1)",
+      "output": "[0.0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Compute numerator and denominator separately for each example."
+    },
+    {
+      "title": "Step 2",
+      "body": "Both empty masks give a numerator and denominator equal to smoothing."
+    }
+  ],
+  "explanation": [
+    "The objective uses soft predicted mass, so it remains sensitive to confidence without a hard threshold. A perfectly matched binary mask has zero loss.",
+    "Smoothing both numerator and denominator gives zero loss for empty-empty masks. Other Dice conventions may use a squared denominator or different smoothing; they are outside this contract."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

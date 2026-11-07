@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m33",
+  "kind": "lesson",
+  "slug": "modified-gram-schmidt",
+  "version": 1,
+  "title": "Build an Orthonormal Basis",
+  "summary": "Correlated columns make coordinates harder to interpret. Subtract earlier directions one by one to build an orthonormal basis and triangular coordinates.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Build an Orthonormal Basis"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gram_schmidt",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

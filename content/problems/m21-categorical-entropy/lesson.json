@@ -1,0 +1,45 @@
+{
+  "intro": "Entropy measures how much uncertainty remains in a categorical distribution. Certain outcomes carry no uncertainty while balanced alternatives carry more.",
+  "task": "Compute Shannon entropy in natural-log units, treating a zero-probability outcome as a zero contribution.",
+  "signature": "categorical_entropy(probabilities)",
+  "requirements": [
+    "probabilities is a nonnegative vector whose sum is one within absolute tolerance 1e-8.",
+    "Return the scalar -sum(p*log(p)) over strictly positive entries. Use natural logarithms, so the result is in nats.",
+    "Return zero for a certain outcome. Do not add epsilon or normalize an invalid probability vector.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Fair binary choice",
+      "input": "categorical_entropy([.5,.5])",
+      "output": "0.69314718\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Certain outcome",
+      "input": "categorical_entropy([1,0])",
+      "output": "0\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Four equal outcomes",
+      "input": "categorical_entropy([.25]*4)",
+      "output": "1.38629436\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Think of entropy as expected surprise, so each logarithm needs its own probability weight."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Select positive probabilities before applying logarithms; zero-mass entries have zero contribution by continuity."
+    }
+  ],
+  "explanation": [
+    "Each outcome contributes its probability times its surprise, -log(p). A probability-zero event has zero expected contribution by the limiting value of p log(p).",
+    "For k equally likely outcomes the result is log(k). Concentrating all mass on one outcome removes uncertainty and produces zero."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A cache hit changes recency even though no new key is inserted. Tracing every request makes the difference between insertion order and LRU eviction visible.",
+  "task": "Trace cache hits and evictions, refreshing recency on every hit before the next admission decision.",
+  "signature": "lru_trace(requests, capacity)",
+  "requirements": [
+    "requests is a list or tuple of at most 10000 nonempty string keys; capacity is an integer 0..10000.",
+    "On a hit, move that key to most-recently-used position. On a miss with positive capacity, insert it and evict the least-recently-used key if full.",
+    "Return dict hits as a boolean vector, keys as the final most-recent-first list, and evicted as keys in eviction order. Capacity zero stores nothing and records no evictions.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Hit refreshes recency",
+      "input": "lru_trace(['a','b','a','c'], 2)",
+      "output": "{'hits': [False, False, True, False],\n 'keys': ['c', 'a'],\n 'evicted': ['b']}"
+    },
+    {
+      "name": "Capacity zero",
+      "input": "lru_trace(['a','a'], 0)",
+      "output": "{'hits': [False, False], 'keys': [], 'evicted': []}"
+    },
+    {
+      "name": "Repeated hit",
+      "input": "lru_trace(['a','a','a'], 1)",
+      "output": "{'hits': [False, True, True], 'keys': ['a'], 'evicted': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "A hit is a state transition",
+      "body": "Remove a hit from its old position before moving it to the front."
+    },
+    {
+      "title": "Evict from the opposite end",
+      "body": "The final element of a most-recent-first list is the least recently used."
+    }
+  ],
+  "explanation": [
+    "LRU approximates temporal locality: recently accessed keys are retained in preference to older ones. A hit must refresh recency or the policy becomes insertion-order eviction.",
+    "This list-based implementation makes state transitions transparent and has linear lookup cost. A production cache can combine a dictionary with a linked order structure for constant-time operations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

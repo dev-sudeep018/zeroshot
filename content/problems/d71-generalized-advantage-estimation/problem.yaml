@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d71",
+  "kind": "lesson",
+  "slug": "generalized-advantage-estimation",
+  "version": 1,
+  "title": "Combine Temporal-Difference Residuals with GAE",
+  "summary": "A single temporal-difference residual uses a nearby prediction. Generalized advantage estimation blends residuals farther into the rollout while respecting episode boundaries.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    [
+      "Reinforcement learning",
+      "Combine Temporal-Difference Residuals with GAE",
+    ],
+  "prerequisites": ["d70"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "generalized_advantages",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1506.02438",
+    ],
+}

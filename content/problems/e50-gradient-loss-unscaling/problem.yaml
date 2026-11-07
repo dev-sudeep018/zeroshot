@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e50",
+  "kind": "lesson",
+  "slug": "gradient-loss-unscaling",
+  "version": 1,
+  "title": "Unscale Gradients and Skip Overflowed Steps",
+  "summary": "Loss scaling expands small gradients before low-precision arithmetic. Before an optimizer step, unscale once and reject the whole update if any gradient is nonfinite.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Training systems", "Numeric stability"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "unscale_gradients",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): PyTorch Automatic Mixed Precision examples. https://docs.pytorch.org/docs/2.14/notes/amp_examples.html",
+    ],
+}

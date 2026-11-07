@@ -1,0 +1,45 @@
+{
+  "intro": "Total variation penalizes differences between neighboring pixels. Its derivative moves across edges while assigning a chosen subgradient to flat regions.",
+  "task": "Implement total_variation(image). An interior pixel receives derivative contributions from several neighboring differences. Equal neighbors use the stated zero subgradient at the absolute-value kink.",
+  "signature": "total_variation(image)",
+  "requirements": [
+    "image is a nonempty (H,W) array, including single-row or single-column images.",
+    "Loss is the sum of absolute differences over all horizontal and vertical neighboring pairs. Do not wrap boundaries, square differences or average them.",
+    "Return {loss: scalar, gradient: (H,W) array}. For each directed difference next-current, contribute -sign(difference) to current and +sign(difference) to next. Use sign(0)=0.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "One horizontal edge",
+      "input": "total_variation([[1,4]])",
+      "output": "{\"loss\": 3.0, \"gradient\": [[-1.0, 1.0]]}"
+    },
+    {
+      "name": "Flat region",
+      "input": "total_variation([[2,2],[2,2]])",
+      "output": "{\"loss\": 0.0, \"gradient\": [[0.0, 0.0], [0.0, 0.0]]}"
+    },
+    {
+      "name": "Peak in a row",
+      "input": "total_variation([[0,2,0]])",
+      "output": "{\"loss\": 4.0, \"gradient\": [[-1.0, 2.0, -1.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Each edge contributes to both endpoint derivatives."
+    },
+    {
+      "title": "Step 2",
+      "body": "A single pixel has no edges, so both loss and derivative vanish."
+    }
+  ],
+  "explanation": [
+    "An interior pixel receives derivative contributions from several neighboring differences. Equal neighbors use the stated zero subgradient at the absolute-value kink.",
+    "This anisotropic penalty sums horizontal and vertical magnitudes separately. It differs from taking the Euclidean norm of a two-dimensional gradient vector."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

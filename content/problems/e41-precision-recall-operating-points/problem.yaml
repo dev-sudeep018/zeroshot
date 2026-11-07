@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e41",
+  "kind": "lesson",
+  "slug": "precision-recall-operating-points",
+  "version": 1,
+  "title": "Trace Precision and Recall at Tied Scores",
+  "summary": "A threshold must move an entire tied-score group at once. Build operating points from unique scores so the reported precision and recall correspond to actual decisions.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": ["e14"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "precision_recall_points",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): scikit-learn precision-recall curve documentation. https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html",
+    ],
+}

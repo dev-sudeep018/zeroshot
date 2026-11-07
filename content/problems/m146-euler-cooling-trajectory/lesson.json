@@ -1,0 +1,45 @@
+{
+  "intro": "Explicit Euler converts a differential cooling rule into small discrete updates. The time-step size changes the numerical trajectory even when the underlying rate is fixed.",
+  "task": "Apply explicit Euler updates to a linear relaxation equation with bounded steps and report the trajectory.",
+  "signature": "cooling_euler(initial, ambient, rate, step_size, steps)",
+  "requirements": [
+    "initial and ambient are finite real scalars. rate is in [0,10000], step_size in [1e-6,10000], and rate*step_size<=1. steps is an integer in 0..64.",
+    "Return the steps+1 temperature estimates, including initial, for T_next=T-rate*step_size*(T-ambient).",
+    "The rate-step restriction keeps every update between the previous temperature and ambient; rate zero leaves temperature unchanged.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Cooling toward room temperature",
+      "input": "cooling_euler(100,20,.5,1,3)",
+      "output": "[100.0, 60.0, 40.0, 30.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Warming from below",
+      "input": "cooling_euler(0,20,.25,1,4)",
+      "output": "[0.0, 5.0, 8.75, 11.5625, 13.671875]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No cooling",
+      "input": "cooling_euler(30,20,0,1,3)",
+      "output": "[30.0, 30.0, 30.0, 30.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the rate-times-step coefficient before entering the update loop."
+    },
+    {
+      "title": "Build the result",
+      "body": "Save the starting value and append each explicit update based on the current temperature."
+    }
+  ],
+  "explanation": [
+    "Explicit Euler converts a differential cooling rule into small discrete updates. The time-step size changes the numerical trajectory even when the underlying rate is fixed.",
+    "With the documented coefficient bound each update is a convex combination of the current temperature and ambient. This guarantees monotone relaxation without overshoot for these exercises."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

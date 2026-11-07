@@ -1,0 +1,45 @@
+{
+  "intro": "Sometimes feature coordinates are implicit and only inner products are available. Double centering removes the feature mean directly from a Gram matrix.",
+  "task": "Center a square symmetric kernel matrix by subtracting its row and column means and restoring its grand mean.",
+  "signature": "center_kernel(kernel)",
+  "requirements": [
+    "kernel is a square matrix symmetric within absolute tolerance 1e-10. Positive semidefiniteness is not checked in this algebra exercise.",
+    "Return K-row_mean[:,None]-column_mean[None,:]+grand_mean with the same shape.",
+    "Center the supplied training kernel on both axes. Do not divide by a variance, subtract only the diagonal, or reuse this formula unchanged for an out-of-sample rectangular kernel.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two orthogonal features",
+      "input": "center_kernel([[1,0],[0,1]])",
+      "output": "[\n  [\n    0.5,\n    -0.5\n  ],\n  [\n    -0.5,\n    0.5\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Constant kernel",
+      "input": "center_kernel([[3,3],[3,3]])",
+      "output": "[\n  [\n    0.0,\n    0.0\n  ],\n  [\n    0.0,\n    0.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "One observation",
+      "input": "center_kernel([[7]])",
+      "output": "[\n  [\n    0.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Expand the inner product of two centered feature vectors to see the four terms needed in kernel space."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Subtract row and column means, then restore the grand mean because it was removed twice."
+    }
+  ],
+  "explanation": [
+    "If K=X X.T, centering the feature rows first gives (X-mean(X))(X-mean(X)).T. Expanding that product yields the two mean subtractions and one grand-mean addition.",
+    "A centered training Gram matrix has row and column sums near zero. Adding a constant to every original kernel entry disappears under the transformation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

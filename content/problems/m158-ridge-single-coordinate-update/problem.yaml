@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m158",
+  "kind": "lesson",
+  "slug": "ridge-single-coordinate-update",
+  "version": 1,
+  "title": "Minimize One Ridge Coordinate Exactly",
+  "summary": "Update one linear coefficient from the residual excluding that feature under a fixed squared-error and L2 convention.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Minimize One Ridge Coordinate Exactly"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "ridge_coordinate",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

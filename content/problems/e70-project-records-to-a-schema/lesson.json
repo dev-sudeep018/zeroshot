@@ -1,0 +1,44 @@
+{
+  "intro": "Projection makes heterogeneous records conform to a chosen output schema. It controls which fields leave the pipeline and supplies a consistent representation for absent values.",
+  "task": "Build uniform records from an ordered field list, filling absent fields with None.",
+  "signature": "project_records(records, fields)",
+  "requirements": [
+    "fields contains unique nonempty strings. Return new dictionaries with exactly those keys in the supplied order, filling absent fields with None and preserving present values.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Drop extras and fill gaps",
+      "input": "project_records([{'a':1,'c':9},{'b':2}], ['a','b'])",
+      "output": "[{'a': 1, 'b': None}, {'a': None, 'b': 2}]"
+    },
+    {
+      "name": "Empty schema",
+      "input": "project_records([{'a':1}], [])",
+      "output": "[{}]"
+    },
+    {
+      "name": "Preserve zero",
+      "input": "project_records([{'a':0}], ['a'])",
+      "output": "[{'a': 0}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Build each output dictionary by iterating over the schema fields."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "An empty field list still produces one empty record per input row."
+    }
+  ],
+  "explanation": [
+    "Projection makes heterogeneous records conform to a chosen output schema. It controls which fields leave the pipeline and supplies a consistent representation for absent values.",
+    "The schema order is explicit rather than inherited from arbitrary source dictionaries. This helps later CSV or column-oriented exports agree on field order."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

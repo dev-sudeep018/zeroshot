@@ -1,0 +1,44 @@
+{
+  "intro": "The Lorenz curve compares the poorest fraction of observations with the fraction of total amount they hold. Equal amounts follow the diagonal; concentration pushes the curve below it.",
+  "task": "Sort nonnegative amounts, build cumulative population and value shares, and derive Gini from trapezoidal area.",
+  "signature": "lorenz_summary(amounts)",
+  "requirements": [
+    "amounts is nonnegative with positive total. Sort ascending and prepend zero to cumulative population and amount shares.",
+    "Return {\"population\": n+1 equally spaced shares, \"share\": n+1 cumulative amount shares, \"gini\": 1-2*area under the piecewise-linear Lorenz curve}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Concentrated amount",
+      "input": "lorenz_summary([0,0,9])",
+      "output": "{'population': [0.0, 0.3333333333, 0.6666666667, 1.0],\n 'share': [0.0, 0.0, 0.0, 1.0],\n 'gini': 0.6666666667}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equal amounts",
+      "input": "lorenz_summary([2,2,2])",
+      "output": "{'population': [0.0, 0.3333333333, 0.6666666667, 1.0],\n 'share': [0.0, 0.3333333333, 0.6666666667, 1.0],\n 'gini': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unequal amounts",
+      "input": "lorenz_summary([1,2,3,4])",
+      "output": "{'population': [0.0, 0.25, 0.5, 0.75, 1.0],\n 'share': [0.0, 0.1, 0.3, 0.6, 1.0],\n 'gini': 0.25}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sort amounts before accumulating their share of the total."
+    },
+    {
+      "title": "Build the result",
+      "body": "Include the origin so trapezoid areas cover the entire population interval."
+    }
+  ],
+  "explanation": [
+    "The Lorenz curve compares the poorest fraction of observations with the fraction of total amount they hold. Equal amounts follow the diagonal; concentration pushes the curve below it.",
+    "The area gap from the equality line becomes the Gini coefficient after doubling. For a finite sample with all mass in one observation, the coefficient is 1-1/n rather than exactly one."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

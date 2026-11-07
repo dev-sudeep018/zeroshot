@@ -1,0 +1,45 @@
+{
+  "intro": "A temporal holdout must respect the direction of time. An embargo removes observations near the boundary so neighboring examples do not straddle the split.",
+  "task": "Partition observations around a time cutoff, retaining explicit indices for the embargoed gap.",
+  "signature": "temporal_split(times, cutoff, embargo=0.0)",
+  "requirements": [
+    "times is a finite numeric vector, possibly empty and unsorted. cutoff is a real scalar and embargo is a nonnegative real scalar.",
+    "Return integer index arrays train, test, and gap. Train uses times < cutoff-embargo; test uses times >= cutoff+embargo; gap contains everything else.",
+    "Preserve original row order and use half-open boundary conventions exactly. With zero embargo, times equal to cutoff belong to test.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Boundary embargo",
+      "input": "temporal_split([0,1,2,3,4], 2, 1)",
+      "output": "{'train': [0], 'test': [3, 4], 'gap': [1, 2]}"
+    },
+    {
+      "name": "Zero embargo",
+      "input": "temporal_split([1,2,3], 2)",
+      "output": "{'train': [0], 'test': [1, 2], 'gap': []}"
+    },
+    {
+      "name": "Unsorted timestamps",
+      "input": "temporal_split([4,0,2], 2, 1)",
+      "output": "{'train': [1], 'test': [0], 'gap': [2]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Define membership masks first",
+      "body": "Compute train and test masks independently using the stated strict and non-strict inequalities."
+    },
+    {
+      "title": "The gap is the complement",
+      "body": "Every row must belong to exactly one of the three returned index sets."
+    }
+  ],
+  "explanation": [
+    "A temporal split tests predictions on later observations. The embargo discards a band around the cutoff, which can reduce overlap between temporally adjacent examples.",
+    "The exact inequalities matter: the lower embargo boundary belongs to the gap, while the upper boundary belongs to test. This convention yields disjoint and exhaustive row sets."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

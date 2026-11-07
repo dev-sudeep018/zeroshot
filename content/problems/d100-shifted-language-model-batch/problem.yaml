@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d100",
+  "kind": "lesson",
+  "slug": "shifted-language-model-batch",
+  "version": 1,
+  "title": "Build Next-Token Training Pairs",
+  "summary": "A causal language model predicts the token after each input position. Padding must not accidentally become a training target.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Build Next-Token Training Pairs"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "shift_language_batch",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://huggingface.co/docs/transformers/tasks/language_modeling",
+    ],
+}

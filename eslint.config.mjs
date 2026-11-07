@@ -6,6 +6,7 @@ export default ts.config(
     ignores: [
       "**/node_modules/**",
       "**/.next/**",
+      "**/.next-auth/**",
       "**/out/**",
       "**/public/**",
       "**/generated/**",

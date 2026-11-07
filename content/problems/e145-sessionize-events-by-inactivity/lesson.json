@@ -1,0 +1,44 @@
+{
+  "intro": "Session boundaries depend on inactivity between neighboring events. A long session can continue indefinitely while each next event arrives within the timeout.",
+  "task": "Start a new session only when the sorted timestamp gap strictly exceeds a timeout.",
+  "signature": "sessionize(timestamps, timeout)",
+  "requirements": [
+    "Require nondecreasing integer timestamps and integer timeout >=0. Return lists of zero-based event indices. Start a new session only if the gap from the previous event is strictly greater than timeout; equality remains in the session. Empty input returns [].",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Separate after inactivity",
+      "input": "sessionize([0,2,5,11,12],5)",
+      "output": "[[0, 1, 2], [3, 4]]"
+    },
+    {
+      "name": "Exact timeout stays",
+      "input": "sessionize([0,5,10],5)",
+      "output": "[[0, 1, 2]]"
+    },
+    {
+      "name": "Zero timeout",
+      "input": "sessionize([1,1,2,2,3],0)",
+      "output": "[[0, 1], [2, 3], [4]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compare consecutive events rather than measuring from the first event in a session."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep equal timestamps together even when the timeout is zero."
+    }
+  ],
+  "explanation": [
+    "Session boundaries depend on inactivity between neighboring events. A long session can continue indefinitely while each next event arrives within the timeout.",
+    "Returning indices preserves a link to original records even when timestamps repeat. Sorting is required from the caller so the function does not silently reorder observations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Elimination turns a coupled linear system into an upper-triangular one. Partial pivoting avoids dividing by a needlessly small entry when a larger one is available below it.",
+  "task": "Perform elimination and back substitution with row pivoting and a documented singularity threshold.",
+  "signature": "pivoted_linear_solve(matrix, target)",
+  "requirements": [
+    "matrix is square with size 1..8; target has matching length. At each elimination column choose the remaining row with largest absolute pivot, choosing the first row on ties.",
+    "Reject any chosen pivot with magnitude <1e-10. Return the solution vector after row elimination and back substitution.",
+    "Work on copies and swap corresponding target entries when swapping rows. Do not call a built-in linear solver.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Row swap required",
+      "input": "pivoted_linear_solve([[0,2],[3,4]],[4,11])",
+      "output": "[1.0, 2.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Three equations",
+      "input": "pivoted_linear_solve([[2,1,-1],[-3,-1,2],[-2,1,2]],[8,-11,-3])",
+      "output": "[2.0, 3.0, -1.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single equation",
+      "input": "pivoted_linear_solve([[4]],[10])",
+      "output": "[2.5]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Choose a pivot row from the still-unprocessed rows before eliminating below it."
+    },
+    {
+      "title": "Build the result",
+      "body": "Carry row swaps and elimination into the target vector, then solve from the last equation upward."
+    }
+  ],
+  "explanation": [
+    "Elimination turns a coupled linear system into an upper-triangular one. Partial pivoting avoids dividing by a needlessly small entry when a larger one is available below it.",
+    "The target vector is part of each equation, so every row operation must affect it too. A residual against the original unmodified system verifies the result independently."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

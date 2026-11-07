@@ -1,0 +1,45 @@
+{
+  "intro": "A draft model proposes tokens cheaply, while a target model verifies them. Rejection requires a corrected distribution, not ordinary target resampling.",
+  "task": "Verify a supplied draft prefix, stopping at rejection and constructing the target-minus-draft correction distribution.",
+  "signature": "verify_draft(draft_probs, target_probs, tokens, uniforms)",
+  "requirements": [
+    "draft_probs and target_probs are same-shaped nonnegative (T,V) probability matrices with positive dimensions and row sums within 1e-8 of one; normalize each row by its sum before verification. tokens is a length-T integer vector of valid vocabulary indices.",
+    "uniforms is a length-T vector in [0,1). For each proposed token require positive draft probability. Accept while u < min(1,p_token/q_token); stop at the first rejection.",
+    "Return dict accepted as a Python token list, rejected_at as its first rejected index or -1, and correction as normalized max(p-q,0) for that row. If all tokens are accepted return an all-zero correction vector. This verifies a supplied prefix and does not generate a bonus token.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Reject overrepresented draft token",
+      "input": "verify_draft([[.8,.2]], [[.2,.8]], [0], [.5])",
+      "output": "{'accepted': [], 'rejected_at': 0, 'correction': [0.0, 1.0]}"
+    },
+    {
+      "name": "Equal models accept",
+      "input": "verify_draft([[.5,.5]], [[.5,.5]], [1], [.99])",
+      "output": "{'accepted': [1], 'rejected_at': -1, 'correction': [0.0, 0.0]}"
+    },
+    {
+      "name": "Stop after accepted prefix",
+      "input": "verify_draft([[.5,.5],[.8,.2]], [[.5,.5],[.2,.8]], [1,0], [.9,.5])",
+      "output": "{'accepted': [1], 'rejected_at': 1, 'correction': [0.0, 1.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use the proposed token ratio",
+      "body": "Acceptance depends on target mass divided by draft mass at the proposed token."
+    },
+    {
+      "title": "Correct for already-overproduced tokens",
+      "body": "The residual distribution keeps only positive target-minus-draft mass."
+    }
+  ],
+  "explanation": [
+    "Acceptance reweights draft proposals toward the target distribution. On rejection, the residual distribution supplies probability mass the draft underrepresented.",
+    "The caller supplies probabilities conditioned on the appropriate prefix and reproducible uniform draws. This lesson isolates verification and leaves model execution, replacement sampling, and bonus-token generation outside the contract."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

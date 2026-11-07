@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d127",
+  "kind": "lesson",
+  "slug": "hidden-neuron-permutation",
+  "version": 1,
+  "title": "Reorder Hidden Neurons without Changing a Network",
+  "summary": "Hidden-neuron indices are arbitrary. Reordering a hidden layer preserves the represented function when its incoming and outgoing connections move together.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Reorder Hidden Neurons without Changing a Network"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "permute_hidden",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/",
+    ],
+}

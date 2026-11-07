@@ -1,0 +1,45 @@
+{
+  "intro": "Hidden units of a feedforward layer can be split into independent branches. Each branch produces a full output contribution that must be summed.",
+  "task": "Implement sharded_mlp(x, up_shards, down_shards). The elementwise activation can be evaluated independently on each hidden shard. The final sum matches multiplying the concatenated hidden features by the vertically stacked down weights.",
+  "signature": "sharded_mlp(x, up_shards, down_shards)",
+  "requirements": [
+    "x is (B,D), up_shards is (S,D,H), down_shards is (S,H,O); all dimensions positive. Each shard has H hidden units.",
+    "For shard s compute exact GELU(x@up_shards[s])@down_shards[s], with GELU(z)=z*(1+erf(z/sqrt(2)))/2. Sum over S.",
+    "Return (B,O). There are no biases, communication libraries, learned parameters or simulated speed measurements.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Zero hidden activation",
+      "input": "sharded_mlp([[0]],[[[2]]],[[[3]]])",
+      "output": "[[0.0]]"
+    },
+    {
+      "name": "One exact GELU branch",
+      "input": "sharded_mlp([[1]],[[[1]]],[[[1]]])",
+      "output": "[[0.841344746069]]"
+    },
+    {
+      "name": "Opposite hidden branches",
+      "input": "sharded_mlp([[1]],[[[1]],[[-1]]],[[[1]],[[-1]]])",
+      "output": "[[1.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Concatenating the up projections forms the complete hidden layer."
+    },
+    {
+      "title": "Step 2",
+      "body": "Down projections produce the same output coordinates, so sum their partial results."
+    }
+  ],
+  "explanation": [
+    "The elementwise activation can be evaluated independently on each hidden shard. The final sum matches multiplying the concatenated hidden features by the vertically stacked down weights.",
+    "This adapts the upstream tensor-parallel MLP arithmetic to supplied NumPy shards. The operation illustrates the reduction semantics without launching distributed workers."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

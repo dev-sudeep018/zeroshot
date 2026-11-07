@@ -1,0 +1,45 @@
+{
+  "intro": "Once points have cluster assignments, the least-squares center of each group is its mean. Empty clusters require a separate policy.",
+  "task": "Re-estimate centroids from fixed assignments while preserving a previous center for any empty group.",
+  "signature": "update_centroids(points, labels, previous)",
+  "requirements": [
+    "points has shape (n,d), previous has shape (k,d), and labels is a matching vector of integer-valued cluster IDs in [0,k-1].",
+    "Return a new (k,d) matrix. For each nonempty cluster, average its assigned rows of points.",
+    "For an empty cluster, copy its corresponding previous center. Do not reassign points or renumber cluster IDs.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two means",
+      "input": "update_centroids([[0],[2],[10]],[0,0,1],[[9],[9]])",
+      "output": "[\n  [\n    1.0\n  ],\n  [\n    10.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Empty cluster",
+      "input": "update_centroids([[2],[4]],[0,0],[[0],[99]])",
+      "output": "[\n  [\n    3.0\n  ],\n  [\n    99.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Two features",
+      "input": "update_centroids([[0,2],[2,4]],[0,0],[[9,9]])",
+      "output": "[\n  [\n    1.0,\n    3.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Gather the rows for one cluster ID at a time; membership is supplied and stays fixed."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Begin with a copy of previous centers so an empty group already has its specified fallback."
+    }
+  ],
+  "explanation": [
+    "For fixed membership, differentiating the sum of squared distances with respect to a center gives the group mean. This is the update step of Lloyd-style k-means.",
+    "An empty group has no mean. Keeping its previous center makes the behavior explicit without silently changing the number or identity of clusters."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

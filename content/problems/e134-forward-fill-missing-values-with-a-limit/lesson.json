@@ -1,0 +1,44 @@
+{
+  "intro": "Forward filling uses only earlier observations, which avoids leaking future information into a time-ordered dataset. A limit prevents stale measurements from propagating indefinitely.",
+  "task": "Carry earlier observed values through bounded None runs without using future data.",
+  "signature": "forward_fill(values, limit)",
+  "requirements": [
+    "values contains bounded plain data; None marks missingness. limit is an integer 0..1000. Replace at most limit consecutive None values after each non-None observation with copied observation values. Leading None values remain; filling does not reset the run limit.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Bounded missing run",
+      "input": "forward_fill([1,None,None,None,2,None], 2)",
+      "output": "[1, 1, 1, None, 2, 2]"
+    },
+    {
+      "name": "Leading missing values",
+      "input": "forward_fill([None,None,3,None], 1)",
+      "output": "[None, None, 3, 3]"
+    },
+    {
+      "name": "Zero and false observed",
+      "input": "forward_fill([0,None,False,None], 1)",
+      "output": "[0, 0, False, False]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Track consecutive missing positions since the latest observed value."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A filled position is not a new observation; it must not restart the limit."
+    }
+  ],
+  "explanation": [
+    "Forward filling uses only earlier observations, which avoids leaking future information into a time-ordered dataset. A limit prevents stale measurements from propagating indefinitely.",
+    "Only None is missing in this exercise. Zero and False are observations and must become eligible fill values rather than being skipped."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

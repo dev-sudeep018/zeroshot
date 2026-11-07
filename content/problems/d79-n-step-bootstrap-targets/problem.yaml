@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d79",
+  "kind": "lesson",
+  "slug": "n-step-bootstrap-targets",
+  "version": 1,
+  "title": "Stop an N-Step Target at the Right Boundary",
+  "summary": "An n-step target combines several observed rewards with a later value prediction. A terminal event or rollout boundary can shorten that lookahead.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    ["Reinforcement learning", "Stop an N-Step Target at the Right Boundary"],
+  "prerequisites": ["d70", "d72"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "n_step_targets",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+    ],
+}

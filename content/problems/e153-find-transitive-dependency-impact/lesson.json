@@ -1,0 +1,44 @@
+{
+  "intro": "Change impact finds downstream consumers that may need review after an input changes. It follows the direction in which data or build results flow.",
+  "task": "Return all downstream components affected by changed IDs, excluding seeds from results.",
+  "signature": "downstream_impact(dependencies, changed)",
+  "requirements": [
+    "dependencies has unique prerequisite lists whose IDs all exist as keys; cycles are permitted for impact analysis. changed contains unique known IDs. Return every task reachable downstream from any changed ID, excluding all changed IDs, in dictionary key order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Transitive chain",
+      "input": "downstream_impact({'a':[],'b':['a'],'c':['b']},['a'])",
+      "output": "['b', 'c']"
+    },
+    {
+      "name": "Exclude all seeds",
+      "input": "downstream_impact({'a':[],'b':['a'],'c':['b']},['a','b'])",
+      "output": "['c']"
+    },
+    {
+      "name": "Cycle terminates",
+      "input": "downstream_impact({'a':['b'],'b':['a'],'c':['b']},['a'])",
+      "output": "['b', 'c']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Propagate impact along prerequisite-to-dependent edges, not in the reverse direction."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Maintain a visited set so cycles terminate and shared descendants appear once."
+    }
+  ],
+  "explanation": [
+    "Change impact finds downstream consumers that may need review after an input changes. It follows the direction in which data or build results flow.",
+    "Unlike execution ordering, impact reachability can be computed on a cyclic graph. Excluding every seed keeps the report focused on additional affected components."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

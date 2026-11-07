@@ -1,0 +1,45 @@
+{
+  "intro": "Independent events need not have equal probabilities. Their count distribution is built by combining two-outcome contributions rather than applying a single-rate binomial formula.",
+  "task": "Use independent event probabilities to compute the full count distribution and aggregate categories.",
+  "signature": "independent_event_counts(probabilities)",
+  "requirements": [
+    "probabilities is a vector of independent event probabilities in [0,1], not necessarily summing to one.",
+    "Return {\"counts\": probabilities of exactly k events for k=0..n, \"none\": P(0), \"one\": P(1), \"several\": P(k>=2)}.",
+    "Allow zero and one probabilities. Each event contributes either zero or one to the total count.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three unequal events",
+      "input": "independent_event_counts([.2,.5,.8])",
+      "output": "{'counts': [0.08, 0.42, 0.42, 0.08], 'none': 0.08, 'one': 0.42, 'several': 0.5}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Certain and impossible",
+      "input": "independent_event_counts([1,0,1])",
+      "output": "{'counts': [0.0, 0.0, 1.0, 0.0], 'none': 0.0, 'one': 0.0, 'several': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single event",
+      "input": "independent_event_counts([.3])",
+      "output": "{'counts': [0.7, 0.3], 'none': 0.7, 'one': 0.3, 'several': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Begin with probability one at count zero before processing any event."
+    },
+    {
+      "title": "Build the result",
+      "body": "A new event sends each old count mass to the same count on failure and one higher count on success."
+    }
+  ],
+  "explanation": [
+    "Independent events need not have equal probabilities. Their count distribution is built by combining two-outcome contributions rather than applying a single-rate binomial formula.",
+    "Use a fresh array for each event so updates do not feed into themselves. The count probabilities sum to one, and their mean equals the sum of individual event probabilities."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

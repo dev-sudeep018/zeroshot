@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m59",
+  "kind": "lesson",
+  "slug": "pinball-quantile-loss",
+  "version": 1,
+  "title": "Train for an Asymmetric Quantile",
+  "summary": "An average prediction treats underestimates and overestimates symmetrically. Quantile loss changes that balance to target a chosen part of a distribution.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Train for an Asymmetric Quantile"],
+  "prerequisites": ["m25", "m39"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "pinball_loss",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

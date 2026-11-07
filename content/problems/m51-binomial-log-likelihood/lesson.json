@@ -1,0 +1,45 @@
+{
+  "intro": "The probability of a count combines the number of compatible sequences with the likelihood of each sequence. Log space keeps those factors manageable.",
+  "task": "Compute the log probability of exactly successes events in trials independent Bernoulli observations.",
+  "signature": "binomial_log_likelihood(successes, trials, probability)",
+  "requirements": [
+    "trials is an integer in [0,1000000] and successes is an integer in [0,trials]. probability is a scalar in [0,1].",
+    "Return log(combination(trials,successes))+successes*log(probability)+(trials-successes)*log(1-probability). Use log-gamma for the combination and skip zero-count terms.",
+    "An endpoint probability is valid only when the requested count is possible; otherwise raise ValueError instead of returning negative infinity. Zero trials returns zero for every valid probability.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One success in two trials",
+      "input": "binomial_log_likelihood(1,2,.5)",
+      "output": "-0.69314718\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Two successes in three trials",
+      "input": "binomial_log_likelihood(2,3,.5)",
+      "output": "-0.98082925\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "No successes",
+      "input": "binomial_log_likelihood(0,4,.5)",
+      "output": "-2.77258872\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "A count can occur through many ordered sequences; the combinatorial term accounts for all of them."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Skip terms whose event count is zero before taking endpoint logarithms, and reject impossible positive-count events."
+    }
+  ],
+  "explanation": [
+    "The binomial coefficient counts which trial positions could contain the observed successes. Omitting it computes one particular sequence probability rather than the probability of the count.",
+    "Zero observations contribute no evidence. Endpoint probabilities need explicit handling so that a zero count times log(0) does not produce an undefined intermediate value."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

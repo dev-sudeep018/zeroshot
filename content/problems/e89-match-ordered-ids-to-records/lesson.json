@@ -1,0 +1,44 @@
+{
+  "intro": "A lookup join must preserve the order and multiplicity of the requesting side. Sorting or deduplicating requested IDs would break alignment with the caller\u2019s other data.",
+  "task": "Resolve a requested ID list against unique records and retain missing positions.",
+  "signature": "resolve_ids(records, requested)",
+  "requirements": [
+    "Each record has a unique nonempty string id. requested contains nonempty strings, possibly repeated. Return records aligned with requested IDs, using None for missing IDs, plus missing_positions.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Requested order",
+      "input": "resolve_ids([{'id':'a'},{'id':'b'}], ['b','a'])",
+      "output": "{'records': [{'id': 'b'}, {'id': 'a'}], 'missing_positions': []}"
+    },
+    {
+      "name": "Missing alignment",
+      "input": "resolve_ids([{'id':'a'}], ['z','a'])",
+      "output": "{'records': [None, {'id': 'a'}], 'missing_positions': [0]}"
+    },
+    {
+      "name": "Repeated request",
+      "input": "resolve_ids([{'id':'a'}], ['a','a'])",
+      "output": "{'records': [{'id': 'a'}, {'id': 'a'}], 'missing_positions': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Construct the unique lookup once, then walk the request sequence."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep a None slot for every missing request so later matches do not shift left."
+    }
+  ],
+  "explanation": [
+    "A lookup join must preserve the order and multiplicity of the requesting side. Sorting or deduplicating requested IDs would break alignment with the caller\u2019s other data.",
+    "Missing-position metadata distinguishes absent records explicitly. Returning only successful matches would hide both the missing IDs and their intended positions."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Ordinary zip stops at the shortest input and can discard data. Explicit padding retains every supplied cell when source columns have unequal lengths.",
+  "task": "Combine columns into rows up to the longest column using None padding.",
+  "signature": "zip_columns(columns)",
+  "requirements": [
+    "columns is a list of item sequences. Return rows up to the longest column length, padding missing cells with None. No columns or only empty columns returns an empty list.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Unequal lengths",
+      "input": "zip_columns([[1,2],['a']])",
+      "output": "[[1, 'a'], [2, None]]"
+    },
+    {
+      "name": "Empty first column",
+      "input": "zip_columns([[],[1,2]])",
+      "output": "[[None, 1], [None, 2]]"
+    },
+    {
+      "name": "Equal lengths",
+      "input": "zip_columns([[1,2],[3,4]])",
+      "output": "[[1, 3], [2, 4]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "The output row count is the maximum column length, not the minimum."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Test whether a cell exists before indexing; None padding does not shift rows."
+    }
+  ],
+  "explanation": [
+    "Ordinary zip stops at the shortest input and can discard data. Explicit padding retains every supplied cell when source columns have unequal lengths.",
+    "The result is rectangular, with one cell per column in each row. None is a padding marker here, so downstream code must know whether actual None values are also possible."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

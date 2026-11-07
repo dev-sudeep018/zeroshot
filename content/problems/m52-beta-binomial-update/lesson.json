@@ -1,0 +1,45 @@
+{
+  "intro": "A probability estimate should distinguish its center from its uncertainty. Beta conjugacy updates both using observed successes and failures.",
+  "task": "Return posterior Beta parameters, posterior mean, and posterior variance after binary observations.",
+  "signature": "beta_update(alpha, beta, successes, failures)",
+  "requirements": [
+    "alpha and beta are scalars in [1e-8,1e6]. successes and failures are integers in [0,1000000].",
+    "Set a=alpha+successes and b=beta+failures. Return {\"alpha\": a, \"beta\": b, \"mean\": a/(a+b), \"variance\": a*b/((a+b)**2*(a+b+1))}.",
+    "Return posterior uncertainty about the unknown success probability, not the Bernoulli variance of the next binary observation. Zero observations retain the prior.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Uniform prior and one success",
+      "input": "beta_update(1,1,1,0)",
+      "output": "{\n  \"alpha\": 2,\n  \"beta\": 1,\n  \"mean\": 0.66666667,\n  \"variance\": 0.05555556\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "No observations",
+      "input": "beta_update(1,1,0,0)",
+      "output": "{\n  \"alpha\": 1,\n  \"beta\": 1,\n  \"mean\": 0.5,\n  \"variance\": 0.08333333\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Balanced evidence",
+      "input": "beta_update(1,1,4,4)",
+      "output": "{\n  \"alpha\": 5,\n  \"beta\": 5,\n  \"mean\": 0.5,\n  \"variance\": 0.02272727\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Treat success and failure counts as additions to different concentration parameters."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Compute the posterior parameter variance separately from the variance of a single future binary draw."
+    }
+  ],
+  "explanation": [
+    "Successes add to alpha and failures add to beta. The posterior mean moves toward the observed success fraction, while the total concentration records how much evidence supports that center.",
+    "Two Beta distributions can share the same mean and have different variances. The posterior variance describes uncertainty about a probability parameter, not variability of a single future outcome."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

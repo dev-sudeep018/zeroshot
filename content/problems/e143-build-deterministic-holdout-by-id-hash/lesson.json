@@ -1,0 +1,44 @@
+{
+  "intro": "Stable holdout assignment helps preserve evaluation membership as a dataset grows. Every ID is classified independently, so reordering a file cannot change its membership.",
+  "task": "Assign each distinct string ID to a stable split using a documented SHA-256 bucket.",
+  "signature": "hash_holdout(ids, holdout_buckets)",
+  "requirements": [
+    "Require unique nonempty string IDs and an integer holdout_buckets from 0 to 10000. Compute each ID SHA-256 on UTF-8, interpret the first eight digest bytes as an unsigned big-endian integer, then take modulo 10000. Assign buckets below holdout_buckets to holdout and others to train; return both ID lists in input order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed hash buckets",
+      "input": "hash_holdout(['a','b','abc'],5000)",
+      "output": "{'train': ['b'], 'holdout': ['a', 'abc']}"
+    },
+    {
+      "name": "Bucket equality stays training",
+      "input": "hash_holdout(['a','abc'],2250)",
+      "output": "{'train': ['a'], 'holdout': ['abc']}"
+    },
+    {
+      "name": "Threshold just above bucket",
+      "input": "hash_holdout(['b','a'],2251)",
+      "output": "{'train': ['b'], 'holdout': ['a']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Hash each ID separately so adding a new ID cannot move an old one."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use bytes in the documented order; do not use Python hash(), which varies between processes."
+    }
+  ],
+  "explanation": [
+    "Stable holdout assignment helps preserve evaluation membership as a dataset grows. Every ID is classified independently, so reordering a file cannot change its membership.",
+    "Hash buckets approximate a requested proportion; they do not guarantee exact split sizes. Identical subjects must share an ID if leakage between their records must be prevented."
+  ],
+  "formula": null,
+  "test_count": 13,
+  "sample_count": 3
+}

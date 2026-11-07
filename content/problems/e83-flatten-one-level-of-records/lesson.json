@@ -1,0 +1,44 @@
+{
+  "intro": "One-level flattening removes transport batches while preserving the structure of each record. Recursive flattening would corrupt a record whose payload is itself a sequence.",
+  "task": "Flatten batches exactly one level, preserving nested record payloads.",
+  "signature": "flatten_batches(batches)",
+  "requirements": [
+    "Return all items from each batch in order, flattening exactly one sequence level. Nested lists inside an item remain nested; each batch must be a list or tuple.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Keep nested payload",
+      "input": "flatten_batches([[1,[2,3]],[4]])",
+      "output": "[1, [2, 3], 4]"
+    },
+    {
+      "name": "Empty batches skipped",
+      "input": "flatten_batches([[],[1],[]])",
+      "output": "[1]"
+    },
+    {
+      "name": "Records remain records",
+      "input": "flatten_batches([[{'x':1}],[{'x':2}]])",
+      "output": "[{'x': 1}, {'x': 2}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use one loop for batches and another for their items."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not recurse into an item that happens to be a list."
+    }
+  ],
+  "explanation": [
+    "One-level flattening removes transport batches while preserving the structure of each record. Recursive flattening would corrupt a record whose payload is itself a sequence.",
+    "The operation is an inverse of count-based batching when records are treated as indivisible items. Empty batches contribute no items and need no special placeholder."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

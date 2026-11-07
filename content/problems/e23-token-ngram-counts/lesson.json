@@ -1,0 +1,45 @@
+{
+  "intro": "Phrase statistics depend on overlapping windows: repeated phrases should increase a count, while a short document may contain no complete window.",
+  "task": "Build an overlapping phrase counter and inspect how repeated windows differ from a vocabulary set.",
+  "signature": "ngram_counts(tokens, n)",
+  "requirements": [
+    "tokens is a list or tuple of at most 10000 nonempty strings; n is an integer from 1 to 10000. Tokens are already segmented and case is significant.",
+    "Return a dictionary whose keys are tuples of n adjacent tokens and whose values are integer occurrence counts. Count overlapping windows.",
+    "Return an empty dictionary for an empty sequence or when n exceeds the token count. Do not join tokens into ambiguous string keys.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Overlapping repetition",
+      "input": "ngram_counts(['a','a','a'], 2)",
+      "output": "{('a', 'a'): 2}"
+    },
+    {
+      "name": "Unigram frequencies",
+      "input": "ngram_counts(['a','b','a'], 1)",
+      "output": "{('a',): 2, ('b',): 1}"
+    },
+    {
+      "name": "Window longer than text",
+      "input": "ngram_counts(['a'], 2)",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Slide one position",
+      "body": "Advance the start index by one even after finding a repeated phrase."
+    },
+    {
+      "title": "Keep token boundaries",
+      "body": "A tuple distinguishes a multiword token from two separate tokens."
+    }
+  ],
+  "explanation": [
+    "There are max(0, L-n+1) windows in a sequence of length L. Counting these windows produces a multiset rather than a set of phrases.",
+    "Overlaps are essential: the bigram (a,a) occurs twice in three consecutive a tokens. This representation is useful for corpus diagnostics and language-model statistics."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

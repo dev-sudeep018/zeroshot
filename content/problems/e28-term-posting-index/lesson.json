@@ -1,0 +1,45 @@
+{
+  "intro": "A retrieval engine can avoid scanning every document by storing where each term occurs. Positional postings also preserve the evidence needed for phrase queries.",
+  "task": "Build positional postings that recover every occurrence of a term while preserving original document IDs.",
+  "signature": "posting_index(documents)",
+  "requirements": [
+    "documents is a list or tuple of at most 1000 documents; each document is a list or tuple of at most 10000 nonempty string tokens.",
+    "Return a dictionary term -> list of [document_id, positions], where positions is a list of zero-based token offsets. Include each document once per term.",
+    "Document IDs and positions must be ascending. Empty documents contribute no postings. Matching is exact and case-sensitive.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repeated term keeps positions",
+      "input": "posting_index([['a','b','a'], ['b']])",
+      "output": "{'a': [[0, [0, 2]]], 'b': [[0, [1]], [1, [0]]]}"
+    },
+    {
+      "name": "Empty corpus",
+      "input": "posting_index([])",
+      "output": "{}"
+    },
+    {
+      "name": "Empty document preserves IDs",
+      "input": "posting_index([[], ['x']])",
+      "output": "{'x': [[1, [0]]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Group within each document",
+      "body": "Collect all positions for a term before appending a posting."
+    },
+    {
+      "title": "Keep original document IDs",
+      "body": "An empty document still occupies its original corpus index."
+    }
+  ],
+  "explanation": [
+    "A positional inverted index maps vocabulary items back to documents and offsets. Repeated terms produce multiple positions within one posting rather than duplicate document entries.",
+    "The construction cost is linear in total token count. This index supplies exact evidence for Boolean and phrase retrieval without assigning a relevance score."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

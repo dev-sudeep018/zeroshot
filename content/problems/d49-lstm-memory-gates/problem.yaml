@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d49",
+  "kind": "lesson",
+  "slug": "lstm-memory-gates",
+  "version": 1,
+  "title": "Separate LSTM Cell Memory from Hidden Output",
+  "summary": "An LSTM stores cell memory separately from visible hidden output. Inspect write, retention and read gates using supplied preactivations.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["LSTM", "Gating"],
+  "prerequisites": ["d08", "d48"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "lstm_step",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Reparameterization expresses a sampled latent value as a deterministic function of parameters and a fixed noise draw. This makes its parameter derivatives explicit.",
+  "task": "Implement reparameterization_backward(mean, log_variance, noise, upstream). Holding noise fixed creates a deterministic path from distribution parameters to one sampled latent value. The derivative with respect to log variance changes sign with the noise draw.",
+  "signature": "reparameterization_backward(mean, log_variance, noise, upstream)",
+  "requirements": [
+    "All four arrays match nonempty (B,D). log_variance is in [-60,60]. noise is supplied and held constant during differentiation.",
+    "Forward latent=mean+exp(0.5*log_variance)*noise. Return {mean: upstream.copy(), log_variance: 0.5*upstream*exp(0.5*log_variance)*noise}.",
+    "Output arrays match input shape. Do not sample new noise, sum over examples, or include an extra KL gradient.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Unit scale",
+      "input": "reparameterization_backward([[0]],[[0]],[[2]],[[3]])",
+      "output": "{\"mean\": [[3.0]], \"log_variance\": [[3.0]]}"
+    },
+    {
+      "name": "Zero noise",
+      "input": "reparameterization_backward([[9]],[[0]],[[0]],[[3]])",
+      "output": "{\"mean\": [[3.0]], \"log_variance\": [[0.0]]}"
+    },
+    {
+      "name": "Variance four",
+      "input": "reparameterization_backward([[0]],[[np.log(4)]],[[2]],[[3]])",
+      "output": "{\"mean\": [[3.0]], \"log_variance\": [[6.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Log variance needs a factor of one half before exponentiation."
+    },
+    {
+      "title": "Step 2",
+      "body": "Mean has derivative one even when the sampled noise is zero."
+    }
+  ],
+  "explanation": [
+    "Holding noise fixed creates a deterministic path from distribution parameters to one sampled latent value. The derivative with respect to log variance changes sign with the noise draw.",
+    "These are pathwise derivatives for a supplied upstream objective. They are not derivatives of the Gaussian density or of the analytic KL term."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

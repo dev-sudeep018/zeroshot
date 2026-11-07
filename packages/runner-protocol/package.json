@@ -1,5 +1,5 @@
 {
-  "name": "@mastery/runner-protocol",
+  "name": "@zeroshot/runner-protocol",
   "version": "0.1.0",
   "private": true,
   "type": "module",

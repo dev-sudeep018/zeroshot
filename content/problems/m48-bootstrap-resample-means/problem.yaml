@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m48",
+  "kind": "lesson",
+  "slug": "bootstrap-resample-means",
+  "version": 1,
+  "title": "Audit Supplied Bootstrap Resamples",
+  "summary": "Bootstrap resampling repeatedly draws observations with replacement. Supplied draws separate the statistic from random-number generation.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Audit Supplied Bootstrap Resamples"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bootstrap_means",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

@@ -1,0 +1,1412 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-26",
+  "previous_lessons": 81,
+  "added_lessons": 119,
+  "published_lessons": 200,
+  "project_checkpoints": 1,
+  "public_cases": 2244,
+  "added_public_cases": 1246,
+  "items": [
+    {
+      "id": "d41",
+      "title": "Control a Normalized Branch with a Gate",
+      "objective": "Implement conditional_gate(x, scale, shift, gate, epsilon=1e-6). A gate of zero closes this branch even if the conditioning shift is nonzero. A constant token has zero normalized features and therefore exposes only gate*shift.",
+      "folder": "d41-conditional-normalization-gate",
+      "domain": "deep-learning",
+      "prerequisites": ["d03"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/adaln_zero.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d42",
+      "title": "Share Key and Value Heads across Query Groups",
+      "objective": "Implement grouped_attention(queries, keys, values). Different queries sharing the same keys can still produce different mixtures. Sharing a value head does not force the outputs of its query group to be identical.",
+      "folder": "d42-grouped-query-heads",
+      "domain": "deep-learning",
+      "prerequisites": ["d04"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/gqa.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d43",
+      "title": "Subtract Two Attention Maps",
+      "objective": "Implement differential_attention(q1, k1, q2, k2, values, coefficient). Signed mixing can produce outputs outside the range of the supplied values. That is expected because the subtraction removes the convex-combination constraint.",
+      "folder": "d43-differential-attention",
+      "domain": "deep-learning",
+      "prerequisites": ["d04"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/diff_attention.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d44",
+      "title": "Learn a Mixture over Graph Neighbors",
+      "objective": "Implement graph_attention(features, adjacency, weights, attention, negative_slope=0.2). Adjacency specifies presence, not attention magnitude. A self-edge participates only when explicitly supplied.",
+      "folder": "d44-graph-attention-neighbors",
+      "domain": "deep-learning",
+      "prerequisites": ["d28"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/gat_layer.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d45",
+      "title": "Build Messages from Nodes and Edge Features",
+      "objective": "Implement edge_messages(features, adjacency, edges, message_weights, update_weights). Two edges linking otherwise identical nodes can carry different messages through their edge features. A node with no incoming weight can still retain its own features through the update projection.",
+      "folder": "d45-edge-conditioned-messages",
+      "domain": "deep-learning",
+      "prerequisites": ["d29"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/mpnn_layer.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d46",
+      "title": "Advance a Diagonal State-Space Memory",
+      "objective": "Implement state_space_step(x, state, decay, input_weights, output_weights, delta). Restricting decay to nonpositive values prevents exponential growth of the retained memory. The input term still depends linearly on the time step.",
+      "folder": "d46-selective-state-space-step",
+      "domain": "deep-learning",
+      "prerequisites": ["d02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/mamba_ssm.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d47",
+      "title": "Recombine a Feedforward Layer from Shards",
+      "objective": "Implement sharded_mlp(x, up_shards, down_shards). The elementwise activation can be evaluated independently on each hidden shard. The final sum matches multiplying the concatenated hidden features by the vertically stacked down weights.",
+      "folder": "d47-sharded-mlp-reduction",
+      "domain": "deep-learning",
+      "prerequisites": ["d23"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/tensor_parallel.py",
+        "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0."
+      ]
+    },
+    {
+      "id": "d48",
+      "title": "Carry a Hidden State through a Sequence",
+      "objective": "Implement recurrent_states(inputs, initial, input_weights, recurrent_weights, bias). Nonzero recurrence lets earlier inputs affect later outputs through hidden state. Reversing a sequence generally changes more than the output order.",
+      "folder": "d48-vanilla-recurrent-state",
+      "domain": "deep-learning",
+      "prerequisites": ["d02", "d08"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d49",
+      "title": "Separate LSTM Cell Memory from Hidden Output",
+      "objective": "Implement lstm_step(cell, input_logits, forget_logits, output_logits, candidate_logits). A closed output gate can conceal information that remains in the cell. Treating hidden output as the next cell loses this distinction.",
+      "folder": "d49-lstm-memory-gates",
+      "domain": "deep-learning",
+      "prerequisites": ["d08", "d48"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d50",
+      "title": "Distinguish GRU Reset from Update Gates",
+      "objective": "Implement gru_step(previous, update_logits, reset_logits, input_candidate, recurrent_candidate). Closing reset prevents the recurrent contribution from shaping the candidate. Update can still retain old state directly.",
+      "folder": "d50-gru-reset-and-update",
+      "domain": "deep-learning",
+      "prerequisites": ["d08", "d48"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d51",
+      "title": "Keep the Identity Path during Backpropagation",
+      "objective": "Implement residual_backward(x, weights, upstream). When all branch activations are negative, the identity path still carries upstream. Masking both routes incorrectly eliminates that gradient.",
+      "folder": "d51-residual-branch-backward",
+      "domain": "deep-learning",
+      "prerequisites": ["d02", "d05"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d52",
+      "title": "Distribute Average-Pooling Gradients",
+      "objective": "Implement average_pool_backward(upstream, input_shape, kernel, stride). Center pixels of overlapping windows receive more contributions than corners. The pattern follows coverage rather than pixel values.",
+      "folder": "d52-average-pool-adjoint",
+      "domain": "deep-learning",
+      "prerequisites": ["d10"],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d53",
+      "title": "Differentiate a Spatial Cross-Correlation",
+      "objective": "Implement convolution_backward(image, kernel, upstream). An interior pixel influences several outputs, so its derivative sums their contributions. A kernel coefficient likewise influences every valid output location.",
+      "folder": "d53-convolution-backward",
+      "domain": "deep-learning",
+      "prerequisites": ["d09", "d02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d54",
+      "title": "Construct a Transposed Convolution by Scattering",
+      "objective": "Implement transposed_convolution(signal, kernel, stride). Segments can reinforce or cancel where they overlap. Assignment instead of addition silently loses earlier contributions.",
+      "folder": "d54-transposed-convolution-scatter",
+      "domain": "deep-learning",
+      "prerequisites": ["d09", "d53"],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d55",
+      "title": "Normalize Channels in Separate Groups",
+      "objective": "Implement group_normalize(x, groups, epsilon=1e-6). Changing the groups changes which population normalizes each feature. Batch size does not enter those statistics.",
+      "folder": "d55-group-normalization",
+      "domain": "deep-learning",
+      "prerequisites": ["d03", "d25"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d56",
+      "title": "Sum the Probability of CTC Alignments",
+      "objective": "Implement ctc_probability(probabilities, labels, blank=0). Consecutive repeated frame labels merge before blanks are removed. Thus a target with two identical labels needs a blank frame between their emissions.",
+      "folder": "d56-ctc-alignment-likelihood",
+      "domain": "deep-learning",
+      "prerequisites": ["d02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d57",
+      "title": "Measure a Latent Gaussian against a Unit Prior",
+      "objective": "Implement gaussian_kl(mean, log_variance). The location term penalizes squared distance from the prior mean. The uncertainty term is minimized at unit variance and grows for both very narrow and very broad distributions.",
+      "folder": "d57-diagonal-gaussian-kl",
+      "domain": "deep-learning",
+      "prerequisites": ["m08"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d58",
+      "title": "Differentiate through a Supplied Noise Draw",
+      "objective": "Implement reparameterization_backward(mean, log_variance, noise, upstream). Holding noise fixed creates a deterministic path from distribution parameters to one sampled latent value. The derivative with respect to log variance changes sign with the noise draw.",
+      "folder": "d58-reparameterization-backward",
+      "domain": "deep-learning",
+      "prerequisites": ["d57", "d02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d59",
+      "title": "Recover the Conditional Diffusion Posterior",
+      "objective": "Implement diffusion_posterior(clean, noisy, beta, previous_retention). Conditioning on the clean endpoint produces a different update from a denoiser prediction. The posterior variance vanishes at the first forward step.",
+      "folder": "d59-diffusion-posterior",
+      "domain": "deep-learning",
+      "prerequisites": ["d32"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d60",
+      "title": "Separate Discriminator and Generator Objectives",
+      "objective": "Implement adversarial_losses(real_logits, fake_logits). The discriminator pushes real scores upward and fake scores downward. The non-saturating generator objective pushes fake scores upward without changing real logits.",
+      "folder": "d60-logistic-adversarial-loss",
+      "domain": "deep-learning",
+      "prerequisites": ["m04"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d61",
+      "title": "Compare Positive and Negative Embedding Distances",
+      "objective": "Implement triplet_margin(anchor, positive, negative, margin=1.0). The margin compares relative distances rather than forcing positives to coincide. Once the negative is sufficiently farther away, that triplet contributes zero.",
+      "folder": "d61-triplet-margin-geometry",
+      "domain": "deep-learning",
+      "prerequisites": ["m12"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d62",
+      "title": "Average Log Probabilities across Positive Partners",
+      "objective": "Implement supervised_contrastive(scores, labels). An anchor with several positives contributes the mean of their individual log losses. Taking the log of summed positive probability implements a different objective.",
+      "folder": "d62-multi-positive-contrastive-loss",
+      "domain": "deep-learning",
+      "prerequisites": ["d27"],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d63",
+      "title": "Measure Soft Segmentation Overlap",
+      "objective": "Implement soft_dice_loss(probabilities, targets, smoothing=1e-6). The objective uses soft predicted mass, so it remains sensitive to confidence without a hard threshold. A perfectly matched binary mask has zero loss.",
+      "folder": "d63-soft-dice-overlap",
+      "domain": "deep-learning",
+      "prerequisites": ["m04"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d64",
+      "title": "Differentiate an Image Smoothness Penalty",
+      "objective": "Implement total_variation(image). An interior pixel receives derivative contributions from several neighboring differences. Equal neighbors use the stated zero subgradient at the absolute-value kink.",
+      "folder": "d64-total-variation-gradient",
+      "domain": "deep-learning",
+      "prerequisites": ["d01"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d65",
+      "title": "Apply a Softmax Jacobian without Building It",
+      "objective": "Implement softmax_jvp(probabilities, direction). The Jacobian is diag(p)-p*p.T. Distributing its product gives an elementwise expression with one weighted reduction per row.",
+      "folder": "d65-softmax-jacobian-vector",
+      "domain": "deep-learning",
+      "prerequisites": ["m02", "d02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d66",
+      "title": "Estimate a Matrix Trace with Sign Probes",
+      "objective": "Implement trace_probes(matrix, probes). Independent balanced sign probes have identity second moment, making the quadratic estimate unbiased over that random distribution. Fixed probes are supplied here to expose individual errors.",
+      "folder": "d66-hutchinson-trace-probes",
+      "domain": "deep-learning",
+      "prerequisites": ["d01"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d67",
+      "title": "Trace Gradients through Attention Scores and Values",
+      "objective": "Implement attention_backward(queries, keys, values, upstream). A single-key attention output cannot depend on query or key scores, so their gradients vanish while the value still receives upstream.",
+      "folder": "d67-attention-backward",
+      "domain": "deep-learning",
+      "prerequisites": ["d04", "d65"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d68",
+      "title": "Normalize Scores over Every Label Sequence",
+      "objective": "Implement chain_log_partition(emissions, transitions, start, end). The log partition includes all paths, even those with poor scores. Replacing log-sum-exp with max computes a best-path score and loses normalization mass.",
+      "folder": "d68-chain-log-partition",
+      "domain": "deep-learning",
+      "prerequisites": ["m02"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d69",
+      "title": "Recover the Best Label Sequence with Backtracking",
+      "objective": "Implement chain_viterbi(emissions, transitions, start, end). A temporarily worse prefix may become the best complete sequence through a favorable transition. Keeping one state for each ending label preserves those possibilities.",
+      "folder": "d69-chain-viterbi-path",
+      "domain": "deep-learning",
+      "prerequisites": ["d68"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "d70",
+      "title": "Trace Returns across Episode Boundaries",
+      "objective": "Compute reward-to-go at every transition. Change one terminal flag and predict which earlier returns change before running the examples.",
+      "folder": "d70-discounted-episode-returns",
+      "domain": "deep-learning",
+      "prerequisites": ["m08"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html"
+      ]
+    },
+    {
+      "id": "d71",
+      "title": "Combine Temporal-Difference Residuals with GAE",
+      "objective": "Return GAE advantages and corresponding value targets. Compare trace decay zero and one to see how much future evidence enters each estimate.",
+      "folder": "d71-generalized-advantage-estimation",
+      "domain": "deep-learning",
+      "prerequisites": ["d70"],
+      "public_cases": 13,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1506.02438"
+      ]
+    },
+    {
+      "id": "d72",
+      "title": "Separate Value Targets from Current Predictions",
+      "objective": "Build one-step value targets and signed temporal-difference errors for a batch of independent transitions.",
+      "folder": "d72-one-step-value-targets",
+      "domain": "deep-learning",
+      "prerequisites": ["d70"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html"
+      ]
+    },
+    {
+      "id": "d73",
+      "title": "Separate Action Selection from Action Evaluation",
+      "objective": "Select actions using the online estimates, then look up those actions in the target estimates to construct a batch of bootstrap targets.",
+      "folder": "d73-double-q-target-selection",
+      "domain": "deep-learning",
+      "prerequisites": ["d72"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1509.06461"
+      ]
+    },
+    {
+      "id": "d74",
+      "title": "Project a Distributional Value Target",
+      "objective": "Transform each return atom and distribute its mass between neighboring support points. Inspect exact-grid hits and clipping at the support endpoints.",
+      "folder": "d74-categorical-value-projection",
+      "domain": "deep-learning",
+      "prerequisites": ["d72"],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1707.06887"
+      ]
+    },
+    {
+      "id": "d75",
+      "title": "Turn Uniform Draws into a Categorical Choice",
+      "objective": "Use the supplied uniform draws to perturb logits. Compare a deterministic preference with a noise-driven change of action.",
+      "folder": "d75-gumbel-max-sampling",
+      "domain": "deep-learning",
+      "prerequisites": ["m02"],
+      "public_cases": 12,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1611.01144"
+      ]
+    },
+    {
+      "id": "d76",
+      "title": "Differentiate a Categorical Policy Objective",
+      "objective": "Compute the negative mean advantage-weighted log-probability loss and its gradient with respect to the supplied logits.",
+      "folder": "d76-categorical-policy-score-gradient",
+      "domain": "deep-learning",
+      "prerequisites": ["m04", "d70"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html"
+      ]
+    },
+    {
+      "id": "d77",
+      "title": "Move a Target Network Gradually",
+      "objective": "Compute a fresh target parameter array and compare a frozen target, a partial update, and a hard copy.",
+      "folder": "d77-polyak-target-update",
+      "domain": "deep-learning",
+      "prerequisites": ["d72"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/algorithms/ddpg.html"
+      ]
+    },
+    {
+      "id": "d78",
+      "title": "Inspect Potential-Based Reward Shaping",
+      "objective": "Add the potential-based shaping term to each reward. Inspect why the current-state potential is subtracted even on a terminal transition.",
+      "folder": "d78-potential-reward-shaping",
+      "domain": "deep-learning",
+      "prerequisites": ["d70"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf"
+      ]
+    },
+    {
+      "id": "d79",
+      "title": "Stop an N-Step Target at the Right Boundary",
+      "objective": "Construct a target for every starting transition. Keep track of how many rewards were consumed so the bootstrap receives the correct discount power.",
+      "folder": "d79-n-step-bootstrap-targets",
+      "domain": "deep-learning",
+      "prerequisites": ["d70", "d72"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html"
+      ]
+    },
+    {
+      "id": "e23",
+      "title": "Count Overlapping Token N-grams",
+      "objective": "Build an overlapping phrase counter and inspect how repeated windows differ from a vocabulary set.",
+      "folder": "e23-token-ngram-counts",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e24",
+      "title": "Compare Repeated Terms with Multiset Jaccard",
+      "objective": "Compare repeated-token documents and observe how multiplicity changes similarity despite identical vocabularies.",
+      "folder": "e24-multiset-jaccard",
+      "domain": "engineering",
+      "prerequisites": ["e23"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e25",
+      "title": "Measure Token Edit Distance",
+      "objective": "Find the minimum edit cost between token sequences, checking insertion, deletion, and reordering separately.",
+      "folder": "e25-token-edit-distance",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e26",
+      "title": "Inspect ROUGE-L Precision and Recall",
+      "objective": "Measure retained sequence structure and explain why adding unrelated candidate words changes precision but not recall.",
+      "folder": "e26-rouge-l-score",
+      "domain": "engineering",
+      "prerequisites": ["e25"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Lin, ROUGE: A Package for Automatic Evaluation of Summaries. https://aclanthology.org/W04-1013/"
+      ]
+    },
+    {
+      "id": "e27",
+      "title": "Explore Clipping and Brevity in BLEU-1",
+      "objective": "Score a candidate with clipped unigram overlap and a brevity penalty; use repetition and short-output examples to inspect both mechanisms.",
+      "folder": "e27-clipped-unigram-bleu",
+      "domain": "engineering",
+      "prerequisites": ["e23"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation. https://aclanthology.org/P02-1040/"
+      ]
+    },
+    {
+      "id": "e28",
+      "title": "Build a Positional Posting Index",
+      "objective": "Build positional postings that recover every occurrence of a term while preserving original document IDs.",
+      "folder": "e28-term-posting-index",
+      "domain": "engineering",
+      "prerequisites": ["e23"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e29",
+      "title": "Intersect and Exclude Posting Lists",
+      "objective": "Resolve required and excluded query terms against posting lists, including unknown terms and repeated document IDs.",
+      "folder": "e29-boolean-posting-query",
+      "domain": "engineering",
+      "prerequisites": ["e28"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e30",
+      "title": "Keep Related Rows in One Split",
+      "objective": "Create a heldout split at the group level and verify that repeated subjects never cross the boundary.",
+      "folder": "e30-group-heldout-split",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e31",
+      "title": "Split Time-Ordered Data with an Embargo",
+      "objective": "Partition observations around a time cutoff, retaining explicit indices for the embargoed gap.",
+      "folder": "e31-chronological-embargo-split",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e32",
+      "title": "Fit Median Imputation on Training Rows",
+      "objective": "Fit medians on observed training entries, then transform heldout values without letting heldout extremes affect the fitted statistics.",
+      "folder": "e32-training-median-imputation",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e33",
+      "title": "Audit Missingness Patterns",
+      "objective": "Report marginal and pairwise missingness to distinguish jointly missing features from disjoint missingness patterns.",
+      "folder": "e33-missingness-pattern-audit",
+      "domain": "engineering",
+      "prerequisites": ["e32"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e34",
+      "title": "Measure Binned Population Shift",
+      "objective": "Calculate smoothed distribution-shift contributions and inspect how empty bins and differing sample totals affect the result.",
+      "folder": "e34-population-stability-index",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e35",
+      "title": "Compare Empirical Distributions with KS Distance",
+      "objective": "Find the largest empirical CDF gap and its earliest location, including tied observations and unequal sample counts.",
+      "folder": "e35-empirical-ks-distance",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): SciPy two-sample Kolmogorov-Smirnov documentation. https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html"
+      ]
+    },
+    {
+      "id": "e36",
+      "title": "Construct Split-Conformal Intervals",
+      "objective": "Construct a calibrated interval radius from the corrected finite-sample rank, rejecting a requested rank that cannot produce a finite threshold.",
+      "folder": "e36-split-conformal-interval",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Angelopoulos and Bates, A Gentle Introduction to Conformal Prediction. https://arxiv.org/abs/2107.07511"
+      ]
+    },
+    {
+      "id": "e37",
+      "title": "Audit Interval Coverage and Width",
+      "objective": "Audit interval inclusion and width together so that broad intervals cannot hide behind coverage alone.",
+      "folder": "e37-prediction-interval-audit",
+      "domain": "engineering",
+      "prerequisites": ["e36"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Angelopoulos and Bates, A Gentle Introduction to Conformal Prediction. https://arxiv.org/abs/2107.07511"
+      ]
+    },
+    {
+      "id": "e38",
+      "title": "Compare Paired Outcomes with an Exact Sign Test",
+      "objective": "Compare the directions of paired changes using an exact two-sided sign test, excluding ties from the null trial count.",
+      "folder": "e38-paired-sign-test",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): SciPy exact binomial test documentation. https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html"
+      ]
+    },
+    {
+      "id": "e39",
+      "title": "Choose Predictions by Expected Error Cost",
+      "objective": "Choose actions by expected error cost and investigate how asymmetric costs move the probability decision boundary.",
+      "folder": "e39-cost-sensitive-decisions",
+      "domain": "engineering",
+      "prerequisites": ["e16"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e40",
+      "title": "Compare Error Rates Across Groups",
+      "objective": "Disaggregate selection and error rates by group, retaining denominators to expose groups with no eligible positive or negative examples.",
+      "folder": "e40-group-error-rate-audit",
+      "domain": "engineering",
+      "prerequisites": ["e14"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e41",
+      "title": "Trace Precision and Recall at Tied Scores",
+      "objective": "Build achievable precision-recall operating points, moving every tied-score group together as the threshold changes.",
+      "folder": "e41-precision-recall-operating-points",
+      "domain": "engineering",
+      "prerequisites": ["e14"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): scikit-learn precision-recall curve documentation. https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html"
+      ]
+    },
+    {
+      "id": "e42",
+      "title": "Compare Boxes with Intersection over Union",
+      "objective": "Compute pairwise geometric overlap and distinguish touching edges, containment, and zero-area boxes.",
+      "folder": "e42-box-intersection-over-union",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e43",
+      "title": "Suppress Redundant Detection Boxes",
+      "objective": "Trace greedy box selection and explain how score order, exact ties, and threshold equality change retained detections.",
+      "folder": "e43-greedy-box-suppression",
+      "domain": "engineering",
+      "prerequisites": ["e42"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e44",
+      "title": "Encode Consecutive Runs",
+      "objective": "Compress consecutive runs while preserving boundaries between equal values that occur in separate segments.",
+      "folder": "e44-run-length-segments",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e45",
+      "title": "Quantize with an Affine Zero Point",
+      "objective": "Map real values to signed 8-bit codes and reconstruct them, inspecting zero points, ties-to-even rounding, and saturation.",
+      "folder": "e45-affine-int8-quantization",
+      "domain": "engineering",
+      "prerequisites": ["e18"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e46",
+      "title": "Reconstruct Logical Tokens from KV Pages",
+      "objective": "Reconstruct logical token histories from noncontiguous physical pages and truncate unused tail capacity.",
+      "folder": "e46-paged-kv-gather",
+      "domain": "engineering",
+      "prerequisites": ["e19"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Kwon et al., Efficient Memory Management for Large Language Model Serving with PagedAttention. https://arxiv.org/abs/2309.06180"
+      ]
+    },
+    {
+      "id": "e47",
+      "title": "Explore Beam Search on a Transition Table",
+      "objective": "Compare greedy and wider-beam decoding on a transition table where a locally attractive choice can lose later.",
+      "folder": "e47-table-beam-search",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e48",
+      "title": "Verify Draft Tokens and Correct a Rejection",
+      "objective": "Verify a supplied draft prefix, stopping at rejection and constructing the target-minus-draft correction distribution.",
+      "folder": "e48-speculative-token-verification",
+      "domain": "engineering",
+      "prerequisites": ["e20"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Leviathan et al., Fast Inference from Transformers via Speculative Decoding. https://proceedings.mlr.press/v202/leviathan23a.html"
+      ]
+    },
+    {
+      "id": "e49",
+      "title": "Accumulate Unequal Microbatch Gradients",
+      "objective": "Combine microbatch mean gradients using example counts and demonstrate the bias from equally weighting unequal batches.",
+      "folder": "e49-sample-weighted-gradient-accumulation",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): PyTorch Automatic Mixed Precision examples. https://docs.pytorch.org/docs/2.14/notes/amp_examples.html"
+      ]
+    },
+    {
+      "id": "e50",
+      "title": "Unscale Gradients and Skip Overflowed Steps",
+      "objective": "Restore scaled gradients before optimization and produce a whole-step skip signal when any coordinate becomes nonfinite.",
+      "folder": "e50-gradient-loss-unscaling",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): PyTorch Automatic Mixed Precision examples. https://docs.pytorch.org/docs/2.14/notes/amp_examples.html"
+      ]
+    },
+    {
+      "id": "e51",
+      "title": "Sample a Stream with a Fixed-Size Reservoir",
+      "objective": "Trace bounded-memory reservoir replacement with supplied random draws and preserve reservoir-slot order.",
+      "folder": "e51-reservoir-sampling-trace",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Vitter, Random Sampling with a Reservoir. https://www.cs.usfca.edu/~mmalensek/cs677/schedule/papers/vitter1985random.pdf"
+      ]
+    },
+    {
+      "id": "e52",
+      "title": "Update Running Mean and Variance State",
+      "objective": "Continue running mean and centered-sum state as a stream arrives, using the old and updated means correctly.",
+      "folder": "e52-welford-stream-update",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Welford, Note on a Method for Calculating Corrected Sums of Squares and Products. https://www.tandfonline.com/doi/abs/10.1080/00401706.1962.10490022"
+      ]
+    },
+    {
+      "id": "e53",
+      "title": "Merge Statistics from Separate Partitions",
+      "objective": "Merge worker moment summaries and retain the between-partition contribution that a simple sum of local variances misses.",
+      "folder": "e53-parallel-moment-merge",
+      "domain": "engineering",
+      "prerequisites": ["e52"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Chan, Golub, and LeVeque, Algorithms for Computing the Sample Variance. https://www.tandfonline.com/doi/abs/10.1080/00031305.1983.10483115"
+      ]
+    },
+    {
+      "id": "e54",
+      "title": "Select Weighted Samples with Exponential Keys",
+      "objective": "Rank random weighted priorities and explore why larger weights change selection without duplicating selected items.",
+      "folder": "e54-weighted-reservoir-priorities",
+      "domain": "engineering",
+      "prerequisites": ["e51"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Efraimidis, Weighted Random Sampling over Data Streams. https://arxiv.org/abs/1012.0256"
+      ]
+    },
+    {
+      "id": "e55",
+      "title": "Map Tokens into a Fixed Feature Space",
+      "objective": "Map token occurrences into a bounded signed feature vector and inspect deterministic collisions.",
+      "folder": "e55-signed-feature-hashing",
+      "domain": "engineering",
+      "prerequisites": ["e23"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): scikit-learn FeatureHasher documentation. https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html"
+      ]
+    },
+    {
+      "id": "e56",
+      "title": "Estimate Frequencies with a Count-Min Sketch",
+      "objective": "Build a compact frequency sketch from explicit hash mappings and compare collision inflation across counter rows.",
+      "folder": "e56-count-min-sketch",
+      "domain": "engineering",
+      "prerequisites": ["e55"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Cormode and Muthukrishnan, An Improved Data Stream Summary: The Count-Min Sketch and Its Applications. https://www.cs.ox.ac.uk/people/graham.cormode/pubs/html/CormodeMuthukrishnan04CMJalg.html"
+      ]
+    },
+    {
+      "id": "e57",
+      "title": "Inspect Bloom Filter False Positives",
+      "objective": "Set membership bits and construct an example where a never-inserted query still receives a positive answer.",
+      "folder": "e57-bloom-membership-filter",
+      "domain": "engineering",
+      "prerequisites": ["e55"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): Bloom, Space/Time Trade-offs in Hash Coding with Allowable Errors. https://www.cs.princeton.edu/courses/archive/spr05/cos598E/bib/p422-bloom.pdf"
+      ]
+    },
+    {
+      "id": "e58",
+      "title": "Trace Least-Recently-Used Eviction",
+      "objective": "Trace cache hits and evictions, refreshing recency on every hit before the next admission decision.",
+      "folder": "e58-lru-cache-trace",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e59",
+      "title": "Simulate Token-Bucket Admission",
+      "objective": "Simulate burst admission over time, capping refills and preserving credit after rejected requests.",
+      "folder": "e59-token-bucket-admission",
+      "domain": "engineering",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e60",
+      "title": "Pack Consecutive Sequences Under a Padding Budget",
+      "objective": "Pack sequences by padded computation cost while preserving input order and respecting both token and row budgets.",
+      "folder": "e60-padding-budget-batches",
+      "domain": "engineering",
+      "prerequisites": ["e10"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e61",
+      "title": "Interleave Two Rankings Without Duplicates",
+      "objective": "Combine two rankings into a deduplicated display while recording which ranking supplied each document.",
+      "folder": "e61-alternating-ranking-interleave",
+      "domain": "engineering",
+      "prerequisites": ["e02"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": []
+    },
+    {
+      "id": "e62",
+      "title": "Join Only Features Available at Prediction Time",
+      "objective": "Join the latest available feature event to each prediction query without reading future observations.",
+      "folder": "e62-causal-asof-feature-join",
+      "domain": "engineering",
+      "prerequisites": ["e31"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Concept reference (original implementation and prose): pandas merge_asof documentation. https://pandas.pydata.org/docs/reference/api/pandas.merge_asof.html"
+      ]
+    },
+    {
+      "id": "m20",
+      "title": "Update Beliefs with Evidence",
+      "objective": "Return a dictionary with posterior probabilities and evidence probability after observing one event under a finite set of hypotheses.",
+      "folder": "m20-bayesian-evidence-update",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m21",
+      "title": "Measure Categorical Uncertainty",
+      "objective": "Compute Shannon entropy in natural-log units, treating a zero-probability outcome as a zero contribution.",
+      "folder": "m21-categorical-entropy",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m22",
+      "title": "Measure Distribution Mismatch",
+      "objective": "Compute KL(p || q) in nats while keeping its direction explicit and skipping zero-mass terms from p.",
+      "folder": "m22-relative-entropy",
+      "domain": "foundations",
+      "prerequisites": ["m21"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m23",
+      "title": "Compare Distributions Symmetrically",
+      "objective": "Return the equally weighted Jensen–Shannon divergence in nats, not its square-root distance.",
+      "folder": "m23-jensen-shannon-divergence",
+      "domain": "foundations",
+      "prerequisites": ["m22"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m24",
+      "title": "Find Dependence in a Joint Table",
+      "objective": "Compute mutual information in nats from a normalized joint-probability matrix.",
+      "folder": "m24-joint-mutual-information",
+      "domain": "foundations",
+      "prerequisites": ["m21", "m22"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m25",
+      "title": "Interpolate Empirical Quantiles",
+      "objective": "Return a vector of empirical quantiles using position h=(n-1)*q and linear interpolation between neighboring sorted observations.",
+      "folder": "m25-linear-empirical-quantiles",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, fixtures, and implementation.",
+        "Concept reference only; no source code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.quantile.html"
+      ]
+    },
+    {
+      "id": "m26",
+      "title": "Separate Scale from Linear Association",
+      "objective": "Compute the Pearson correlation coefficient of paired observations with a defined error for constant inputs.",
+      "folder": "m26-pearson-correlation",
+      "domain": "foundations",
+      "prerequisites": ["m09"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m27",
+      "title": "Compare Order with Tied Ranks",
+      "objective": "Replace both observation vectors by one-based average ranks, then return their Pearson correlation.",
+      "folder": "m27-spearman-average-ranks",
+      "domain": "foundations",
+      "prerequisites": ["m26"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m28",
+      "title": "Scale Features with Robust Statistics",
+      "objective": "Return training medians, safe interquartile scales, and transformed values without refitting on the values to transform.",
+      "folder": "m28-median-iqr-scaling",
+      "domain": "foundations",
+      "prerequisites": ["m05", "m25"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m29",
+      "title": "Remove Correlation with Symmetric Whitening",
+      "objective": "Return the symmetric whitening matrix for a supplied positive-semidefinite covariance, regularized by a positive epsilon.",
+      "folder": "m29-symmetric-covariance-whitening",
+      "domain": "foundations",
+      "prerequisites": ["m09"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m30",
+      "title": "Compress a Matrix with Singular Values",
+      "objective": "Return a rank-limited matrix reconstruction and its squared Frobenius residual using the largest singular values.",
+      "folder": "m30-truncated-svd-reconstruction",
+      "domain": "foundations",
+      "prerequisites": ["m15"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m31",
+      "title": "Solve Rank Deficiency with a Pseudoinverse",
+      "objective": "Compute a Moore–Penrose pseudoinverse using an explicit relative cutoff on singular values.",
+      "folder": "m31-svd-pseudoinverse",
+      "domain": "foundations",
+      "prerequisites": ["m30"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m32",
+      "title": "Track a Dominant Matrix Direction",
+      "objective": "Return the final unit vector and its Rayleigh quotient after exactly the requested number of power-iteration steps.",
+      "folder": "m32-power-iteration-rayleigh",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m33",
+      "title": "Build an Orthonormal Basis",
+      "objective": "Implement modified Gram–Schmidt and return thin Q and upper-triangular R with positive diagonal.",
+      "folder": "m33-modified-gram-schmidt",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m34",
+      "title": "Factor a Positive Definite Matrix",
+      "objective": "Compute the lower-triangular Cholesky factor with positive diagonal using the column recurrence.",
+      "folder": "m34-cholesky-factorization",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m35",
+      "title": "Solve a Triangular System in Order",
+      "objective": "Solve lower@x=target by forward substitution and return the solution vector.",
+      "folder": "m35-forward-triangular-solve",
+      "domain": "foundations",
+      "prerequisites": ["m34"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m36",
+      "title": "Differentiate a Logistic Model",
+      "objective": "Return mean logistic loss and gradients for a linear binary classifier with no regularization.",
+      "folder": "m36-logistic-regression-gradient",
+      "domain": "foundations",
+      "prerequisites": ["m03", "m04"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m37",
+      "title": "Create Sparsity with a Proximal Step",
+      "objective": "Apply the elementwise proximal operator of threshold times the L1 norm to a vector.",
+      "folder": "m37-l1-proximal-threshold",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m38",
+      "title": "Follow Mistakes through a Perceptron Pass",
+      "objective": "Process examples in their given order and update the model whenever its signed margin is zero or negative.",
+      "folder": "m38-ordered-perceptron-pass",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m39",
+      "title": "Differentiate the Margin Penalty",
+      "objective": "Return mean binary hinge loss and one documented subgradient for a linear score without regularization.",
+      "folder": "m39-hinge-loss-subgradient",
+      "domain": "foundations",
+      "prerequisites": ["m38"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m40",
+      "title": "Choose a Gini Decision Split",
+      "objective": "Find the best binary split of one feature using Gini impurity, with deterministic threshold and class ties.",
+      "folder": "m40-gini-decision-stump",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m41",
+      "title": "Move Cluster Centers to Their Assigned Means",
+      "objective": "Re-estimate centroids from fixed assignments while preserving a previous center for any empty group.",
+      "folder": "m41-centroid-reestimation",
+      "domain": "foundations",
+      "prerequisites": ["m14"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m42",
+      "title": "Diagnose Cluster Separation",
+      "objective": "Compute per-observation Euclidean silhouette scores and their mean for a supplied clustering.",
+      "folder": "m42-silhouette-diagnostics",
+      "domain": "foundations",
+      "prerequisites": ["m12", "m14"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m43",
+      "title": "Identify Density-Based Core Points",
+      "objective": "Return the inclusive radius-neighbor matrix and a boolean vector identifying core observations.",
+      "folder": "m43-density-core-neighborhoods",
+      "domain": "foundations",
+      "prerequisites": ["m12"],
+      "public_cases": 11,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m44",
+      "title": "Refine a Gaussian Mixture with Soft Assignments",
+      "objective": "Perform one full univariate Gaussian-mixture expectation and maximization step, returning updated parameters and the old total log likelihood.",
+      "folder": "m44-gaussian-mixture-em-step",
+      "domain": "foundations",
+      "prerequisites": ["m16", "m20"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, fixtures, and implementation.",
+        "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/mixture.html"
+      ]
+    },
+    {
+      "id": "m45",
+      "title": "Merge the Nearest Clusters",
+      "objective": "Choose the closest cluster pair and update the distance matrix for one single-linkage merge.",
+      "folder": "m45-single-linkage-merge",
+      "domain": "foundations",
+      "prerequisites": ["m12"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m46",
+      "title": "Learn a Count-Based Class Model",
+      "objective": "Fit empirical class priors and smoothed multinomial feature probabilities from labeled count vectors.",
+      "folder": "m46-multinomial-naive-bayes-fit",
+      "domain": "foundations",
+      "prerequisites": ["m16"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m47",
+      "title": "Read Probability from an Empirical CDF",
+      "objective": "Return the fraction of sample observations less than or equal to each query threshold.",
+      "folder": "m47-empirical-cumulative-distribution",
+      "domain": "foundations",
+      "prerequisites": ["m25"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m48",
+      "title": "Audit Supplied Bootstrap Resamples",
+      "objective": "Compute one mean per supplied bootstrap resample and the sample standard deviation of those means.",
+      "folder": "m48-bootstrap-resample-means",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m49",
+      "title": "Compare Means under Relabeled Groups",
+      "objective": "Evaluate a two-sided difference-of-means randomization test using supplied full permutations and a plus-one Monte Carlo correction.",
+      "folder": "m49-permutation-mean-test",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m50",
+      "title": "Standardize Paired Differences",
+      "objective": "Return the mean paired difference, its estimated standard error, and the corresponding t statistic without computing a p-value.",
+      "folder": "m50-paired-t-statistic",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m51",
+      "title": "Evaluate Binomial Evidence in Log Space",
+      "objective": "Compute the log probability of exactly successes events in trials independent Bernoulli observations.",
+      "folder": "m51-binomial-log-likelihood",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m52",
+      "title": "Update a Beta Belief about a Rate",
+      "objective": "Return posterior Beta parameters, posterior mean, and posterior variance after binary observations.",
+      "folder": "m52-beta-binomial-update",
+      "domain": "foundations",
+      "prerequisites": ["m20", "m51"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m53",
+      "title": "Score a Sequence while Updating Category Beliefs",
+      "objective": "Score an ordered category sequence under a Dirichlet prior, updating the concentration vector after each observation.",
+      "folder": "m53-categorical-predictive-sequence",
+      "domain": "foundations",
+      "prerequisites": ["m52"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m54",
+      "title": "Measure Distance in Covariance Geometry",
+      "objective": "Return squared Mahalanobis distances using a supplied symmetric positive-definite precision matrix.",
+      "folder": "m54-mahalanobis-distance",
+      "domain": "foundations",
+      "prerequisites": ["m09", "m29"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m55",
+      "title": "Measure the Cost of Moving Probability Mass",
+      "objective": "Compute the one-dimensional Wasserstein-1 distance between two equally weighted empirical distributions of potentially different sample sizes.",
+      "folder": "m55-empirical-wasserstein-distance",
+      "domain": "foundations",
+      "prerequisites": ["m47"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, fixtures, and implementation.",
+        "Concept reference only; no source code or prose copied: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wasserstein_distance.html"
+      ]
+    },
+    {
+      "id": "m56",
+      "title": "Turn Distances into Radial Similarities",
+      "objective": "Return the pairwise Gaussian radial-basis kernel matrix between two sets of feature rows.",
+      "folder": "m56-rbf-kernel-matrix",
+      "domain": "foundations",
+      "prerequisites": ["m12"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m57",
+      "title": "Center Features through Their Kernel",
+      "objective": "Center a square symmetric kernel matrix by subtracting its row and column means and restoring its grand mean.",
+      "folder": "m57-kernel-double-centering",
+      "domain": "foundations",
+      "prerequisites": ["m56"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    },
+    {
+      "id": "m58",
+      "title": "Fit a Monotone Sequence",
+      "objective": "Return the nondecreasing vector minimizing sum(weights*(fitted-values)**2) with the original observation order fixed.",
+      "folder": "m58-weighted-isotonic-regression",
+      "domain": "foundations",
+      "prerequisites": [],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot lesson, fixtures, and implementation.",
+        "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/generated/sklearn.isotonic.isotonic_regression.html"
+      ]
+    },
+    {
+      "id": "m59",
+      "title": "Train for an Asymmetric Quantile",
+      "objective": "Return the mean pinball loss and its per-prediction subgradient for a fixed quantile.",
+      "folder": "m59-pinball-quantile-loss",
+      "domain": "foundations",
+      "prerequisites": ["m25", "m39"],
+      "public_cases": 10,
+      "status": "validated",
+      "attribution": ["Original ZeroShot lesson, fixtures, and implementation."]
+    }
+  ]
+}

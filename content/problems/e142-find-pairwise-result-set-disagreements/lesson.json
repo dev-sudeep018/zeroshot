@@ -1,0 +1,44 @@
+{
+  "intro": "Comparing result membership reveals what changes when a retrieval system is replaced or tuned. Per-query differences preserve context that a single global overlap would lose.",
+  "task": "Compare two per-query result sets and preserve query order in overlap and exclusive outputs.",
+  "signature": "result_disagreements(left, right)",
+  "requirements": [
+    "left and right contain equally many per-query ID lists, allowing repeated IDs. Return one dictionary per query with sorted overlap, left_only, and right_only lists based on set membership. Preserve query order; duplicates within a ranking do not affect the comparison.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Partial overlap",
+      "input": "result_disagreements([['a','b']], [['b','c']])",
+      "output": "[{'overlap': ['b'], 'left_only': ['a'], 'right_only': ['c']}]"
+    },
+    {
+      "name": "Duplicates ignored",
+      "input": "result_disagreements([['a','a']], [['a']])",
+      "output": "[{'overlap': ['a'], 'left_only': [], 'right_only': []}]"
+    },
+    {
+      "name": "Empty first system",
+      "input": "result_disagreements([[]], [['x']])",
+      "output": "[{'overlap': [], 'left_only': [], 'right_only': ['x']}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compare sets inside each aligned query pair."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not flatten queries together; the same ID can agree on one query and disagree on another."
+    }
+  ],
+  "explanation": [
+    "Comparing result membership reveals what changes when a retrieval system is replaced or tuned. Per-query differences preserve context that a single global overlap would lose.",
+    "This audit ignores ranking order and duplicates intentionally. Position-aware ranking metrics answer a different question and should be evaluated separately."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

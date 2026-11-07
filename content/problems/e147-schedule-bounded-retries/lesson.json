@@ -1,0 +1,44 @@
+{
+  "intro": "Exponential backoff reduces repeated pressure after failed requests. A cap prevents the wait between later retries from increasing without bound.",
+  "task": "Generate capped exponential delays and total elapsed delay from attempt count.",
+  "signature": "retry_schedule(retries, base, cap)",
+  "requirements": [
+    "retries is an integer 0..60; base and cap are finite nonnegative numbers. Return delays[i]=min(cap,base*2**i) for retry indices starting at zero, and total=sum(delays). cap may be below base. These are waiting delays, not request execution times.",
+    "Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Exponential then capped",
+      "input": "retry_schedule(5,1,5)",
+      "output": "{'delays': [1, 2, 4, 5, 5], 'total': 17}"
+    },
+    {
+      "name": "Cap below base",
+      "input": "retry_schedule(3,10,2)",
+      "output": "{'delays': [2, 2, 2], 'total': 6}"
+    },
+    {
+      "name": "Fractional base",
+      "input": "retry_schedule(4,0.5,3)",
+      "output": "{'delays': [0.5, 1, 2, 3], 'total': 6.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "The first retry uses the base delay, so the exponent starts at zero."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Apply the cap to every delay before computing the total."
+    }
+  ],
+  "explanation": [
+    "Exponential backoff reduces repeated pressure after failed requests. A cap prevents the wait between later retries from increasing without bound.",
+    "This deterministic schedule omits jitter and request duration. Keeping those concerns separate makes the delay budget easy to verify and compose with a real retry system."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

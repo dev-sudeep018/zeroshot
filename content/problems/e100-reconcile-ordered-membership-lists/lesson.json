@@ -1,0 +1,44 @@
+{
+  "intro": "Allow and deny lists express separate policies. An explicit precedence rule prevents ambiguous behavior when an identifier appears in both sets.",
+  "task": "Split candidate IDs into accepted and rejected lists using allow and deny sets.",
+  "signature": "reconcile_membership(candidates, allowed, denied)",
+  "requirements": [
+    "All inputs contain nonempty string IDs. Accept a candidate only if it is in allowed and not in denied. Return accepted and rejected lists preserving candidate order and duplicates; denial takes precedence.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Denial takes precedence",
+      "input": "reconcile_membership(['a','b','c'], ['a','b'], ['b'])",
+      "output": "{'accepted': ['a'], 'rejected': ['b', 'c']}"
+    },
+    {
+      "name": "Duplicate candidates",
+      "input": "reconcile_membership(['a','a'], ['a'], [])",
+      "output": "{'accepted': ['a', 'a'], 'rejected': []}"
+    },
+    {
+      "name": "Empty allow list",
+      "input": "reconcile_membership(['a'], [], [])",
+      "output": "{'accepted': [], 'rejected': ['a']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Evaluate allow membership and deny membership as one condition."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use sets for lookup but lists for output to preserve repeated requests."
+    }
+  ],
+  "explanation": [
+    "Allow and deny lists express separate policies. An explicit precedence rule prevents ambiguous behavior when an identifier appears in both sets.",
+    "Membership sets do not define output order. Walking the candidate list retains the request sequence and makes accepted plus rejected counts equal the number of requests."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Rows from the same person or session can leak information across a random split. A group holdout keeps every row belonging to a selected group together.",
+  "task": "Create a heldout split at the group level and verify that repeated subjects never cross the boundary.",
+  "signature": "group_split(groups, heldout_groups)",
+  "requirements": [
+    "groups and heldout_groups are lists or tuples of nonempty string IDs with at most 10000 entries. groups may be empty.",
+    "Return a dictionary with train and test NumPy integer index vectors. test contains rows whose group occurs in heldout_groups; train contains the rest.",
+    "Preserve original row order, allow repeated heldout IDs, and reject heldout IDs that do not occur in groups. Empty heldout_groups puts all rows in training.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repeated subject stays together",
+      "input": "group_split(['u','v','u','w'], ['u'])",
+      "output": "{'train': [1, 3], 'test': [0, 2]}"
+    },
+    {
+      "name": "No heldout groups",
+      "input": "group_split(['u','v'], [])",
+      "output": "{'train': [0, 1], 'test': []}"
+    },
+    {
+      "name": "All rows held out",
+      "input": "group_split(['u','u'], ['u'])",
+      "output": "{'train': [], 'test': [0, 1]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Split membership, not individual rows",
+      "body": "Every occurrence of a chosen group must receive the same destination."
+    },
+    {
+      "title": "Enumerate the original rows",
+      "body": "Index outputs should follow input order rather than sorted group order."
+    }
+  ],
+  "explanation": [
+    "Group-aware evaluation prevents identity or session information from appearing in both splits. The chosen holdout groups define the experimental unit, even when groups have unequal sizes.",
+    "The function only materializes a specified partition; it does not optimize group balance or choose holdout groups. Returning row indices makes the split reusable across aligned arrays."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

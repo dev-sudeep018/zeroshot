@@ -1,0 +1,44 @@
+{
+  "intro": "Attention at one layer maps to the previous layer\u2019s representations. Trace these mappings back through the stack while allowing an identity residual path.",
+  "task": "Return layer-by-layer cumulative token mixing matrices after residual addition and row normalization.",
+  "signature": "attention_rollout(attention, residual_weight)",
+  "requirements": [
+    "attention has shape layers-by-tokens-by-tokens; every row is a probability distribution within absolute tolerance 1e-8. residual_weight lies in [0,1].",
+    "Normalize input rows, form A=(attention+residual_weight*I)/(1+residual_weight), then update rollout=A@previous_rollout starting with identity. Return a matrix stack in layer order.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Identity stack",
+      "input": "attention_rollout(np.array([np.eye(2),np.eye(2)]),1)",
+      "output": "[[[1.0, 0.0], [0.0, 1.0]], [[1.0, 0.0], [0.0, 1.0]]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Single swap with residual",
+      "input": "attention_rollout([[[0,1],[1,0]]],1)",
+      "output": "[[[0.5, 0.5], [0.5, 0.5]]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Two swaps",
+      "input": "attention_rollout([[[0,1],[1,0]],[[0,1],[1,0]]],0)",
+      "output": "[[[0.0, 1.0], [1.0, 0.0]], [[1.0, 0.0], [0.0, 1.0]]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "The newest mapping multiplies on the left because it maps current tokens to previous tokens."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Normalize after adding identity so every cumulative row still sums to one."
+    }
+  ],
+  "explanation": [
+    "Multiplying mixing matrices accumulates indirect token routes across layers. Adding the identity includes a simplified residual route that preserves a token\u2019s own representation.",
+    "Rollout is an attention-based attribution approximation. It ignores nonlinearities, value projections, and gradient effects, so it should not be presented as a complete causal explanation of model output."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "An axis-aligned bounding box is a compact summary of the occupied coordinate ranges. It is useful for spatial indexing and clipping even though it may contain large empty regions.",
+  "task": "Compute coordinatewise bounds, center, side lengths and volume for a point cloud.",
+  "signature": "point_cloud_bounds(points)",
+  "requirements": [
+    "points is a nonempty matrix whose rows are positions and columns are dimensions.",
+    "Return {\"lower\": column minima, \"upper\": column maxima, \"center\": midpoint of these bounds, \"lengths\": upper-lower, \"volume\": product of lengths}.",
+    "A zero extent in any dimension makes volume zero. This is an axis-aligned box center, not the average of the points.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Planar cloud",
+      "input": "point_cloud_bounds([[0,1],[4,2],[1,5]])",
+      "output": "{'lower': [0.0, 1.0],\n 'upper': [4.0, 5.0],\n 'center': [2.0, 3.0],\n 'lengths': [4.0, 4.0],\n 'volume': 16.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One point",
+      "input": "point_cloud_bounds([[2,3]])",
+      "output": "{'lower': [2.0, 3.0],\n 'upper': [2.0, 3.0],\n 'center': [2.0, 3.0],\n 'lengths': [0.0, 0.0],\n 'volume': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Flat 3D cloud",
+      "input": "point_cloud_bounds([[0,0,1],[2,3,1]])",
+      "output": "{'lower': [0.0, 0.0, 1.0],\n 'upper': [2.0, 3.0, 1.0],\n 'center': [1.0, 1.5, 1.0],\n 'lengths': [2.0, 3.0, 0.0],\n 'volume': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Reduce rows independently for each coordinate to find the lower and upper limits."
+    },
+    {
+      "title": "Build the result",
+      "body": "Derive midpoint, lengths and volume from those limits rather than from the point mean."
+    }
+  ],
+  "explanation": [
+    "An axis-aligned bounding box is a compact summary of the occupied coordinate ranges. It is useful for spatial indexing and clipping even though it may contain large empty regions.",
+    "The box center depends only on extreme coordinates, while a centroid depends on the distribution of all points. Repeating an interior point changes a centroid but leaves these bounds unchanged."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

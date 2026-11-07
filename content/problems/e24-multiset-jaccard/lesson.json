@@ -1,0 +1,45 @@
+{
+  "intro": "A set-based overlap loses repetition. Multiset Jaccard compares the minimum and maximum token counts so repeated boilerplate affects similarity.",
+  "task": "Compare repeated-token documents and observe how multiplicity changes similarity despite identical vocabularies.",
+  "signature": "multiset_jaccard(left, right)",
+  "requirements": [
+    "left and right are lists or tuples of at most 10000 nonempty string tokens, with case preserved.",
+    "For each token let a and b be its two occurrence counts. Return sum(min(a,b))/sum(max(a,b)) as a float.",
+    "Define two empty documents to have similarity 1. A single empty document has similarity 0.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repetition changes overlap",
+      "input": "multiset_jaccard(['a','a','b'], ['a','b','b'])",
+      "output": "0.5"
+    },
+    {
+      "name": "Two empty documents",
+      "input": "multiset_jaccard([], [])",
+      "output": "1.0"
+    },
+    {
+      "name": "Disjoint documents",
+      "input": "multiset_jaccard(['a'], ['b'])",
+      "output": "0.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Count before comparing",
+      "body": "Each distinct token contributes one minimum and one maximum count."
+    },
+    {
+      "title": "Handle the empty union",
+      "body": "Decide the both-empty result before performing division."
+    }
+  ],
+  "explanation": [
+    "Multiset Jaccard retains token multiplicity, unlike ordinary set Jaccard. Repeating one token can lower similarity even when both documents have the same vocabulary.",
+    "The score is symmetric and lies in [0,1]. It ignores word order; n-gram multisets can introduce local order when that distinction matters."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

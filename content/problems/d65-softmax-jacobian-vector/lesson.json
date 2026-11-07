@@ -1,0 +1,45 @@
+{
+  "intro": "A softmax Jacobian couples every output probability to every logit. Its action on a direction can be computed without constructing a square matrix.",
+  "task": "Implement softmax_jvp(probabilities, direction). The Jacobian is diag(p)-p*p.T. Distributing its product gives an elementwise expression with one weighted reduction per row.",
+  "signature": "softmax_jvp(probabilities, direction)",
+  "requirements": [
+    "probabilities and direction match nonempty (B,C). Probabilities are nonnegative and each row sums to one within absolute tolerance 1e-8.",
+    "Return probabilities*(direction-sum(probabilities*direction,axis=1,keepdims=True)), shape (B,C).",
+    "Inputs are probabilities, not logits. This is the Jacobian-vector product of softmax at those probabilities. Do not apply another softmax.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Move one logit",
+      "input": "softmax_jvp([[.5,.5]],[[1,0]])",
+      "output": "[[0.25, -0.25]]"
+    },
+    {
+      "name": "Constant shift",
+      "input": "softmax_jvp([[.2,.8]],[[3,3]])",
+      "output": "[[0.0, 0.0]]"
+    },
+    {
+      "name": "Unequal probability weights",
+      "input": "softmax_jvp([[.25,.75]],[[1,0]])",
+      "output": "[[0.1875, -0.1875]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The weighted mean of the direction is shared across each row."
+    },
+    {
+      "title": "Step 2",
+      "body": "A constant logit shift leaves probabilities unchanged, so its derivative is zero."
+    }
+  ],
+  "explanation": [
+    "The Jacobian is diag(p)-p*p.T. Distributing its product gives an elementwise expression with one weighted reduction per row.",
+    "Every output direction sums to zero because the original probabilities must continue to sum to one. The Jacobian is symmetric, so the same formula also applies a vector-Jacobian product."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Wide intervals can cover everything while providing little information. Report empirical coverage together with width to make the tradeoff visible.",
+  "task": "Audit interval inclusion and width together so that broad intervals cannot hide behind coverage alone.",
+  "signature": "interval_audit(targets, lower, upper)",
+  "requirements": [
+    "targets, lower, and upper are equal-length nonempty finite numeric vectors. Every lower endpoint must be at most its upper endpoint.",
+    "Return dict covered as a boolean vector using inclusive bounds, coverage as its mean, widths as upper-lower, and mean_width as the mean width.",
+    "Count boundary observations as covered. Zero-width intervals are valid and cover only exact equality. These are descriptive evaluation statistics.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Coverage and width differ",
+      "input": "interval_audit([0,5], [-1,0], [1,4])",
+      "output": "{'covered': [True, False],\n 'coverage': 0.5,\n 'widths': [2.0, 4.0],\n 'mean_width': 3.0}"
+    },
+    {
+      "name": "Inclusive boundaries",
+      "input": "interval_audit([0,2], [0,1], [1,2])",
+      "output": "{'covered': [True, True],\n 'coverage': 1.0,\n 'widths': [1.0, 1.0],\n 'mean_width': 1.0}"
+    },
+    {
+      "name": "Exact zero width",
+      "input": "interval_audit([2], [2], [2])",
+      "output": "{'covered': [True],\n 'coverage': 1.0,\n 'widths': [0.0],\n 'mean_width': 0.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate each row from the aggregate",
+      "body": "Build a boolean inclusion mask and a width vector before averaging."
+    },
+    {
+      "title": "Use inclusive comparisons",
+      "body": "Equality with either endpoint counts as covered."
+    }
+  ],
+  "explanation": [
+    "Empirical coverage is the fraction of evaluated targets inside their intervals. Mean width supplies the second dimension needed to distinguish informative coverage from trivially broad intervals.",
+    "These observations do not guarantee future coverage. Dataset shift and small evaluation samples can make a seemingly well-calibrated model unreliable."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

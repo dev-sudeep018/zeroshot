@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e46",
+  "kind": "lesson",
+  "slug": "paged-kv-gather",
+  "version": 1,
+  "title": "Reconstruct Logical Tokens from KV Pages",
+  "summary": "Logical token order can differ from physical memory order. A page table maps each sequence to shared storage blocks, and sequence lengths hide unused tail slots.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Inference serving", "KV cache"],
+  "prerequisites": ["e19"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gather_kv_pages",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Kwon et al., Efficient Memory Management for Large Language Model Serving with PagedAttention. https://arxiv.org/abs/2309.06180",
+    ],
+}

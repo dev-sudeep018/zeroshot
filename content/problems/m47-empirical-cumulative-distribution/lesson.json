@@ -1,0 +1,45 @@
+{
+  "intro": "An empirical CDF answers how much observed mass lies at or below a threshold. Ties create jumps that must be counted inclusively.",
+  "task": "Return the fraction of sample observations less than or equal to each query threshold.",
+  "signature": "empirical_cdf(samples, queries)",
+  "requirements": [
+    "samples and queries are nonempty vectors. Samples need not be sorted and repeated observations carry repeated mass.",
+    "For each query q, return count(samples<=q)/len(samples). Preserve query shape and order.",
+    "Use the right-continuous convention: every observation exactly equal to a query counts toward its probability.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Inclusive repeated values",
+      "input": "empirical_cdf([1,2,2,4],[0,1,2,3,4])",
+      "output": "[\n  0.0,\n  0.25,\n  0.75,\n  0.75,\n  1.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unsorted sample",
+      "input": "empirical_cdf([4,1,3,2],[2,0,4])",
+      "output": "[\n  0.5,\n  0.0,\n  1.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Single observation",
+      "input": "empirical_cdf([5],[4,5,6])",
+      "output": "[\n  0.0,\n  1.0,\n  1.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Sorting observations makes each threshold a boundary between included and excluded samples."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Use the insertion point after equal values so tied observations are all counted at the query."
+    }
+  ],
+  "explanation": [
+    "Each sample contributes mass 1/n. The empirical CDF adds those masses up through a threshold and therefore includes every tied value at that threshold.",
+    "Sorting once permits binary-search queries. The result is a step function rather than the interpolation used by the earlier quantile exercise."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

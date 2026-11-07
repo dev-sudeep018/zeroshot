@@ -15,7 +15,11 @@ import {
   validateCatalog,
 } from "../../packages/problem-schema/src/index";
 import { loadContent } from "../../scripts/content";
-import { catalog, paths } from "../../apps/web/src/lib/curriculum";
+import {
+  beginnerTracks,
+  catalog,
+  paths,
+} from "../../apps/web/src/lib/curriculum";
 
 describe("portable progress", () => {
   it("preserves completion and the newer timestamp without inventing added attempts", () => {
@@ -99,6 +103,21 @@ describe("retrieval workbench", () => {
   });
 });
 describe("content capacity", () => {
+  it("offers distinct published beginner starting points and sorts larger IDs numerically", () => {
+    const startingPoints = beginnerTracks.flatMap((track) => track.items);
+    expect(new Set(startingPoints).size).toBe(startingPoints.length);
+    for (const id of startingPoints) {
+      const item = catalog.find((entry) => entry.id === id);
+      expect(item?.status).toBe("validated");
+      expect(item?.difficulty).toBe("beginner");
+    }
+    for (const domain of ["foundations", "deep-learning", "engineering"]) {
+      const ids = catalog
+        .filter((item) => item.domain === domain)
+        .map((item) => Number(item.id.slice(1)));
+      expect(ids).toEqual([...ids].sort((a, b) => a - b));
+    }
+  });
   it("connects every published lesson to one path with local prerequisites first", () => {
     const assigned = paths.flatMap((path) => path.items);
     expect(new Set(assigned).size).toBe(assigned.length);

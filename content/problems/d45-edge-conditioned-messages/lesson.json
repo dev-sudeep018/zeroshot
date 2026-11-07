@@ -1,0 +1,45 @@
+{
+  "intro": "An edge feature can change the message sent between the same pair of nodes. Trace the recipient, sender and edge contributions before aggregating neighbors.",
+  "task": "Implement edge_messages(features, adjacency, edges, message_weights, update_weights). Two edges linking otherwise identical nodes can carry different messages through their edge features. A node with no incoming weight can still retain its own features through the update projection.",
+  "signature": "edge_messages(features, adjacency, edges, message_weights, update_weights)",
+  "requirements": [
+    "features is (N,F), adjacency is nonnegative (N,N), edges is (N,N,E), message_weights is (2*F+E,M), update_weights is (F+M,O); all dimensions positive.",
+    "For receiver i and sender j compute relu(concatenate([features[i],features[j],edges[i,j]])@message_weights)*adjacency[i,j]. Sum over j.",
+    "Return relu(concatenate([features[i],summed_message[i]])@update_weights) for every i, shape (N,O). Do not normalize weighted adjacency or add edges.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Edge feature becomes message",
+      "input": "edge_messages([[0]],[[1]],[[[3]]],[[0],[0],[2]],[[0],[1]])",
+      "output": "[[6.0]]"
+    },
+    {
+      "name": "Receiver survives isolation",
+      "input": "edge_messages([[4]],[[0]],[[[9]]],[[1],[1],[1]],[[2],[1]])",
+      "output": "[[8.0]]"
+    },
+    {
+      "name": "Weighted message",
+      "input": "edge_messages([[2]],[[3]],[[[0]]],[[0],[1],[0]],[[0],[1]])",
+      "output": "[[6.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The concatenation order determines what each weight row means."
+    },
+    {
+      "title": "Step 2",
+      "body": "Apply message ReLU before multiplying the edge weight and summing."
+    }
+  ],
+  "explanation": [
+    "Two edges linking otherwise identical nodes can carry different messages through their edge features. A node with no incoming weight can still retain its own features through the update projection.",
+    "The adaptation retains the upstream message/update structure with caller-supplied matrices and explicit edge orientation."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

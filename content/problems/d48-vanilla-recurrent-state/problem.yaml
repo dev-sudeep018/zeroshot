@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d48",
+  "kind": "lesson",
+  "slug": "vanilla-recurrent-state",
+  "version": 1,
+  "title": "Carry a Hidden State through a Sequence",
+  "summary": "A recurrent layer reuses the same weights at every time step. Its hidden state makes outputs sensitive to input order without positional embeddings.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Recurrent networks", "Hidden state"],
+  "prerequisites": ["d02", "d08"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "recurrent_states",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

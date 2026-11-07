@@ -1,0 +1,44 @@
+{
+  "intro": "Merging uses the fact that each source is already sorted. Only the two current front events need comparison, giving linear work in the total number of events.",
+  "task": "Merge two already sorted timestamp streams stably with left-first ties.",
+  "signature": "merge_events(left, right)",
+  "requirements": [
+    "Each input is a sorted sequence of [integer timestamp, nonempty string ID] pairs with nondecreasing timestamps. Return all copied events sorted by timestamp, retaining each stream order and taking left before right for equal timestamps.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Interleaving times",
+      "input": "merge_events([[1,'a'],[3,'c']], [[2,'b']])",
+      "output": "[[1, 'a'], [2, 'b'], [3, 'c']]"
+    },
+    {
+      "name": "Left-first ties",
+      "input": "merge_events([[1,'l1'],[1,'l2']], [[1,'r']])",
+      "output": "[[1, 'l1'], [1, 'l2'], [1, 'r']]"
+    },
+    {
+      "name": "Empty left",
+      "input": "merge_events([], [[2,'r']])",
+      "output": "[[2, 'r']]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compare only the next unconsumed event from each sorted stream."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use <= when deciding to take left so every left tie precedes the right tie."
+    }
+  ],
+  "explanation": [
+    "Merging uses the fact that each source is already sorted. Only the two current front events need comparison, giving linear work in the total number of events.",
+    "A tie policy makes repeated timestamps reproducible. Left-first ordering is deliberate and must not be replaced by alphabetical ID order."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Conditioning on several columns means selecting an event in the column variable. The row variable remains uncertain and needs a new distribution after selection.",
+  "task": "Restrict a joint probability table to an event and return event probability and conditional row distribution.",
+  "signature": "condition_joint_columns(joint, selected)",
+  "requirements": [
+    "joint is a nonnegative matrix whose entries sum to one within 1e-10. selected is a boolean vector with one entry per column.",
+    "Return {\"event\": total selected-column probability, \"rows\": conditional distribution over rows given that event}.",
+    "Reject a selected event with zero mass, even if some selected columns exist.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Select first column",
+      "input": "condition_joint_columns([[.1,.2],[.3,.4]],[True,False])",
+      "output": "{'event': 0.4, 'rows': [0.25, 0.75]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Select all columns",
+      "input": "condition_joint_columns([[.1,.2],[.3,.4]],[True,True])",
+      "output": "{'event': 1.0, 'rows': [0.3, 0.7]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Several selected columns",
+      "input": "condition_joint_columns([[.1,.1,.2],[.2,.3,.1]],[True,False,True])",
+      "output": "{'event': 0.6, 'rows': [0.5, 0.5]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sum the selected cells separately within each row."
+    },
+    {
+      "title": "Build the result",
+      "body": "Normalize these row totals by their combined event mass, not by each original row sum."
+    }
+  ],
+  "explanation": [
+    "Conditioning on several columns means selecting an event in the column variable. The row variable remains uncertain and needs a new distribution after selection.",
+    "The event probability records how common the condition is. Returning it with the normalized row masses keeps rarity separate from conditional composition."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

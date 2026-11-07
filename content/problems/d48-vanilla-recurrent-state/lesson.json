@@ -1,0 +1,45 @@
+{
+  "intro": "A recurrent layer reuses the same weights at every time step. Its hidden state makes outputs sensitive to input order without positional embeddings.",
+  "task": "Implement recurrent_states(inputs, initial, input_weights, recurrent_weights, bias). Nonzero recurrence lets earlier inputs affect later outputs through hidden state. Reversing a sequence generally changes more than the output order.",
+  "signature": "recurrent_states(inputs, initial, input_weights, recurrent_weights, bias)",
+  "requirements": [
+    "inputs is (T,F), initial and bias are (H,), input_weights is (F,H), recurrent_weights is (H,H), with positive dimensions.",
+    "Starting at initial, update h=tanh(inputs[t]@input_weights+h@recurrent_weights+bias) in chronological order.",
+    "Return all updated states (T,H), excluding initial. Use no output projection or batch dimension.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "No signal",
+      "input": "recurrent_states([[0],[0]],[0],[[1]],[[1]],[0])",
+      "output": "[[0.0], [0.0]]"
+    },
+    {
+      "name": "One input",
+      "input": "recurrent_states([[1]],[0],[[1]],[[0]],[0])",
+      "output": "[[0.761594155956]]"
+    },
+    {
+      "name": "Carry memory",
+      "input": "recurrent_states([[0],[0]],[1],[[0]],[[1]],[0])",
+      "output": "[[0.761594155956], [0.642014992012]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Read the previous hidden state before assigning the next state."
+    },
+    {
+      "title": "Step 2",
+      "body": "A zero recurrent matrix removes all memory between time steps."
+    }
+  ],
+  "explanation": [
+    "Nonzero recurrence lets earlier inputs affect later outputs through hidden state. Reversing a sequence generally changes more than the output order.",
+    "Tanh bounds each updated coordinate to [-1,1]. The initial state is supplied and need not already satisfy that bound."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

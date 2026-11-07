@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-26",
+  "source": "https://github.com/whwangovo/pyre-code",
+  "revision": "7ede95b47437798c74023a0ffae8fb33bbeebc2e",
+  "license": "MIT",
+  "upstream_license_sha256": "91a61cb1377cef47e1c6ec7dba42331f3070970f91e5ab1638fcc30add2f9138",
+  "items": [
+    {
+      "id": "d41",
+      "folder": "d41-conditional-normalization-gate",
+      "upstream_path": "torch_judge/tasks/adaln_zero.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/adaln_zero.py",
+      "upstream_sha256": "3c1ef1e1d07313f73324ee7bf1c170ebbcdb3f679273e274d7e025229b9185aa",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d41-conditional-normalization-gate/THIRD_PARTY_NOTICE.md",
+      "changes": "This adapts the upstream modulation equation to supplied parameters. It is not an entire AdaLN-Zero transformer block, and it does not include the upstream conditioning projection."
+    },
+    {
+      "id": "d42",
+      "folder": "d42-grouped-query-heads",
+      "upstream_path": "torch_judge/tasks/gqa.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/gqa.py",
+      "upstream_sha256": "206615c1eee4e658c1ae3dd48aa888211aca37ba77be8e6dc6a6b1a2f54a2f7a",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d42-grouped-query-heads/THIRD_PARTY_NOTICE.md",
+      "changes": "The NumPy port makes the upstream repeat-interleave head mapping explicit, without allocating repeated key/value arrays."
+    },
+    {
+      "id": "d43",
+      "folder": "d43-differential-attention",
+      "upstream_path": "torch_judge/tasks/diff_attention.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/diff_attention.py",
+      "upstream_sha256": "02debfe442af96a7e9e75dd8918e57ab666caa58df2c88bda553e3b109be0cdc",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d43-differential-attention/THIRD_PARTY_NOTICE.md",
+      "changes": "This port takes the two query/key subspaces separately instead of splitting a projected feature tensor as the upstream implementation does."
+    },
+    {
+      "id": "d44",
+      "folder": "d44-graph-attention-neighbors",
+      "upstream_path": "torch_judge/tasks/gat_layer.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/gat_layer.py",
+      "upstream_sha256": "d6ec2091f6b45ce747b9862872b9b207d132b7ba538dd66c8d798d89489d704b",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d44-graph-attention-neighbors/THIRD_PARTY_NOTICE.md",
+      "changes": "The port retains the upstream additive scoring equation and changes isolated-node handling from an all-masked softmax to an explicit zero output."
+    },
+    {
+      "id": "d45",
+      "folder": "d45-edge-conditioned-messages",
+      "upstream_path": "torch_judge/tasks/mpnn_layer.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/mpnn_layer.py",
+      "upstream_sha256": "6c2fba4d89b98f5a05cad2387aef8224077f5aca8be90436abb7f44ebdf091ac",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d45-edge-conditioned-messages/THIRD_PARTY_NOTICE.md",
+      "changes": "The adaptation retains the upstream message/update structure with caller-supplied matrices and explicit edge orientation."
+    },
+    {
+      "id": "d46",
+      "folder": "d46-selective-state-space-step",
+      "upstream_path": "torch_judge/tasks/mamba_ssm.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/mamba_ssm.py",
+      "upstream_sha256": "29f5a49546df3e64a2c7fe304139b271767b03e155a433e24ff12b4e4bf9af8d",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d46-selective-state-space-step/THIRD_PARTY_NOTICE.md",
+      "changes": "The port exposes state and readout arrays directly. It follows the upstream exp(delta*A), delta*B convention rather than an exact zero-order-hold input integral."
+    },
+    {
+      "id": "d47",
+      "folder": "d47-sharded-mlp-reduction",
+      "upstream_path": "torch_judge/tasks/tensor_parallel.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/tensor_parallel.py",
+      "upstream_sha256": "771a860cb30929c366df3b9318375c3f920a42309652a759ac24443376d78dfc",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 11,
+      "notice": "content/problems/d47-sharded-mlp-reduction/THIRD_PARTY_NOTICE.md",
+      "changes": "This adapts the upstream tensor-parallel MLP arithmetic to supplied NumPy shards. The operation illustrates the reduction semantics without launching distributed workers."
+    }
+  ]
+}

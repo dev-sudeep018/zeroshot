@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e109",
+  "kind": "lesson",
+  "slug": "count-unique-terms-per-document",
+  "version": 1,
+  "title": "Count Unique Terms Per Document",
+  "summary": "Compute document frequencies, counting repeated terms once per document.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "document_frequencies",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "m44",
+  "kind": "lesson",
+  "slug": "gaussian-mixture-em-step",
+  "version": 1,
+  "title": "Refine a Gaussian Mixture with Soft Assignments",
+  "summary": "A mixture model does not know which component generated each observation. One EM step turns current likelihoods into soft assignments and updates component statistics.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Refine a Gaussian Mixture with Soft Assignments"],
+  "prerequisites": ["m16", "m20"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gaussian_em_step",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, fixtures, and implementation.",
+      "Concept reference only; no source code or prose copied: https://scikit-learn.org/stable/modules/mixture.html",
+    ],
+}

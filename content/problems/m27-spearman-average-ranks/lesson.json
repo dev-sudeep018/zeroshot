@@ -1,0 +1,45 @@
+{
+  "intro": "Rank correlation captures monotone relationships without requiring a straight line. Tied observations need shared average ranks to avoid artificial ordering.",
+  "task": "Replace both observation vectors by one-based average ranks, then return their Pearson correlation.",
+  "signature": "spearman_correlation(x, y)",
+  "requirements": [
+    "x and y are equal-length vectors containing at least two paired observations.",
+    "Give tied values the average of their occupied one-based ranks, then correlate centered rank vectors.",
+    "Reject constant rank vectors. Do not use the no-ties shortcut formula when ties occur.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Monotone nonlinear relation",
+      "input": "spearman_correlation([1,2,3],[1,4,9])",
+      "output": "1\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Reversed order",
+      "input": "spearman_correlation([1,2,3],[9,4,1])",
+      "output": "-1\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Average tied ranks",
+      "input": "spearman_correlation([1,1,3],[1,2,3])",
+      "output": "0.8660254\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Sort positions to discover groups of tied values, but write their shared ranks back to original positions."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "The average of the first and last occupied rank gives the rank for every member of a tie group."
+    }
+  ],
+  "explanation": [
+    "Ranking discards the numerical gaps between ordered observations. Any strictly increasing transformation preserves the ranks and therefore preserves this correlation.",
+    "Ties occupy several positions but all receive the mean of those positions. Using arbitrary tie order adds information that the observations do not contain."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

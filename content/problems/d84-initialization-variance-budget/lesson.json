@@ -1,0 +1,44 @@
+{
+  "intro": "Initialization scale influences signal growth before any training. Predict that growth without drawing random weights.",
+  "task": "Compare Xavier and He weight variances and resulting pre-activation variances.",
+  "signature": "initialization_budget(fan_in, fan_out, input_variance)",
+  "requirements": [
+    "fan_in and fan_out are integers 1..64; input_variance is nonnegative. Assume independent zero-mean inputs and weights.",
+    "Return a 2-by-2 array: rows Xavier, He; columns weight variance, pre-activation variance. Weight variances are 2/(fan_in+fan_out) and 2/fan_in. Pre-activation variance is fan_in*weight_variance*input_variance.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Equal widths",
+      "input": "initialization_budget(4,4,1)",
+      "output": "[[0.25, 1.0], [0.5, 2.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Expanding layer",
+      "input": "initialization_budget(2,6,1)",
+      "output": "[[0.25, 0.5], [1.0, 2.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Larger input variance",
+      "input": "initialization_budget(2,2,3)",
+      "output": "[[0.5, 3.0], [1.0, 6.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Independent zero-mean contributions have additive variances."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Report variance before ReLU, without another factor of one half."
+    }
+  ],
+  "explanation": [
+    "Fan-based initialization adjusts scale to the number of connections. The calculation explains why identical weight variance behaves differently in narrow and wide layers.",
+    "The assumptions are approximations. Correlation and nonzero means in actual activations can change the observed variance, so use the prediction as a baseline rather than a guarantee."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A GRU combines a reset-controlled candidate with an update-controlled old state. Moving the reset gate outside the candidate nonlinearity changes the recurrence.",
+  "task": "Implement gru_step(previous, update_logits, reset_logits, input_candidate, recurrent_candidate). Closing reset prevents the recurrent contribution from shaping the candidate. Update can still retain old state directly.",
+  "signature": "gru_step(previous, update_logits, reset_logits, input_candidate, recurrent_candidate)",
+  "requirements": [
+    "All inputs match nonempty shape (B,H). input_candidate and recurrent_candidate are supplied affine contributions including any biases.",
+    "z=sigmoid(update_logits), r=sigmoid(reset_logits), candidate=tanh(input_candidate+r*recurrent_candidate).",
+    "Return (1-z)*candidate+z*previous, shape (B,H). This reset-after-projection convention retains old state when z approaches one.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Empty state",
+      "input": "gru_step([[0]],[[0]],[[0]],[[0]],[[0]])",
+      "output": "[[0.0]]"
+    },
+    {
+      "name": "Half retention",
+      "input": "gru_step([[2]],[[0]],[[0]],[[0]],[[0]])",
+      "output": "[[1.0]]"
+    },
+    {
+      "name": "Reset scales drive",
+      "input": "gru_step([[0]],[[0]],[[0]],[[0]],[[2]])",
+      "output": "[[0.380797077978]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Reset acts before tanh on only the recurrent contribution."
+    },
+    {
+      "title": "Step 2",
+      "body": "Check the update convention; some texts reverse the role of z."
+    }
+  ],
+  "explanation": [
+    "Closing reset prevents the recurrent contribution from shaping the candidate. Update can still retain old state directly.",
+    "Supplying affine contributions makes gate placement inspectable. This is not a learned GRU layer or a reset-before-matrix convention."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

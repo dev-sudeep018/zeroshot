@@ -1,0 +1,45 @@
+{
+  "intro": "Attention maps can be contrasted instead of averaged. Their difference is signed, so the resulting weights need not describe a probability distribution.",
+  "task": "Implement differential_attention(q1, k1, q2, k2, values, coefficient). Signed mixing can produce outputs outside the range of the supplied values. That is expected because the subtraction removes the convex-combination constraint.",
+  "signature": "differential_attention(q1, k1, q2, k2, values, coefficient)",
+  "requirements": [
+    "q1 and q2 have matching nonempty (Q,D) shapes; k1 and k2 match (K,D); values is (K,V) with V>0.",
+    "Compute A1=softmax(q1@k1.T/sqrt(D)) and A2 analogously, then return (A1-coefficient*A2)@values with shape (Q,V). coefficient is a finite real scalar.",
+    "Normalize the two maps separately. Do not apply softmax again after subtraction or clip negative weights. There is no causal mask.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Identical maps cancel",
+      "input": "differential_attention([[0]],[[0],[0]],[[0]],[[0],[0]],[[2],[8]],1)",
+      "output": "[[0.0]]"
+    },
+    {
+      "name": "Keep the first map",
+      "input": "differential_attention([[0]],[[0],[0]],[[1]],[[0],[1]],[[2],[8]],0)",
+      "output": "[[5.0]]"
+    },
+    {
+      "name": "Signed contrast",
+      "input": "differential_attention([[np.log(3)]],[[0],[1]],[[0]],[[0],[1]],[[0],[8]],1)",
+      "output": "[[2.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "At coefficient one, every row of the signed map sums to zero."
+    },
+    {
+      "title": "Step 2",
+      "body": "A constant value vector is multiplied by 1-coefficient regardless of the attention scores."
+    }
+  ],
+  "explanation": [
+    "Signed mixing can produce outputs outside the range of the supplied values. That is expected because the subtraction removes the convex-combination constraint.",
+    "This port takes the two query/key subspaces separately instead of splitting a projected feature tensor as the upstream implementation does."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

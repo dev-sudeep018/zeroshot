@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "e30",
+  "kind": "lesson",
+  "slug": "group-heldout-split",
+  "version": 1,
+  "title": "Keep Related Rows in One Split",
+  "summary": "Rows from the same person or session can leak information across a random split. A group holdout keeps every row belonging to a selected group together.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Data leakage", "Data preparation"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "group_split",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

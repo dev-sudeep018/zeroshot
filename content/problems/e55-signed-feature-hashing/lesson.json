@@ -1,0 +1,45 @@
+{
+  "intro": "A fixed-size feature vector avoids storing a growing vocabulary, but hash collisions mix token contributions. Signed hashing can make opposing collisions cancel.",
+  "task": "Map token occurrences into a bounded signed feature vector and inspect deterministic collisions.",
+  "signature": "hashed_features(tokens, buckets)",
+  "requirements": [
+    "tokens is a list or tuple of at most 10000 nonempty strings; buckets is an integer 1..100000. Token matching is case-sensitive.",
+    "For each token compute h=0 then h=(31*h+ord(character)) mod 2**32 for each Unicode code point. Use bucket=(h//2) mod buckets and sign=+1 for even h, -1 for odd h.",
+    "Return a float vector of bucket sums, adding one signed contribution per token occurrence. This specified teaching hash is deterministic, not a cryptographic or security hash.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Signed contributions",
+      "input": "hashed_features(['a','b'], 4)",
+      "output": "[-1.0, 1.0, 0.0, 0.0]"
+    },
+    {
+      "name": "Opposite signs can cancel",
+      "input": "hashed_features(['b','c'], 4)",
+      "output": "[0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "name": "Repetition accumulates",
+      "input": "hashed_features(['a','a'], 2)",
+      "output": "[-2.0, 0.0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Apply the modulus at every character",
+      "body": "Use the exact stated hash recurrence so results are stable across Python processes."
+    },
+    {
+      "title": "Separate bucket and sign",
+      "body": "The parity bit supplies the sign while the remaining integer selects the bucket."
+    }
+  ],
+  "explanation": [
+    "Hashing bounds feature memory independently of vocabulary size. The cost is collisions: different tokens may share a coordinate and become indistinguishable to a downstream linear model.",
+    "This lesson fixes the hash function to make every collision inspectable. Production choices can use better-distributed hashes; Python built-in hash is unsuitable for this deterministic contract because its string results may vary between processes."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

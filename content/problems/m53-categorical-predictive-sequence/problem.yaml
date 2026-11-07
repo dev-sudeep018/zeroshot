@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m53",
+  "kind": "lesson",
+  "slug": "categorical-predictive-sequence",
+  "version": 1,
+  "title": "Score a Sequence while Updating Category Beliefs",
+  "summary": "After a category is observed, its probability in a Bayesian predictive sequence changes. Track those changing probabilities instead of multiplying one fixed distribution.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Score a Sequence while Updating Category Beliefs"],
+  "prerequisites": ["m52"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "categorical_predictive_sequence",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

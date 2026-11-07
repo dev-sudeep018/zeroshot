@@ -1,0 +1,45 @@
+{
+  "intro": "Correlated columns make coordinates harder to interpret. Subtract earlier directions one by one to build an orthonormal basis and triangular coordinates.",
+  "task": "Implement modified Gram\u2013Schmidt and return thin Q and upper-triangular R with positive diagonal.",
+  "signature": "gram_schmidt(matrix)",
+  "requirements": [
+    "matrix has shape (n,k) with n>=k. Every residual column norm encountered in order must exceed 1e-10.",
+    "For each column, subtract its projections on already normalized columns in sequence, store those coefficients in R, then normalize the residual.",
+    "Return {\"q\": Q, \"r\": R} with Q shape (n,k) and R shape (k,k). Reject numerically dependent columns; do not silently drop them.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Upper triangular input",
+      "input": "gram_schmidt([[1,1],[0,1]])",
+      "output": "{\n  \"q\": [\n    [\n      1.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0\n    ]\n  ],\n  \"r\": [\n    [\n      1.0,\n      1.0\n    ],\n    [\n      0.0,\n      1.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Scaled axes",
+      "input": "gram_schmidt([[2,0],[0,3]])",
+      "output": "{\n  \"q\": [\n    [\n      1.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0\n    ]\n  ],\n  \"r\": [\n    [\n      2.0,\n      0.0\n    ],\n    [\n      0.0,\n      3.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Negative column orientation",
+      "input": "gram_schmidt([[-2,0],[0,3]])",
+      "output": "{\n  \"q\": [\n    [\n      -1.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0\n    ]\n  ],\n  \"r\": [\n    [\n      2.0,\n      0.0\n    ],\n    [\n      0.0,\n      3.0\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "The next basis vector is the portion of a column unexplained by all earlier basis vectors."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Update the residual after each projection, and store that coefficient before normalizing the remaining direction."
+    }
+  ],
+  "explanation": [
+    "Each new column splits into components along existing basis vectors and an orthogonal residual. The projection coefficients form R, while normalized residuals form Q.",
+    "Modified Gram\u2013Schmidt updates the residual after every subtraction. Its positive normalization denominator fixes the otherwise arbitrary sign of each basis column."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

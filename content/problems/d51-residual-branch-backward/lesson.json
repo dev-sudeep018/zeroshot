@@ -1,0 +1,45 @@
+{
+  "intro": "A residual block has identity and transformed gradient routes. Omitting either changes learning even when the forward values look plausible.",
+  "task": "Implement residual_backward(x, weights, upstream). When all branch activations are negative, the identity path still carries upstream. Masking both routes incorrectly eliminates that gradient.",
+  "signature": "residual_backward(x, weights, upstream)",
+  "requirements": [
+    "x and upstream match (B,D); weights is (D,D), with positive dimensions.",
+    "Forward is y=x+relu(x@weights), without bias. ReLU derivative at zero is zero.",
+    "Return {input: dx, weights: dweights}; dz=upstream*(x@weights>0), dx=upstream+dz@weights.T, dweights=x.T@dz. Do not average the batch.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Both routes active",
+      "input": "residual_backward([[2]],[[3]],[[4]])",
+      "output": "{\"input\": [[16.0]], \"weights\": [[8.0]]}"
+    },
+    {
+      "name": "Branch inactive",
+      "input": "residual_backward([[-2]],[[3]],[[4]])",
+      "output": "{\"input\": [[4.0]], \"weights\": [[0.0]]}"
+    },
+    {
+      "name": "ReLU boundary",
+      "input": "residual_backward([[0]],[[3]],[[4]])",
+      "output": "{\"input\": [[4.0]], \"weights\": [[0.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The shortcut passes upstream directly to the input derivative."
+    },
+    {
+      "title": "Step 2",
+      "body": "Only the transformed branch is masked by ReLU."
+    }
+  ],
+  "explanation": [
+    "When all branch activations are negative, the identity path still carries upstream. Masking both routes incorrectly eliminates that gradient.",
+    "Upstream already differentiates the final objective with respect to y. This operation neither averages it nor introduces a new loss."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

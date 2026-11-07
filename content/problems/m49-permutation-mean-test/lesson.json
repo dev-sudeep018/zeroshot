@@ -1,0 +1,45 @@
+{
+  "intro": "A randomization test asks whether a group difference is unusual under exchanged labels. Supplied reorderings make each null statistic inspectable.",
+  "task": "Evaluate a two-sided difference-of-means randomization test using supplied full permutations and a plus-one Monte Carlo correction.",
+  "signature": "permutation_mean_test(values, group_size, permutations)",
+  "requirements": [
+    "values is a length-n vector, n>=2. group_size is an integer in [1,n-1]. The original first group_size values form group A and the rest form B.",
+    "permutations is a nonempty matrix with n columns. Each row must be an exact permutation of integer positions 0..n-1; rows may repeat.",
+    "For each reordered vector, subtract the mean of its last n-group_size entries from that of its first group_size entries. Return {\"observed\": original_difference, \"null\": statistic vector, \"p_value\": (1+count(abs(null)>=abs(observed)))/(1+b)}.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Swap two observations",
+      "input": "permutation_mean_test([0,2],1,[[0,1],[1,0]])",
+      "output": "{\n  \"observed\": -2,\n  \"null\": [\n    -2.0,\n    2.0\n  ],\n  \"p_value\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "No null as extreme",
+      "input": "permutation_mean_test([0,0,2,2],2,[[0,2,1,3],[3,1,2,0]])",
+      "output": "{\n  \"observed\": -2,\n  \"null\": [\n    0.0,\n    0.0\n  ],\n  \"p_value\": 0.33333333\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "One extreme null",
+      "input": "permutation_mean_test([0,0,2,2],2,[[0,1,2,3],[0,2,1,3]])",
+      "output": "{\n  \"observed\": -2,\n  \"null\": [\n    -2.0,\n    0.0\n  ],\n  \"p_value\": 0.66666667\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Validate that each row reorders all positions exactly once, then use its first group_size positions as group A."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Count null statistics at least as extreme in absolute magnitude, including equality, before applying the plus-one correction."
+    }
+  ],
+  "explanation": [
+    "Under an exchangeability assumption, relabeling observations generates a null comparison. Recompute both group means after each reordering, including when group sizes differ.",
+    "This exercise uses a plus-one Monte Carlo correction, so finite null draws never give zero p-value. Exhaustive exact permutation tests can use another convention; the contract fixes this one."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Whitespace normalization removes formatting differences from imported text without changing its words or punctuation. It can make exact comparisons and logs easier to inspect.",
+  "task": "Collapse Unicode whitespace while preserving case and punctuation.",
+  "signature": "normalize_whitespace(text)",
+  "requirements": [
+    "Return a string with each run of Unicode whitespace replaced by one ASCII space and leading/trailing whitespace removed. Preserve every nonwhitespace character exactly.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed whitespace",
+      "input": "normalize_whitespace('  North\\tstar\\n data  ')",
+      "output": "'North star data'"
+    },
+    {
+      "name": "Unicode space",
+      "input": "normalize_whitespace('A\\u2003B\\u00a0C')",
+      "output": "'A B C'"
+    },
+    {
+      "name": "Punctuation survives",
+      "input": "normalize_whitespace(' Hello,   WORLD! ')",
+      "output": "'Hello, WORLD!'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Split without a separator to recognize whitespace runs."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Join tokens with a single space; punctuation belongs to the tokens."
+    }
+  ],
+  "explanation": [
+    "Whitespace normalization removes formatting differences from imported text without changing its words or punctuation. It can make exact comparisons and logs easier to inspect.",
+    "Unicode whitespace includes more than ordinary spaces. The contract deliberately preserves case and punctuation, so it does not silently turn different answers into the same answer."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

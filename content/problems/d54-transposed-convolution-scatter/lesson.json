@@ -1,0 +1,45 @@
+{
+  "intro": "Transposed convolution scatters each input value through a shifted filter. This adjoint operation need not invert a convolution.",
+  "task": "Implement transposed_convolution(signal, kernel, stride). Segments can reinforce or cancel where they overlap. Assignment instead of addition silently loses earlier contributions.",
+  "signature": "transposed_convolution(signal, kernel, stride)",
+  "requirements": [
+    "signal and kernel are nonempty vectors of lengths L and K, each at most 4096. stride is an integer in [1,10000], excluding booleans. The resulting output length must be at most 65536.",
+    "Allocate length (L-1)*stride+K. For each i add signal[i]*kernel at indices i*stride through i*stride+K-1.",
+    "Return that vector, using no padding, output padding, dilation or kernel reversal. Overlaps add.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "One scatter",
+      "input": "transposed_convolution([2],[1,3],1)",
+      "output": "[2.0, 6.0]"
+    },
+    {
+      "name": "Overlap adds",
+      "input": "transposed_convolution([1,2],[1,1],1)",
+      "output": "[1.0, 3.0, 2.0]"
+    },
+    {
+      "name": "Separated segments",
+      "input": "transposed_convolution([1,2],[1,3],2)",
+      "output": "[1.0, 3.0, 2.0, 6.0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Derive length from the final segment start plus its width."
+    },
+    {
+      "title": "Step 2",
+      "body": "Stride larger than kernel width leaves uncovered zeros."
+    }
+  ],
+  "explanation": [
+    "Segments can reinforce or cancel where they overlap. Assignment instead of addition silently loses earlier contributions.",
+    "The shape follows the transpose of a valid strided cross-correlation matrix. It cannot generally recover information lost in the forward operation."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

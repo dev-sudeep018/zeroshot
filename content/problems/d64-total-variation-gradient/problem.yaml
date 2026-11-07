@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d64",
+  "kind": "lesson",
+  "slug": "total-variation-gradient",
+  "version": 1,
+  "title": "Differentiate an Image Smoothness Penalty",
+  "summary": "Total variation penalizes differences between neighboring pixels. Its derivative moves across edges while assigning a chosen subgradient to flat regions.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Image regularization", "Subgradients"],
+  "prerequisites": ["d01"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "total_variation",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

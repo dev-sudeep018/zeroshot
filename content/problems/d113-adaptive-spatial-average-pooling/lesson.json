@@ -1,0 +1,44 @@
+{
+  "intro": "A network head may require a fixed grid even when input images differ in size. Adaptive pooling chooses averaging regions from the requested output dimensions.",
+  "task": "Average the documented floor-to-ceil regions for every output location.",
+  "signature": "adaptive_average_pool(image, output_size)",
+  "requirements": [
+    "image is a height-by-width matrix and output_size has two integer entries in 1..64.",
+    "For output row i, use input rows floor(i*H/OH) through ceil((i+1)*H/OH)-1; use the analogous interval for columns. Return each rectangular region\u2019s mean. Regions may overlap, and output dimensions may exceed input dimensions.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Uneven bins",
+      "input": "adaptive_average_pool(np.arange(15).reshape(3,5),[2,2])",
+      "output": "[[3.5, 5.5], [8.5, 10.5]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Global mean",
+      "input": "adaptive_average_pool([[1,2],[3,4]],[1,1])",
+      "output": "[[2.5]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Disjoint blocks",
+      "input": "adaptive_average_pool(np.arange(16).reshape(4,4),[2,2])",
+      "output": "[[2.5, 4.5], [10.5, 12.5]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Compute bin boundaries from the ratio of input length to output length."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Use a ceiling for the right boundary to ensure every region contains at least one source element."
+    }
+  ],
+  "explanation": [
+    "Adaptive pooling summarizes variable input sizes with a fixed output shape. Floor and ceiling boundaries can create overlapping bins when dimensions do not divide evenly.",
+    "The result is an average over each region rather than a resampled value at one coordinate. Consequently it behaves differently from bilinear interpolation and from disjoint block pooling."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

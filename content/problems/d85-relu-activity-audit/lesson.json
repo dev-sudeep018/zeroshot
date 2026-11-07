@@ -1,0 +1,44 @@
+{
+  "intro": "An average activation can hide units that never turn on. Inspect each neuron across a batch.",
+  "task": "Return activity fractions, mean ReLU outputs, and batch inactivity flags.",
+  "signature": "relu_activity(preactivations)",
+  "requirements": [
+    "preactivations is a batch-by-neuron matrix. Active means strictly positive; exact zero is inactive.",
+    "Return {\"active_fraction\": vector, \"mean_output\": vector, \"inactive\": boolean vector}. Reduce over the batch; inactive means no positive entry in that column.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One inactive neuron",
+      "input": "relu_activity([[1,-1,0],[3,-2,2]])",
+      "output": "{'active_fraction': [1.0, 0.0, 0.5],\n 'mean_output': [2, 0, 1],\n 'inactive': [False, True, False]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Exact zeros",
+      "input": "relu_activity([[0,0]])",
+      "output": "{'active_fraction': [0.0, 0.0],\n 'mean_output': [0.0, 0.0],\n 'inactive': [True, True]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Mixed signs",
+      "input": "relu_activity([[-1],[1],[-2],[3]])",
+      "output": "{'active_fraction': [0.5], 'mean_output': [1], 'inactive': [False]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Reduce the example axis, not the neuron axis."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Inactivity on this batch does not prove inactivity on all possible inputs."
+    }
+  ],
+  "explanation": [
+    "A batch-inactive ReLU emits zero for every observed example. Under the usual derivative convention, these examples also send zero gradient through that unit.",
+    "Mean output and activity fraction describe different behaviors. A rarely active neuron can produce large values, so inspecting both helps distinguish frequency from magnitude."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A document classifier can learn class-specific token frequencies from count vectors. Additive smoothing keeps unseen vocabulary entries usable.",
+  "task": "Fit empirical class priors and smoothed multinomial feature probabilities from labeled count vectors.",
+  "signature": "fit_multinomial_nb(counts, labels, classes, alpha=1.0)",
+  "requirements": [
+    "counts is a nonnegative integer-valued (n,d) matrix. labels contains n integer-valued class IDs. classes is an integer in [1,128], and every class must occur.",
+    "alpha is a scalar in [1e-8,1e6]. Sum feature counts within each class, add alpha to every feature, and normalize by total counts plus alpha*d.",
+    "Return {\"class_log_prior\": log(class_row_counts/n), \"feature_log_probability\": log(smoothed_probabilities)}. Class priors are not smoothed; token-empty rows still count toward them.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two document classes",
+      "input": "fit_multinomial_nb([[2,0],[0,2]],[0,1],2)",
+      "output": "{\n  \"class_log_prior\": [\n    -0.69314718,\n    -0.69314718\n  ],\n  \"feature_log_probability\": [\n    [\n      -0.28768207,\n      -1.38629436\n    ],\n    [\n      -1.38629436,\n      -0.28768207\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Empty document",
+      "input": "fit_multinomial_nb([[0,0]],[0],1)",
+      "output": "{\n  \"class_log_prior\": [\n    0.0\n  ],\n  \"feature_log_probability\": [\n    [\n      -0.69314718,\n      -0.69314718\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unequal class prior",
+      "input": "fit_multinomial_nb([[1,0],[1,0],[0,1]],[0,0,1],2)",
+      "output": "{\n  \"class_log_prior\": [\n    -0.40546511,\n    -1.09861229\n  ],\n  \"feature_log_probability\": [\n    [\n      -0.28768207,\n      -1.38629436\n    ],\n    [\n      -1.09861229,\n      -0.40546511\n    ]\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Observation counts set class priors, whereas token counts within a class set feature probabilities."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Apply smoothing to every vocabulary entry before computing the row denominator, including unseen entries."
+    }
+  ],
+  "explanation": [
+    "Feature counts are accumulated within each class rather than averaged per document. Additive smoothing distributes a fixed pseudo-count across the vocabulary before normalization.",
+    "Class prior counts observations, whereas feature likelihood counts tokens. Treating those as the same denominator would change the model when document lengths differ."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

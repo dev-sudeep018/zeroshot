@@ -1,0 +1,45 @@
+{
+  "intro": "Greedy next-token choices can miss a stronger completed sequence. Beam search retains several partial sequences, but pruning still makes it an approximate search.",
+  "task": "Compare greedy and wider-beam decoding on a transition table where a locally attractive choice can lose later.",
+  "signature": "beam_search(log_probs, start, eos, width, max_steps)",
+  "requirements": [
+    "log_probs is a finite square (V,V) matrix of nonpositive transition log scores, 1<=V<=50. Rows need not normalize because this lesson also accepts additive scoring tables.",
+    "start and eos are valid token indices, width is an integer 1..100, and max_steps is an integer 0..20. Initialize with [start] and score 0; completed EOS sequences are carried without extension.",
+    "Each step expands every unfinished beam by all tokens, then retains the best width entries by descending total score and lexicographic token-sequence ties. Return dict tokens and score for the best remaining beam. max_steps counts generated tokens, excluding start.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "A wider beam rescues a better finish",
+      "input": "beam_search([[-2,-.1,-.2],[-2,-2,-2],[-1,-1,-1]], 0, 2, 2, 2)",
+      "output": "{'tokens': [0, 2], 'score': -0.2}"
+    },
+    {
+      "name": "Width one follows the greedy branch",
+      "input": "beam_search([[-2,-.1,-.2],[-2,-2,-2],[-1,-1,-1]], 0, 2, 1, 2)",
+      "output": "{'tokens': [0, 1, 0], 'score': -2.1}"
+    },
+    {
+      "name": "No generation steps",
+      "input": "beam_search([[-1,-1],[-1,-1]], 0, 1, 2, 0)",
+      "output": "{'tokens': [0], 'score': 0.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Completed hypotheses remain candidates",
+      "body": "Carry their score and token sequence forward without adding another transition."
+    },
+    {
+      "title": "Prune after pooling expansions",
+      "body": "Sort all candidates together, not each parent beam separately."
+    }
+  ],
+  "explanation": [
+    "Beam search trades memory and compute for a larger candidate frontier. A wider beam can retain an initially weaker branch that later becomes the best surviving sequence.",
+    "This explicit scoring variant has no length normalization, repetition penalty, or stochastic sampling. A completed short sequence can therefore outrank a longer sequence whose extra log scores reduce its total."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A strong signal can still lead to a modest posterior when its prior probability is small. Track both the evidence probability and the updated belief.",
+  "task": "Return a dictionary with posterior probabilities and evidence probability after observing one event under a finite set of hypotheses.",
+  "signature": "bayes_update(prior, likelihood)",
+  "requirements": [
+    "prior is a probability vector and likelihood has the same shape with values in [0,1]. The sum of prior times likelihood must be positive.",
+    "Return {\"posterior\": prior*likelihood/evidence, \"evidence\": evidence}, where evidence is the sum of the joint masses.",
+    "Preserve hypotheses with zero prior at zero posterior. Do not renormalize the likelihood across hypotheses.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Unequal prior",
+      "input": "bayes_update([.2,.8],[.8,.1])",
+      "output": "{\n  \"posterior\": [\n    0.66666667,\n    0.33333333\n  ],\n  \"evidence\": 0.24\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Uninformative event",
+      "input": "bayes_update([.1,.9],[.4,.4])",
+      "output": "{\n  \"posterior\": [\n    0.1,\n    0.9\n  ],\n  \"evidence\": 0.4\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Impossible hypothesis",
+      "input": "bayes_update([0,1],[1,.2])",
+      "output": "{\n  \"posterior\": [\n    0,\n    1\n  ],\n  \"evidence\": 0.2\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "First calculate one joint mass for every hypothesis by combining its prior with the event likelihood."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "The normalization constant is also the event probability; keep it before dividing the joint masses."
+    }
+  ],
+  "explanation": [
+    "Bayes updating multiplies a prior by a likelihood before dividing by the total evidence. The evidence is a weighted average of likelihoods, not their unweighted sum.",
+    "The event probability also diagnoses impossible observations. Returning both quantities makes it possible to audit where a surprising posterior came from."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "batch": "engineering-200",
+  "checked_on": "2026-10-26",
+  "authorship": "Original ZeroShot code, prose, contracts, worked examples, and tests. No third-party exercise text or implementation copied.",
+  "code_license": "Apache-2.0",
+  "prose_license": "CC-BY-SA-4.0",
+  "references": [
+    {
+      "key": "rouge",
+      "title": "Lin, ROUGE: A Package for Automatic Evaluation of Summaries",
+      "url": "https://aclanthology.org/W04-1013/",
+      "lessons": ["e26"],
+      "scope": "Single-reference token LCS F1; no stemming or sentence aggregation."
+    },
+    {
+      "key": "bleu",
+      "title": "Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation",
+      "url": "https://aclanthology.org/P02-1040/",
+      "lessons": ["e27"],
+      "scope": "One-reference sentence BLEU-1 with clipping and brevity penalty; no corpus or multi-order claim."
+    },
+    {
+      "key": "ks",
+      "title": "SciPy two-sample Kolmogorov-Smirnov documentation",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
+      "lessons": ["e35"],
+      "scope": "Descriptive two-sided empirical-CDF distance only; deterministic earliest maximizer and no p-value."
+    },
+    {
+      "key": "conformal",
+      "title": "Angelopoulos and Bates, A Gentle Introduction to Conformal Prediction",
+      "url": "https://arxiv.org/abs/2107.07511",
+      "lessons": ["e36", "e37"],
+      "scope": "Absolute-residual split-conformal intervals and descriptive coverage; finite rank required and exchangeability assumption stated."
+    },
+    {
+      "key": "binomial",
+      "title": "SciPy exact binomial test documentation",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html",
+      "lessons": ["e38"],
+      "scope": "Fair-sign null with ties excluded; exact doubled smaller tail for p=0.5."
+    },
+    {
+      "key": "pr",
+      "title": "scikit-learn precision-recall curve documentation",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html",
+      "lessons": ["e41"],
+      "scope": "Only observed descending-score thresholds; no synthetic endpoint or area aggregation."
+    },
+    {
+      "key": "paged",
+      "title": "Kwon et al., Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "url": "https://arxiv.org/abs/2309.06180",
+      "lessons": ["e46"],
+      "scope": "Logical page-table gathering only; no GPU kernel, memory allocator, or throughput claim."
+    },
+    {
+      "key": "speculative",
+      "title": "Leviathan et al., Fast Inference from Transformers via Speculative Decoding",
+      "url": "https://proceedings.mlr.press/v202/leviathan23a.html",
+      "lessons": ["e48"],
+      "scope": "Supplied draft-prefix verification and normalized residual distribution; no bonus-token generation or model serving."
+    },
+    {
+      "key": "amp",
+      "title": "PyTorch Automatic Mixed Precision examples",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/amp_examples.html",
+      "lessons": ["e49", "e50"],
+      "scope": "Sample-weighted supplied gradients and finite-check/unscale gate; no autograd or optimizer implementation."
+    },
+    {
+      "key": "reservoir",
+      "title": "Vitter, Random Sampling with a Reservoir",
+      "url": "https://www.cs.usfca.edu/~mmalensek/cs677/schedule/papers/vitter1985random.pdf",
+      "lessons": ["e51"],
+      "scope": "Basic reservoir replacement with supplied integer draws; not Algorithm Z or a random-number generator."
+    },
+    {
+      "key": "welford",
+      "title": "Welford, Note on a Method for Calculating Corrected Sums of Squares and Products",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/00401706.1962.10490022",
+      "lessons": ["e52"],
+      "scope": "Streaming count, mean, and unnormalized centered sum of squares."
+    },
+    {
+      "key": "variance",
+      "title": "Chan, Golub, and LeVeque, Algorithms for Computing the Sample Variance",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/00031305.1983.10483115",
+      "lessons": ["e53"],
+      "scope": "Pairwise moment merging with a between-partition correction; no raw-data reconstruction."
+    },
+    {
+      "key": "weighted",
+      "title": "Efraimidis, Weighted Random Sampling over Data Streams",
+      "url": "https://arxiv.org/abs/1012.0256",
+      "lessons": ["e54"],
+      "scope": "Logarithmic priority equivalent of exponential keys, supplied draws, sampling without replacement."
+    },
+    {
+      "key": "hashing",
+      "title": "scikit-learn FeatureHasher documentation",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html",
+      "lessons": ["e55"],
+      "scope": "Concept of signed feature hashing; the lesson uses its own explicit polynomial teaching hash, not MurmurHash or sklearn parity."
+    },
+    {
+      "key": "countmin",
+      "title": "Cormode and Muthukrishnan, An Improved Data Stream Summary: The Count-Min Sketch and Its Applications",
+      "url": "https://www.cs.ox.ac.uk/people/graham.cormode/pubs/html/CormodeMuthukrishnan04CMJalg.html",
+      "lessons": ["e56"],
+      "scope": "Ordinary nonnegative counter updates with supplied hash buckets; no conservative updates or claimed error bound."
+    },
+    {
+      "key": "bloom",
+      "title": "Bloom, Space/Time Trade-offs in Hash Coding with Allowable Errors",
+      "url": "https://www.cs.princeton.edu/courses/archive/spr05/cos598E/bib/p422-bloom.pdf",
+      "lessons": ["e57"],
+      "scope": "Boolean membership bits with supplied hashes; no deletion and no claimed false-positive rate."
+    },
+    {
+      "key": "asof",
+      "title": "pandas merge_asof documentation",
+      "url": "https://pandas.pydata.org/docs/reference/api/pandas.merge_asof.html",
+      "lessons": ["e62"],
+      "scope": "Backward, exact-match-allowed single-clock join with stable last-row timestamp ties; no nearest/forward modes."
+    }
+  ],
+  "items": [
+    {
+      "id": "e23",
+      "folder": "e23-token-ngram-counts",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e24",
+      "folder": "e24-multiset-jaccard",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e25",
+      "folder": "e25-token-edit-distance",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e26",
+      "folder": "e26-rouge-l-score",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["rouge"],
+      "status": "validated"
+    },
+    {
+      "id": "e27",
+      "folder": "e27-clipped-unigram-bleu",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["bleu"],
+      "status": "validated"
+    },
+    {
+      "id": "e28",
+      "folder": "e28-term-posting-index",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e29",
+      "folder": "e29-boolean-posting-query",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e30",
+      "folder": "e30-group-heldout-split",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e31",
+      "folder": "e31-chronological-embargo-split",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e32",
+      "folder": "e32-training-median-imputation",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e33",
+      "folder": "e33-missingness-pattern-audit",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e34",
+      "folder": "e34-population-stability-index",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e35",
+      "folder": "e35-empirical-ks-distance",
+      "use": "original-implementation",
+      "public_cases": 11,
+      "concept_references": ["ks"],
+      "status": "validated"
+    },
+    {
+      "id": "e36",
+      "folder": "e36-split-conformal-interval",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["conformal"],
+      "status": "validated"
+    },
+    {
+      "id": "e37",
+      "folder": "e37-prediction-interval-audit",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["conformal"],
+      "status": "validated"
+    },
+    {
+      "id": "e38",
+      "folder": "e38-paired-sign-test",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["binomial"],
+      "status": "validated"
+    },
+    {
+      "id": "e39",
+      "folder": "e39-cost-sensitive-decisions",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e40",
+      "folder": "e40-group-error-rate-audit",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e41",
+      "folder": "e41-precision-recall-operating-points",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["pr"],
+      "status": "validated"
+    },
+    {
+      "id": "e42",
+      "folder": "e42-box-intersection-over-union",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e43",
+      "folder": "e43-greedy-box-suppression",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e44",
+      "folder": "e44-run-length-segments",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e45",
+      "folder": "e45-affine-int8-quantization",
+      "use": "original-implementation",
+      "public_cases": 11,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e46",
+      "folder": "e46-paged-kv-gather",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["paged"],
+      "status": "validated"
+    },
+    {
+      "id": "e47",
+      "folder": "e47-table-beam-search",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e48",
+      "folder": "e48-speculative-token-verification",
+      "use": "original-implementation",
+      "public_cases": 11,
+      "concept_references": ["speculative"],
+      "status": "validated"
+    },
+    {
+      "id": "e49",
+      "folder": "e49-sample-weighted-gradient-accumulation",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["amp"],
+      "status": "validated"
+    },
+    {
+      "id": "e50",
+      "folder": "e50-gradient-loss-unscaling",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["amp"],
+      "status": "validated"
+    },
+    {
+      "id": "e51",
+      "folder": "e51-reservoir-sampling-trace",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["reservoir"],
+      "status": "validated"
+    },
+    {
+      "id": "e52",
+      "folder": "e52-welford-stream-update",
+      "use": "original-implementation",
+      "public_cases": 11,
+      "concept_references": ["welford"],
+      "status": "validated"
+    },
+    {
+      "id": "e53",
+      "folder": "e53-parallel-moment-merge",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["variance"],
+      "status": "validated"
+    },
+    {
+      "id": "e54",
+      "folder": "e54-weighted-reservoir-priorities",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["weighted"],
+      "status": "validated"
+    },
+    {
+      "id": "e55",
+      "folder": "e55-signed-feature-hashing",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["hashing"],
+      "status": "validated"
+    },
+    {
+      "id": "e56",
+      "folder": "e56-count-min-sketch",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["countmin"],
+      "status": "validated"
+    },
+    {
+      "id": "e57",
+      "folder": "e57-bloom-membership-filter",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["bloom"],
+      "status": "validated"
+    },
+    {
+      "id": "e58",
+      "folder": "e58-lru-cache-trace",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e59",
+      "folder": "e59-token-bucket-admission",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e60",
+      "folder": "e60-padding-budget-batches",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e61",
+      "folder": "e61-alternating-ranking-interleave",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": [],
+      "status": "validated"
+    },
+    {
+      "id": "e62",
+      "folder": "e62-causal-asof-feature-join",
+      "use": "original-implementation",
+      "public_cases": 10,
+      "concept_references": ["asof"],
+      "status": "validated"
+    }
+  ]
+}

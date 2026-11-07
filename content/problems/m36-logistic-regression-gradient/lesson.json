@@ -1,0 +1,45 @@
+{
+  "intro": "Binary cross-entropy at logits has a simple residual gradient. Combine that residual with feature columns and a separate bias parameter.",
+  "task": "Return mean logistic loss and gradients for a linear binary classifier with no regularization.",
+  "signature": "logistic_gradient(features, labels, weights, bias)",
+  "requirements": [
+    "features has shape (n,d), labels has shape (n,) with values zero or one, weights has shape (d,), and bias is a scalar.",
+    "Set logits=features@weights+bias and probabilities=sigmoid(logits). Return {\"loss\": mean(logaddexp(0,logits)-labels*logits), \"weights\": features.T@(probabilities-labels)/n, \"bias\": mean(probabilities-labels)}.",
+    "Use a stable sigmoid for large positive and negative logits. Include the bias gradient separately and average across observations once.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Zero logits",
+      "input": "logistic_gradient([[1],[3]],[0,1],[0],0)",
+      "output": "{\n  \"loss\": 0.69314718,\n  \"weights\": [\n    -0.5\n  ],\n  \"bias\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Bias-only residual",
+      "input": "logistic_gradient([[0],[0]],[1,1],[3],0)",
+      "output": "{\n  \"loss\": 0.69314718,\n  \"weights\": [\n    0.0\n  ],\n  \"bias\": -0.5\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Confident correct predictions",
+      "input": "logistic_gradient([[1],[-1]],[1,0],[1000],0)",
+      "output": "{\n  \"loss\": 0,\n  \"weights\": [\n    0.0\n  ],\n  \"bias\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "The derivative of logistic cross-entropy with respect to a logit is prediction probability minus label."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Use the feature transpose to accumulate weight gradients, and average the same residuals for the bias."
+    }
+  ],
+  "explanation": [
+    "Differentiating the stable logistic loss with respect to a logit gives sigmoid(logit)-label. Multiplying by each feature and averaging applies the chain rule to the weight vector.",
+    "Bias shifts every logit by the same amount, so its gradient is the mean residual. This is a parameter gradient, whereas evaluating a loss alone does not identify an update direction."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

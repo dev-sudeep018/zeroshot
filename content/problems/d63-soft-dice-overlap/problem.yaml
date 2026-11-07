@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d63",
+  "kind": "lesson",
+  "slug": "soft-dice-overlap",
+  "version": 1,
+  "title": "Measure Soft Segmentation Overlap",
+  "summary": "Soft Dice compares overlap with the total predicted and target mass. Its smoothing convention determines what happens when both masks are empty.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Segmentation", "Overlap losses"],
+  "prerequisites": ["m04"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "soft_dice_loss",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

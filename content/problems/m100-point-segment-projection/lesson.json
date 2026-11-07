@@ -1,0 +1,44 @@
+{
+  "intro": "A line projection may land outside a finite segment. The closest point then moves to the nearest endpoint, which is exactly what clamping the parameter accomplishes.",
+  "task": "Project a point onto a finite 2D segment, clamp the parameter and return squared distance.",
+  "signature": "nearest_on_segment(point, start, end)",
+  "requirements": [
+    "point,start,end are length-two coordinate vectors. A zero-length segment is allowed and represents its single endpoint.",
+    "Return {\"parameter\": t in [0,1], \"point\": start+t*(end-start), \"squared_distance\": squared distance from the query to that point}. Use t=0 for a zero-length segment.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Interior projection",
+      "input": "nearest_on_segment([1,3],[0,0],[4,0])",
+      "output": "{'parameter': 0.25, 'point': [1.0, 0.0], 'squared_distance': 9.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Beyond end",
+      "input": "nearest_on_segment([5,2],[0,0],[3,0])",
+      "output": "{'parameter': 1.0, 'point': [3.0, 0.0], 'squared_distance': 8.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Degenerate segment",
+      "input": "nearest_on_segment([3,4],[1,1],[1,1])",
+      "output": "{'parameter': 0.0, 'point': [1.0, 1.0], 'squared_distance': 13.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Project onto the infinite line using a dot product divided by squared segment length."
+    },
+    {
+      "title": "Build the result",
+      "body": "Clamp the projection parameter so the nearest point cannot lie beyond either endpoint."
+    }
+  ],
+  "explanation": [
+    "A line projection may land outside a finite segment. The closest point then moves to the nearest endpoint, which is exactly what clamping the parameter accomplishes.",
+    "The returned parameter also describes how far along the segment the match occurs. A degenerate segment has no direction, so its only possible nearest point is the shared endpoint."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

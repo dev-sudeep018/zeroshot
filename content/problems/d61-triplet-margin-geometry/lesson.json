@@ -1,0 +1,45 @@
+{
+  "intro": "A triplet objective asks a positive example to be closer than a negative example by a specified margin. The geometry matters before the hinge activates.",
+  "task": "Implement triplet_margin(anchor, positive, negative, margin=1.0). The margin compares relative distances rather than forcing positives to coincide. Once the negative is sufficiently farther away, that triplet contributes zero.",
+  "signature": "triplet_margin(anchor, positive, negative, margin=1.0)",
+  "requirements": [
+    "anchor, positive and negative match nonempty (B,D). margin is a finite nonnegative scalar.",
+    "Compute dpos=sum((anchor-positive)**2,axis=1) and dneg analogously. Return mean(max(dpos-dneg+margin,0)) as a scalar.",
+    "Use squared Euclidean distances without normalizing embeddings, square roots, mining or distance swapping. Average after applying each triplet hinge.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Comfortable separation",
+      "input": "triplet_margin([[0]],[[1]],[[3]])",
+      "output": "0.0"
+    },
+    {
+      "name": "Wrong ordering",
+      "input": "triplet_margin([[0]],[[3]],[[1]])",
+      "output": "9.0"
+    },
+    {
+      "name": "Identical distances",
+      "input": "triplet_margin([[0]],[[1]],[[-1]],2)",
+      "output": "2.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The hinge applies per example before averaging."
+    },
+    {
+      "title": "Step 2",
+      "body": "A far negative can make a triplet inactive despite a nonzero positive distance."
+    }
+  ],
+  "explanation": [
+    "The margin compares relative distances rather than forcing positives to coincide. Once the negative is sufficiently farther away, that triplet contributes zero.",
+    "Squared-distance and unsquared-distance objectives differ. The explicit convention lets you inspect geometry without hidden normalization or triplet-mining choices."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

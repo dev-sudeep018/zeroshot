@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e52",
+  "kind": "lesson",
+  "slug": "welford-stream-update",
+  "version": 1,
+  "title": "Update Running Mean and Variance State",
+  "summary": "A streaming process cannot recompute statistics from its entire history. Welford state tracks count, mean, and centered squared deviations as new values arrive.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Streaming statistics"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "welford_update",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Welford, Note on a Method for Calculating Corrected Sums of Squares and Products. https://www.tandfonline.com/doi/abs/10.1080/00401706.1962.10490022",
+    ],
+}

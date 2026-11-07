@@ -1,0 +1,44 @@
+{
+  "intro": "Content digests detect changed payload bytes during storage or transfer. A batch report should identify the exact records that need repair.",
+  "task": "Compare lowercase SHA-256 digests for byte payloads and return mismatched indices.",
+  "signature": "digest_mismatches(payloads, expected)",
+  "requirements": [
+    "payloads is a sequence of bytes, each at most 10000 bytes; expected is an equally long sequence of exactly 64 lowercase hexadecimal characters. Return indices whose SHA-256 hexdigest differs from expected. Invalid digest syntax is an error, not a mismatch.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Known empty digest",
+      "input": "digest_mismatches([b''],['e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'])",
+      "output": "[]"
+    },
+    {
+      "name": "Known abc digest",
+      "input": "digest_mismatches([b'abc'],['ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'])",
+      "output": "[]"
+    },
+    {
+      "name": "Valid syntax wrong hash",
+      "input": "digest_mismatches([b'abc',b''],['0'*64,'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'])",
+      "output": "[0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Validate format separately from comparing a computed digest."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep mismatch positions aligned with the original batch."
+    }
+  ],
+  "explanation": [
+    "Content digests detect changed payload bytes during storage or transfer. A batch report should identify the exact records that need repair.",
+    "A plain hash checks consistency against the supplied digest; it does not authenticate an untrusted sender. Malformed digest text is a contract error rather than evidence of changed content."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

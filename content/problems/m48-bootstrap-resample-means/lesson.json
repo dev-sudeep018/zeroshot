@@ -1,0 +1,45 @@
+{
+  "intro": "Bootstrap resampling repeatedly draws observations with replacement. Supplied draws separate the statistic from random-number generation.",
+  "task": "Compute one mean per supplied bootstrap resample and the sample standard deviation of those means.",
+  "signature": "bootstrap_means(values, indices)",
+  "requirements": [
+    "values is a length-n vector. indices is an integer-valued (b,n) matrix with b>=2 and entries in [0,n-1]. Repeated indices are valid.",
+    "Return {\"means\": mean(values[indices],axis=1), \"standard_error\": standard deviation of those means with ddof=1}.",
+    "Do not generate randomness, deduplicate indices, or divide the standard deviation by sqrt(b). The resample distribution estimates estimator variability.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two resamples",
+      "input": "bootstrap_means([0,2],[[0,0],[1,1]])",
+      "output": "{\n  \"means\": [\n    0.0,\n    2.0\n  ],\n  \"standard_error\": 1.41421356\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Repeated index draws",
+      "input": "bootstrap_means([1,4,7],[[0,0,2],[1,1,1],[2,2,2]])",
+      "output": "{\n  \"means\": [\n    3.0,\n    4.0,\n    7.0\n  ],\n  \"standard_error\": 2.081666\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Same means",
+      "input": "bootstrap_means([0,2],[[0,1],[1,0]])",
+      "output": "{\n  \"means\": [\n    1.0,\n    1.0\n  ],\n  \"standard_error\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Indexing with the supplied matrix creates one complete resample per row, including repeated positions."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "The spread of those row means is the estimate; use the sample standard deviation without another square-root scaling."
+    }
+  ],
+  "explanation": [
+    "A bootstrap row samples original observation positions with replacement. Repeated positions remain repeated because multiplicity is part of the resampling distribution.",
+    "The spread across resample means estimates uncertainty in the mean estimator. Dividing it by the square root of the number of resamples instead describes Monte Carlo precision."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

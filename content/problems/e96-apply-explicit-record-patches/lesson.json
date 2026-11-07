@@ -1,0 +1,44 @@
+{
+  "intro": "An explicit patch language separates operations from data values. That allows None to be stored as a legitimate value while deletion remains unambiguous.",
+  "task": "Interpret set and delete operations in order, rejecting deletion of absent keys.",
+  "signature": "patch_record(record, operations)",
+  "requirements": [
+    "Operations are [\"set\", key, value] or [\"delete\", key]. Apply in order to a copied record. Deleting an absent key or using an unknown operation is invalid. Return the final record.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Set then delete",
+      "input": "patch_record({'a':1}, [['set','b',2],['delete','a']])",
+      "output": "{'b': 2}"
+    },
+    {
+      "name": "Set None stores None",
+      "input": "patch_record({}, [['set','a',None]])",
+      "output": "{'a': None}"
+    },
+    {
+      "name": "Repeated assignment",
+      "input": "patch_record({}, [['set','x',1],['set','x',2]])",
+      "output": "{'x': 2}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Interpret each operation against the current working copy."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Unlike merge_config, a set operation with None stores None rather than deleting the key."
+    }
+  ],
+  "explanation": [
+    "An explicit patch language separates operations from data values. That allows None to be stored as a legitimate value while deletion remains unambiguous.",
+    "Operation order matters: setting a key can make a later deletion valid, and deleting then setting recreates it. Rejecting absent deletions helps catch stale or incorrect patches."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Polar coordinates express magnitude and direction, but a direction can be represented by infinitely many angles differing by full turns. Canonical wrapping gives a predictable representation.",
+  "task": "Compute radii and angles in [0,2*pi), using zero angle at the origin.",
+  "signature": "canonical_polar(points)",
+  "requirements": [
+    "points has shape (n,2). Return {\"radius\": Euclidean radii, \"angle\": angles in [0,2*pi)}.",
+    "Use atan2(y,x), wrap negative angles by 2*pi, and explicitly assign angle=0 to an origin point.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Four directions",
+      "input": "canonical_polar([[1,0],[0,1],[-1,0],[0,-1]])",
+      "output": "{'radius': [1.0, 1.0, 1.0, 1.0], 'angle': [0.0, 1.570796327, 3.141592654, 4.71238898]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Origin convention",
+      "input": "canonical_polar([[0,0],[3,4]])",
+      "output": "{'radius': [0.0, 5.0], 'angle': [0.0, 0.927295218]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Different quadrants",
+      "input": "canonical_polar([[1,1],[-1,1],[-1,-1],[1,-1]])",
+      "output": "{'radius': [1.414213562, 1.414213562, 1.414213562, 1.414213562],\n 'angle': [0.7853981634, 2.35619449, 3.926990817, 5.497787144]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use both coordinates in atan2 so the quadrant is preserved."
+    },
+    {
+      "title": "Build the result",
+      "body": "Wrap angles into one fixed interval and treat radius zero as a separate canonical case."
+    }
+  ],
+  "explanation": [
+    "Polar coordinates express magnitude and direction, but a direction can be represented by infinitely many angles differing by full turns. Canonical wrapping gives a predictable representation.",
+    "At the origin every angle represents the same point. Assigning zero removes that ambiguity and makes repeated conversions deterministic."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

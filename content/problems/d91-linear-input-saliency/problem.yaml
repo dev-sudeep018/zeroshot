@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d91",
+  "kind": "lesson",
+  "slug": "linear-input-saliency",
+  "version": 1,
+  "title": "Trace a Class Score Back to Input Features",
+  "summary": "For a linear classifier, sensitivity is determined by the weights of the selected class. Pair that gradient with the observed input.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Trace a Class Score Back to Input Features"],
+  "prerequisites": ["d90"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "linear_saliency",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/",
+    ],
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Average pooling spreads each derivative equally over its source window. Shared pixels accumulate contributions from overlapping windows.",
+  "task": "Implement average_pool_backward(upstream, input_shape, kernel, stride). Center pixels of overlapping windows receive more contributions than corners. The pattern follows coverage rather than pixel values.",
+  "signature": "average_pool_backward(upstream, input_shape, kernel, stride)",
+  "requirements": [
+    "input_shape is (H,W), positive integers at most 256. kernel is a positive integer <=min(H,W); stride is a positive integer <=100000. No padding.",
+    "upstream is (1+(H-kernel)//stride,1+(W-kernel)//stride). Its value contributes upstream/kernel**2 to every pixel of that window.",
+    "Return (H,W), summing overlap. Uncovered pixels receive zero. Integer parameters exclude booleans.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "One window",
+      "input": "average_pool_backward([[4]],(2,2),2,1)",
+      "output": "[[1.0, 1.0], [1.0, 1.0]]"
+    },
+    {
+      "name": "Overlap counts",
+      "input": "average_pool_backward(np.ones((2,2))*4,(3,3),2,1)",
+      "output": "[[1.0, 2.0, 1.0], [2.0, 4.0, 2.0], [1.0, 2.0, 1.0]]"
+    },
+    {
+      "name": "Uncovered tail",
+      "input": "average_pool_backward([[4]],(3,3),2,2)",
+      "output": "[[1.0, 1.0, 0.0], [1.0, 1.0, 0.0], [0.0, 0.0, 0.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Add each window contribution; assignment discards overlap."
+    },
+    {
+      "title": "Step 2",
+      "body": "Divide by kernel area, not stride or output area."
+    }
+  ],
+  "explanation": [
+    "Center pixels of overlapping windows receive more contributions than corners. The pattern follows coverage rather than pixel values.",
+    "This adjoint does not need the original image because averaging has a constant derivative within each window."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

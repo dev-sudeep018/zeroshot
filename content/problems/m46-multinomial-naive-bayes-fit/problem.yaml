@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m46",
+  "kind": "lesson",
+  "slug": "multinomial-naive-bayes-fit",
+  "version": 1,
+  "title": "Learn a Count-Based Class Model",
+  "summary": "A document classifier can learn class-specific token frequencies from count vectors. Additive smoothing keeps unseen vocabulary entries usable.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Learn a Count-Based Class Model"],
+  "prerequisites": ["m16"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "fit_multinomial_nb",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

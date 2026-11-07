@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "provenance": "Original teaching documents and manually assigned four-dimensional vectors by Project Mastery contributors. These are synthetic teaching vectors, not embeddings from a trained model.",
+  "provenance": "Original teaching documents and manually assigned four-dimensional vectors by ZeroShot contributors. These are synthetic teaching vectors, not embeddings from a trained model.",
   "documents": [
     {
       "id": "chunks",

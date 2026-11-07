@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e27",
+  "kind": "lesson",
+  "slug": "clipped-unigram-bleu",
+  "version": 1,
+  "title": "Explore Clipping and Brevity in BLEU-1",
+  "summary": "Repeating a correct word should not manufacture a high translation score. Clipped unigram precision limits credit, while a brevity penalty discourages tiny outputs.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Text evaluation", "Token sequences"],
+  "prerequisites": ["e23"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bleu_one",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation. https://aclanthology.org/P02-1040/",
+    ],
+}

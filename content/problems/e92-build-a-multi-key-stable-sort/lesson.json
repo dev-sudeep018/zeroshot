@@ -1,0 +1,44 @@
+{
+  "intro": "Compound sorting combines fields with different directions. Category forms the outer grouping, while a negated priority lets one ascending tuple sort place larger priorities first.",
+  "task": "Sort records by category then descending integer priority, keeping exact ties stable.",
+  "signature": "sort_work_records(records)",
+  "requirements": [
+    "Records require category (nonempty string) and priority (integer -1e9..1e9). Return copied records sorted by category ascending, then priority descending. Exact-key ties retain input order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Two sort directions",
+      "input": "sort_work_records([dict(category='b',priority=9),dict(category='a',priority=1),dict(category='a',priority=3)])",
+      "output": "[{'category': 'a', 'priority': 3},\n {'category': 'a', 'priority': 1},\n {'category': 'b', 'priority': 9}]"
+    },
+    {
+      "name": "Stable exact ties",
+      "input": "sort_work_records([dict(category='a',priority=1,id='z'),dict(category='a',priority=1,id='a')])",
+      "output": "[{'category': 'a', 'priority': 1, 'id': 'z'},\n {'category': 'a', 'priority': 1, 'id': 'a'}]"
+    },
+    {
+      "name": "Negative priorities",
+      "input": "sort_work_records([dict(category='a',priority=-2),dict(category='a',priority=-1)])",
+      "output": "[{'category': 'a', 'priority': -1}, {'category': 'a', 'priority': -2}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use a tuple key with category first and negated priority second."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not add an ID tie-breaker: stability must preserve exact-key input order."
+    }
+  ],
+  "explanation": [
+    "Compound sorting combines fields with different directions. Category forms the outer grouping, while a negated priority lets one ascending tuple sort place larger priorities first.",
+    "Stable ties preserve a prior ordering decision such as arrival order. Adding an undocumented tie-breaker would change that operational policy."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

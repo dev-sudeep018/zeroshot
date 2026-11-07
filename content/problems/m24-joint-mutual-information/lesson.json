@@ -1,0 +1,45 @@
+{
+  "intro": "Marginal frequencies alone can hide dependence between variables. A joint table reveals whether knowing one variable changes what to expect about the other.",
+  "task": "Compute mutual information in nats from a normalized joint-probability matrix.",
+  "signature": "mutual_information(joint)",
+  "requirements": [
+    "joint has shape (rows, columns), contains nonnegative values, and sums to one within absolute tolerance 1e-8.",
+    "Compute row and column marginals and sum joint_ij*log(joint_ij/(row_i*column_j)) over positive cells.",
+    "Zero rows and columns are allowed. They contribute nothing rather than causing division by zero.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Independent coins",
+      "input": "mutual_information([[.25,.25],[.25,.25]])",
+      "output": "0\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Perfect agreement",
+      "input": "mutual_information([[.5,0],[0,.5]])",
+      "output": "0.69314718\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unequal dependent outcomes",
+      "input": "mutual_information([[.25,0],[0,.75]])",
+      "output": "0.56233514\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Sum along each axis to find the two marginals; their product describes the independent model."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "For positive cells, subtract the two marginal logarithms from the joint logarithm to avoid underflowing their product."
+    }
+  ],
+  "explanation": [
+    "Independence predicts each cell as the product of its two marginal probabilities. Mutual information is the KL divergence from the observed joint table to that independence model.",
+    "Perfect agreement between two fair binary variables carries log(2) nats of information. Independent variables have zero mutual information even when their marginal probabilities are unequal."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

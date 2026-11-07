@@ -1,0 +1,44 @@
+{
+  "intro": "A rotation around an axis leaves the vector component along that axis unchanged. Only the perpendicular component moves in a plane.",
+  "task": "Apply Rodrigues rotation using a normalized nonzero axis and a supplied angle.",
+  "signature": "rotate_about_axis(vector, axis, angle)",
+  "requirements": [
+    "vector and axis are length-three vectors. axis norm must be at least 1e-6; angle is in radians.",
+    "Normalize axis to u and return vector*cos(angle)+cross(u,vector)*sin(angle)+u*(u dot vector)*(1-cos(angle)). Positive angles use the right-hand rule.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Quarter turn around z",
+      "input": "rotate_about_axis([1,0,0],[0,0,1],np.pi/2)",
+      "output": "[6.123233996e-17, 1.0, 0.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Along the axis",
+      "input": "rotate_about_axis([0,0,3],[0,0,2],1.2)",
+      "output": "[0.0, 0.0, 3.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Half turn around x",
+      "input": "rotate_about_axis([1,2,3],[1,0,0],np.pi)",
+      "output": "[1.0, -2.0, -3.0]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Normalize the axis so its length does not alter the rotation."
+    },
+    {
+      "title": "Build the result",
+      "body": "Combine the preserved parallel component with the rotated perpendicular component using the Rodrigues formula."
+    }
+  ],
+  "explanation": [
+    "A rotation around an axis leaves the vector component along that axis unchanged. Only the perpendicular component moves in a plane.",
+    "The cross-product order fixes the rotation direction. Reversing the axis is equivalent to reversing the angle, while multiplying the axis by a positive scale should make no difference."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

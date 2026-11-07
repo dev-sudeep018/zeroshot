@@ -1,0 +1,45 @@
+{
+  "intro": "The best label at each position may not form the best sequence. Viterbi decoding combines local evidence with transition scores and reconstructs a complete path.",
+  "task": "Implement chain_viterbi(emissions, transitions, start, end). A temporarily worse prefix may become the best complete sequence through a favorable transition. Keeping one state for each ending label preserves those possibilities.",
+  "signature": "chain_viterbi(emissions, transitions, start, end)",
+  "requirements": [
+    "emissions is nonempty (T,K), transitions is (K,K), start and end are length K. transitions[i,j] scores previous i to current j.",
+    "Use the same path score as a linear chain: start[first]+all emissions+all adjacent transitions+end[last]. Maximize the total score.",
+    "Return {path: length-T integer NumPy array, score: scalar}. Resolve exact score ties by the lexicographically smallest complete path. Do not choose independent per-position argmax labels.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Exact ties choose lower path",
+      "input": "chain_viterbi(np.zeros((2,2)),np.zeros((2,2)),[0,0],[0,0])",
+      "output": "{\"path\": [0, 0], \"score\": 0.0}"
+    },
+    {
+      "name": "One-step best label",
+      "input": "chain_viterbi([[1,3]],np.zeros((2,2)),[0,0],[0,0])",
+      "output": "{\"path\": [1], \"score\": 3.0}"
+    },
+    {
+      "name": "Transition overrides local choices",
+      "input": "chain_viterbi([[2,0],[2,0]],[[0,10],[0,0]],[0,0],[0,0])",
+      "output": "{\"path\": [0, 1], \"score\": 12.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Keep the best prefix ending at each label, not just the best label overall."
+    },
+    {
+      "title": "Step 2",
+      "body": "Tie handling must compare complete prefixes so the final path is lexicographically smallest."
+    }
+  ],
+  "explanation": [
+    "A temporarily worse prefix may become the best complete sequence through a favorable transition. Keeping one state for each ending label preserves those possibilities.",
+    "This reference stores short prefix tuples for explicit deterministic ties. A production decoder can store backpointers, provided it preserves the documented tie policy."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A trace estimator can replace a diagonal sum with quadratic probes. Inspect sampling variation using explicit sign vectors instead of hidden random draws.",
+  "task": "Implement trace_probes(matrix, probes). Independent balanced sign probes have identity second moment, making the quadratic estimate unbiased over that random distribution. Fixed probes are supplied here to expose individual errors.",
+  "signature": "trace_probes(matrix, probes)",
+  "requirements": [
+    "matrix is a nonempty square (D,D) array. probes has nonempty shape (M,D) and every entry is exactly -1 or +1.",
+    "For each probe z compute z.T@matrix@z. Return {estimates: length-M array, mean: scalar average}.",
+    "Do not generate random probes or normalize their lengths. The matrix need not be symmetric. The mean is an estimate, not a guarantee of the exact trace for an arbitrary supplied probe set.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Diagonal trace",
+      "input": "trace_probes([[2,0],[0,3]],[[1,1],[1,-1]])",
+      "output": "{\"estimates\": [5.0, 5.0], \"mean\": 5.0}"
+    },
+    {
+      "name": "One inaccurate probe",
+      "input": "trace_probes([[1,2],[2,3]],[[1,1]])",
+      "output": "{\"estimates\": [8.0], \"mean\": 8.0}"
+    },
+    {
+      "name": "Balanced off-diagonal cancellation",
+      "input": "trace_probes([[1,2],[2,3]],[[1,1],[1,-1]])",
+      "output": "{\"estimates\": [8.0, 0.0], \"mean\": 4.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "A diagonal matrix has the same estimate for every sign probe because z_i squared is one."
+    },
+    {
+      "title": "Step 2",
+      "body": "Off-diagonal terms change sign across probes and cancel only with suitable averaging."
+    }
+  ],
+  "explanation": [
+    "Independent balanced sign probes have identity second moment, making the quadratic estimate unbiased over that random distribution. Fixed probes are supplied here to expose individual errors.",
+    "Antisymmetric matrix components do not contribute to a real quadratic form. One probe can therefore capture the trace exactly for some matrices and miss it badly for others."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A conditioning signal can change a normalized feature vector and decide how much of that branch passes onward. Separate the gate from the normalization statistics.",
+  "task": "Implement conditional_gate(x, scale, shift, gate, epsilon=1e-6). A gate of zero closes this branch even if the conditioning shift is nonzero. A constant token has zero normalized features and therefore exposes only gate*shift.",
+  "signature": "conditional_gate(x, scale, shift, gate, epsilon=1e-6)",
+  "requirements": [
+    "x has shape (B,S,D); scale, shift and gate each have shape (B,D), all dimensions positive. epsilon is a scalar in [1e-12,1].",
+    "Normalize each token over D using population variance, then return gate[:,None,:]*(scale[:,None,:]*normalized+shift[:,None,:]). Output shape equals x.",
+    "There is no implicit 1+scale and no residual addition. A zero gate returns zero, not x. Conditioning parameters are supplied directly.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Closed branch",
+      "input": "conditional_gate([[[1,3]]],[[2,2]],[[7,7]],[[0,0]])",
+      "output": "[[[0.0, 0.0]]]"
+    },
+    {
+      "name": "Constant token",
+      "input": "conditional_gate([[[5,5]]],[[9,9]],[[2,3]],[[4,-1]])",
+      "output": "[[[8.0, -3.0]]]"
+    },
+    {
+      "name": "Normalize then scale",
+      "input": "conditional_gate([[[1,3]]],[[2,2]],[[0,0]],[[1,1]],1)",
+      "output": "[[[-1.41421356237, 1.41421356237]]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Keep statistics per token; conditioning parameters broadcast over the sequence axis."
+    },
+    {
+      "title": "Step 2",
+      "body": "Apply the gate after adding the shift, so a closed gate also suppresses the shift."
+    }
+  ],
+  "explanation": [
+    "A gate of zero closes this branch even if the conditioning shift is nonzero. A constant token has zero normalized features and therefore exposes only gate*shift.",
+    "This adapts the upstream modulation equation to supplied parameters. It is not an entire AdaLN-Zero transformer block, and it does not include the upstream conditioning projection."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

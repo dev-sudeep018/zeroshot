@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m26",
+  "kind": "lesson",
+  "slug": "pearson-correlation",
+  "version": 1,
+  "title": "Separate Scale from Linear Association",
+  "summary": "Two measurements may use different units yet share a linear relationship. Centering and normalizing isolates their direction of association.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Separate Scale from Linear Association"],
+  "prerequisites": ["m09"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "pearson_correlation",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

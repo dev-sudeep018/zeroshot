@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d59",
+  "kind": "lesson",
+  "slug": "diffusion-posterior",
+  "version": 1,
+  "title": "Recover the Conditional Diffusion Posterior",
+  "summary": "The forward diffusion chain has a Gaussian posterior when the clean endpoint is known. Separate its mean coefficients from the noise variance.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Diffusion models", "Gaussian conditioning"],
+  "prerequisites": ["d32"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "diffusion_posterior",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

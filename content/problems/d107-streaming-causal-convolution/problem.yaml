@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d107",
+  "kind": "lesson",
+  "slug": "streaming-causal-convolution",
+  "version": 1,
+  "title": "Carry a Causal Convolution across Chunks",
+  "summary": "Streaming inference sees chunks rather than the whole sequence. Retain just enough history to match a continuous causal convolution.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Carry a Causal Convolution across Chunks"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "causal_convolution_chunk",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1609.03499",
+    ],
+}

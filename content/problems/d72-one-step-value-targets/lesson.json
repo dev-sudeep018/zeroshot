@@ -1,0 +1,45 @@
+{
+  "intro": "A value update compares a prediction with a target built from the next state. Terminal transitions and rollout cutoffs require different targets.",
+  "task": "Build one-step value targets and signed temporal-difference errors for a batch of independent transitions.",
+  "signature": "td_value_targets(rewards, current_values, next_values, terminated, discount)",
+  "requirements": [
+    "The four vector inputs have the same length. terminated contains numeric zero or one, and discount is a scalar in [0,1]. current_values and next_values are supplied value estimates.",
+    "Return {\"targets\": rewards+discount*(1-terminated)*next_values, \"errors\": targets-current_values}, both NumPy vectors.",
+    "Transitions are independent batch rows; never propagate rewards between rows. The error sign is target minus current prediction, and this operation does not update model parameters.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Nonterminal bootstrap",
+      "input": "td_value_targets([1],[2],[10],[0],0.5)",
+      "output": "{'targets': array([6.]), 'errors': array([4.])}"
+    },
+    {
+      "name": "Terminal reward",
+      "input": "td_value_targets([1],[2],[10],[1],0.5)",
+      "output": "{'targets': array([1.]), 'errors': array([-1.])}"
+    },
+    {
+      "name": "Mixed transition batch",
+      "input": "td_value_targets([1,2],[0,3],[4,8],[0,1],0.5)",
+      "output": "{'targets': array([3., 2.]), 'errors': array([ 3., -1.])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Build the target without the current value",
+      "body": "The current estimate enters the residual, not the target."
+    },
+    {
+      "title": "Use the terminal mask per row",
+      "body": "A terminal transition still contributes its observed reward."
+    }
+  ],
+  "explanation": [
+    "A positive error means the target exceeds the current prediction. This sign matters when a learner later applies a gradient update.",
+    "Bootstrapping substitutes a prediction for the unobserved future. If the state truly terminates, there is no future value term to retain."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

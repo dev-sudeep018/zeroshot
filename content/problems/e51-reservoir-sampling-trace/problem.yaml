@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e51",
+  "kind": "lesson",
+  "slug": "reservoir-sampling-trace",
+  "version": 1,
+  "title": "Sample a Stream with a Fixed-Size Reservoir",
+  "summary": "A stream may be too large to store, yet a uniform sample can fit in fixed memory. Supplied draws make the reservoir replacement decisions reproducible.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Streaming data", "Sampling"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "reservoir_sample",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Vitter, Random Sampling with a Reservoir. https://www.cs.usfca.edu/~mmalensek/cs677/schedule/papers/vitter1985random.pdf",
+    ],
+}

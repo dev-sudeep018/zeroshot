@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e158",
+  "kind": "lesson",
+  "slug": "build-reversible-length-prefixed-frames",
+  "version": 1,
+  "title": "Build Reversible Length-Prefixed Frames",
+  "summary": "Encode and decode UTF-8 text frames with decimal byte lengths and reject malformed frames.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "text_frames",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

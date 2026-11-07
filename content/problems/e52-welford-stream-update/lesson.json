@@ -1,0 +1,45 @@
+{
+  "intro": "A streaming process cannot recompute statistics from its entire history. Welford state tracks count, mean, and centered squared deviations as new values arrive.",
+  "task": "Continue running mean and centered-sum state as a stream arrives, using the old and updated means correctly.",
+  "signature": "welford_update(count, mean, m2, values)",
+  "requirements": [
+    "count is an integer in [0,1000000], mean is a finite scalar, m2 is a nonnegative finite scalar, and values is a finite vector. Require count+len(values)<=1000000. For count=0 require mean=m2=0.",
+    "For each x: increment n; delta=x-mean; update mean+=delta/n; update m2+=delta*(x-new_mean). Return dict count, mean, m2.",
+    "m2 is the sum of squared deviations, not variance. The existing state is trusted to summarize prior observations; values may be empty.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Start a stream",
+      "input": "welford_update(0, 0, 0, [1,2,3])",
+      "output": "{'count': 3, 'mean': 2.0, 'm2': 2.0}"
+    },
+    {
+      "name": "Continue existing state",
+      "input": "welford_update(2, 1.5, .5, [3])",
+      "output": "{'count': 3, 'mean': 2.0, 'm2': 2.0}"
+    },
+    {
+      "name": "No new values",
+      "input": "welford_update(3, 2, 2, [])",
+      "output": "{'count': 3, 'mean': 2.0, 'm2': 2.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use old and new mean in different places",
+      "body": "The first delta uses the old mean; the second factor uses the updated mean."
+    },
+    {
+      "title": "Keep a sufficient state",
+      "body": "You need only count, mean, and m2 to continue processing a stream."
+    }
+  ],
+  "explanation": [
+    "Welford updates centered moments without storing historical observations. The two different mean values in the update are necessary to account for the shifting center.",
+    "Population variance is m2/count and sample variance is m2/(count-1) when defined. Keeping m2 in the state postpones that normalization choice."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

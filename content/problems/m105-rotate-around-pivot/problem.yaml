@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m105",
+  "kind": "lesson",
+  "slug": "rotate-around-pivot",
+  "version": 1,
+  "title": "Rotate Points around a Chosen Pivot",
+  "summary": "Translate to a pivot, apply a 2D rotation in radians and translate back without modifying inputs.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Rotate Points around a Chosen Pivot"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "rotate_points",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

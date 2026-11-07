@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m113",
+  "kind": "lesson",
+  "slug": "plane-from-three-points",
+  "version": 1,
+  "title": "Construct an Oriented Plane from Three Points",
+  "summary": "Normalize a cross product into a plane normal and compute its offset, rejecting collinear points.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Construct an Oriented Plane from Three Points"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "plane_from_points",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

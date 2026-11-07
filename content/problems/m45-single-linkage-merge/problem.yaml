@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m45",
+  "kind": "lesson",
+  "slug": "single-linkage-merge",
+  "version": 1,
+  "title": "Merge the Nearest Clusters",
+  "summary": "Agglomerative clustering builds a hierarchy one merge at a time. Single linkage measures two groups by their nearest pair of members.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Merge the Nearest Clusters"],
+  "prerequisites": ["m12"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "single_linkage_merge",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d102",
+  "kind": "lesson",
+  "slug": "scheduled-teacher-forcing-inputs",
+  "version": 1,
+  "title": "Choose Decoder Inputs with Scheduled Teacher Forcing",
+  "summary": "A decoder can train on a mixture of previous gold tokens and previous model predictions. Make the choice with supplied random draws so behavior is reproducible.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Choose Decoder Inputs with Scheduled Teacher Forcing"],
+  "prerequisites": ["d100"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "teacher_forcing_inputs",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1506.03099",
+    ],
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m142",
+  "kind": "lesson",
+  "slug": "bisection-polynomial-root",
+  "version": 1,
+  "title": "Keep a Root inside a Shrinking Bracket",
+  "summary": "Bisect a continuous polynomial on a sign-changing interval for a fixed number of steps.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Keep a Root inside a Shrinking Bracket"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bisect_polynomial",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

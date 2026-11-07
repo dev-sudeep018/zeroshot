@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "m25",
+  "kind": "lesson",
+  "slug": "linear-empirical-quantiles",
+  "version": 1,
+  "title": "Interpolate Empirical Quantiles",
+  "summary": "A percentile is ambiguous until its interpolation convention is fixed. Build quantiles from sorted observations and fractional positions.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Interpolate Empirical Quantiles"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "empirical_quantiles",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, fixtures, and implementation.",
+      "Concept reference only; no source code or prose copied: https://numpy.org/doc/stable/reference/generated/numpy.quantile.html",
+    ],
+}

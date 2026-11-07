@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d123",
+  "kind": "lesson",
+  "slug": "spectral-weight-normalization",
+  "version": 1,
+  "title": "Control a Linear Layer\u2019s Maximum Gain",
+  "summary": "The largest singular value is the greatest amplification a linear map can apply to a unit-length input. Normalize that gain directly.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Control a Linear Layer\u2019s Maximum Gain"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "spectral_normalize",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1802.05957",
+    ],
+}

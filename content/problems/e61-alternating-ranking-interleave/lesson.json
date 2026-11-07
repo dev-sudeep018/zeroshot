@@ -1,0 +1,45 @@
+{
+  "intro": "An online comparison can combine two ranked lists into one display. Alternating ownership while skipping duplicate documents keeps credit assignment explicit.",
+  "task": "Combine two rankings into a deduplicated display while recording which ranking supplied each document.",
+  "signature": "interleave_rankings(left, right, k)",
+  "requirements": [
+    "left and right are vectors of integer-valued document IDs in [0,1000000], possibly empty and with repetitions. k is an integer 0..1000000.",
+    "Starting with left, alternate turns. On each turn take that ranking\u2019s next unseen ID; if exhausted, take the other ranking\u2019s next unseen ID. Stop after k unique documents or exhaustion of both.",
+    "Return dict documents as selected IDs and owners as 0 for a left pick or 1 for a right pick. Advance the scheduled turn after each successful selection, even when the other ranking supplied it.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Skip shared document",
+      "input": "interleave_rankings([1,2,3], [1,4,2], 4)",
+      "output": "{'documents': [1, 4, 2, 3], 'owners': [0, 1, 0, 0]}"
+    },
+    {
+      "name": "Disjoint rankings alternate",
+      "input": "interleave_rankings([1,2], [3,4], 4)",
+      "output": "{'documents': [1, 3, 2, 4], 'owners': [0, 1, 0, 1]}"
+    },
+    {
+      "name": "Left exhausted immediately",
+      "input": "interleave_rankings([], [3,4], 3)",
+      "output": "{'documents': [3, 4], 'owners': [1, 1]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Track displayed IDs globally",
+      "body": "A document selected from either ranking must be skipped in both future scans."
+    },
+    {
+      "title": "Separate scheduled turn from actual owner",
+      "body": "An exhausted ranking can borrow a pick, but the recorded owner is the ranking that supplied it."
+    }
+  ],
+  "explanation": [
+    "Interleaving produces a shared display with a record of which ranking supplied each result. Removing duplicates prevents one document from occupying several display positions.",
+    "This deterministic alternating variant always starts left; it is not randomized, count-balanced team-draft interleaving. A real randomized comparison must address starting-order effects, click attribution, and experimental validity separately."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Two samples can differ by a small shift even when none of their values match. Wasserstein distance measures how far probability mass must move.",
+  "task": "Compute the one-dimensional Wasserstein-1 distance between two equally weighted empirical distributions of potentially different sample sizes.",
+  "signature": "empirical_wasserstein(first, second)",
+  "requirements": [
+    "first and second are nonempty vectors. Every observation has mass 1/len(its_vector), including duplicates.",
+    "Integrate the absolute difference between the two empirical CDFs across consecutive distinct pooled observation values.",
+    "Return a nonnegative scalar. Sample lengths may differ; do not zip sorted arrays unless their lengths happen to match.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Translation cost",
+      "input": "empirical_wasserstein([0,1],[2,3])",
+      "output": "2\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unequal sample sizes",
+      "input": "empirical_wasserstein([0],[0,2])",
+      "output": "1\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Same empirical distribution",
+      "input": "empirical_wasserstein([1,1,3,3],[1,3])",
+      "output": "0\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "The CDFs change only at pooled sample values, so integrate over intervals between adjacent distinct values."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Evaluate both inclusive CDFs at each left endpoint and multiply their absolute difference by that interval width."
+    }
+  ],
+  "explanation": [
+    "Between adjacent pooled sample values, each empirical CDF is constant. The area between the two CDFs is therefore a sum of rectangle widths times probability differences.",
+    "Equal sample sizes permit matching sorted observations, but unequal sizes require splitting mass. The CDF formulation handles both cases and preserves duplicate observations as repeated probability mass."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

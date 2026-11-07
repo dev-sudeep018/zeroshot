@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d118",
+  "kind": "lesson",
+  "slug": "cutmix-effective-area",
+  "version": 1,
+  "title": "Mix Labels Using the Actual CutMix Area",
+  "summary": "A requested CutMix patch can extend beyond the image. The label mixture must reflect the area actually replaced after clipping.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Mix Labels Using the Actual CutMix Area"],
+  "prerequisites": ["d117"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "cutmix_pair",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/1905.04899",
+    ],
+}

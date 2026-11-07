@@ -1,0 +1,45 @@
+{
+  "intro": "Scaling individual coordinates cannot remove cross-feature correlation. A symmetric inverse square root transforms the covariance in all directions.",
+  "task": "Return the symmetric whitening matrix for a supplied positive-semidefinite covariance, regularized by a positive epsilon.",
+  "signature": "whiten_covariance(covariance, epsilon)",
+  "requirements": [
+    "covariance is a square symmetric matrix, with symmetry tolerance 1e-10. Its smallest eigenvalue must be at least -1e-10.",
+    "epsilon is a scalar in [1e-8,1e6]. Return V diag(1/sqrt(max(eigenvalue,0)+epsilon)) V.T from an orthonormal eigendecomposition.",
+    "This is regularized ZCA whitening. Return the transformation matrix, not transformed samples; eigenvector signs must not affect the answer.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Diagonal covariance",
+      "input": "whiten_covariance([[3,0],[0,8]],1)",
+      "output": "[\n  [\n    0.5,\n    0.0\n  ],\n  [\n    0.0,\n    0.33333333\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Zero covariance",
+      "input": "whiten_covariance([[0,0],[0,0]],4)",
+      "output": "[\n  [\n    0.5,\n    0.0\n  ],\n  [\n    0.0,\n    0.5\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Rotated directions",
+      "input": "whiten_covariance([[1.5,.5],[.5,1.5]],2)",
+      "output": "[\n  [\n    0.53867513,\n    -0.03867513\n  ],\n  [\n    -0.03867513,\n    0.53867513\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "A symmetric covariance has orthogonal eigenvectors and real eigenvalues, which expose its principal directions."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Scale eigenvector columns by inverse square roots of regularized eigenvalues before multiplying by their transpose."
+    }
+  ],
+  "explanation": [
+    "A covariance eigendecomposition identifies orthogonal directions and their variances. Scaling each direction by the inverse square root and rotating back gives a symmetric transform.",
+    "With regularization, W(C+epsilon I)W.T equals identity up to numerical error. W C W.T instead retains a small regularization-dependent shrinkage, so it should not be claimed to equal identity exactly."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

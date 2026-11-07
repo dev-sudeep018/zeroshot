@@ -1,0 +1,45 @@
+{
+  "intro": "Group normalization computes statistics inside each example. Channel groups determine which features share a mean and variance.",
+  "task": "Implement group_normalize(x, groups, epsilon=1e-6). Changing the groups changes which population normalizes each feature. Batch size does not enter those statistics.",
+  "signature": "group_normalize(x, groups, epsilon=1e-6)",
+  "requirements": [
+    "x is nonempty (B,C,S). groups is an integer divisor of C in [1,C]; epsilon is a scalar in [1e-12,1].",
+    "Split channels into contiguous groups. Normalize each example/group over its C/groups channels and all S positions, using population variance.",
+    "Return (B,C,S) with no affine scale or shift. Never share statistics between examples.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Constant group",
+      "input": "group_normalize([[[2,2],[2,2]]],1)",
+      "output": "[[[0.0, 0.0], [0.0, 0.0]]]"
+    },
+    {
+      "name": "Shared channels",
+      "input": "group_normalize([[[0],[2]]],1,1)",
+      "output": "[[[-0.707106781187], [0.707106781187]]]"
+    },
+    {
+      "name": "Singleton groups",
+      "input": "group_normalize([[[0],[2]]],2,1)",
+      "output": "[[[0.0], [0.0]]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Reshape to (B,groups,C/groups,S) and reduce the final two axes."
+    },
+    {
+      "title": "Step 2",
+      "body": "Groups equal to C normalize each channel over its spatial positions."
+    }
+  ],
+  "explanation": [
+    "Changing the groups changes which population normalizes each feature. Batch size does not enter those statistics.",
+    "One group pools channels and spatial positions; one group per channel isolates channel statistics. These are boundaries of the same operation."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

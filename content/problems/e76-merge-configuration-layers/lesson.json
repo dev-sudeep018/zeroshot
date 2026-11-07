@@ -1,0 +1,44 @@
+{
+  "intro": "Layered settings support defaults, environment overrides, and later corrections. A precise deletion rule lets a later layer remove a setting rather than merely mask it.",
+  "task": "Apply ordered shallow overrides while treating None as deletion.",
+  "signature": "merge_config(layers)",
+  "requirements": [
+    "Apply dictionary layers from first to last. A non-None value sets or replaces a top-level key; None deletes that key if present. Nested values are replaced as a whole, never recursively merged.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Override and deletion",
+      "input": "merge_config([{'a':1,'b':2},{'a':3,'b':None}])",
+      "output": "{'a': 3}"
+    },
+    {
+      "name": "Nested replacement",
+      "input": "merge_config([{'x':{'a':1,'b':2}},{'x':{'a':9}}])",
+      "output": "{'x': {'a': 9}}"
+    },
+    {
+      "name": "Delete absent key",
+      "input": "merge_config([{'x':None}])",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Replay layers in order and treat None as an operation, not a stored value."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Copy nested replacement values; a shallow override is different from a recursive merge."
+    }
+  ],
+  "explanation": [
+    "Layered settings support defaults, environment overrides, and later corrections. A precise deletion rule lets a later layer remove a setting rather than merely mask it.",
+    "Replacing nested values atomically keeps the policy simple and predictable. Recursive merges use different semantics and would incorrectly retain nested keys in this lesson."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,46 @@
+{
+  "intro": "An ordinary inverse requires a square nonsingular matrix. A pseudoinverse keeps only supported singular directions and also handles rectangular systems.",
+  "task": "Compute a Moore\u2013Penrose pseudoinverse using an explicit relative cutoff on singular values.",
+  "signature": "svd_pseudoinverse(matrix, rcond=1e-10)",
+  "requirements": [
+    "matrix is a nonempty real matrix. rcond is a scalar in [0,1].",
+    "Retain singular values strictly greater than rcond times the largest singular value. Replace other inverse singular values by zero.",
+    "Return an array with transposed shape. A zero matrix has a zero pseudoinverse; do not divide by zero when all singular values vanish.",
+    "Raise ValueError if the requested inverse or solution exceeds finite floating-point range, even when individual inputs satisfy the bounds.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Diagonal inverse",
+      "input": "svd_pseudoinverse([[2,0],[0,4]])",
+      "output": "[\n  [\n    0.5,\n    0.0\n  ],\n  [\n    0.0,\n    0.25\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Rank deficient",
+      "input": "svd_pseudoinverse([[1,2],[2,4]])",
+      "output": "[\n  [\n    0.04,\n    0.08\n  ],\n  [\n    0.08,\n    0.16\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Wide matrix",
+      "input": "svd_pseudoinverse([[1,0,0],[0,2,0]])",
+      "output": "[\n  [\n    1.0,\n    0.0\n  ],\n  [\n    0.0,\n    0.5\n  ],\n  [\n    0.0,\n    0.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Use a thin singular-value decomposition so the formula works for both tall and wide matrices."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Build a zero reciprocal vector first and fill only retained entries; preserve the strict cutoff comparison."
+    }
+  ],
+  "explanation": [
+    "The pseudoinverse reverses each retained singular direction and leaves discarded directions at zero. Multiplying it by a target gives the minimum-norm least-squares solution under that cutoff.",
+    "The cutoff is relative to the largest singular value, so multiplying a matrix by a common nonzero scale preserves which directions survive. Equality with the threshold is deliberately discarded."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

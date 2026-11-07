@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m110",
+  "kind": "lesson",
+  "slug": "axis-aligned-box-clipping",
+  "version": 1,
+  "title": "Clip a Segment to a Rectangle",
+  "summary": "Compute the visible parameter interval of a 2D segment inside a closed axis-aligned rectangle.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Clip a Segment to a Rectangle"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "clip_segment_box",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

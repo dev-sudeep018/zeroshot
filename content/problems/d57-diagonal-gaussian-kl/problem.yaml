@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d57",
+  "kind": "lesson",
+  "slug": "diagonal-gaussian-kl",
+  "version": 1,
+  "title": "Measure a Latent Gaussian against a Unit Prior",
+  "summary": "A variational encoder predicts both location and uncertainty. Compare its diagonal Gaussian with a standard-normal prior without drawing random samples.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Variational autoencoders", "KL divergence"],
+  "prerequisites": ["m08"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gaussian_kl",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

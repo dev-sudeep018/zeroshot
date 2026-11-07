@@ -1,0 +1,45 @@
+{
+  "intro": "Raw lag products preserve the signal mean; they are not Pearson correlations and are not restricted to the interval [-1,1]. Lag zero is the average squared amplitude.",
+  "task": "Compute raw lag products with biased or overlap-count normalization and return counts.",
+  "signature": "lag_products(values, max_lag, normalization)",
+  "requirements": [
+    "max_lag is an integer in 0..n-1. normalization is exactly \"biased\" or \"overlap\".",
+    "At lag k compute sum(values[:n-k]*values[k:]), without subtracting the mean. Divide by n for biased or n-k for overlap.",
+    "Return {\"value\": normalized products for lags 0..max_lag, \"count\": overlap lengths}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Overlap normalization",
+      "input": "lag_products([1,2,3],2,\"overlap\")",
+      "output": "{'value': [4.666666667, 4.0, 3.0], 'count': [3, 2, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Biased normalization",
+      "input": "lag_products([1,2,3],2,\"biased\")",
+      "output": "{'value': [4.666666667, 2.666666667, 1.0], 'count': [3, 2, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant signal",
+      "input": "lag_products([2,2,2],2,\"overlap\")",
+      "output": "{'value': [4.0, 4.0, 4.0], 'count': [3, 2, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Slice two overlapping portions separated by the requested lag."
+    },
+    {
+      "title": "Build the result",
+      "body": "Keep the normalization choice explicit because overlap shrinks as lag grows."
+    }
+  ],
+  "explanation": [
+    "Raw lag products preserve the signal mean; they are not Pearson correlations and are not restricted to the interval [-1,1]. Lag zero is the average squared amplitude.",
+    "Dividing by overlap count keeps a constant signal constant across lags. Dividing by the original length instead damps long-lag estimates as fewer pairs remain."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

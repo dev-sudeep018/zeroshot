@@ -1,0 +1,45 @@
+{
+  "intro": "A distribution can shift even when its mean stays fixed. The two-sample KS distance finds the largest vertical gap between empirical cumulative distributions.",
+  "task": "Find the largest empirical CDF gap and its earliest location, including tied observations and unequal sample counts.",
+  "signature": "ks_distance(reference, current)",
+  "requirements": [
+    "reference and current are nonempty finite numeric vectors; ties and unequal sample sizes are allowed.",
+    "Evaluate both empirical CDFs at every distinct observed value using count(sample<=value)/sample_size. Return dict statistic and location.",
+    "location is the smallest observed value attaining the maximum absolute CDF gap. Return statistic 0 and the smallest pooled observation for identical empirical distributions. No p-value is requested.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Disjoint samples",
+      "input": "ks_distance([0,1], [2,3])",
+      "output": "{'statistic': 1.0, 'location': 1.0}"
+    },
+    {
+      "name": "Identical empirical distributions",
+      "input": "ks_distance([2,1], [1,2])",
+      "output": "{'statistic': 0.0, 'location': 1.0}"
+    },
+    {
+      "name": "Ties count together",
+      "input": "ks_distance([0,0,1], [0,1,1])",
+      "output": "{'statistic': 0.333333333333, 'location': 0.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use right-sided counts",
+      "body": "At an observed value, include every tied observation in its empirical CDF."
+    },
+    {
+      "title": "Inspect pooled support",
+      "body": "The CDF gap changes only at values observed in at least one sample."
+    }
+  ],
+  "explanation": [
+    "The empirical CDF is a step function, so a maximum gap occurs on the pooled support. Right-sided counts handle ties as one jump rather than arbitrarily ordering equal observations.",
+    "This lesson computes a descriptive distance only. Statistical significance requires additional assumptions and a p-value procedure; those are deliberately separate from the distance."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

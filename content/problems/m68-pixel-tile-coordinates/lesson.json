@@ -1,0 +1,45 @@
+{
+  "intro": "Flat indexing and tiling are different coordinate transforms. A flat index counts across full image rows, while tile coordinates count blocks and local coordinates count positions within a block.",
+  "task": "Convert flat pixel indices into tile coordinates and within-tile coordinates for uneven image boundaries.",
+  "signature": "pixel_tile_locations(height, width, tile_height, tile_width, indices)",
+  "requirements": [
+    "Image dimensions and tile dimensions are integers in 1..64. indices is an integer-valued vector in [0,height*width).",
+    "Decode each row-major flat index as row=index//width and column=index%width. Return {\"tile\": (n,2) tile row/column, \"local\": (n,2) offsets inside that tile}.",
+    "Tiles start at the top-left. Partial bottom/right tiles are valid and indices retain input order and repetition.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Uneven final tiles",
+      "input": "pixel_tile_locations(3,5,2,3,[0,4,14])",
+      "output": "{'tile': [[0, 0], [0, 1], [1, 1]], 'local': [[0, 0], [0, 1], [0, 1]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One tile",
+      "input": "pixel_tile_locations(2,2,4,4,[0,3,1])",
+      "output": "{'tile': [[0, 0], [0, 0], [0, 0]], 'local': [[0, 0], [1, 1], [0, 1]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unit tiles",
+      "input": "pixel_tile_locations(2,3,1,1,[5,0])",
+      "output": "{'tile': [[1, 2], [0, 0]], 'local': [[0, 0], [0, 0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "First decode flat indices using image width, not tile width."
+    },
+    {
+      "title": "Build the result",
+      "body": "Then divide and take remainders of row and column separately by tile dimensions."
+    }
+  ],
+  "explanation": [
+    "Flat indexing and tiling are different coordinate transforms. A flat index counts across full image rows, while tile coordinates count blocks and local coordinates count positions within a block.",
+    "The identity row=tile_row*tile_height+local_row, with the analogous column identity, reconstructs every pixel. It still holds when the final tiles are smaller than the requested tile size."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

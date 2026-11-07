@@ -1,0 +1,45 @@
+{
+  "intro": "A single temporal-difference residual uses a nearby prediction. Generalized advantage estimation blends residuals farther into the rollout while respecting episode boundaries.",
+  "task": "Return GAE advantages and corresponding value targets. Compare trace decay zero and one to see how much future evidence enters each estimate.",
+  "signature": "generalized_advantages(rewards, values, terminated, discount, trace_decay)",
+  "requirements": [
+    "rewards and terminated have length T in 1..255. values has length T+1 and includes the prediction after the final transition. terminated is numeric zero/one; discount and trace_decay are scalars in [0,1].",
+    "Set delta[t]=rewards[t]+discount*(1-terminated[t])*values[t+1]-values[t]. With A[T]=0, recur A[t]=delta[t]+discount*trace_decay*(1-terminated[t])*A[t+1].",
+    "Return {\"advantages\": A, \"targets\": lambda_returns}. In exact arithmetic, lambda_returns=A+values[:-1]. Compute targets with the equivalent recurrence L[T]=values[T], L[t]=rewards[t]+discount*(1-terminated[t])*((1-trace_decay)*values[t+1]+trace_decay*L[t+1]) to preserve small terminal rewards beside large values. Do not normalize advantages or train a value network.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Full residual trace",
+      "input": "generalized_advantages([1,2],[0,0,0],[0,1],0.5,1)",
+      "output": "{'advantages': array([2., 2.]), 'targets': array([2., 2.])}"
+    },
+    {
+      "name": "One-step residuals",
+      "input": "generalized_advantages([1,2],[2,4,8],[0,0],0.5,0)",
+      "output": "{'advantages': array([1., 2.]), 'targets': array([3., 6.])}"
+    },
+    {
+      "name": "Half trace decay",
+      "input": "generalized_advantages([1,2],[2,4,8],[0,0],0.5,0.5)",
+      "output": "{'advantages': array([1.5, 2. ]), 'targets': array([3.5, 6. ])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Compute residuals first",
+      "body": "The last supplied value is a bootstrap prediction, not another reward."
+    },
+    {
+      "title": "Mask both future terms",
+      "body": "A terminal flag stops both the value bootstrap in delta and the advantage trace."
+    }
+  ],
+  "explanation": [
+    "At trace decay zero, the estimate is the one-step residual. At trace decay one, adding the current value back telescopes the residual sequence into a bootstrapped return.",
+    "Intermediate trace decay values reduce the influence of distant residuals. This is an estimator from a fixed rollout, not a guarantee of improved policy learning."
+  ],
+  "formula": null,
+  "test_count": 13,
+  "sample_count": 3
+}

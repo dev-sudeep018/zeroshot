@@ -59,3 +59,9 @@ embedding model or a production benchmark.
 - [Monaco Editor](https://github.com/microsoft/monaco-editor)
 
 These informed the implementation; current limitations and actual test evidence are recorded in verification.md.
+
+## Local practice rewards and rename compatibility
+
+ZeroShot retains `mastery:learning:v1`, per-item completion keys, and draft keys so the rename does not discard local work. Practice XP and achievements are derived from completed current catalog versions; visits and repeated runs cannot increase the score. The `zeroshot:momentum:v1` record stores optional preferences and known first-completion calendar days. Per-item `zeroshot:first-completion:<id>:v<version>` records preserve dates if another tab writes an older aggregate snapshot. Completion keys similarly recover checked status. Attempts and last-visit metadata remain best-effort local snapshots.
+
+Only a newly successful full-suite check records a first-completion day. Historical completion with an unknown date earns current-catalog XP but receives no guessed weekly credit. Monday-to-Sunday goals use local calendar dates, including across DST boundaries. The v2 `zeroshot-backup` format carries preferences and dated progress; the strict legacy v1 `project-mastery-backup` remains accepted. Imports merge matching current versions, preserve existing drafts and preferences, and restore preferences on a fresh device. Dates are unioned conservatively using the earliest valid known day. Exported backups include the recovered per-item dates. This is personal practice feedback, not a competitive credential or synchronized account. Future lesson-version publication requires an explicit historical-credit migration policy.

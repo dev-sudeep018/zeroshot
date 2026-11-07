@@ -1,0 +1,44 @@
+{
+  "intro": "Optional fields need a deliberate absence policy. Treating zero or False as missing would change valid measurements or settings during extraction.",
+  "task": "Collect a requested field with an explicit fallback while retaining falsy values.",
+  "signature": "extract_field(records, field, fallback)",
+  "requirements": [
+    "Return one list entry per record: its field value if the key exists, otherwise fallback. field is a nonempty string. None, False, zero, and empty strings are present values.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Absent field fallback",
+      "input": "extract_field([{'x':2},{}], 'x', 9)",
+      "output": "[2, 9]"
+    },
+    {
+      "name": "Preserve falsy values",
+      "input": "extract_field([{'x':0},{'x':False},{'x':''},{'x':None}], 'x', 9)",
+      "output": "[0, False, '', None]"
+    },
+    {
+      "name": "Nested fallback",
+      "input": "extract_field([{}], 'x', {'v':1})",
+      "output": "[{'v': 1}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use key membership rather than truthiness to decide whether fallback applies."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Append exactly one result for every row, including rows with no fields."
+    }
+  ],
+  "explanation": [
+    "Optional fields need a deliberate absence policy. Treating zero or False as missing would change valid measurements or settings during extraction.",
+    "Returning copied values protects the source records from later edits to extracted containers. The list keeps row alignment so it can be paired with other extracted columns."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

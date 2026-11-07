@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m140",
+  "kind": "lesson",
+  "slug": "polynomial-horner-derivative",
+  "version": 1,
+  "title": "Evaluate a Polynomial and Its Slope Together",
+  "summary": "Apply a coupled Horner recurrence to descending coefficients at a batch of query points.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Evaluate a Polynomial and Its Slope Together"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "horner_value_slope",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

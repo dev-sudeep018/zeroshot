@@ -53,7 +53,7 @@ for (const item of items) {
 test("three learning entry points, filters, and experiments connect", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/learn/");
   await page.getByRole("link", { name: "Choose a learning path" }).click();
   await page.getByRole("link", { name: "View this path" }).first().click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -177,7 +177,7 @@ test("backup import preserves existing drafts and merges completion", async ({
 test("learning pages fit a narrow viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const route of [
-    "/",
+    "/learn/",
     "/paths/ai-engineering/",
     "/explore/",
     "/problems/",
@@ -192,6 +192,10 @@ test("learning pages fit a narrow viewport", async ({ page }) => {
       route,
     ).toBe(true);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    const menu = page.getByRole("button", {
+      name: "Toggle learning navigation",
+    });
+    if (await menu.isVisible()) await menu.click();
     const firstLink = page.getByRole("link", {
       name: "Learning home",
       exact: true,
@@ -202,6 +206,6 @@ test("learning pages fit a narrow viewport", async ({ page }) => {
       `${route}: first navigation link is reachable`,
     ).toBeGreaterThanOrEqual(0);
     await firstLink.click();
-    await expect(page).toHaveURL("http://localhost:3000/");
+    await expect(page).toHaveURL("http://localhost:3000/learn/");
   }
 });

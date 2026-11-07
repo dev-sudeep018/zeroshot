@@ -1,0 +1,44 @@
+{
+  "intro": "Padded tokens must contribute neither loss nor denominator weight. Compute stable categorical loss only at positions selected by the mask.",
+  "task": "Return per-token negative log likelihood with zeros at masked positions and its mean over valid positions.",
+  "signature": "masked_token_nll(logits, targets, mask)",
+  "requirements": [
+    "logits has shape batch-by-time-by-vocabulary. targets and numeric 0/1 mask match batch-by-time. Every target is an integer vocabulary index, even at masked positions. At least one mask entry is one.",
+    "Return {\"per_token\": matrix, \"loss\": scalar, \"count\": integer}. Use logsumexp(logits)-target_logit; divide the masked sum by the count of ones, not by batch size or padded area.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Mask padding",
+      "input": "masked_token_nll([[[0,0],[0,2],[3,0]]],[[0,1,0]],[[1,1,0]])",
+      "output": "{'per_token': [[0.69314718056, 0.126928011043, 0.0]],\n 'loss': 0.410037595801,\n 'count': 2}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Uniform distribution",
+      "input": "masked_token_nll([[[0,0,0]]],[[2]],[[1]])",
+      "output": "{'per_token': [[1.09861228867]], 'loss': 1.09861228867, 'count': 1}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Extreme wrong class",
+      "input": "masked_token_nll([[[1000,-1000]]],[[1]],[[1]])",
+      "output": "{'per_token': [[2000.0]], 'loss': 2000.0, 'count': 1}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Subtract each vocabulary row\u2019s maximum before exponentiating."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Sum the masked losses and divide by the number of valid tokens."
+    }
+  ],
+  "explanation": [
+    "A token-level mean gives each observed token equal weight even when sequence lengths differ. Dividing by padded area would make loss artificially smaller for batches with more padding.",
+    "Stable log-sum-exp avoids overflow and protects confidently wrong predictions from probability underflow. The result remains finite even for large positive and negative logits."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "The last array position may be padding. Summarize a variable-length sequence using the state at its last observed token.",
+  "task": "Gather one hidden vector per example using valid lengths, returning zeros for empty sequences.",
+  "signature": "last_valid_state(hidden, lengths)",
+  "requirements": [
+    "hidden is batch-by-time-by-features. lengths has one integer per example in 0..time.",
+    "Return a batch-by-features array: row b is hidden[b,lengths[b]-1] for a positive length and all zeros for length zero. Do not use negative indexing for empty rows.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Different lengths",
+      "input": "last_valid_state([[[1,2],[3,4]],[[5,6],[7,8]]],[1,2])",
+      "output": "[[1.0, 2.0], [7.0, 8.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Empty sequence",
+      "input": "last_valid_state([[[9,8],[7,6]]],[0])",
+      "output": "[[0.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "One timestep",
+      "input": "last_valid_state([[[2]],[[3]]],[1,0])",
+      "output": "[[2.0], [0.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Convert a positive length to its last index by subtracting one."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Initialize zero rows and gather only examples whose length is positive."
+    }
+  ],
+  "explanation": [
+    "Length-aware selection prevents padded states from replacing meaningful sequence summaries. It also supports a batch where some examples are empty without inventing a last token.",
+    "The gathered state is whatever representation the model supplied at that position. Whether it summarizes the whole prefix depends on the network architecture, not on this indexing operation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

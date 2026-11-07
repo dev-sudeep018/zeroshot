@@ -1,0 +1,46 @@
+{
+  "intro": "A triangular system lets each unknown depend only on earlier solutions. Follow that dependency order without forming a matrix inverse.",
+  "task": "Solve lower@x=target by forward substitution and return the solution vector.",
+  "signature": "forward_substitution(lower, target)",
+  "requirements": [
+    "lower is a square matrix and target is a matching vector. Entries above the diagonal must have magnitude at most 1e-12 and are treated as zero.",
+    "For row i, subtract the dot product with earlier solved values, then divide by lower[i,i]. Return a new vector.",
+    "Every diagonal entry must have magnitude greater than 1e-12. Negative diagonal entries are allowed.",
+    "Raise ValueError if the requested inverse or solution exceeds finite floating-point range, even when individual inputs satisfy the bounds.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two-step solve",
+      "input": "forward_substitution([[2,0],[3,1]],[4,7])",
+      "output": "[\n  2.0,\n  1.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Diagonal solve",
+      "input": "forward_substitution([[2,0],[0,4]],[6,8])",
+      "output": "[\n  3.0,\n  2.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Negative diagonal",
+      "input": "forward_substitution([[-2,0],[1,-1]],[4,3])",
+      "output": "[\n  -2.0,\n  -5.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Start with the first row, which contains only one unknown, then progress downward through the system."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "At row i, subtract only coefficients multiplying previously solved entries before dividing by the diagonal."
+    }
+  ],
+  "explanation": [
+    "The first row has one unknown. Each subsequent row becomes a one-variable equation once the previously solved contributions are subtracted.",
+    "Triangular solves are building blocks inside larger factorizations. They avoid the work and numerical drawbacks of explicitly constructing an inverse."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

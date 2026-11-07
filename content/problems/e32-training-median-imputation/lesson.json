@@ -1,0 +1,45 @@
+{
+  "intro": "Imputation can leak heldout information when statistics are fitted on all data. Explicit missingness masks let you fit medians on training observations only.",
+  "task": "Fit medians on observed training entries, then transform heldout values without letting heldout extremes affect the fitted statistics.",
+  "signature": "median_impute(train, values, train_missing, value_missing)",
+  "requirements": [
+    "train and values are finite numeric matrices with equal positive feature counts; train has at least one row. Each missing mask must be a boolean NumPy array of the corresponding matrix shape.",
+    "Fit each feature median using only train entries whose train_missing mask is false. Reject a feature with no observed training values.",
+    "Return dict medians as a feature vector and filled as a copy of values with value_missing entries replaced. Masked numeric placeholders do not affect fitted medians.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Fit only observed training values",
+      "input": "median_impute([[1,10],[3,999]], [[100,0]], np.array([[False,False],[False,True]]), np.array([[False,True]]))",
+      "output": "{'medians': [2.0, 10.0], 'filled': [[100.0, 10.0]]}"
+    },
+    {
+      "name": "Heldout extremes do not change median",
+      "input": "median_impute([[1],[3]], [[999],[0]], np.zeros((2,1),dtype=bool), np.array([[False],[True]]))",
+      "output": "{'medians': [2.0], 'filled': [[999.0], [2.0]]}"
+    },
+    {
+      "name": "Odd training count",
+      "input": "median_impute([[1],[9],[3]], [[0]], np.zeros((3,1),dtype=bool), np.ones((1,1),dtype=bool))",
+      "output": "{'medians': [3.0], 'filled': [[3.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Ignore placeholders during fitting",
+      "body": "Index each training column with the inverse of its missingness mask."
+    },
+    {
+      "title": "Broadcast fitted statistics",
+      "body": "A feature median vector can fill matching columns without reading heldout statistics."
+    }
+  ],
+  "explanation": [
+    "Fit and transform are distinct operations. The feature statistics depend only on observed training entries, and the transform reuses those statistics on any aligned matrix.",
+    "A separate boolean mask avoids overloading a numeric sentinel such as zero or NaN. Zero can be a valid observation, and arbitrary masked placeholders must not influence the median."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

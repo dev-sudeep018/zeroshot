@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "e42",
+  "kind": "lesson",
+  "slug": "box-intersection-over-union",
+  "version": 1,
+  "title": "Compare Boxes with Intersection over Union",
+  "summary": "Localization quality depends on geometric overlap. Pairwise intersection over union compares boxes of different sizes without treating touching edges as positive area.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Object detection", "Geometry"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "box_iou",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

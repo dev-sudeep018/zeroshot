@@ -1,0 +1,45 @@
+{
+  "intro": "A spatial filter reuses each weight across positions. Its backward pass accumulates gradients for both overlapping image patches and shared weights.",
+  "task": "Implement convolution_backward(image, kernel, upstream). An interior pixel influences several outputs, so its derivative sums their contributions. A kernel coefficient likewise influences every valid output location.",
+  "signature": "convolution_backward(image, kernel, upstream)",
+  "requirements": [
+    "image is (H,W), kernel is (Kh,Kw), with 1<=Kh<=H and 1<=Kw<=W; upstream is (H-Kh+1,W-Kw+1).",
+    "Forward output[i,j]=sum(image[i:i+Kh,j:j+Kw]*kernel), stride one, no padding, no kernel flip.",
+    "Return {image: dimage, kernel: dkernel}. Add upstream[i,j]*kernel into its input patch and upstream[i,j]*image_patch into dkernel.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Scalar product",
+      "input": "convolution_backward([[2]],[[3]],[[4]])",
+      "output": "{\"image\": [[12.0]], \"kernel\": [[8.0]]}"
+    },
+    {
+      "name": "Shared scalar filter",
+      "input": "convolution_backward([[1,2]],[[3]],[[4,5]])",
+      "output": "{\"image\": [[12.0, 15.0]], \"kernel\": [[14.0]]}"
+    },
+    {
+      "name": "Overlapping filter",
+      "input": "convolution_backward([[1,2,3]],[[2,1]],[[1,1]])",
+      "output": "{\"image\": [[2.0, 3.0, 1.0]], \"kernel\": [[3.0, 5.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Initialize both gradients to zero and accumulate each output location."
+    },
+    {
+      "title": "Step 2",
+      "body": "Weight sharing sums kernel gradients across all patches."
+    }
+  ],
+  "explanation": [
+    "An interior pixel influences several outputs, so its derivative sums their contributions. A kernel coefficient likewise influences every valid output location.",
+    "The single-channel contract exposes the adjoint calculation directly. Finite differences check both operands independently."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

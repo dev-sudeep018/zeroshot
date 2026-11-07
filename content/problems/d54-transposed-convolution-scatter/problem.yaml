@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d54",
+  "kind": "lesson",
+  "slug": "transposed-convolution-scatter",
+  "version": 1,
+  "title": "Construct a Transposed Convolution by Scattering",
+  "summary": "Transposed convolution scatters each input value through a shifted filter. This adjoint operation need not invert a convolution.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Convolution", "Linear adjoints"],
+  "prerequisites": ["d09", "d53"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "transposed_convolution",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

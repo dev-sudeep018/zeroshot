@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d61",
+  "kind": "lesson",
+  "slug": "triplet-margin-geometry",
+  "version": 1,
+  "title": "Compare Positive and Negative Embedding Distances",
+  "summary": "A triplet objective asks a positive example to be closer than a negative example by a specified margin. The geometry matters before the hinge activates.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Metric learning", "Embedding geometry"],
+  "prerequisites": ["m12"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "triplet_margin",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

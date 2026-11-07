@@ -1,0 +1,44 @@
+{
+  "intro": "A descent direction\u2019s slope and curvature play different roles. For a quadratic objective they can be computed and checked exactly.",
+  "task": "Return the objective value, directional slope, directional curvature, and unconstrained minimizing step along the direction.",
+  "signature": "quadratic_probe(hessian, point, direction)",
+  "requirements": [
+    "hessian is a symmetric square matrix (absolute symmetry tolerance 1e-10); point and direction are matching vectors. Require direction.T@hessian@direction >=1e-8. Average H with H.T after symmetry validation.",
+    "For q(x)=0.5*x.T@H@x, return {\"value\": q(x), \"slope\": d.T@H@x, \"curvature\": d.T@H@d, \"step\": -slope/curvature}. The step is allowed to be negative.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One dimensional descent",
+      "input": "quadratic_probe([[2]],[3],[-1])",
+      "output": "{'value': 9.0, 'slope': -6.0, 'curvature': 2.0, 'step': 3.0}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "One dimensional uphill",
+      "input": "quadratic_probe([[2]],[3],[1])",
+      "output": "{'value': 9.0, 'slope': 6.0, 'curvature': 2.0, 'step': -3.0}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Two-dimensional line",
+      "input": "quadratic_probe([[2,0],[0,4]],[1,2],[-1,-1])",
+      "output": "{'value': 9.0, 'slope': -10.0, 'curvature': 6.0, 'step': 1.66666666667}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Expand q(x+t*d) as a quadratic in the scalar t."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Only positive curvature along this direction is required; the matrix need not be positive definite in every direction."
+    }
+  ],
+  "explanation": [
+    "The slope determines the immediate tendency and curvature describes how that tendency changes along the chosen line. A positive directional curvature gives a unique line minimum.",
+    "This is an exact diagnostic for the supplied quadratic, not a finite-difference estimator or a guarantee for a nonlinear network far from the current point. Negative optimal steps simply indicate the selected direction points uphill initially."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A FIFO queue models workers accepting tasks in arrival order. Replaying operations makes both completed and waiting work visible.",
+  "task": "Replay enqueue/dequeue operations and return served IDs plus final queue.",
+  "signature": "fifo_queue(operations)",
+  "requirements": [
+    "Each operation is [\"put\", nonempty_string_id] or [\"take\"]. Replay a FIFO queue; duplicate IDs are separate jobs. Return served (including None for a take on an empty queue) and pending IDs in queue order.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "First in first out",
+      "input": "fifo_queue([['put','a'],['put','b'],['take']])",
+      "output": "{'served': ['a'], 'pending': ['b']}"
+    },
+    {
+      "name": "Empty removal",
+      "input": "fifo_queue([['take'],['put','x'],['take'],['take']])",
+      "output": "{'served': [None, 'x', None], 'pending': []}"
+    },
+    {
+      "name": "Duplicate jobs",
+      "input": "fifo_queue([['put','x'],['put','x'],['take']])",
+      "output": "{'served': ['x'], 'pending': ['x']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Keep arrival order independently of the job ID; duplicates are permitted."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "An empty take produces a result slot containing None."
+    }
+  ],
+  "explanation": [
+    "A FIFO queue models workers accepting tasks in arrival order. Replaying operations makes both completed and waiting work visible.",
+    "An attempted removal from an empty queue is recorded explicitly. Skipping that result would lose alignment between take operations and returned responses."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

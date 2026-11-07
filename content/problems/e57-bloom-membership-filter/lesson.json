@@ -1,0 +1,45 @@
+{
+  "intro": "A Bloom filter can reject unseen items without storing every key. Collisions can produce false positives, so membership means possibly present rather than definitely present.",
+  "task": "Set membership bits and construct an example where a never-inserted query still receives a positive answer.",
+  "signature": "bloom_filter(insert_hashes, query_hashes, size)",
+  "requirements": [
+    "insert_hashes and query_hashes are integer-valued matrices (N,K) and (M,K), sharing positive K. size is an integer 1..100000; every hash index lies in [0,size-1].",
+    "Set each inserted bucket in a boolean bit vector. A query is possibly present only if all its buckets are set.",
+    "Return dict bits as a length-size boolean NumPy vector and maybe_present as a length-M boolean vector. There is no deletion, counter array, or false-positive probability estimate.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Known and absent item",
+      "input": "bloom_filter([[0,2]], [[0,2],[0,1]], 4)",
+      "output": "{'bits': [True, False, True, False], 'maybe_present': [True, False]}"
+    },
+    {
+      "name": "A false positive from combined bits",
+      "input": "bloom_filter([[0,1],[2,3]], [[0,3]], 4)",
+      "output": "{'bits': [True, True, True, True], 'maybe_present': [True]}"
+    },
+    {
+      "name": "Empty filter",
+      "input": "bloom_filter(np.empty((0,2)), [[0,1]], 2)",
+      "output": "{'bits': [False, False], 'maybe_present': [False]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Insertion is a bitwise OR operation",
+      "body": "Repeated inserts do not change a bit after it becomes true."
+    },
+    {
+      "title": "A query requires every bit",
+      "body": "One unset bit proves absence; all set bits only suggest membership."
+    }
+  ],
+  "explanation": [
+    "Bloom filters have no false negatives for correctly inserted items under a fixed hash mapping, but different items can collectively set all bits needed by a query.",
+    "The worked false-positive example separates the membership guarantee from exact storage. A positive result should trigger a definitive lookup when correctness requires certainty."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

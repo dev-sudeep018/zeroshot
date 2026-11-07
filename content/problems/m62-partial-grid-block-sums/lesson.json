@@ -1,0 +1,45 @@
+{
+  "intro": "The output grid summarizes disjoint spatial regions. Ceiling division is necessary because a partial region still contains observations and must appear in the result.",
+  "task": "Sum nonoverlapping grid blocks while preserving partial bottom and right boundary blocks.",
+  "signature": "grid_block_sums(grid, block_rows, block_cols)",
+  "requirements": [
+    "grid is a matrix. block_rows and block_cols are integers in 1..64.",
+    "Return a matrix with shape (ceil(rows/block_rows), ceil(cols/block_cols)), containing sums of nonoverlapping blocks anchored at (0,0).",
+    "Include partial blocks at bottom and right; do not drop or duplicate any cell.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Partial right edge",
+      "input": "grid_block_sums([[1,2,3],[4,5,6]],2,2)",
+      "output": "[[12.0, 9.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Partial bottom edge",
+      "input": "grid_block_sums([[1,2],[3,4],[5,6]],2,1)",
+      "output": "[[4.0, 6.0], [5.0, 6.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Whole grid",
+      "input": "grid_block_sums([[1,2],[3,4]],8,8)",
+      "output": "[[10.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Enumerate block starts using steps equal to the block sizes."
+    },
+    {
+      "title": "Build the result",
+      "body": "A bounded slice naturally includes the smaller block at the final edge."
+    }
+  ],
+  "explanation": [
+    "The output grid summarizes disjoint spatial regions. Ceiling division is necessary because a partial region still contains observations and must appear in the result.",
+    "A useful conservation check is that the sum of all output blocks equals the sum of the original grid. This catches both dropped edges and accidentally overlapping blocks."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

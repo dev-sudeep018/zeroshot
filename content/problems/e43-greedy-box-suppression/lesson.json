@@ -1,0 +1,45 @@
+{
+  "intro": "Object detectors often predict several boxes for one object. Greedy suppression keeps confident boxes while removing later boxes whose overlap is too large.",
+  "task": "Trace greedy box selection and explain how score order, exact ties, and threshold equality change retained detections.",
+  "signature": "non_max_suppression(boxes, scores, threshold)",
+  "requirements": [
+    "boxes is a finite (N,4) matrix of continuous [xmin,ymin,xmax,ymax] coordinates with nonnegative side lengths; scores is a length-N real vector; 0<=threshold<=1.",
+    "Consider boxes by descending score, breaking ties by lower original index. Keep a box unless its IoU with an already-kept box is strictly greater than threshold.",
+    "Return kept original indices as a Python list in selection order. IoU for zero union is 0. This is class-agnostic greedy NMS; no score cutoff or maximum count is applied.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Duplicate box suppressed",
+      "input": "non_max_suppression([[0,0,1,1],[0,0,1,1],[2,2,3,3]], [.8,.9,.7], .5)",
+      "output": "[1, 2]"
+    },
+    {
+      "name": "Score tie keeps lower index",
+      "input": "non_max_suppression([[0,0,1,1],[0,0,1,1]], [1,1], .5)",
+      "output": "[0]"
+    },
+    {
+      "name": "Threshold equality survives",
+      "input": "non_max_suppression([[0,0,1,1],[0,0,1,1]], [1,.5], 1)",
+      "output": "[0, 1]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Sort once with an explicit tie rule",
+      "body": "Confidence determines the greedy order; original index resolves exact ties."
+    },
+    {
+      "title": "Compare only against retained boxes",
+      "body": "A discarded box must not suppress another candidate later."
+    }
+  ],
+  "explanation": [
+    "Greedy NMS is order-dependent: a high-confidence box is retained first and can suppress lower-ranked alternatives. The algorithm does not optimize a global set objective.",
+    "Only overlaps strictly above the threshold are suppressed. That boundary and the tie policy make deterministic evaluation possible across implementations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

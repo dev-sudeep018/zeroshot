@@ -1,0 +1,45 @@
+{
+  "intro": "Compact groups are useful only when they are also separated from alternatives. Silhouette scores compare within-cluster distance with the nearest other group.",
+  "task": "Compute per-observation Euclidean silhouette scores and their mean for a supplied clustering.",
+  "signature": "silhouette_scores(points, labels)",
+  "requirements": [
+    "points has shape (n,d), n>=3. labels contains n integer-valued IDs in [0,n-1] and must represent between two and n-1 distinct clusters.",
+    "For a nonsingleton observation, a is mean distance to other members of its cluster and b is the smallest mean distance to any other cluster. Score=(b-a)/max(a,b).",
+    "A singleton gets zero. If a=b=0, also use zero. Return {\"scores\": vector, \"mean\": scalar}; exclude the observation itself only from its own-cluster mean.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Separated pairs",
+      "input": "silhouette_scores([[0],[1],[4],[5]],[0,0,1,1])",
+      "output": "{\n  \"scores\": [\n    0.77777778,\n    0.71428571,\n    0.71428571,\n    0.77777778\n  ],\n  \"mean\": 0.74603175\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Singleton convention",
+      "input": "silhouette_scores([[0],[2],[5]],[0,0,1])",
+      "output": "{\n  \"scores\": [\n    0.6,\n    0.33333333,\n    0.0\n  ],\n  \"mean\": 0.31111111\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Coincident points",
+      "input": "silhouette_scores([[0],[0],[0]],[0,0,1])",
+      "output": "{\n  \"scores\": [\n    0.0,\n    0.0,\n    0.0\n  ],\n  \"mean\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Compute within-group and competing-group averages separately; the nearest individual point does not define b."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Exclude self-distance from a, and handle a singleton before attempting to average an empty group."
+    }
+  ],
+  "explanation": [
+    "A silhouette compares the average distance within the assigned group with the best competing group. Values near one indicate favorable separation; negative values indicate a closer alternative.",
+    "A singleton lacks a within-group comparison, so this exercise assigns it zero. Including self-distance in a larger group would artificially reduce a and inflate the score."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

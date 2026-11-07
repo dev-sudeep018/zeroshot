@@ -1,0 +1,45 @@
+{
+  "intro": "A definite integral records signed accumulation, so reversing its limits changes its sign. Building an antiderivative separates the symbolic coefficient transformation from evaluating many intervals.",
+  "task": "Build antiderivative coefficients and evaluate signed definite integrals for paired bounds.",
+  "signature": "polynomial_integrals(coefficients, lower, upper)",
+  "requirements": [
+    "coefficients is a length 1..10 vector in descending powers. lower and upper are matching vectors with absolute values <=10.",
+    "Return {\"antiderivative\": descending coefficients with integration constant zero, \"areas\": signed definite integrals from each lower to its upper}.",
+    "Reversed bounds negate the integral; equal bounds give zero. Divide each coefficient by its new exponent.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Integrate quadratic",
+      "input": "polynomial_integrals([3,2,1],[0,1],[1,2])",
+      "output": "{'antiderivative': [1.0, 1.0, 1.0, 0.0], 'areas': [3.0, 11.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Reversed bounds",
+      "input": "polynomial_integrals([2],[3],[1])",
+      "output": "{'antiderivative': [2.0, 0.0], 'areas': [-4.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equal bounds",
+      "input": "polynomial_integrals([1,-2],[2],[2])",
+      "output": "{'antiderivative': [0.5, -2.0, 0.0], 'areas': [0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "An exponent k becomes k+1 in the antiderivative, so divide its coefficient by k+1."
+    },
+    {
+      "title": "Build the result",
+      "body": "Evaluate the same antiderivative at upper and lower bounds, then subtract in that order."
+    }
+  ],
+  "explanation": [
+    "A definite integral records signed accumulation, so reversing its limits changes its sign. Building an antiderivative separates the symbolic coefficient transformation from evaluating many intervals.",
+    "The constant of integration cancels in every difference and can be set to zero. Adjacent interval integrals must add to the integral over their union."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

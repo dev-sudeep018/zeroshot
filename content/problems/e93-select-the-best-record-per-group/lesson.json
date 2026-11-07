@@ -1,0 +1,44 @@
+{
+  "intro": "Grouped selection preserves the best full record instead of merely computing a maximum number. This retains metadata needed to explain or act on the selected result.",
+  "task": "Pick the highest-score record per group with first-occurrence tie handling.",
+  "signature": "best_per_group(records)",
+  "requirements": [
+    "Records require group (nonempty string) and score (finite number). Return a dictionary group -> copied record with maximum score; first occurrence wins exact score ties.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Higher score wins",
+      "input": "best_per_group([dict(group='a',score=1),dict(group='a',score=3)])",
+      "output": "{'a': {'group': 'a', 'score': 3}}"
+    },
+    {
+      "name": "First tie retained",
+      "input": "best_per_group([dict(group='a',score=2,id='x'),dict(group='a',score=2,id='y')])",
+      "output": "{'a': {'group': 'a', 'score': 2, 'id': 'x'}}"
+    },
+    {
+      "name": "Negative scores",
+      "input": "best_per_group([dict(group='a',score=-3),dict(group='a',score=-1)])",
+      "output": "{'a': {'group': 'a', 'score': -1}}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Keep a separate current winner for each group."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Replace a winner only on strictly greater score, not on equality."
+    }
+  ],
+  "explanation": [
+    "Grouped selection preserves the best full record instead of merely computing a maximum number. This retains metadata needed to explain or act on the selected result.",
+    "Initializing from the first group member handles negative scores correctly. A default score of zero would mistakenly reject every negative candidate."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

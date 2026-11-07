@@ -1,0 +1,44 @@
+{
+  "intro": "The third standardized moment is sensitive to the direction of asymmetry because cubing preserves signs. The fourth moment emphasizes large distances on both sides and is often expressed relative to the normal-distribution value of three.",
+  "task": "Compute standardized third and fourth central moments with a defined constant-sample convention.",
+  "signature": "shape_moments(values)",
+  "requirements": [
+    "Return {\"skewness\": mean(z**3), \"excess_kurtosis\": mean(z**4)-3}, where z uses the sample population mean and population standard deviation.",
+    "No finite-sample bias correction is applied. If every observation is equal, return both values as zero.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Symmetric sample",
+      "input": "shape_moments([-2,-1,0,1,2])",
+      "output": "{'skewness': 0.0, 'excess_kurtosis': -1.3}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Right tail",
+      "input": "shape_moments([0,0,0,4])",
+      "output": "{'skewness': 1.154700538, 'excess_kurtosis': -0.6666666667}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant sample",
+      "input": "shape_moments([3,3])",
+      "output": "{'skewness': 0.0, 'excess_kurtosis': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Standardize centered observations using population standard deviation."
+    },
+    {
+      "title": "Build the result",
+      "body": "Average the third and fourth powers of standardized values, then subtract three only from the fourth moment."
+    }
+  ],
+  "explanation": [
+    "The third standardized moment is sensitive to the direction of asymmetry because cubing preserves signs. The fourth moment emphasizes large distances on both sides and is often expressed relative to the normal-distribution value of three.",
+    "These are descriptive sample moments, not bias-corrected estimators. The explicit constant-sample convention avoids dividing by zero when there is no observed spread."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

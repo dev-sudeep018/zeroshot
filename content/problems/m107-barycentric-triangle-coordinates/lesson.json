@@ -1,0 +1,45 @@
+{
+  "intro": "Barycentric coordinates describe a point as an affine combination of a triangle vertices. They are useful for interpolating values attached to vertices because the same coefficients apply to those values.",
+  "task": "Solve barycentric weights and test inclusive membership for a nondegenerate 2D triangle.",
+  "signature": "barycentric_location(point, vertices)",
+  "requirements": [
+    "point is a length-two vector; vertices has shape (3,2). Require absolute cross product of the two edges from vertex zero to be at least 1e-8.",
+    "Return {\"weights\": three barycentric coefficients in vertex order, \"inside\": bool}. inside is true when every weight is at least -1e-10, allowing a small rounding tolerance on the boundary.",
+    "Weights sum to one and reconstruct the point; outside points are valid and can have negative weights.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Interior point",
+      "input": "barycentric_location([1,1],[[0,0],[4,0],[0,4]])",
+      "output": "{'weights': [0.5, 0.25, 0.25], 'inside': True}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Vertex boundary",
+      "input": "barycentric_location([4,0],[[0,0],[4,0],[0,4]])",
+      "output": "{'weights': [0.0, 1.0, 0.0], 'inside': True}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Outside point",
+      "input": "barycentric_location([5,2],[[0,0],[4,0],[0,4]])",
+      "output": "{'weights': [-0.75, 1.25, 0.5], 'inside': False}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use vertex zero as the origin and solve for coefficients of its two edge vectors."
+    },
+    {
+      "title": "Build the result",
+      "body": "The remaining coefficient is one minus the two solved coefficients; all three determine membership."
+    }
+  ],
+  "explanation": [
+    "Barycentric coordinates describe a point as an affine combination of a triangle vertices. They are useful for interpolating values attached to vertices because the same coefficients apply to those values.",
+    "A point inside or on the triangle is a convex combination, so its coefficients are nonnegative. Outside points require at least one negative coefficient, while a degenerate triangle cannot supply a unique coordinate system."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

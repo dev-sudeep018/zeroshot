@@ -1,0 +1,44 @@
+{
+  "intro": "Max pooling discards positions unless the winning locations are saved. Use those switches to place the retained values back into a larger map.",
+  "task": "Scatter pooled values to distinct flattened output indices and fill all other positions with zero.",
+  "signature": "max_unpool(values, switches, output_size)",
+  "requirements": [
+    "values and switches are matching matrices. output_size is two integer dimensions in 1..64. Each switch is a unique integer index in 0..output_height*output_width-1, using row-major flattening.",
+    "Return the output matrix. Reject duplicate switches rather than choosing an overwrite or addition rule. This reconstructs retained maxima only, not the original non-maximum pixels.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two winning locations",
+      "input": "max_unpool([[3,5]],[[1,6]],[2,4])",
+      "output": "[[0.0, 3.0, 0.0, 0.0], [0.0, 0.0, 5.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "First and last positions",
+      "input": "max_unpool([[2,4]],[[0,3]],[2,2])",
+      "output": "[[2.0, 0.0], [0.0, 4.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Single maximum",
+      "input": "max_unpool([[7]],[[4]],[3,3])",
+      "output": "[[0.0, 0.0, 0.0], [0.0, 7.0, 0.0], [0.0, 0.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Create a zero vector of the total output size, then scatter and reshape."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Checking uniqueness makes the result independent of traversal order."
+    }
+  ],
+  "explanation": [
+    "Saved pooling switches preserve where the selected maxima came from. Unpooling can therefore produce a sparse spatial representation aligned with the earlier feature map.",
+    "Most source values were discarded during pooling and cannot be recovered. Zero-filled positions explicitly represent that missing information rather than an inverse of the entire pooling operation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

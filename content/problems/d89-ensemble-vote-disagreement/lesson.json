@@ -1,0 +1,44 @@
+{
+  "intro": "Models can share a winning label while assigning different probabilities. Compare the averaged distribution with model-vote disagreement.",
+  "task": "Average model probabilities and measure the fraction of votes outside the majority class.",
+  "signature": "ensemble_audit(probabilities)",
+  "requirements": [
+    "probabilities has shape models-by-batch-by-classes. Final-axis rows are nonnegative and sum to one within 1e-8 absolute tolerance; normalize rows after validation.",
+    "Return {\"mean_probability\": batch-by-class matrix, \"prediction\": argmax-of-mean integer vector, \"vote_disagreement\": vector}. Model votes use argmax with smaller-index ties; disagreement=1-largest vote count/models.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Split votes",
+      "input": "ensemble_audit([[[0.9,0.1]],[[0.2,0.8]]])",
+      "output": "{'mean_probability': [[0.55, 0.45]],\n 'prediction': [0],\n 'vote_disagreement': [0.5]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Unanimous models",
+      "input": "ensemble_audit([[[0.8,0.2]],[[0.6,0.4]]])",
+      "output": "{'mean_probability': [[0.7, 0.3]],\n 'prediction': [0],\n 'vote_disagreement': [0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Single model",
+      "input": "ensemble_audit([[[0.1,0.9]]])",
+      "output": "{'mean_probability': [[0.1, 0.9]],\n 'prediction': [1],\n 'vote_disagreement': [0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Average the model axis while retaining batch and class axes."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Averaged probabilities and majority votes can favor different classes."
+    }
+  ],
+  "explanation": [
+    "Probability averaging retains more information than votes, which discard every score except the strongest class. An individually confident minority can influence the averaged prediction.",
+    "Vote disagreement measures diversity among these models. A unanimous ensemble can still be wrong, so zero disagreement is not a correctness guarantee."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

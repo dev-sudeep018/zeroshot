@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m67",
+  "kind": "lesson",
+  "slug": "rectangle-sum-queries",
+  "version": 1,
+  "title": "Answer Rectangular Sum Queries",
+  "summary": "Use a summed-area table to answer half-open rectangular grid queries, including empty rectangles.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Answer Rectangular Sum Queries"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "rectangle_sums",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html",
+    ],
+}

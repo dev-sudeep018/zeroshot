@@ -1,0 +1,45 @@
+{
+  "intro": "A threshold must move an entire tied-score group at once. Build operating points from unique scores so the reported precision and recall correspond to actual decisions.",
+  "task": "Build achievable precision-recall operating points, moving every tied-score group together as the threshold changes.",
+  "signature": "precision_recall_points(labels, scores)",
+  "requirements": [
+    "labels is a nonempty binary integer-valued vector and scores is a same-length finite real vector. At least one label must be positive.",
+    "At each unique score in descending order, predict positive for scores >= threshold. Return arrays thresholds, precision, and recall at those points.",
+    "Do not add artificial endpoints or interpolate. Scores are ranking values, not necessarily probabilities, and ties must enter together.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Tied scores enter together",
+      "input": "precision_recall_points([1,0,1], [.9,.9,.2])",
+      "output": "{'thresholds': [0.9, 0.2],\n 'precision': [0.5, 0.666666666667],\n 'recall': [0.5, 1.0]}"
+    },
+    {
+      "name": "Perfect ordering",
+      "input": "precision_recall_points([1,0], [2,1])",
+      "output": "{'thresholds': [2.0, 1.0],\n 'precision': [1.0, 0.5],\n 'recall': [1.0, 1.0]}"
+    },
+    {
+      "name": "Worst ordering",
+      "input": "precision_recall_points([0,1], [2,1])",
+      "output": "{'thresholds': [2.0, 1.0],\n 'precision': [0.0, 0.5],\n 'recall': [0.0, 1.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Group by distinct score",
+      "body": "A deployment threshold cannot split observations with identical scores."
+    },
+    {
+      "title": "Recall has a fixed denominator",
+      "body": "Divide every true-positive count by the total number of positive labels."
+    }
+  ],
+  "explanation": [
+    "The curve is a sequence of achievable decision rules. Moving tied observations one at a time would invent operating points that no threshold can reproduce.",
+    "This lesson reports observed points without integrating an area. Average precision and trapezoidal PR area make different aggregation choices and should not be silently substituted."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

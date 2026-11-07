@@ -43,12 +43,19 @@ content schemas and prerequisite checks remain authoritative.
    operations. Existing aliases, fork duplicates and number swaps do not count.
 2. Write one JSON batch using the example format. Include the finite-value bounds
    used by the shared helpers in each lesson’s requirements.
-3. Generate into a new review directory. Review the output, move new packages
-   into `content/problems`, and record the manifest under `content/` with final
-   notice paths and inspection date. Keep drafts unpublished during development.
-4. Run `pnpm content:check` with the batch IDs. Add independent property or oracle
-   checks for the new concepts. Revise the batch data or generated files as needed;
-   the packager deliberately does not overwrite edited packages.
+3. Generate into a new review directory. Run `pnpm content:stage <directory> <expected-count>`
+   before moving anything into the catalog. This checks the exact batch size,
+   schemas, IDs, slugs and prerequisites against existing content, then executes
+   the drafts in native and WebAssembly Python. It verifies public cases, sample
+   names, displayed outputs, starter rejection and canned-answer rejection.
+   Drafts remain outside the generated app and the published lesson count.
+4. Add independent property or oracle checks for the new concepts and review
+   semantic overlap with the existing curriculum. The stage gate flags identical
+   task wording but cannot judge whether two differently worded tasks teach the
+   same objective. After review, move accepted packages into `content/problems`
+   and record provenance under `content/` with final notice paths and inspection
+   date. Run `pnpm content:check` with the batch IDs. The packager deliberately
+   does not overwrite edited packages.
 5. After editorial and mathematical review, mark accepted packages validated,
    connect them to paths, format changed files and run `pnpm check` once.
 6. Execute the new references in the browser and submit one batch PR. GitHub runs

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d50",
+  "kind": "lesson",
+  "slug": "gru-reset-and-update",
+  "version": 1,
+  "title": "Distinguish GRU Reset from Update Gates",
+  "summary": "A GRU combines a reset-controlled candidate with an update-controlled old state. Moving the reset gate outside the candidate nonlinearity changes the recurrence.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["GRU", "Gating"],
+  "prerequisites": ["d08", "d48"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gru_step",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

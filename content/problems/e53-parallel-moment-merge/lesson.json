@@ -1,0 +1,45 @@
+{
+  "intro": "Distributed workers can summarize partitions without sharing raw records. Merging their centered moments must account for the distance between partition means.",
+  "task": "Merge worker moment summaries and retain the between-partition contribution that a simple sum of local variances misses.",
+  "signature": "merge_moments(counts, means, m2s)",
+  "requirements": [
+    "counts, means, and m2s are equal-length vectors. Counts are integer-valued in [0,1000000]; m2s are nonnegative sums of centered squared deviations.",
+    "Zero-count partitions must have mean=0 and m2=0. Merge all partitions and return dict count, mean, m2; return all zeros when every partition is empty.",
+    "When combining states A and B, add m2_A+m2_B+delta^2*n_A*n_B/(n_A+n_B), where delta=mean_B-mean_A. Weight the merged mean by partition counts.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Between-partition variation matters",
+      "input": "merge_moments([2,2], [1.5,3.5], [.5,.5])",
+      "output": "{'count': 4, 'mean': 2.5, 'm2': 5.0}"
+    },
+    {
+      "name": "Unequal partition sizes",
+      "input": "merge_moments([1,3], [0,4], [0,2])",
+      "output": "{'count': 4, 'mean': 3.0, 'm2': 14.0}"
+    },
+    {
+      "name": "Ignore empty partitions",
+      "input": "merge_moments([0,2], [0,3], [0,2])",
+      "output": "{'count': 2, 'mean': 3.0, 'm2': 2.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Within-partition variance is insufficient",
+      "body": "Different partition means contribute additional squared deviations after merging."
+    },
+    {
+      "title": "Treat empty states as identities",
+      "body": "Skip an empty partition before dividing by the combined count."
+    }
+  ],
+  "explanation": [
+    "Centered sums are measured around local means. A merged mean moves those centers, producing the between-partition correction in addition to the within-partition m2 totals.",
+    "The same sufficient statistics support streaming and distributed aggregation. In exact arithmetic merging is associative; floating-point order can cause small numerical differences."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

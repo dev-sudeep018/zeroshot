@@ -1,0 +1,45 @@
+{
+  "intro": "Boolean retrieval answers an exact membership question. Required terms narrow the candidate set, and excluded terms remove documents even when other terms match.",
+  "task": "Resolve required and excluded query terms against posting lists, including unknown terms and repeated document IDs.",
+  "signature": "boolean_query(postings, required, excluded)",
+  "requirements": [
+    "postings is a dictionary from nonempty strings to lists or tuples of integer-valued document IDs in [0,1000000]; duplicates and unsorted lists are allowed.",
+    "required and excluded are token lists or tuples of at most 10000 nonempty strings. required must be nonempty. Return a sorted Python list of IDs present for every required term and for no excluded term.",
+    "An unknown required term makes the result empty. Unknown excluded terms have no effect. Repeated query terms do not duplicate results.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Intersection then exclusion",
+      "input": "boolean_query({'a':[0,1,2],'b':[1,2],'x':[2]}, ['a','b'], ['x'])",
+      "output": "[1]"
+    },
+    {
+      "name": "Unknown required term",
+      "input": "boolean_query({'a':[1]}, ['a','missing'], [])",
+      "output": "[]"
+    },
+    {
+      "name": "Unsorted repeated postings",
+      "input": "boolean_query({'a':[3,1,3]}, ['a'], [])",
+      "output": "[1, 3]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use set operations",
+      "body": "Intersect required-term document sets, then subtract excluded-term sets."
+    },
+    {
+      "title": "Sort once at the boundary",
+      "body": "Return stable ascending IDs after all membership operations are complete."
+    }
+  ],
+  "explanation": [
+    "Boolean retrieval is independent of ranking: a document either satisfies every condition or it does not. Set intersection expresses all required terms, while set difference handles exclusions.",
+    "Missing required terms must produce no results. Treating them as absent query constraints would silently broaden the query and return incorrect documents."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

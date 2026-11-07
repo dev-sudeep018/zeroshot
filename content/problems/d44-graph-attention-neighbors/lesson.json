@@ -1,0 +1,45 @@
+{
+  "intro": "A graph attention layer learns how strongly each neighbor contributes. Absent edges must receive no weight, while an isolated node needs an explicit output policy.",
+  "task": "Implement graph_attention(features, adjacency, weights, attention, negative_slope=0.2). Adjacency specifies presence, not attention magnitude. A self-edge participates only when explicitly supplied.",
+  "signature": "graph_attention(features, adjacency, weights, attention, negative_slope=0.2)",
+  "requirements": [
+    "features is (N,F), weights is (F,O), adjacency is a numeric binary (N,N) matrix, and attention is a vector of length 2*O. Dimensions are positive; negative_slope is in [0,1].",
+    "Set H=features@weights. Edge i,j means j sends to i. Score LeakyReLU(dot(H[i],attention[:O])+dot(H[j],attention[O:])); softmax only over adjacency[i,j]=1.",
+    "Return the weighted neighbor sum (N,O). Isolated rows return zero. Do not add self-edges implicitly or apply a final activation.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Swap two nodes",
+      "input": "graph_attention([[2],[8]],[[0,1],[1,0]],[[1]],[0,0])",
+      "output": "[[8.0], [2.0]]"
+    },
+    {
+      "name": "Isolated node is zero",
+      "input": "graph_attention([[4]],[[0]],[[2]],[1,1])",
+      "output": "[[0.0]]"
+    },
+    {
+      "name": "Uniform neighborhood",
+      "input": "graph_attention([[2],[8]],[[1,1],[1,1]],[[1]],[0,0])",
+      "output": "[[5.0], [5.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Keep recipient and sender coefficients in the documented order."
+    },
+    {
+      "title": "Step 2",
+      "body": "Handle an empty neighborhood before taking a maximum or softmax."
+    }
+  ],
+  "explanation": [
+    "Adjacency specifies presence, not attention magnitude. A self-edge participates only when explicitly supplied.",
+    "The port retains the upstream additive scoring equation and changes isolated-node handling from an all-masked softmax to an explicit zero output."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

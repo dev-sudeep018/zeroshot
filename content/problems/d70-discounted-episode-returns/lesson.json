@@ -1,0 +1,45 @@
+{
+  "intro": "A rollout can contain several episodes or stop before an episode ends. Follow how future rewards contribute, and where a terminal transition must cut that contribution.",
+  "task": "Compute reward-to-go at every transition. Change one terminal flag and predict which earlier returns change before running the examples.",
+  "signature": "episode_returns(rewards, terminated, discount, bootstrap=0.0)",
+  "requirements": [
+    "rewards and terminated are equal-length vectors. terminated contains numeric 0 or 1; 1 marks a true terminal transition. discount is a scalar in [0,1], and bootstrap is the value after the final transition.",
+    "Starting with running=bootstrap, visit t from last to first and set running=rewards[t]+discount*(1-terminated[t])*running. Return all running values as a NumPy vector in original time order.",
+    "A true terminal transition removes its bootstrap and every later reward. A nonterminal rollout cutoff retains bootstrap. Time-limit truncation should be supplied as 0 when it should bootstrap.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Three-step return",
+      "input": "episode_returns([1,2,3],[0,0,1],0.5)",
+      "output": "array([2.75, 3.5 , 3.  ])"
+    },
+    {
+      "name": "Terminal boundary",
+      "input": "episode_returns([1,2,100],[0,1,1],1)",
+      "output": "array([  3.,   2., 100.])"
+    },
+    {
+      "name": "Rollout cutoff",
+      "input": "episode_returns([1,2],[0,0],0.5,8)",
+      "output": "array([4., 6.])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Walk backward",
+      "body": "At time t the accumulated suffix already represents the return beginning at t+1."
+    },
+    {
+      "title": "Separate terminal from cutoff",
+      "body": "The terminal flag belongs to the transition producing rewards[t], so apply it to the future term only."
+    }
+  ],
+  "explanation": [
+    "The backward recurrence is equivalent to a discounted sum of future rewards up to a terminal boundary, plus a discounted bootstrap if the rollout ends first.",
+    "Rewards from a later episode cannot cross a terminal transition. A collected rollout ending is not itself proof that the environment terminated."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d53",
+  "kind": "lesson",
+  "slug": "convolution-backward",
+  "version": 1,
+  "title": "Differentiate a Spatial Cross-Correlation",
+  "summary": "A spatial filter reuses each weight across positions. Its backward pass accumulates gradients for both overlapping image patches and shared weights.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Backpropagation", "Convolution"],
+  "prerequisites": ["d09", "d02"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "convolution_backward",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

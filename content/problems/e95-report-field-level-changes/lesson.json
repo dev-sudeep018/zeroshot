@@ -1,0 +1,44 @@
+{
+  "intro": "A field-level diff reports enough information to inspect both additions and deletions. It preserves removed values rather than only listing names, which helps explain a change.",
+  "task": "Return added, removed, and changed fields between two shallow records.",
+  "signature": "record_diff(before, after)",
+  "requirements": [
+    "Return added as new-key values, removed as old-key values, and changed as shared-key [old,new] values where Python equality differs. Compare top-level fields only; copy nested payloads.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Field changes",
+      "input": "record_diff({'a':1,'b':2}, {'b':3,'c':4})",
+      "output": "{'added': {'c': 4}, 'removed': {'a': 1}, 'changed': {'b': [2, 3]}}"
+    },
+    {
+      "name": "None added",
+      "input": "record_diff({}, {'a':None})",
+      "output": "{'added': {'a': None}, 'removed': {}, 'changed': {}}"
+    },
+    {
+      "name": "Nested value changed",
+      "input": "record_diff({'x':{'a':1}}, {'x':{'a':2}})",
+      "output": "{'added': {}, 'removed': {}, 'changed': {'x': [{'a': 1}, {'a': 2}]}}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Classify keys by presence before comparing shared values."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A nested object is one top-level value; return the whole old/new pair."
+    }
+  ],
+  "explanation": [
+    "A field-level diff reports enough information to inspect both additions and deletions. It preserves removed values rather than only listing names, which helps explain a change.",
+    "The comparison is shallow by field boundary but uses Python value equality for each field. It is an audit format, not a recursive patch language."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

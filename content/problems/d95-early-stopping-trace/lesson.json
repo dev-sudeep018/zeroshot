@@ -1,0 +1,45 @@
+{
+  "intro": "Validation loss often fluctuates. Track meaningful improvements and stop only after a stated number of consecutive stalls.",
+  "task": "Replay early stopping and return the best epoch, stopping epoch, and observed stall counts.",
+  "signature": "early_stopping(losses, patience, min_delta)",
+  "requirements": [
+    "losses is a nonnegative vector in chronological order; patience is an integer 1..64; min_delta is nonnegative. Epoch indices start at zero.",
+    "Epoch zero initializes the best loss. Later improvement requires loss < best_loss - min_delta, strictly. An improvement resets the stall count; otherwise increment it. Stop at stall==patience and ignore subsequent losses.",
+    "Return {\"best_epoch\": integer, \"stop_epoch\": integer or -1 if no stop, \"stall_counts\": integer vector for processed epochs only}. The best epoch is the last meaningful improvement, not necessarily the smallest observed loss.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Stop after two stalls",
+      "input": "early_stopping([5,4,4,4,1],2,0)",
+      "output": "{'best_epoch': 1, 'stop_epoch': 3, 'stall_counts': [0, 0, 1, 2]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Improvement resets patience",
+      "input": "early_stopping([5,5,4,4,3],2,0)",
+      "output": "{'best_epoch': 4, 'stop_epoch': -1, 'stall_counts': [0, 1, 0, 1, 0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Minimum change boundary",
+      "input": "early_stopping([5,4.5,4,4],2,0.5)",
+      "output": "{'best_epoch': 2, 'stop_epoch': -1, 'stall_counts': [0, 1, 0, 1]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Keep separate state for the remembered best loss and the consecutive stall count."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Equality at the min_delta boundary is a stall under this contract."
+    }
+  ],
+  "explanation": [
+    "Patience tolerates isolated non-improving epochs while limiting repeated wasted evaluation. Remembering a meaningful best value lets several small improvements eventually exceed min_delta.",
+    "Stopping logic is a policy, so boundary conventions must be explicit. It uses validation observations and does not restore model parameters; the returned best epoch identifies which checkpoint a training loop should restore."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

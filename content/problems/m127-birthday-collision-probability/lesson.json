@@ -1,0 +1,45 @@
+{
+  "intro": "Collision probability can become substantial long before every category is occupied. The no-collision product is easier to calculate because each next distinct draw has a clear conditional probability.",
+  "task": "Compute collision probability for uniform independent labels using the no-collision product.",
+  "signature": "collision_probability(categories, draws)",
+  "requirements": [
+    "categories is an integer in 1..10000 and draws is an integer in 0..10000. Every draw independently chooses a uniform category.",
+    "Return the probability that at least two draws share a category.",
+    "Zero or one draw has probability zero. More draws than categories has probability one; otherwise use one minus the no-collision product.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Three draws four labels",
+      "input": "collision_probability(4,3)",
+      "output": "0.625\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Birthday-sized example",
+      "input": "collision_probability(365,23)",
+      "output": "0.5072972343\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No draws",
+      "input": "collision_probability(5,0)",
+      "output": "-0.0\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Condition on each earlier draw having used a different label."
+    },
+    {
+      "title": "Build the result",
+      "body": "The next draw avoids all k occupied labels with probability 1-k/categories."
+    }
+  ],
+  "explanation": [
+    "Collision probability can become substantial long before every category is occupied. The no-collision product is easier to calculate because each next distinct draw has a clear conditional probability.",
+    "The pigeonhole case must be handled before taking logarithms. The remaining log-product formulation avoids cancellation when collision probability is small."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

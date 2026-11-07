@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e153",
+  "kind": "lesson",
+  "slug": "find-transitive-dependency-impact",
+  "version": 1,
+  "title": "Find Transitive Dependency Impact",
+  "summary": "Return all downstream components affected by changed IDs, excluding seeds from results.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "downstream_impact",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

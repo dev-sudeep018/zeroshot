@@ -1,0 +1,45 @@
+{
+  "intro": "A fixed probability threshold can be inappropriate when error costs differ. Compare the expected loss of each action and make the tie policy explicit.",
+  "task": "Choose actions by expected error cost and investigate how asymmetric costs move the probability decision boundary.",
+  "signature": "cost_sensitive_predict(probabilities, false_positive_cost, false_negative_cost)",
+  "requirements": [
+    "probabilities is a finite vector in [0,1], possibly empty. Both error costs are nonnegative real scalars and their sum must be positive.",
+    "Predict one when false_positive_cost*(1-p) <= false_negative_cost*p, including ties. Return dict predictions as integer vector and expected_cost as minimum per-row cost.",
+    "Correct decisions have zero cost. Costs are supplied deployment assumptions, and probabilities are assumed to be meaningful conditional estimates.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Asymmetric errors change threshold",
+      "input": "cost_sensitive_predict([.1,.3,.9], 1, 3)",
+      "output": "{'predictions': [0, 1, 1], 'expected_cost': [0.3, 0.7, 0.1]}"
+    },
+    {
+      "name": "Tie chooses positive",
+      "input": "cost_sensitive_predict([.5], 1, 1)",
+      "output": "{'predictions': [1], 'expected_cost': [0.5]}"
+    },
+    {
+      "name": "False positives are free",
+      "input": "cost_sensitive_predict([0,.5,1], 0, 1)",
+      "output": "{'predictions': [1, 1, 1], 'expected_cost': [0.0, 0.0, 0.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Write both action costs",
+      "body": "Predicting positive risks a false positive; predicting negative risks a false negative."
+    },
+    {
+      "title": "A threshold is derived, not fixed",
+      "body": "For positive total cost the boundary is fp_cost/(fp_cost+fn_cost)."
+    }
+  ],
+  "explanation": [
+    "Expected loss turns a probability estimate into a decision using an explicit utility model. Unequal error costs shift the decision boundary away from one half.",
+    "A cost-optimal rule can still perform badly when probabilities are miscalibrated or costs are wrong. Keeping the per-row expected costs visible helps audit those assumptions."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

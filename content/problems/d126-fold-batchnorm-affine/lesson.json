@@ -1,0 +1,44 @@
+{
+  "intro": "At inference, batch normalization uses fixed running statistics. Combine it with a preceding affine layer to produce exactly the same outputs with one affine operation.",
+  "task": "Return folded weights and bias for batch normalization applied to x@weights+bias.",
+  "signature": "fold_batchnorm(weights, bias, mean, variance, gamma, beta, epsilon)",
+  "requirements": [
+    "weights has shape input-by-output. All five vectors bias, mean, variance, gamma, beta have output width. variance is nonnegative and epsilon is in [1e-8,1].",
+    "Let scale=gamma/sqrt(variance+epsilon). Return {\"weights\": weights*scale across columns, \"bias\": (bias-mean)*scale+beta}. Use fixed evaluation statistics, not current batch statistics.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two output scales",
+      "input": "fold_batchnorm([[1,2],[3,4]],[1,2],[0,1],[3,8],[2,3],[0,1],1)",
+      "output": "{'weights': [[1.0, 2.0], [3.0, 4.0]], 'bias': [1.0, 2.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Zero gamma",
+      "input": "fold_batchnorm([[2]],[3],[4],[0],[0],[7],0.1)",
+      "output": "{'weights': [[0.0]], 'bias': [7.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Negative gamma",
+      "input": "fold_batchnorm([[1]],[0],[1],[3],[-2],[0],1)",
+      "output": "{'weights': [[-1.0]], 'bias': [1.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Each output column has its own normalization scale."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The original bias participates before subtracting the running mean."
+    }
+  ],
+  "explanation": [
+    "Fixed normalization is an affine transform, so composing it with a linear layer gives another affine transform. Folding avoids a separate normalization operation during evaluation.",
+    "The equivalence depends on fixed statistics. Recomputing mean and variance from each input batch would make the transform input-dependent and would not permit this same fold."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

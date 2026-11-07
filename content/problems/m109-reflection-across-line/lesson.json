@@ -1,0 +1,44 @@
+{
+  "intro": "A reflection keeps the component parallel to the mirror line and reverses the perpendicular component. The midpoint of an original point and its reflection lies on the mirror.",
+  "task": "Use signed line offsets to reflect a batch of 2D points across a nonzero-normal line.",
+  "signature": "reflect_points(points, normal, offset)",
+  "requirements": [
+    "points has shape (n,2). The reflecting line is normal dot x + offset = 0; normal has length two and norm at least 1e-6.",
+    "Return points reflected across that line. Subtract twice each signed line offset times normal / squared norm.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Reflect across x axis",
+      "input": "reflect_points([[1,2],[-3,-4]],[0,1],0)",
+      "output": "[[1.0, -2.0], [-3.0, 4.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Reflect across shifted line",
+      "input": "reflect_points([[0,0],[3,1]],[1,0],-1)",
+      "output": "[[2.0, 0.0], [-1.0, 1.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Diagonal mirror",
+      "input": "reflect_points([[2,0],[1,3]],[1,-1],0)",
+      "output": "[[0.0, 2.0], [3.0, 1.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Calculate the offset of each point from the line equation."
+    },
+    {
+      "title": "Build the result",
+      "body": "A reflection travels twice the displacement needed to reach the perpendicular foot."
+    }
+  ],
+  "explanation": [
+    "A reflection keeps the component parallel to the mirror line and reverses the perpendicular component. The midpoint of an original point and its reflection lies on the mirror.",
+    "Applying the same reflection twice recovers the original positions. Unlike a rotation, a reflection reverses orientation while preserving distances."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A checkpoint records a contiguous prefix of completed work. Concurrent workers may finish later items while an earlier item is still missing.",
+  "task": "Advance a contiguous completed offset only across gap-free acknowledged sequence IDs.",
+  "signature": "advance_checkpoint(committed, acknowledged)",
+  "requirements": [
+    "committed is the largest contiguous processed sequence ID, an integer from -1 to 1000000000. acknowledged contains integer IDs from 0 to 1000000000, with duplicates allowed. Advance committed while each next ID is present. Return committed and sorted unique pending IDs greater than the new committed; ignore acknowledgments at or below the initial committed.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Stop at first gap",
+      "input": "advance_checkpoint(2,[3,5,6])",
+      "output": "{'committed': 3, 'pending': [5, 6]}"
+    },
+    {
+      "name": "Close earlier gap",
+      "input": "advance_checkpoint(2,[6,5,3,4])",
+      "output": "{'committed': 6, 'pending': []}"
+    },
+    {
+      "name": "Start before zero",
+      "input": "advance_checkpoint(-1,[0,1,3])",
+      "output": "{'committed': 1, 'pending': [3]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Membership in a set handles duplicate and out-of-order acknowledgments."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Never jump directly to the largest acknowledged ID; gaps must remain uncommitted."
+    }
+  ],
+  "explanation": [
+    "A checkpoint records a contiguous prefix of completed work. Concurrent workers may finish later items while an earlier item is still missing.",
+    "Keeping later acknowledgments pending allows the frontier to advance once the gap closes. Ignoring old acknowledgments makes replayed completion events harmless."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

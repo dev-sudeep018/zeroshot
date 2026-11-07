@@ -1,0 +1,45 @@
+{
+  "intro": "Online learning changes the model after each example, so later predictions depend on earlier mistakes. Trace one ordered perceptron pass.",
+  "task": "Process examples in their given order and update the model whenever its signed margin is zero or negative.",
+  "signature": "perceptron_pass(features, labels, weights, bias, rate=1.0)",
+  "requirements": [
+    "features is (n,d), labels is (n,) containing -1 or +1, weights is (d,), and bias is a scalar. rate is a scalar in (0,1e6].",
+    "For each row, if label*(weights@row+bias)<=0, set weights+=rate*label*row and bias+=rate*label, then increment the update count.",
+    "Return {\"weights\": final_weights, \"bias\": final_bias, \"updates\": count}. Use the updated model for the next row; do not batch the updates.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Zero margin updates",
+      "input": "perceptron_pass([[2]],[1],[0],0)",
+      "output": "{\n  \"weights\": [\n    2.0\n  ],\n  \"bias\": 1,\n  \"updates\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Already correct",
+      "input": "perceptron_pass([[2]],[-1],[-1],0)",
+      "output": "{\n  \"weights\": [\n    -1.0\n  ],\n  \"bias\": 0,\n  \"updates\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Sequential updates",
+      "input": "perceptron_pass([[1],[-1]],[1,-1],[0],0)",
+      "output": "{\n  \"weights\": [\n    2.0\n  ],\n  \"bias\": 0,\n  \"updates\": 2\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Use a private copy of the parameters because every example may change the model for the next example."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "A zero signed margin also triggers an update. Count updates when they happen, rather than counting initial mistakes."
+    }
+  ],
+  "explanation": [
+    "A perceptron adjusts its parameters only when the signed margin is nonpositive. The update moves the score in the direction of the correct label for the current feature vector.",
+    "This is one deterministic online pass, not training until convergence. Reordering the data may change the result because every prediction sees the model produced by earlier rows."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

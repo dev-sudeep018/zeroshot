@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m141",
+  "kind": "lesson",
+  "slug": "polynomial-antiderivative-area",
+  "version": 1,
+  "title": "Integrate a Polynomial between Bounds",
+  "summary": "Build antiderivative coefficients and evaluate signed definite integrals for paired bounds.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Integrate a Polynomial between Bounds"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "polynomial_integrals",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

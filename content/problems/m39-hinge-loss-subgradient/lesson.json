@@ -1,0 +1,45 @@
+{
+  "intro": "Correct classification does not necessarily provide a comfortable margin. Hinge loss keeps pushing examples until their signed score reaches one.",
+  "task": "Return mean binary hinge loss and one documented subgradient for a linear score without regularization.",
+  "signature": "hinge_gradient(features, labels, weights, bias)",
+  "requirements": [
+    "features is (n,d), labels is (n,) containing -1 or +1, weights is (d,), and bias is a scalar.",
+    "Use margin=labels*(features@weights+bias), loss=mean(maximum(0,1-margin)), and active examples with margin strictly below one.",
+    "Return {\"loss\": loss, \"weights\": -features.T@(labels*active)/n, \"bias\": -mean(labels*active)}. At margin exactly one, choose zero contribution.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Both inside margin",
+      "input": "hinge_gradient([[1],[-1]],[1,-1],[0],0)",
+      "output": "{\n  \"loss\": 1,\n  \"weights\": [\n    -1.0\n  ],\n  \"bias\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "At the kink",
+      "input": "hinge_gradient([[1]],[1],[1],0)",
+      "output": "{\n  \"loss\": 0,\n  \"weights\": [\n    0.0\n  ],\n  \"bias\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Satisfied margin",
+      "input": "hinge_gradient([[2]],[1],[1],0)",
+      "output": "{\n  \"loss\": 0,\n  \"weights\": [\n    0.0\n  ],\n  \"bias\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Build an active mask from signed margins below one; correct classifications can still belong to that mask."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Average over every observation, including inactive ones, and assign no contribution at the exact kink."
+    }
+  ],
+  "explanation": [
+    "The hinge penalty is linear when the signed score is below one and flat above one. Its active set therefore depends on the margin, not just the predicted class.",
+    "The derivative is not unique exactly at the kink. Choosing zero there gives a deterministic contract; averaging by all observations keeps the loss and gradient scales consistent."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

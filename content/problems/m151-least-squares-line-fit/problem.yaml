@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m151",
+  "kind": "lesson",
+  "slug": "least-squares-line-fit",
+  "version": 1,
+  "title": "Fit a Line and Explain Its Residuals",
+  "summary": "Compute ordinary least-squares slope/intercept and residual sum of squares for paired observations.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Fit a Line and Explain Its Residuals"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "fit_least_squares_line",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

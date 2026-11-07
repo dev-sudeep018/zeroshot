@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m22",
+  "kind": "lesson",
+  "slug": "relative-entropy",
+  "version": 1,
+  "title": "Measure Distribution Mismatch",
+  "summary": "A predictive distribution can assign too little probability to outcomes that matter. Relative entropy measures the expected extra surprise under that mismatch.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Measure Distribution Mismatch"],
+  "prerequisites": ["m21"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "relative_entropy",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

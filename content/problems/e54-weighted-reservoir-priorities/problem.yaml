@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e54",
+  "kind": "lesson",
+  "slug": "weighted-reservoir-priorities",
+  "version": 1,
+  "title": "Select Weighted Samples with Exponential Keys",
+  "summary": "Weighted sampling without replacement can assign each item a random priority. Logarithmic keys avoid raising tiny probabilities to awkward powers.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Sampling"],
+  "prerequisites": ["e51"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "weighted_sample_keys",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Efraimidis, Weighted Random Sampling over Data Streams. https://arxiv.org/abs/1012.0256",
+    ],
+}

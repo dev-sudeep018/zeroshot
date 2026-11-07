@@ -1,0 +1,44 @@
+{
+  "intro": "Dependency ordering turns a graph of prerequisites into an executable task sequence. Shared prerequisites should run once before every dependent task.",
+  "task": "Return a stable topological order or reject cycles and missing dependencies.",
+  "signature": "dependency_order(dependencies)",
+  "requirements": [
+    "dependencies maps nonempty string task IDs to sequences of unique prerequisite IDs, all present as keys. Return a topological order by repeatedly choosing the earliest dictionary key among all currently ready tasks. Reject cycles, self-dependencies, unknown prerequisites, or repeated prerequisites.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Prerequisite before task",
+      "input": "dependency_order({'train':['load'],'load':[]})",
+      "output": "['load', 'train']"
+    },
+    {
+      "name": "Reconsider earliest ready",
+      "input": "dependency_order({'a':['b'],'b':[],'c':[]})",
+      "output": "['b', 'a', 'c']"
+    },
+    {
+      "name": "Diamond graph",
+      "input": "dependency_order({'d':['b','c'],'b':['a'],'c':['a'],'a':[]})",
+      "output": "['a', 'b', 'c', 'd']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "A task is ready only when every prerequisite has already been emitted."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Rescan from the beginning of key order after each selection; newly ready tasks may precede old ready tasks."
+    }
+  ],
+  "explanation": [
+    "Dependency ordering turns a graph of prerequisites into an executable task sequence. Shared prerequisites should run once before every dependent task.",
+    "Stable choice among currently ready tasks makes builds reproducible. A pass with no ready task while work remains reveals a cycle rather than a reason to emit an arbitrary task."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

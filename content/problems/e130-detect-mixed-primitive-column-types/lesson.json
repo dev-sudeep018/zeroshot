@@ -1,0 +1,44 @@
+{
+  "intro": "A column-type audit reveals inconsistent data before model features are constructed. Numeric-looking text and actual numbers are distinct observations until a conversion policy is applied.",
+  "task": "Report which primitive types occur in each named column, separating booleans and numbers.",
+  "signature": "column_type_audit(records, fields)",
+  "requirements": [
+    "fields contains unique nonempty strings. Selected present cells must be None, bool, int, float, or str. Return each field mapped to sorted distinct labels among missing, null, bool, int, float, str. An absent field contributes missing; bool is separate from int.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Separate booleans and numbers",
+      "input": "column_type_audit([{'x':True},{'x':1},{'x':1.0}], ['x'])",
+      "output": "{'x': ['bool', 'float', 'int']}"
+    },
+    {
+      "name": "Missing versus null",
+      "input": "column_type_audit([{}, {'x':None}], ['x'])",
+      "output": "{'x': ['missing', 'null']}"
+    },
+    {
+      "name": "Mixed text and integer",
+      "input": "column_type_audit([{'x':'1'},{'x':1}], ['x'])",
+      "output": "{'x': ['int', 'str']}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use exact type identity because bool is a subclass of int."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Record missing and null separately: absence and an explicit null carry different information."
+    }
+  ],
+  "explanation": [
+    "A column-type audit reveals inconsistent data before model features are constructed. Numeric-looking text and actual numbers are distinct observations until a conversion policy is applied.",
+    "The report lists categories, not inferred coercions. Keeping booleans separate avoids counting a flag as a numeric measurement merely because Python permits arithmetic with it."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

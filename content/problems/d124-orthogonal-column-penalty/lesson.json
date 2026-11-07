@@ -1,0 +1,44 @@
+{
+  "intro": "Correlated feature directions can duplicate information. A Gram-matrix penalty encourages columns to have unit norm and be mutually orthogonal.",
+  "task": "Return the squared Frobenius penalty on W.T@W-I and its gradient with respect to W.",
+  "signature": "orthogonality_penalty(weights)",
+  "requirements": [
+    "weights is a rows-by-columns matrix. Define G=W.T@W-I with an identity sized by the number of columns.",
+    "Return {\"loss\": sum(G*G), \"gradient\": 4*W@G}. Do not average the loss or divide by batch size. More columns than rows is allowed, although zero loss is then impossible.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Already orthogonal",
+      "input": "orthogonality_penalty(np.eye(2))",
+      "output": "{'loss': 0.0, 'gradient': [[0.0, 0.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Scaled axes",
+      "input": "orthogonality_penalty([[2,0],[0,1]])",
+      "output": "{'loss': 9.0, 'gradient': [[24.0, 0.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Correlated columns",
+      "input": "orthogonality_penalty([[1,1],[0,0]])",
+      "output": "{'loss': 2.0, 'gradient': [[4.0, 4.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "The diagonal of the Gram matrix measures squared column norms; off-diagonal entries measure inner products."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The derivative receives equal contributions from both appearances of W."
+    }
+  ],
+  "explanation": [
+    "The penalty treats unit length and independence as one matrix objective. Its gradient moves columns in response to both their norms and their pairwise correlations.",
+    "When columns outnumber the ambient dimension, they cannot all be orthonormal. The function still provides a well-defined optimization objective rather than rejecting the rectangular matrix."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e26",
+  "kind": "lesson",
+  "slug": "rouge-l-score",
+  "version": 1,
+  "title": "Inspect ROUGE-L Precision and Recall",
+  "summary": "A summary may preserve a reference sequence while inserting unrelated words. ROUGE-L separates longest-subsequence recall from precision to reveal that tradeoff.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Text evaluation", "Token sequences"],
+  "prerequisites": ["e25"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "rouge_l",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Lin, ROUGE: A Package for Automatic Evaluation of Summaries. https://aclanthology.org/W04-1013/",
+    ],
+}

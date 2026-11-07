@@ -1,0 +1,44 @@
+{
+  "intro": "Widening a hidden layer changes both adjacent weight matrices. Account for each layer before allocating a network.",
+  "task": "Return per-layer weight, bias, and total counts, plus the total network parameter count.",
+  "signature": "dense_budget(widths, biases)",
+  "requirements": [
+    "widths is an integer vector of length 2..64, with entries 1..64. biases contains one numeric 0/1 flag per consecutive pair of widths.",
+    "Return {\"weights\": vector, \"biases\": vector, \"per_layer\": vector, \"total\": scalar}. A layer from a inputs to b outputs has a*b weights and b biases when enabled.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two layers",
+      "input": "dense_budget([3,4,2],[1,1])",
+      "output": "{'weights': [12, 8], 'biases': [4, 2], 'per_layer': [16, 10], 'total': 26}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "No bias",
+      "input": "dense_budget([2,3],[0])",
+      "output": "{'weights': [6], 'biases': [0], 'per_layer': [6], 'total': 6}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Mixed flags",
+      "input": "dense_budget([1,2,1],[0,1])",
+      "output": "{'weights': [2, 2], 'biases': [0, 1], 'per_layer': [2, 3], 'total': 5}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Adjacent widths describe a parameter block; the input layer has none."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Disabling bias removes one parameter per output neuron."
+    }
+  ],
+  "explanation": [
+    "Each dense output neuron connects to every input coordinate. Counting adjacent pairs exposes why changing one hidden width affects two parameter blocks.",
+    "Parameter storage differs from activation storage and dataset size. Bias flags change the trainable count without changing the number of output neurons."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

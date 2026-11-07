@@ -1,0 +1,44 @@
+{
+  "intro": "Some landmark decoders choose the strongest discrete location rather than averaging confidence across the image. Resolve ties consistently.",
+  "task": "Return the row-column coordinates and value of the first maximum in each heatmap.",
+  "signature": "heatmap_peaks(heatmaps)",
+  "requirements": [
+    "heatmaps has shape batch-by-height-by-width and may contain negative values.",
+    "Return {\"coordinates\": batch-by-2 integer matrix, \"score\": vector}. Break ties by the smallest row, then the smallest column (row-major order).",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Rectangular map",
+      "input": "heatmap_peaks([[[1,2,3],[6,4,5]]])",
+      "output": "{'coordinates': [[1, 0]], 'score': [6.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Tied maxima",
+      "input": "heatmap_peaks([[[0,3],[3,0]]])",
+      "output": "{'coordinates': [[0, 1]], 'score': [3.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "All negative",
+      "input": "heatmap_peaks([[[-5,-2],[-3,-4]]])",
+      "output": "{'coordinates': [[0, 1]], 'score': [-2.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Find the flat index of each maximum, then use division and remainder by image width."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Using height in the index conversion fails for rectangular maps."
+    }
+  ],
+  "explanation": [
+    "Peak decoding selects a location that actually attains the largest supplied score. It can differ substantially from the center of mass when the map contains multiple modes.",
+    "Deterministic row-major tie handling makes equal-score results reproducible. The returned score need not be a probability because this contract accepts any finite response values."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

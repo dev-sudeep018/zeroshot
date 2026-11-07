@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d70",
+  "kind": "lesson",
+  "slug": "discounted-episode-returns",
+  "version": 1,
+  "title": "Trace Returns across Episode Boundaries",
+  "summary": "A rollout can contain several episodes or stop before an episode ends. Follow how future rewards contribute, and where a terminal transition must cut that contribution.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    ["Reinforcement learning", "Trace Returns across Episode Boundaries"],
+  "prerequisites": ["m08"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "episode_returns",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+    ],
+}

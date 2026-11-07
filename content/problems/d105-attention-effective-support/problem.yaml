@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d105",
+  "kind": "lesson",
+  "slug": "attention-effective-support",
+  "version": 1,
+  "title": "Measure How Broadly Attention Is Spread",
+  "summary": "A maximum attention weight does not describe the full distribution. Entropy and effective support distinguish focused and diffuse rows.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Measure How Broadly Attention Is Spread"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "attention_support",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2005.00928",
+    ],
+}

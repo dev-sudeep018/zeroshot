@@ -1,0 +1,44 @@
+{
+  "intro": "Inverted dropout preserves a fixed activation\u2019s expectation while increasing its variance. Predict both before sampling any masks.",
+  "task": "Return elementwise mean, variance, and second moment under independent inverted dropout.",
+  "signature": "dropout_moments(activations, keep_probability)",
+  "requirements": [
+    "activations is a vector; keep_probability p lies in [1e-6,1]. Retained values are divided by p and dropped values become zero.",
+    "Return {\"mean\": x, \"variance\": x*x*(1-p)/p, \"second_moment\": x*x/p}, all vectors. Inputs are fixed; only the mask is random. Evaluation without dropout outputs x deterministically, with zero mask-induced variance.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Half retained",
+      "input": "dropout_moments([2,-3],0.5)",
+      "output": "{'mean': [2, -3], 'variance': [4, 9], 'second_moment': [8, 18]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "No dropout",
+      "input": "dropout_moments([2,3],1)",
+      "output": "{'mean': [2, 3], 'variance': [0.0, 0.0], 'second_moment': [4, 9]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Quarter retained",
+      "input": "dropout_moments([1],0.25)",
+      "output": "{'mean': [1], 'variance': [3], 'second_moment': [4]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "List the two possible outcomes for a single coordinate."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Squared values determine variance, so negative activations still have nonnegative variance."
+    }
+  ],
+  "explanation": [
+    "Scaling survivors by the reciprocal keep probability preserves their expectation. This explains why evaluation can use the original activation without drawing masks.",
+    "The training distribution still differs from evaluation: smaller keep probability increases second moments and variance. Equal means do not imply equal noise or equal downstream nonlinear behavior."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

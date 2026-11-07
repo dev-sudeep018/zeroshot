@@ -1,0 +1,45 @@
+{
+  "intro": "Two measurements may use different units yet share a linear relationship. Centering and normalizing isolates their direction of association.",
+  "task": "Compute the Pearson correlation coefficient of paired observations with a defined error for constant inputs.",
+  "signature": "pearson_correlation(x, y)",
+  "requirements": [
+    "x and y are equal-length vectors with at least two observations.",
+    "Subtract each mean and return dot(x_centered,y_centered)/(norm(x_centered)*norm(y_centered)).",
+    "Reject either centered norm at or below 1e-12. Return a scalar clipped to [-1,1] only to correct roundoff.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Positive line",
+      "input": "pearson_correlation([1,2,3],[5,7,9])",
+      "output": "1\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Negative line",
+      "input": "pearson_correlation([1,2,3],[9,7,5])",
+      "output": "-1\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Zero linear association",
+      "input": "pearson_correlation([-1,0,1],[1,-2,1])",
+      "output": "0\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Offsets disappear after centering each vector; positive units disappear after normalizing their lengths."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "A constant vector has no direction after centering, so check its norm before dividing."
+    }
+  ],
+  "explanation": [
+    "Centering removes offsets, and division by the two vector norms removes positive scale factors. A negative scale flips the sign of the coefficient.",
+    "Correlation measures linear association. A zero result does not prove independence: symmetric nonlinear patterns can still have zero centered dot product."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "JSON Lines lets pipelines process records independently. Keeping a rejection list makes partial ingestion explicit and preserves the source locations needed for repair.",
+  "task": "Read one JSON object per nonblank line and return valid objects plus rejected line numbers.",
+  "signature": "parse_json_lines(text)",
+  "requirements": [
+    "Process physical lines numbered from 1; ignore whitespace-only lines. Each remaining line must decode to a JSON object satisfying the bounded plain-data contract; reject JSON NaN/Infinity and duplicate object keys. Return records and rejected_lines in source order. Invalid lines are reported rather than stopping other lines.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Recover after bad line",
+      "input": "parse_json_lines('{\"x\":1}\\nbad\\n{\"x\":2}')",
+      "output": "{'records': [{'x': 1}, {'x': 2}], 'rejected_lines': [2]}"
+    },
+    {
+      "name": "Physical line numbers",
+      "input": "parse_json_lines('\\n[]\\n\\n{}')",
+      "output": "{'records': [{}], 'rejected_lines': [2]}"
+    },
+    {
+      "name": "Duplicate key rejected",
+      "input": "parse_json_lines('{\"x\":1,\"x\":2}\\n{}')",
+      "output": "{'records': [{}], 'rejected_lines': [1]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Catch parsing errors per line so one bad record does not discard later records."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Count blank physical lines even though they do not produce a record or rejection."
+    }
+  ],
+  "explanation": [
+    "JSON Lines lets pipelines process records independently. Keeping a rejection list makes partial ingestion explicit and preserves the source locations needed for repair.",
+    "Rejecting duplicate keys and nonfinite numbers removes ambiguities that some parsers otherwise accept. A valid JSON value can still fail this application contract when it is not an object."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

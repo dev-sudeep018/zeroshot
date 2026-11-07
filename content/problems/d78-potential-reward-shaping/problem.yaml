@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d78",
+  "kind": "lesson",
+  "slug": "potential-reward-shaping",
+  "version": 1,
+  "title": "Inspect Potential-Based Reward Shaping",
+  "summary": "A shaping reward can give local feedback while telescoping over a trajectory. The difference of discounted potentials matters, including what happens at terminal states.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    ["Reinforcement learning", "Inspect Potential-Based Reward Shaping"],
+  "prerequisites": ["d70"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "shape_rewards",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf",
+    ],
+}

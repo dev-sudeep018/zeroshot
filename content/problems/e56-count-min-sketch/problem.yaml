@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e56",
+  "kind": "lesson",
+  "slug": "count-min-sketch",
+  "version": 1,
+  "title": "Estimate Frequencies with a Count-Min Sketch",
+  "summary": "A frequency sketch trades exact counts for bounded memory. Several hash rows reduce collision overcounts, and the minimum row counter estimates each queried frequency.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Streaming data", "Approximate counting"],
+  "prerequisites": ["e55"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "count_min_sketch",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Cormode and Muthukrishnan, An Improved Data Stream Summary: The Count-Min Sketch and Its Applications. https://www.cs.ox.ac.uk/people/graham.cormode/pubs/html/CormodeMuthukrishnan04CMJalg.html",
+    ],
+}

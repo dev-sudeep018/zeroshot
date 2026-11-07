@@ -1,0 +1,45 @@
+{
+  "intro": "Weighted sampling without replacement can assign each item a random priority. Logarithmic keys avoid raising tiny probabilities to awkward powers.",
+  "task": "Rank random weighted priorities and explore why larger weights change selection without duplicating selected items.",
+  "signature": "weighted_sample_keys(weights, uniforms, k)",
+  "requirements": [
+    "weights is a nonempty vector of strictly positive real weights; uniforms is a matching vector with 0<u<=1; k is an integer from 0 to the item count.",
+    "Require the computed keys to be finite. Compute key_i=log(u_i)/weight_i and retain the k largest keys, breaking exact ties by lower original index. Return dict indices in selection order and keys for all items.",
+    "Independent uniform draws are an assumption supplied by the caller. This is weighted sampling without replacement; inclusion probabilities are not simply k*weight/sum(weights).",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Weight changes priority",
+      "input": "weighted_sample_keys([1,2], [np.exp(-2),np.exp(-2)], 1)",
+      "output": "{'indices': [1], 'keys': [-2.0, -1.0]}"
+    },
+    {
+      "name": "Exact key tie",
+      "input": "weighted_sample_keys([1,1], [.5,.5], 2)",
+      "output": "{'indices': [0, 1], 'keys': [-0.69314718056, -0.69314718056]}"
+    },
+    {
+      "name": "Zero selected items",
+      "input": "weighted_sample_keys([1,2], [1,1], 0)",
+      "output": "{'indices': [], 'keys': [0.0, 0.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Larger means closer to zero",
+      "body": "Logarithms of uniforms are nonpositive, and the largest keys win."
+    },
+    {
+      "title": "Do not renormalize repeatedly",
+      "body": "One priority per item is enough to choose the entire sample without replacement."
+    }
+  ],
+  "explanation": [
+    "Exponential-key sampling associates each item with a random race time. Taking the largest log-uniform keys is equivalent to taking the smallest negative-log-uniform times divided by weight.",
+    "The algorithm defines a particular weighted-without-replacement distribution. It should not be interpreted as independently including each item with a simple normalized probability."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

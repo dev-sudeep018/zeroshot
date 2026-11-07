@@ -1,0 +1,45 @@
+{
+  "intro": "Repeated locations represent multiple measurements of the same region. Assignment would retain only the final measurement, whereas accumulation preserves both total and support.",
+  "task": "Scatter repeated integer grid coordinates into separate sum and count grids.",
+  "signature": "accumulate_grid(rows, cols, coordinates, values)",
+  "requirements": [
+    "rows and cols are integers in 1..64. coordinates has shape (n,2) with integer-valued row/column indices inside the grid; values has length n.",
+    "Return {\"sum\": sum grid, \"count\": count grid}, both of shape (rows,cols). Every coordinate contributes once, including duplicates.",
+    "Empty cells remain zero. Coordinate order does not change the result.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Repeated location",
+      "input": "accumulate_grid(2,2,[[0,1],[0,1],[1,0]],[2,3,7])",
+      "output": "{'sum': [[0.0, 5.0], [7.0, 0.0]], 'count': [[0, 2], [1, 0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Negative measurements",
+      "input": "accumulate_grid(1,2,[[0,0],[0,0],[0,1]],[3,-3,-2])",
+      "output": "{'sum': [[0.0, -2.0]], 'count': [[2, 1]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Single cell",
+      "input": "accumulate_grid(1,1,[[0,0]],[4])",
+      "output": "{'sum': [[4.0]], 'count': [[1]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Allocate separate sum and count grids so zero-valued measurements are still counted."
+    },
+    {
+      "title": "Build the result",
+      "body": "Visit each coordinate-value pair and add to the existing cell rather than overwrite it."
+    }
+  ],
+  "explanation": [
+    "Repeated locations represent multiple measurements of the same region. Assignment would retain only the final measurement, whereas accumulation preserves both total and support.",
+    "The separate count grid distinguishes an unvisited cell from a visited cell whose measurements sum to zero. That distinction is essential before computing local averages."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

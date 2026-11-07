@@ -1,0 +1,45 @@
+{
+  "intro": "Loss scaling expands small gradients before low-precision arithmetic. Before an optimizer step, unscale once and reject the whole update if any gradient is nonfinite.",
+  "task": "Restore scaled gradients before optimization and produce a whole-step skip signal when any coordinate becomes nonfinite.",
+  "signature": "unscale_gradients(scaled_gradients, scale)",
+  "requirements": [
+    "scaled_gradients is a numeric NumPy-compatible array; real finite entries have magnitude at most 1e30, and NaN or infinity are allowed as overflow indicators in this lesson. scale is a positive finite scalar at most 1e30.",
+    "If any scaled gradient or any unscaled result is nonfinite, return dict gradients as an all-zero float array of the same shape and skip_step True.",
+    "Otherwise return gradients=scaled_gradients/scale and skip_step False. This function does not update parameters or adapt the scale. Empty gradient arrays are allowed.",
+    "Inputs must be real numeric values except the documented NaN and infinity gradient indicators. Boolean values are invalid numeric inputs. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Undo the scale exactly once",
+      "input": "unscale_gradients([8,-16], 8)",
+      "output": "{'gradients': [1.0, -2.0], 'skip_step': False}"
+    },
+    {
+      "name": "Infinity skips whole update",
+      "input": "unscale_gradients([2,np.inf], 2)",
+      "output": "{'gradients': [0.0, 0.0], 'skip_step': True}"
+    },
+    {
+      "name": "NaN skips whole update",
+      "input": "unscale_gradients([np.nan], 1)",
+      "output": "{'gradients': [0.0], 'skip_step': True}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Check the entire parameter group",
+      "body": "One nonfinite entry invalidates the whole returned update, not only that coordinate."
+    },
+    {
+      "title": "Check division too",
+      "body": "A tiny positive scale can overflow an otherwise finite gradient when unscaled."
+    }
+  ],
+  "explanation": [
+    "Scaling is useful only if gradients are restored before the optimizer consumes them. Applying an optimizer to scaled gradients changes the effective update size.",
+    "This function demonstrates a finite-check gate with an explicit skip signal. It does not simulate low-precision hardware, maintain master weights, or silently turn an overflowed step into a partial parameter update."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

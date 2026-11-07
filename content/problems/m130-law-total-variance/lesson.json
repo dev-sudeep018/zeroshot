@@ -1,0 +1,45 @@
+{
+  "intro": "A mixture can vary because observations differ within each group and because group centers differ. The law of total variance separates these two sources of uncertainty.",
+  "task": "Combine mixture weights, conditional means and variances into a total mean and variance.",
+  "signature": "mixture_variance(weights, means, variances)",
+  "requirements": [
+    "weights is a probability vector. means and variances have the same length; variances are nonnegative.",
+    "Return {\"mean\", \"within\", \"between\", \"variance\"}. within is weighted conditional variance; between is weighted squared deviation of conditional means from total mean.",
+    "The total variance is within+between. Zero-weight groups contribute nothing but must still have valid finite inputs.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two subpopulations",
+      "input": "mixture_variance([.5,.5],[0,4],[1,1])",
+      "output": "{'mean': 2.0, 'within': 1.0, 'between': 4.0, 'variance': 5.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Only between variance",
+      "input": "mixture_variance([.25,.75],[0,8],[0,0])",
+      "output": "{'mean': 6.0, 'within': 0.0, 'between': 12.0, 'variance': 12.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Identical means",
+      "input": "mixture_variance([.2,.8],[3,3],[2,7])",
+      "output": "{'mean': 3.0, 'within': 6.0, 'between': 0.0, 'variance': 6.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "First compute the overall weighted mean."
+    },
+    {
+      "title": "Build the result",
+      "body": "Average the within-group variances and separately measure the spread of group means."
+    }
+  ],
+  "explanation": [
+    "A mixture can vary because observations differ within each group and because group centers differ. The law of total variance separates these two sources of uncertainty.",
+    "A weighted average of the group variances alone misses the second source. Groups with zero internal variance can still form a highly variable population when their means differ."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

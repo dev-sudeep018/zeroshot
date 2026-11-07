@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m56",
+  "kind": "lesson",
+  "slug": "rbf-kernel-matrix",
+  "version": 1,
+  "title": "Turn Distances into Radial Similarities",
+  "summary": "A radial basis kernel turns squared distance into a smooth similarity. Its bandwidth controls how rapidly a neighbor stops looking similar.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Turn Distances into Radial Similarities"],
+  "prerequisites": ["m12"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "rbf_kernel",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

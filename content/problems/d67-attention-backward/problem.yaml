@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d67",
+  "kind": "lesson",
+  "slug": "attention-backward",
+  "version": 1,
+  "title": "Trace Gradients through Attention Scores and Values",
+  "summary": "Attention has two gradient routes: the weighted values and the score-dependent weights. Follow both without confusing the query, key and value axes.",
+  "domain": "deep-learning",
+  "difficulty": "advanced",
+  "skills": ["Attention", "Backpropagation"],
+  "prerequisites": ["d04", "d65"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "attention_backward",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

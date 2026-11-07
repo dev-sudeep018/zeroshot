@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d106",
+  "kind": "lesson",
+  "slug": "residual-attention-rollout",
+  "version": 1,
+  "title": "Compose Residual Attention across Layers",
+  "summary": "Attention at one layer maps to the previous layer\u2019s representations. Trace these mappings back through the stack while allowing an identity residual path.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Compose Residual Attention across Layers"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "attention_rollout",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://arxiv.org/abs/2005.00928",
+    ],
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d113",
+  "kind": "lesson",
+  "slug": "adaptive-spatial-average-pooling",
+  "version": 1,
+  "title": "Pool an Image into a Requested Grid",
+  "summary": "A network head may require a fixed grid even when input images differ in size. Adaptive pooling chooses averaging regions from the requested output dimensions.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Pool an Image into a Requested Grid"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "adaptive_average_pool",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://pytorch.org/docs/stable/generated/torch.nn.AdaptiveAvgPool2d.html",
+    ],
+}

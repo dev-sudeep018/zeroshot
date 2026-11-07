@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d87",
+  "kind": "lesson",
+  "slug": "dropout-moment-prediction",
+  "version": 1,
+  "title": "Predict Inverted Dropout Moments",
+  "summary": "Inverted dropout preserves a fixed activation\u2019s expectation while increasing its variance. Predict both before sampling any masks.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Predict Inverted Dropout Moments"],
+  "prerequisites": ["d06"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "dropout_moments",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-2/",
+    ],
+}

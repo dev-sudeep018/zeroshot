@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d103",
+  "kind": "lesson",
+  "slug": "ctc-path-collapse",
+  "version": 1,
+  "title": "Decode a CTC Alignment Path",
+  "summary": "A CTC path contains timing repetitions and blank symbols. The order of collapsing repeats and removing blanks determines the decoded sequence.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Decode a CTC Alignment Path"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "collapse_ctc_path",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://www.cs.toronto.edu/~graves/icml_2006.pdf",
+    ],
+}

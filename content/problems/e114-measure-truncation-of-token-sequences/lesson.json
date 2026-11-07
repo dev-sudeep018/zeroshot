@@ -1,0 +1,44 @@
+{
+  "intro": "Truncation makes variable-length examples fit a bounded model input. Recording what was dropped helps audit whether important context is systematically lost.",
+  "task": "Truncate each sequence and report original lengths and dropped counts.",
+  "signature": "truncate_sequences(sequences, limit)",
+  "requirements": [
+    "Each sequence is a list or tuple of bounded plain data. limit is an integer 0..1000. Return sequences containing copied prefixes, original_lengths, and dropped_counts. Preserve one output sequence per input, including empty sequences.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed lengths",
+      "input": "truncate_sequences([[1,2,3],[4]], 2)",
+      "output": "{'sequences': [[1, 2], [4]],\n 'original_lengths': [3, 1],\n 'dropped_counts': [1, 0]}"
+    },
+    {
+      "name": "Zero limit",
+      "input": "truncate_sequences([[1],[]], 0)",
+      "output": "{'sequences': [[], []],\n 'original_lengths': [1, 0],\n 'dropped_counts': [1, 0]}"
+    },
+    {
+      "name": "Exact length",
+      "input": "truncate_sequences([[1,2]], 2)",
+      "output": "{'sequences': [[1, 2]],\n 'original_lengths': [2],\n 'dropped_counts': [0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Store each original length before taking its prefix."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Dropped count is never negative, even when limit exceeds the sequence length."
+    }
+  ],
+  "explanation": [
+    "Truncation makes variable-length examples fit a bounded model input. Recording what was dropped helps audit whether important context is systematically lost.",
+    "The metadata is aligned with input rows, so empty sequences remain visible. A zero limit is meaningful: it removes every token while preserving the batch structure."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

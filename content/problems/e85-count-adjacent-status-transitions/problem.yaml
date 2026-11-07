@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e85",
+  "kind": "lesson",
+  "slug": "count-adjacent-status-transitions",
+  "version": 1,
+  "title": "Count Adjacent Status Transitions",
+  "summary": "Count each ordered pair of adjacent statuses, including self transitions.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "transition_counts",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

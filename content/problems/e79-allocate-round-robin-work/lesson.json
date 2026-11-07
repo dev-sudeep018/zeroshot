@@ -1,0 +1,44 @@
+{
+  "intro": "Round-robin scheduling spreads the number of jobs evenly without considering job duration. Worker queue sizes differ by at most one because assignments cycle through workers.",
+  "task": "Distribute ordered task IDs among workers and retain empty worker queues.",
+  "signature": "distribute_jobs(jobs, workers)",
+  "requirements": [
+    "jobs is a list of nonempty string IDs. workers is an integer 1..1000. Assign job i to worker i modulo workers; return exactly workers lists, including empty queues.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Uneven distribution",
+      "input": "distribute_jobs(['a','b','c','d','e'], 2)",
+      "output": "[['a', 'c', 'e'], ['b', 'd']]"
+    },
+    {
+      "name": "More workers than jobs",
+      "input": "distribute_jobs(['a'], 3)",
+      "output": "[['a'], [], []]"
+    },
+    {
+      "name": "No jobs",
+      "input": "distribute_jobs([], 2)",
+      "output": "[[], []]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use the original job index to choose the worker queue."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Create separate lists for workers; repeated references to one list would mix the queues."
+    }
+  ],
+  "explanation": [
+    "Round-robin scheduling spreads the number of jobs evenly without considering job duration. Worker queue sizes differ by at most one because assignments cycle through workers.",
+    "Independent worker lists are essential: constructing several references to the same list creates aliasing. This lesson exposes that common Python container mistake in a practical setting."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

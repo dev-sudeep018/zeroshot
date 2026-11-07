@@ -1,0 +1,45 @@
+{
+  "intro": "A feature join can accidentally read the future. An as-of join selects the latest event available at each prediction time and makes unmatched queries explicit.",
+  "task": "Join the latest available feature event to each prediction query without reading future observations.",
+  "signature": "asof_features(event_times, event_values, query_times)",
+  "requirements": [
+    "event_times is a finite numeric vector, event_values is a finite (N,D) matrix with N matching times and D>0, and query_times is a finite vector. Inputs may be unsorted; N and query count may be zero.",
+    "For each query choose the event with maximum time <= query time. For tied event times choose the last original event row.",
+    "Return dict indices as integer event-row indices or -1, matched as a boolean vector, and values as a (Q,D) matrix. Unmatched rows contain zeros; use matched to distinguish missing data from actual zero-valued features.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Never read a future event",
+      "input": "asof_features([1,3], [[10],[30]], [0,2,3])",
+      "output": "{'indices': [-1, 0, 1],\n 'matched': [False, True, True],\n 'values': [[0.0], [10.0], [30.0]]}"
+    },
+    {
+      "name": "Unsorted event rows",
+      "input": "asof_features([3,1], [[30],[10]], [2,4])",
+      "output": "{'indices': [1, 0],\n 'matched': [True, True],\n 'values': [[10.0], [30.0]]}"
+    },
+    {
+      "name": "Last row wins timestamp tie",
+      "input": "asof_features([1,1], [[10],[20]], [1])",
+      "output": "{'indices': [1], 'matched': [True], 'values': [[20.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Stable sorting resolves equal timestamps",
+      "body": "The last row among equal event times should remain last after sorting."
+    },
+    {
+      "title": "Search on the right boundary",
+      "body": "A right-sided insertion point includes events exactly at query time; subtract one to get the latest eligible event."
+    }
+  ],
+  "explanation": [
+    "A causal as-of join prevents temporal leakage by requiring every selected feature event to occur no later than the prediction query. Stable ordering gives a deterministic policy for repeated timestamps.",
+    "Event time is only one availability model. Real systems may also need ingestion-time constraints; this lesson makes its single-clock assumption explicit."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

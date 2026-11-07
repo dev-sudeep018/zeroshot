@@ -1,0 +1,44 @@
+{
+  "intro": "Duration fields combine a quantity with a unit. Converting into one integer base unit avoids confusion when milliseconds, seconds, and minutes appear together.",
+  "task": "Convert integer ms, s, and m durations into milliseconds with full-string matching.",
+  "signature": "duration_milliseconds(values)",
+  "requirements": [
+    "Each string after trimming must be ASCII digits followed immediately by ms, s, or m. Return integer milliseconds using multipliers 1, 1000, 60000. Reject outputs above 1e9; units are lowercase and signs, fractions, or internal spaces are invalid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Different units",
+      "input": "duration_milliseconds(['2ms','3s','1m'])",
+      "output": "[2, 3000, 60000]"
+    },
+    {
+      "name": "Outer spaces",
+      "input": "duration_milliseconds([' 4s '])",
+      "output": "[4000]"
+    },
+    {
+      "name": "Zero duration",
+      "input": "duration_milliseconds(['0m','0002ms'])",
+      "output": "[0, 2]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Match the whole value and unit together before conversion."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Apply the unit multiplier before enforcing the maximum result."
+    }
+  ],
+  "explanation": [
+    "Duration fields combine a quantity with a unit. Converting into one integer base unit avoids confusion when milliseconds, seconds, and minutes appear together.",
+    "The output bound applies after conversion. A small-looking number of minutes can exceed the allowed millisecond range, so checking only the raw number is insufficient."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "Jacobi iteration solves each equation for its diagonal variable while holding other variables at their previous estimates. That simultaneous-update rule distinguishes it from sequential coordinate methods.",
+  "task": "Compute a fixed number of Jacobi iterations from an initial vector and return the residual.",
+  "signature": "jacobi_iterations(matrix, target, initial, steps)",
+  "requirements": [
+    "matrix is square with size 1..8, diagonal magnitudes >=1e-6, and each diagonal magnitude strictly exceeds the sum of other row magnitudes. target and initial match its size.",
+    "steps is an integer in 0..64. Return {\"solution\": final vector, \"residual\": matrix@solution-target}.",
+    "Each new coordinate uses only the entire previous vector: x_new=(target-(matrix-diag(diagonal))@x_old)/diagonal.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two coupled equations",
+      "input": "jacobi_iterations([[4,1],[2,3]],[1,2],[0,0],3)",
+      "output": "{'solution': [0.125, 0.6111111111], 'residual': [0.1111111111, 0.08333333333]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Diagonal system",
+      "input": "jacobi_iterations([[2,0],[0,-4]],[6,8],[0,0],1)",
+      "output": "{'solution': [3.0, -2.0], 'residual': [0.0, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No iteration",
+      "input": "jacobi_iterations([[3,1],[1,3]],[1,1],[2,3],0)",
+      "output": "{'solution': [2.0, 3.0], 'residual': [8.0, 10.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Separate the diagonal from all off-diagonal coefficients once."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compute a complete new vector at each iteration so no coordinate sees another coordinate from the same update."
+    }
+  ],
+  "explanation": [
+    "Jacobi iteration solves each equation for its diagonal variable while holding other variables at their previous estimates. That simultaneous-update rule distinguishes it from sequential coordinate methods.",
+    "Strict diagonal dominance supplies a convergence condition for this bounded exercise. Reporting the residual measures how well the final vector satisfies the original equations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

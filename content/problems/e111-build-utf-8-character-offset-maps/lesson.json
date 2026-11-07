@@ -1,0 +1,44 @@
+{
+  "intro": "A tokenizer may report character spans while a storage format uses byte positions. A boundary map translates between these coordinate systems without decoding arbitrary partial bytes.",
+  "task": "Return the byte offset of every Unicode code point boundary, including the final boundary.",
+  "signature": "utf8_offsets(text)",
+  "requirements": [
+    "Return integer UTF-8 byte offsets for every Python code-point boundary, starting at zero and ending at len(text.encode(\"utf-8\")). Unicode surrogate code points are invalid. Empty text returns [0].",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed byte widths",
+      "input": "utf8_offsets('a\u00e9\ud83d\ude42')",
+      "output": "[0, 1, 3, 7]"
+    },
+    {
+      "name": "Combining mark",
+      "input": "utf8_offsets('e\\u0301')",
+      "output": "[0, 1, 3]"
+    },
+    {
+      "name": "ASCII text",
+      "input": "utf8_offsets('abc')",
+      "output": "[0, 1, 2, 3]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Accumulate each character\u2019s encoded byte length."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Include the final boundary so a span ending at the text end can be converted."
+    }
+  ],
+  "explanation": [
+    "A tokenizer may report character spans while a storage format uses byte positions. A boundary map translates between these coordinate systems without decoding arbitrary partial bytes.",
+    "Code points are not grapheme clusters: a letter plus a combining mark has two boundaries here. UTF-8 characters occupy between one and four bytes, so multiplying by a fixed width is incorrect."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

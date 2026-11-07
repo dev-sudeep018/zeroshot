@@ -1,0 +1,45 @@
+{
+  "intro": "Row conditionals answer how mass is distributed within each row, while row masses describe how common each row is overall. Multiplying these two quantities reconstructs the normalized joint table.",
+  "task": "Derive conditional row probabilities and row masses from a nonnegative count table, keeping empty rows zero.",
+  "signature": "conditional_rows(counts)",
+  "requirements": [
+    "counts is a nonnegative matrix with positive total mass.",
+    "Return {\"conditional\": each nonempty row divided by its row total, \"row_mass\": row totals divided by the grand total}.",
+    "Empty rows have all-zero conditional values and zero row mass; do not replace them with a uniform distribution.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Unequal row totals",
+      "input": "conditional_rows([[1,3],[2,0]])",
+      "output": "{'conditional': [[0.25, 0.75], [1.0, 0.0]], 'row_mass': [0.6666666667, 0.3333333333]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Empty row",
+      "input": "conditional_rows([[0,0],[2,2]])",
+      "output": "{'conditional': [[0.0, 0.0], [0.5, 0.5]], 'row_mass': [0.0, 1.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One column",
+      "input": "conditional_rows([[1],[3]])",
+      "output": "{'conditional': [[1.0], [1.0]], 'row_mass': [0.25, 0.75]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute row totals and the grand total before dividing."
+    },
+    {
+      "title": "Build the result",
+      "body": "Use a zero output buffer and divide only where a row total is positive."
+    }
+  ],
+  "explanation": [
+    "Row conditionals answer how mass is distributed within each row, while row masses describe how common each row is overall. Multiplying these two quantities reconstructs the normalized joint table.",
+    "An empty row provides no evidence about its conditional distribution. Leaving it zero keeps missing support visible and avoids introducing artificial uniform mass."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

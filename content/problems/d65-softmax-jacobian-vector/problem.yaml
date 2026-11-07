@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d65",
+  "kind": "lesson",
+  "slug": "softmax-jacobian-vector",
+  "version": 1,
+  "title": "Apply a Softmax Jacobian without Building It",
+  "summary": "A softmax Jacobian couples every output probability to every logit. Its action on a direction can be computed without constructing a square matrix.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Backpropagation", "Jacobian products"],
+  "prerequisites": ["m02", "d02"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "softmax_jvp",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

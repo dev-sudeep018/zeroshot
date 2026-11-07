@@ -1,0 +1,45 @@
+{
+  "intro": "A service can allow short bursts while bounding sustained traffic. A token bucket refills over elapsed time, caps stored credit, and charges only admitted requests.",
+  "task": "Simulate burst admission over time, capping refills and preserving credit after rejected requests.",
+  "signature": "token_bucket(times, costs, capacity, refill_rate)",
+  "requirements": [
+    "times and costs are equal-length nonempty finite vectors. times must be nonnegative and nondecreasing; costs must be nonnegative. capacity and refill_rate are nonnegative finite scalars.",
+    "Start with a full bucket at time 0. Before each request add elapsed_time*refill_rate, capped at capacity. Accept when cost<=available tokens, including equality.",
+    "Subtract cost only on acceptance. Return dict allowed as a boolean vector and remaining as token balances immediately after each request. Equal timestamps receive no refill.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Burst followed by refill",
+      "input": "token_bucket([0,0,2], [2,2,2], 3, 1)",
+      "output": "{'allowed': [True, False, True], 'remaining': [1.0, 1.0, 1.0]}"
+    },
+    {
+      "name": "Refill is capped",
+      "input": "token_bucket([10], [2], 3, 10)",
+      "output": "{'allowed': [True], 'remaining': [1.0]}"
+    },
+    {
+      "name": "Exact balance is accepted",
+      "input": "token_bucket([0], [3], 3, 0)",
+      "output": "{'allowed': [True], 'remaining': [0.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Update time even after rejection",
+      "body": "Elapsed time is measured since the previous request, regardless of admission."
+    },
+    {
+      "title": "Cap before charging",
+      "body": "Refill first, clamp to capacity, then decide whether the request can spend its cost."
+    }
+  ],
+  "explanation": [
+    "The capacity controls the maximum burst while refill rate controls replenishment over time. A long idle period cannot build unlimited credit because the balance is capped.",
+    "This simulation is deterministic and single-threaded. A real shared limiter needs atomic state updates and a defined clock policy to preserve the same admission semantics under concurrency."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

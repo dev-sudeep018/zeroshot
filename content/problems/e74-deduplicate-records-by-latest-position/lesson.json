@@ -1,0 +1,44 @@
+{
+  "intro": "Update streams can contain several versions of the same entity. This policy uses stream position as recency and returns only the final version of each entity.",
+  "task": "Keep each ID's last record while ordering results by last occurrence.",
+  "signature": "keep_last_records(records, id_field)",
+  "requirements": [
+    "All records contain a nonempty string ID at id_field. Keep the final occurrence of each ID and order results by those final positions. Return copied records.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Last position order",
+      "input": "keep_last_records([{'id':'a','v':1},{'id':'b','v':2},{'id':'a','v':3}], 'id')",
+      "output": "[{'id': 'b', 'v': 2}, {'id': 'a', 'v': 3}]"
+    },
+    {
+      "name": "One ID repeats",
+      "input": "keep_last_records([{'id':'a','v':1},{'id':'a','v':2}], 'id')",
+      "output": "[{'id': 'a', 'v': 2}]"
+    },
+    {
+      "name": "Already unique",
+      "input": "keep_last_records([{'id':'b'},{'id':'a'}], 'id')",
+      "output": "[{'id': 'b'}, {'id': 'a'}]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Record the last index for each identifier in a first pass."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "A second pass over original order keeps precisely the rows at their last indices."
+    }
+  ],
+  "explanation": [
+    "Update streams can contain several versions of the same entity. This policy uses stream position as recency and returns only the final version of each entity.",
+    "Dictionary overwrite alone preserves first insertion order, which is not the requested last-occurrence order. Tracking positions makes the intended ordering independent of dictionary insertion behavior."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

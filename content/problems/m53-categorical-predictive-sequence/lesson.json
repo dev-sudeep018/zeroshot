@@ -1,0 +1,45 @@
+{
+  "intro": "After a category is observed, its probability in a Bayesian predictive sequence changes. Track those changing probabilities instead of multiplying one fixed distribution.",
+  "task": "Score an ordered category sequence under a Dirichlet prior, updating the concentration vector after each observation.",
+  "signature": "categorical_predictive_sequence(alpha, observations)",
+  "requirements": [
+    "alpha is a vector of concentrations in [1e-8,1e6]. observations is a nonempty vector of integer-valued category IDs in [0,len(alpha)-1].",
+    "Before each update, probability=concentration[category]/sum(concentration). Record it, add its logarithm to the sequence log probability, then increment that category concentration by one.",
+    "Return {\"probabilities\": per-step vector, \"log_probability\": scalar, \"posterior\": final concentration vector}. Score the supplied ordered sequence; do not multiply by a multinomial counting factor.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repeated category reinforces itself",
+      "input": "categorical_predictive_sequence([1,1],[0,0])",
+      "output": "{\n  \"probabilities\": [\n    0.5,\n    0.66666667\n  ],\n  \"log_probability\": -1.09861229,\n  \"posterior\": [\n    3.0,\n    1.0\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Switch categories",
+      "input": "categorical_predictive_sequence([1,1],[0,1])",
+      "output": "{\n  \"probabilities\": [\n    0.5,\n    0.33333333\n  ],\n  \"log_probability\": -1.79175947,\n  \"posterior\": [\n    2.0,\n    2.0\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unequal prior",
+      "input": "categorical_predictive_sequence([2,1],[1])",
+      "output": "{\n  \"probabilities\": [\n    0.33333333\n  ],\n  \"log_probability\": -1.09861229,\n  \"posterior\": [\n    2.0,\n    2.0\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Read the probability of the next observed category before incrementing its concentration."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Accumulate logarithms along the ordered sequence; a multinomial coefficient would count additional sequences that were not supplied."
+    }
+  ],
+  "explanation": [
+    "Each observation changes the next predictive distribution because the concentration vector accumulates evidence. A repeated category becomes more probable than it was under the initial prior.",
+    "Although individual step probabilities depend on order, the product for a complete ordered sequence depends only on its category counts. A count-event probability would also include how many different sequences have those counts."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

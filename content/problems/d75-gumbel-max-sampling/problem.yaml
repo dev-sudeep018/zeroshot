@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d75",
+  "kind": "lesson",
+  "slug": "gumbel-max-sampling",
+  "version": 1,
+  "title": "Turn Uniform Draws into a Categorical Choice",
+  "summary": "A categorical sample can be produced by adding Gumbel noise to logits and taking an argmax. Supplied uniforms make every choice reproducible for inspection.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    ["Reinforcement learning", "Turn Uniform Draws into a Categorical Choice"],
+  "prerequisites": ["m02"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gumbel_choice",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1611.01144",
+    ],
+}

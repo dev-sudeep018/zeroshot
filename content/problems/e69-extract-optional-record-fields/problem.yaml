@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e69",
+  "kind": "lesson",
+  "slug": "extract-optional-record-fields",
+  "version": 1,
+  "title": "Extract Optional Record Fields",
+  "summary": "Collect a requested field with an explicit fallback while retaining falsy values.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": ["e68"],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "extract_field",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

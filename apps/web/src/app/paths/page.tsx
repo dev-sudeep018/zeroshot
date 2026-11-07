@@ -1,4 +1,4 @@
-import { PathList } from "@/components/learning";
+import { BeginnerEntry, PathList } from "@/components/learning";
 import { LearningPage } from "@/components/learning-page";
 export default function PathsPage() {
   return (
@@ -9,6 +9,7 @@ export default function PathsPage() {
         Python. Prerequisites are helpful connections; you can enter wherever
         you are curious.
       </p>
+      <BeginnerEntry />
       <PathList />
     </LearningPage>
   );

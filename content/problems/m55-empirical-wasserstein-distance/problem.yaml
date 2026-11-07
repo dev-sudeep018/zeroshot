@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "m55",
+  "kind": "lesson",
+  "slug": "empirical-wasserstein-distance",
+  "version": 1,
+  "title": "Measure the Cost of Moving Probability Mass",
+  "summary": "Two samples can differ by a small shift even when none of their values match. Wasserstein distance measures how far probability mass must move.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Measure the Cost of Moving Probability Mass"],
+  "prerequisites": ["m47"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "empirical_wasserstein",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, fixtures, and implementation.",
+      "Concept reference only; no source code or prose copied: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wasserstein_distance.html",
+    ],
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "A circuit breaker stops forwarding requests after repeated failures. Its open state prevents a failing dependency from receiving every subsequent request.",
+  "task": "Open after consecutive failures and reset on success under a simple no-timer state machine.",
+  "signature": "circuit_trace(events, threshold)",
+  "requirements": [
+    "events contains success, failure, or reset. threshold is an integer 1..1000. Start closed with zero consecutive failures; failure increments the count and opens at threshold, success resets it, reset always closes and clears it. While open, success/failure are blocked and ignored. Return a states list after each event and blocked zero-based indices.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Open and block",
+      "input": "circuit_trace(['failure','failure','success'],2)",
+      "output": "{'states': ['closed', 'open', 'open'], 'blocked': [2]}"
+    },
+    {
+      "name": "Success clears streak",
+      "input": "circuit_trace(['failure','success','failure'],2)",
+      "output": "{'states': ['closed', 'closed', 'closed'], 'blocked': []}"
+    },
+    {
+      "name": "Explicit reset",
+      "input": "circuit_trace(['failure','reset','success'],1)",
+      "output": "{'states': ['open', 'closed', 'closed'], 'blocked': []}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Separate the open-state guard from success/failure handling."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Reset is a control event and remains allowed while open."
+    }
+  ],
+  "explanation": [
+    "A circuit breaker stops forwarding requests after repeated failures. Its open state prevents a failing dependency from receiving every subsequent request.",
+    "This small state machine uses explicit reset events instead of timers or half-open probes. Tracing state after every event exposes off-by-one errors at the failure threshold."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

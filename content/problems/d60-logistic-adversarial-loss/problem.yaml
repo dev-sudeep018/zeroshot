@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d60",
+  "kind": "lesson",
+  "slug": "logistic-adversarial-loss",
+  "version": 1,
+  "title": "Separate Discriminator and Generator Objectives",
+  "summary": "Adversarial training gives the discriminator and generator different goals on fake samples. Stable logits make those opposing objectives easy to inspect.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Adversarial learning", "Stable losses"],
+  "prerequisites": ["m04"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "adversarial_losses",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

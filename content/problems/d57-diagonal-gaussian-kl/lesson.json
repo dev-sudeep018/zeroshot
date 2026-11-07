@@ -1,0 +1,45 @@
+{
+  "intro": "A variational encoder predicts both location and uncertainty. Compare its diagonal Gaussian with a standard-normal prior without drawing random samples.",
+  "task": "Implement gaussian_kl(mean, log_variance). The location term penalizes squared distance from the prior mean. The uncertainty term is minimized at unit variance and grows for both very narrow and very broad distributions.",
+  "signature": "gaussian_kl(mean, log_variance)",
+  "requirements": [
+    "mean and log_variance have the same nonempty (B,D) shape. Every log_variance lies in [-60,60].",
+    "For each row return 0.5*sum(mean**2+exp(log_variance)-1-log_variance,axis=1). log_variance is log variance, not log standard deviation.",
+    "Return a length-B NumPy array. Sum latent coordinates but do not average examples. This is KL(q||N(0,I)), not a reconstruction loss.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Prior match",
+      "input": "gaussian_kl([[0,0]],[[0,0]])",
+      "output": "[0.0]"
+    },
+    {
+      "name": "Shifted mean",
+      "input": "gaussian_kl([[2]],[[0]])",
+      "output": "[2.0]"
+    },
+    {
+      "name": "Broader variance",
+      "input": "gaussian_kl([[0]],[[np.log(4)]])",
+      "output": "[0.80685281944]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Unit prior matching has mean zero and log variance zero."
+    },
+    {
+      "title": "Step 2",
+      "body": "Keep the variance exponential and logarithm term together for values near zero."
+    }
+  ],
+  "explanation": [
+    "The location term penalizes squared distance from the prior mean. The uncertainty term is minimized at unit variance and grows for both very narrow and very broad distributions.",
+    "Summing coordinates gives one divergence per example. A separate training objective may later average these values or apply a coefficient."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

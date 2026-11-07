@@ -1,0 +1,45 @@
+{
+  "intro": "Moments of inertia measure how mass is distributed around axes. Centering at the mass-weighted center makes them describe the shape rather than its location in space.",
+  "task": "Compute mass-weighted center and second-moment inertia components around that center.",
+  "signature": "planar_mass_moments(points, masses)",
+  "requirements": [
+    "points has shape (n,2); masses has length n, is nonnegative and has positive total.",
+    "Return {\"center\": mass-weighted center, \"inertia\": [[sum(m*y_c**2),-sum(m*x_c*y_c)],[-sum(m*x_c*y_c),sum(m*x_c**2)]], \"polar\": sum(m*(x_c**2+y_c**2))}.",
+    "Centered coordinates are relative to the returned center. These are unnormalized moments, not covariance entries.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Horizontal pair",
+      "input": "planar_mass_moments([[-1,0],[1,0]],[1,1])",
+      "output": "{'center': [0.0, 0.0], 'inertia': [[0.0, -0.0], [-0.0, 2.0]], 'polar': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unequal masses",
+      "input": "planar_mass_moments([[0,0],[3,0]],[2,1])",
+      "output": "{'center': [1.0, 0.0], 'inertia': [[0.0, -0.0], [-0.0, 6.0]], 'polar': 6.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Square corners",
+      "input": "planar_mass_moments([[-1,-1],[-1,1],[1,-1],[1,1]],[1,1,1,1])",
+      "output": "{'center': [0.0, 0.0], 'inertia': [[4.0, -0.0], [-0.0, 4.0]], 'polar': 8.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the mass-weighted center before evaluating any squared distances."
+    },
+    {
+      "title": "Build the result",
+      "body": "Moment about the x axis uses squared y distance, while the cross term carries a minus sign."
+    }
+  ],
+  "explanation": [
+    "Moments of inertia measure how mass is distributed around axes. Centering at the mass-weighted center makes them describe the shape rather than its location in space.",
+    "The two diagonal entries add to the polar moment about the perpendicular axis. Unlike a covariance matrix, these moments scale with the total mass rather than dividing it away."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

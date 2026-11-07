@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e38",
+  "kind": "lesson",
+  "slug": "paired-sign-test",
+  "version": 1,
+  "title": "Compare Paired Outcomes with an Exact Sign Test",
+  "summary": "Paired measurements should be compared within each example. An exact sign test asks whether positive and negative nonzero differences are balanced under a fair-sign null.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "paired_sign_test",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): SciPy exact binomial test documentation. https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html",
+    ],
+}

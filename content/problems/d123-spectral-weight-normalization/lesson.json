@@ -1,0 +1,44 @@
+{
+  "intro": "The largest singular value is the greatest amplification a linear map can apply to a unit-length input. Normalize that gain directly.",
+  "task": "Scale a nonzero weight matrix so its largest singular value equals a requested positive bound.",
+  "signature": "spectral_normalize(weights, bound)",
+  "requirements": [
+    "weights is a nonzero matrix; bound is a real scalar in [1e-6,1000000]. Use the largest singular value from an exact SVD, not a power-iteration estimate.",
+    "Return {\"weights\": weights*(bound/sigma), \"original_norm\": sigma, \"scale\": bound/sigma}. This always normalizes to the bound, including when the original norm is below it.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Diagonal gains",
+      "input": "spectral_normalize([[3,0],[0,4]],1)",
+      "output": "{'weights': [[0.75, 0.0], [0.0, 1.0]], 'original_norm': 4.0, 'scale': 0.25}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Rectangular row",
+      "input": "spectral_normalize([[3,4]],2)",
+      "output": "{'weights': [[1.2, 1.6]], 'original_norm': 5.0, 'scale': 0.4}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Already unit gain",
+      "input": "spectral_normalize(np.eye(2),1)",
+      "output": "{'weights': [[1.0, 0.0], [0.0, 1.0]], 'original_norm': 1.0, 'scale': 1.0}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "The leading singular value measures operator gain, while Frobenius norm measures all squared entries."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A zero matrix has no direction to normalize and is rejected."
+    }
+  ],
+  "explanation": [
+    "Spectral normalization controls the worst-case Euclidean gain of a linear layer. It differs from normalizing each column or using the Frobenius norm, which can produce a different scale.",
+    "The bound concerns this linear map. Nonlinearities and compositions require separate reasoning; setting one layer\u2019s gain does not alone guarantee a whole model\u2019s robustness."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

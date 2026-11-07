@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "e40",
+  "kind": "lesson",
+  "slug": "group-error-rate-audit",
+  "version": 1,
+  "title": "Compare Error Rates Across Groups",
+  "summary": "Aggregate accuracy can conceal unequal errors across groups. A disaggregated audit reports selection, true-positive, and false-positive rates with their denominators.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": ["e14"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "group_error_rates",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

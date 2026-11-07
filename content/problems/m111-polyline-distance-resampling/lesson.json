@@ -1,0 +1,45 @@
+{
+  "intro": "Equal spacing in vertex index is not equal spacing along a path when segments have different lengths. Cumulative geometric distance provides the coordinate needed for uniform travel.",
+  "task": "Interpolate positions at cumulative path distances while skipping zero-length segments.",
+  "signature": "resample_polyline(points, distances)",
+  "requirements": [
+    "points has shape (n,2) with at least two rows. Consecutive repeated points are allowed, but total path length must be positive.",
+    "distances is a vector within [0,total path length]. Return interpolated points at those traveled distances, preserving query order.",
+    "Ignore zero-length segments when interpolating. A query equal to total length returns the final point; no extrapolation.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "L shaped path",
+      "input": "resample_polyline([[0,0],[3,0],[3,4]],[0,2,5,7])",
+      "output": "[[0.0, 0.0], [2.0, 0.0], [3.0, 2.0], [3.0, 4.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Repeated vertex",
+      "input": "resample_polyline([[0,0],[0,0],[2,0]],[0,1,2])",
+      "output": "[[0.0, 0.0], [1.0, 0.0], [2.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unsorted queries",
+      "input": "resample_polyline([[0,0],[2,0],[2,2]],[4,1,3,0])",
+      "output": "[[2.0, 2.0], [1.0, 0.0], [2.0, 1.0], [0.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use cumulative segment lengths to locate the segment containing each traveled distance."
+    },
+    {
+      "title": "Build the result",
+      "body": "Subtract the distance before that segment and divide by its positive length to get the local interpolation fraction."
+    }
+  ],
+  "explanation": [
+    "Equal spacing in vertex index is not equal spacing along a path when segments have different lengths. Cumulative geometric distance provides the coordinate needed for uniform travel.",
+    "Repeated vertices add no distance and should not create division by zero. Endpoint handling and right-sided segment lookup make such repetitions harmless while preserving the original path geometry."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

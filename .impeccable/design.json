@@ -1,496 +1,649 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T07:40:12.379437+00:00",
-  "title": "Design System: Project Mastery",
+  "generatedAt": "2026-11-07T05:24:45.775Z",
+  "title": "Design System: ZeroShot",
   "extensions": {
     "colorMeta": {
       "bg": {
         "role": "neutral",
-        "displayName": "Bg",
+        "displayName": "Charcoal ground",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0075 229.34)",
+          "oklch(26% 0.0075 229.34)",
+          "oklch(38% 0.0075 229.34)",
+          "oklch(49% 0.0075 229.34)",
+          "oklch(61% 0.0075 229.34)",
+          "oklch(72% 0.0075 229.34)",
+          "oklch(84% 0.0075 229.34)",
+          "oklch(95% 0.0075 229.34)"
         ]
       },
       "surface": {
         "role": "neutral",
-        "displayName": "Surface",
+        "displayName": "Charcoal surface",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0106 229.47)",
+          "oklch(26% 0.0106 229.47)",
+          "oklch(38% 0.0106 229.47)",
+          "oklch(49% 0.0106 229.47)",
+          "oklch(61% 0.0106 229.47)",
+          "oklch(72% 0.0106 229.47)",
+          "oklch(84% 0.0106 229.47)",
+          "oklch(95% 0.0106 229.47)"
         ]
       },
       "raised": {
         "role": "neutral",
-        "displayName": "Raised",
+        "displayName": "Raised charcoal",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0127 222.55)",
+          "oklch(26% 0.0127 222.55)",
+          "oklch(38% 0.0127 222.55)",
+          "oklch(49% 0.0127 222.55)",
+          "oklch(61% 0.0127 222.55)",
+          "oklch(72% 0.0127 222.55)",
+          "oklch(84% 0.0127 222.55)",
+          "oklch(95% 0.0127 222.55)"
         ]
       },
       "hover": {
         "role": "neutral",
-        "displayName": "Hover",
+        "displayName": "Charcoal hover",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0159 216.16)",
+          "oklch(26% 0.0159 216.16)",
+          "oklch(38% 0.0159 216.16)",
+          "oklch(49% 0.0159 216.16)",
+          "oklch(61% 0.0159 216.16)",
+          "oklch(72% 0.0159 216.16)",
+          "oklch(84% 0.0159 216.16)",
+          "oklch(95% 0.0159 216.16)"
         ]
       },
       "border": {
         "role": "neutral",
-        "displayName": "Border",
+        "displayName": "Thin charcoal divider",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0162 221.85)",
+          "oklch(26% 0.0162 221.85)",
+          "oklch(38% 0.0162 221.85)",
+          "oklch(49% 0.0162 221.85)",
+          "oklch(61% 0.0162 221.85)",
+          "oklch(72% 0.0162 221.85)",
+          "oklch(84% 0.0162 221.85)",
+          "oklch(95% 0.0162 221.85)"
         ]
       },
       "border-strong": {
         "role": "neutral",
-        "displayName": "Border Strong",
+        "displayName": "Strong sage border",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0211 179.70)",
+          "oklch(26% 0.0211 179.70)",
+          "oklch(38% 0.0211 179.70)",
+          "oklch(49% 0.0211 179.70)",
+          "oklch(61% 0.0211 179.70)",
+          "oklch(72% 0.0211 179.70)",
+          "oklch(84% 0.0211 179.70)",
+          "oklch(95% 0.0211 179.70)"
         ]
       },
       "text": {
         "role": "neutral",
-        "displayName": "Text",
+        "displayName": "Warm off-white",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0070 124.45)",
+          "oklch(26% 0.0070 124.45)",
+          "oklch(38% 0.0070 124.45)",
+          "oklch(49% 0.0070 124.45)",
+          "oklch(61% 0.0070 124.45)",
+          "oklch(72% 0.0070 124.45)",
+          "oklch(84% 0.0070 124.45)",
+          "oklch(95% 0.0070 124.45)"
         ]
       },
       "muted": {
         "role": "neutral",
-        "displayName": "Muted",
+        "displayName": "Muted sage grey",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0116 182.76)",
+          "oklch(26% 0.0116 182.76)",
+          "oklch(38% 0.0116 182.76)",
+          "oklch(49% 0.0116 182.76)",
+          "oklch(61% 0.0116 182.76)",
+          "oklch(72% 0.0116 182.76)",
+          "oklch(84% 0.0116 182.76)",
+          "oklch(95% 0.0116 182.76)"
         ]
       },
       "subtle": {
         "role": "neutral",
-        "displayName": "Subtle",
+        "displayName": "Quiet sage grey",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0154 180.50)",
+          "oklch(26% 0.0154 180.50)",
+          "oklch(38% 0.0154 180.50)",
+          "oklch(49% 0.0154 180.50)",
+          "oklch(61% 0.0154 180.50)",
+          "oklch(72% 0.0154 180.50)",
+          "oklch(84% 0.0154 180.50)",
+          "oklch(95% 0.0154 180.50)"
         ]
       },
       "accent": {
         "role": "primary",
-        "displayName": "Accent",
+        "displayName": "Seafoam action",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0470 160.93)",
+          "oklch(26% 0.0470 160.93)",
+          "oklch(38% 0.0470 160.93)",
+          "oklch(49% 0.0470 160.93)",
+          "oklch(61% 0.0470 160.93)",
+          "oklch(72% 0.0470 160.93)",
+          "oklch(84% 0.0470 160.93)",
+          "oklch(95% 0.0470 160.93)"
         ]
       },
       "accent-ink": {
         "role": "primary",
-        "displayName": "Accent Ink",
+        "displayName": "Deep green ink",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0288 160.12)",
+          "oklch(26% 0.0288 160.12)",
+          "oklch(38% 0.0288 160.12)",
+          "oklch(49% 0.0288 160.12)",
+          "oklch(61% 0.0288 160.12)",
+          "oklch(72% 0.0288 160.12)",
+          "oklch(84% 0.0288 160.12)",
+          "oklch(95% 0.0288 160.12)"
         ]
       },
       "accent-hover": {
         "role": "primary",
-        "displayName": "Accent Hover",
+        "displayName": "Light seafoam",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0358 162.29)",
+          "oklch(26% 0.0358 162.29)",
+          "oklch(38% 0.0358 162.29)",
+          "oklch(49% 0.0358 162.29)",
+          "oklch(61% 0.0358 162.29)",
+          "oklch(72% 0.0358 162.29)",
+          "oklch(84% 0.0358 162.29)",
+          "oklch(95% 0.0358 162.29)"
         ]
       },
       "accent-soft": {
         "role": "primary",
-        "displayName": "Accent Soft",
+        "displayName": "Selected green",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0324 163.22)",
+          "oklch(26% 0.0324 163.22)",
+          "oklch(38% 0.0324 163.22)",
+          "oklch(49% 0.0324 163.22)",
+          "oklch(61% 0.0324 163.22)",
+          "oklch(72% 0.0324 163.22)",
+          "oklch(84% 0.0324 163.22)",
+          "oklch(95% 0.0324 163.22)"
         ]
       },
       "selection": {
         "role": "neutral",
         "displayName": "Selection",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0472 166.87)",
+          "oklch(26% 0.0472 166.87)",
+          "oklch(38% 0.0472 166.87)",
+          "oklch(49% 0.0472 166.87)",
+          "oklch(61% 0.0472 166.87)",
+          "oklch(72% 0.0472 166.87)",
+          "oklch(84% 0.0472 166.87)",
+          "oklch(95% 0.0472 166.87)"
         ]
       },
       "code": {
         "role": "neutral",
         "displayName": "Code",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0118 162.02)",
+          "oklch(26% 0.0118 162.02)",
+          "oklch(38% 0.0118 162.02)",
+          "oklch(49% 0.0118 162.02)",
+          "oklch(61% 0.0118 162.02)",
+          "oklch(72% 0.0118 162.02)",
+          "oklch(84% 0.0118 162.02)",
+          "oklch(95% 0.0118 162.02)"
         ]
       },
       "success": {
-        "role": "success",
+        "role": "semantic",
         "displayName": "Success",
         "tonalRamp": [
-          "oklch(15% 0.1172 154.27)",
-          "oklch(26% 0.1172 154.27)",
-          "oklch(38% 0.1172 154.27)",
-          "oklch(49% 0.1172 154.27)",
-          "oklch(61% 0.1172 154.27)",
-          "oklch(72% 0.1172 154.27)",
-          "oklch(84% 0.1172 154.27)",
-          "oklch(95% 0.1172 154.27)"
+          "oklch(15% 0.0937 154.82)",
+          "oklch(26% 0.0937 154.82)",
+          "oklch(38% 0.0937 154.82)",
+          "oklch(49% 0.0937 154.82)",
+          "oklch(61% 0.0937 154.82)",
+          "oklch(72% 0.0937 154.82)",
+          "oklch(84% 0.0937 154.82)",
+          "oklch(95% 0.0937 154.82)"
         ]
       },
       "danger": {
-        "role": "error",
+        "role": "semantic",
         "displayName": "Danger",
         "tonalRamp": [
-          "oklch(15% 0.1353 16.76)",
-          "oklch(26% 0.1353 16.76)",
-          "oklch(38% 0.1353 16.76)",
-          "oklch(49% 0.1353 16.76)",
-          "oklch(61% 0.1353 16.76)",
-          "oklch(72% 0.1353 16.76)",
-          "oklch(84% 0.1353 16.76)",
-          "oklch(95% 0.1353 16.76)"
+          "oklch(15% 0.0992 14.84)",
+          "oklch(26% 0.0992 14.84)",
+          "oklch(38% 0.0992 14.84)",
+          "oklch(49% 0.0992 14.84)",
+          "oklch(61% 0.0992 14.84)",
+          "oklch(72% 0.0992 14.84)",
+          "oklch(84% 0.0992 14.84)",
+          "oklch(95% 0.0992 14.84)"
         ]
       },
       "danger-surface": {
-        "role": "error",
+        "role": "semantic",
         "displayName": "Danger Surface",
         "tonalRamp": [
-          "oklch(15% 0.0311 9.49)",
-          "oklch(26% 0.0311 9.49)",
-          "oklch(38% 0.0311 9.49)",
-          "oklch(49% 0.0311 9.49)",
-          "oklch(61% 0.0311 9.49)",
-          "oklch(72% 0.0311 9.49)",
-          "oklch(84% 0.0311 9.49)",
-          "oklch(95% 0.0311 9.49)"
+          "oklch(15% 0.0333 3.91)",
+          "oklch(26% 0.0333 3.91)",
+          "oklch(38% 0.0333 3.91)",
+          "oklch(49% 0.0333 3.91)",
+          "oklch(61% 0.0333 3.91)",
+          "oklch(72% 0.0333 3.91)",
+          "oklch(84% 0.0333 3.91)",
+          "oklch(95% 0.0333 3.91)"
+        ]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Warning",
+        "tonalRamp": [
+          "oklch(15% 0.0859 78.38)",
+          "oklch(26% 0.0859 78.38)",
+          "oklch(38% 0.0859 78.38)",
+          "oklch(49% 0.0859 78.38)",
+          "oklch(61% 0.0859 78.38)",
+          "oklch(72% 0.0859 78.38)",
+          "oklch(84% 0.0859 78.38)",
+          "oklch(95% 0.0859 78.38)"
+        ]
+      },
+      "warning-surface": {
+        "role": "semantic",
+        "displayName": "Warning Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0264 81.31)",
+          "oklch(26% 0.0264 81.31)",
+          "oklch(38% 0.0264 81.31)",
+          "oklch(49% 0.0264 81.31)",
+          "oklch(61% 0.0264 81.31)",
+          "oklch(72% 0.0264 81.31)",
+          "oklch(84% 0.0264 81.31)",
+          "oklch(95% 0.0264 81.31)"
+        ]
+      },
+      "info": {
+        "role": "semantic",
+        "displayName": "Info",
+        "tonalRamp": [
+          "oklch(15% 0.0694 255.36)",
+          "oklch(26% 0.0694 255.36)",
+          "oklch(38% 0.0694 255.36)",
+          "oklch(49% 0.0694 255.36)",
+          "oklch(61% 0.0694 255.36)",
+          "oklch(72% 0.0694 255.36)",
+          "oklch(84% 0.0694 255.36)",
+          "oklch(95% 0.0694 255.36)"
         ]
       },
       "syntax-keyword": {
         "role": "neutral",
         "displayName": "Syntax Keyword",
         "tonalRamp": [
-          "oklch(15% 0.1029 282.60)",
-          "oklch(26% 0.1029 282.60)",
-          "oklch(38% 0.1029 282.60)",
-          "oklch(49% 0.1029 282.60)",
-          "oklch(61% 0.1029 282.60)",
-          "oklch(72% 0.1029 282.60)",
-          "oklch(84% 0.1029 282.60)",
-          "oklch(95% 0.1029 282.60)"
+          "oklch(15% 0.0791 295.22)",
+          "oklch(26% 0.0791 295.22)",
+          "oklch(38% 0.0791 295.22)",
+          "oklch(49% 0.0791 295.22)",
+          "oklch(61% 0.0791 295.22)",
+          "oklch(72% 0.0791 295.22)",
+          "oklch(84% 0.0791 295.22)",
+          "oklch(95% 0.0791 295.22)"
         ]
       },
       "syntax-string": {
         "role": "neutral",
         "displayName": "Syntax String",
         "tonalRamp": [
-          "oklch(15% 0.0699 164.01)",
-          "oklch(26% 0.0699 164.01)",
-          "oklch(38% 0.0699 164.01)",
-          "oklch(49% 0.0699 164.01)",
-          "oklch(61% 0.0699 164.01)",
-          "oklch(72% 0.0699 164.01)",
-          "oklch(84% 0.0699 164.01)",
-          "oklch(95% 0.0699 164.01)"
+          "oklch(15% 0.0677 157.37)",
+          "oklch(26% 0.0677 157.37)",
+          "oklch(38% 0.0677 157.37)",
+          "oklch(49% 0.0677 157.37)",
+          "oklch(61% 0.0677 157.37)",
+          "oklch(72% 0.0677 157.37)",
+          "oklch(84% 0.0677 157.37)",
+          "oklch(95% 0.0677 157.37)"
         ]
       },
       "syntax-number": {
         "role": "neutral",
         "displayName": "Syntax Number",
         "tonalRamp": [
-          "oklch(15% 0.0809 71.25)",
-          "oklch(26% 0.0809 71.25)",
-          "oklch(38% 0.0809 71.25)",
-          "oklch(49% 0.0809 71.25)",
-          "oklch(61% 0.0809 71.25)",
-          "oklch(72% 0.0809 71.25)",
-          "oklch(84% 0.0809 71.25)",
-          "oklch(95% 0.0809 71.25)"
+          "oklch(15% 0.0773 72.21)",
+          "oklch(26% 0.0773 72.21)",
+          "oklch(38% 0.0773 72.21)",
+          "oklch(49% 0.0773 72.21)",
+          "oklch(61% 0.0773 72.21)",
+          "oklch(72% 0.0773 72.21)",
+          "oklch(84% 0.0773 72.21)",
+          "oklch(95% 0.0773 72.21)"
         ]
       },
-      "warning": {
-        "role": "warning",
-        "displayName": "Warning",
+      "topic-math": {
+        "role": "secondary",
+        "displayName": "Topic Math",
         "tonalRamp": [
-          "oklch(15% 0.1087 83.62)",
-          "oklch(26% 0.1087 83.62)",
-          "oklch(38% 0.1087 83.62)",
-          "oklch(49% 0.1087 83.62)",
-          "oklch(61% 0.1087 83.62)",
-          "oklch(72% 0.1087 83.62)",
-          "oklch(84% 0.1087 83.62)",
-          "oklch(95% 0.1087 83.62)"
+          "oklch(15% 0.0499 162.79)",
+          "oklch(26% 0.0499 162.79)",
+          "oklch(38% 0.0499 162.79)",
+          "oklch(49% 0.0499 162.79)",
+          "oklch(61% 0.0499 162.79)",
+          "oklch(72% 0.0499 162.79)",
+          "oklch(84% 0.0499 162.79)",
+          "oklch(95% 0.0499 162.79)"
         ]
       },
-      "warning-surface": {
-        "role": "warning",
-        "displayName": "Warning Surface",
+      "topic-math-surface": {
+        "role": "secondary",
+        "displayName": "Topic Math Surface",
         "tonalRamp": [
-          "oklch(15% 0.0249 82.57)",
-          "oklch(26% 0.0249 82.57)",
-          "oklch(38% 0.0249 82.57)",
-          "oklch(49% 0.0249 82.57)",
-          "oklch(61% 0.0249 82.57)",
-          "oklch(72% 0.0249 82.57)",
-          "oklch(84% 0.0249 82.57)",
-          "oklch(95% 0.0249 82.57)"
+          "oklch(15% 0.0268 168.39)",
+          "oklch(26% 0.0268 168.39)",
+          "oklch(38% 0.0268 168.39)",
+          "oklch(49% 0.0268 168.39)",
+          "oklch(61% 0.0268 168.39)",
+          "oklch(72% 0.0268 168.39)",
+          "oklch(84% 0.0268 168.39)",
+          "oklch(95% 0.0268 168.39)"
         ]
       },
-      "info": {
-        "role": "info",
-        "displayName": "Info",
+      "topic-deep": {
+        "role": "secondary",
+        "displayName": "Topic Deep",
         "tonalRamp": [
-          "oklch(15% 0.1094 259.63)",
-          "oklch(26% 0.1094 259.63)",
-          "oklch(38% 0.1094 259.63)",
-          "oklch(49% 0.1094 259.63)",
-          "oklch(61% 0.1094 259.63)",
-          "oklch(72% 0.1094 259.63)",
-          "oklch(84% 0.1094 259.63)",
-          "oklch(95% 0.1094 259.63)"
+          "oklch(15% 0.0486 257.27)",
+          "oklch(26% 0.0486 257.27)",
+          "oklch(38% 0.0486 257.27)",
+          "oklch(49% 0.0486 257.27)",
+          "oklch(61% 0.0486 257.27)",
+          "oklch(72% 0.0486 257.27)",
+          "oklch(84% 0.0486 257.27)",
+          "oklch(95% 0.0486 257.27)"
+        ]
+      },
+      "topic-deep-surface": {
+        "role": "secondary",
+        "displayName": "Topic Deep Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0307 258.33)",
+          "oklch(26% 0.0307 258.33)",
+          "oklch(38% 0.0307 258.33)",
+          "oklch(49% 0.0307 258.33)",
+          "oklch(61% 0.0307 258.33)",
+          "oklch(72% 0.0307 258.33)",
+          "oklch(84% 0.0307 258.33)",
+          "oklch(95% 0.0307 258.33)"
+        ]
+      },
+      "topic-engineering": {
+        "role": "secondary",
+        "displayName": "Topic Engineering",
+        "tonalRamp": [
+          "oklch(15% 0.0611 78.39)",
+          "oklch(26% 0.0611 78.39)",
+          "oklch(38% 0.0611 78.39)",
+          "oklch(49% 0.0611 78.39)",
+          "oklch(61% 0.0611 78.39)",
+          "oklch(72% 0.0611 78.39)",
+          "oklch(84% 0.0611 78.39)",
+          "oklch(95% 0.0611 78.39)"
+        ]
+      },
+      "topic-engineering-surface": {
+        "role": "secondary",
+        "displayName": "Topic Engineering Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0193 80.46)",
+          "oklch(26% 0.0193 80.46)",
+          "oklch(38% 0.0193 80.46)",
+          "oklch(49% 0.0193 80.46)",
+          "oklch(61% 0.0193 80.46)",
+          "oklch(72% 0.0193 80.46)",
+          "oklch(84% 0.0193 80.46)",
+          "oklch(95% 0.0193 80.46)"
+        ]
+      },
+      "public-surface": {
+        "role": "neutral",
+        "displayName": "Public panel",
+        "tonalRamp": [
+          "oklch(15% 0.0106 207.04)",
+          "oklch(26% 0.0106 207.04)",
+          "oklch(38% 0.0106 207.04)",
+          "oklch(49% 0.0106 207.04)",
+          "oklch(61% 0.0106 207.04)",
+          "oklch(72% 0.0106 207.04)",
+          "oklch(84% 0.0106 207.04)",
+          "oklch(95% 0.0106 207.04)"
+        ]
+      },
+      "portal-navigation": {
+        "role": "neutral",
+        "displayName": "Portal navigation",
+        "tonalRamp": [
+          "oklch(15% 0.0098 219.98)",
+          "oklch(26% 0.0098 219.98)",
+          "oklch(38% 0.0098 219.98)",
+          "oklch(49% 0.0098 219.98)",
+          "oklch(61% 0.0098 219.98)",
+          "oklch(72% 0.0098 219.98)",
+          "oklch(84% 0.0098 219.98)",
+          "oklch(95% 0.0098 219.98)"
         ]
       }
     },
     "typographyMeta": {
+      "display": {
+        "displayName": "Public display",
+        "purpose": "Public home headline; separate from task screen titles."
+      },
       "headline": {
-        "displayName": "Exercise headline",
-        "purpose": "Compact titles above the workbench."
+        "displayName": "Learning page title",
+        "purpose": "Compact portal page headings."
+      },
+      "title": {
+        "displayName": "Section heading",
+        "purpose": "Working sections and account management."
+      },
+      "body": {
+        "displayName": "Interface and reading",
+        "purpose": "Self-hosted Manrope for explanations and controls."
+      },
+      "label": {
+        "displayName": "Metadata",
+        "purpose": "Short labels and compact controls."
       },
       "code": {
-        "displayName": "Python editor",
-        "purpose": "Editable source with a 24px reading line."
+        "displayName": "Code and filenames",
+        "purpose": "Monospace editor, code samples and operation previews."
       }
     },
     "shadows": [],
     "motion": [
       {
-        "name": "control-feedback",
-        "value": "background 0.16s, color 0.16s",
-        "purpose": "Primary and secondary button hover states."
+        "name": "portal-controls",
+        "value": "background-color 150ms, color 150ms, border-color 150ms",
+        "purpose": "Immediate control feedback."
       },
       {
-        "name": "disclosure-chevron",
-        "value": "transform 0.18s",
-        "purpose": "Test row expansion."
+        "name": "public-controls",
+        "value": "background 160ms",
+        "purpose": "Public action hover feedback."
       },
       {
-        "name": "running-spinner",
-        "value": "spin 1s linear infinite",
-        "purpose": "Running state; reduced motion disables animation."
+        "name": "probability-bars",
+        "value": "width 180ms ease-out",
+        "purpose": "Reflect actual inputs in the public interactive example."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none",
+        "purpose": "Respect the existing reduced-motion media query."
       }
     ],
     "breakpoints": [
       {
-        "name": "wide",
-        "value": "1600px"
-      },
-      {
-        "name": "compact-desktop",
+        "name": "portal-compact-spacing",
         "value": "1250px"
       },
       {
-        "name": "learning-controls",
+        "name": "public-compact-spacing",
         "value": "1100px"
       },
       {
-        "name": "icon-rail",
-        "value": "950px"
+        "name": "portal-menu",
+        "value": "1099px"
       },
       {
-        "name": "mobile",
+        "name": "public-stacked",
+        "value": "800px"
+      },
+      {
+        "name": "portal-stacked",
+        "value": "720px"
+      },
+      {
+        "name": "workspace-mobile",
         "value": "700px"
+      },
+      {
+        "name": "account-mobile",
+        "value": "600px"
+      },
+      {
+        "name": "public-mobile",
+        "value": "500px"
+      },
+      {
+        "name": "portal-small",
+        "value": "480px"
       }
     ]
   },
   "components": [
     {
-      "name": "Primary action",
+      "name": "Portal primary action",
       "kind": "button",
-      "description": "The strongest action beside the editor.",
-      "html": "<button class=\"ds-primary\">Check solution</button>",
-      "css": ".ds-primary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;border:0;background:var(--accent,#d4d4d4);color:var(--accent-ink,#101010);} .ds-primary:hover:not(:disabled) {background:var(--accent-hover,#f0f0f0);} .ds-primary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-primary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
-      "refersTo": "button-primary"
+      "refersTo": "button-primary",
+      "description": "Seafoam highlights the next learning action.",
+      "html": "<button class=\"ds-primary\">Continue learning</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:42px;padding:11px 17px;border:0;border-radius:7px;background:var(--accent,#b6dac6);color:var(--accent-ink,#13241b);font:700 12px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif;cursor:pointer;transition:background-color 150ms,color 150ms}.ds-primary:hover:not(:disabled){background:var(--accent-hover,#cce8d9)}.ds-primary:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}.ds-primary:disabled{opacity:.48;cursor:not-allowed}"
     },
     {
-      "name": "Secondary action",
+      "name": "Portal secondary action",
       "kind": "button",
-      "description": "Supporting actions keep the work surface dark.",
-      "html": "<button class=\"ds-secondary\">Run code</button>",
-      "css": ".ds-secondary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;background:var(--hover,#272727);border:1px solid var(--border-strong,#7a7a7a);color:var(--text,#ededed);} .ds-secondary:hover:not(:disabled) {background:var(--hover,#272727);} .ds-secondary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-secondary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
-      "refersTo": "button-secondary"
+      "refersTo": "button-secondary",
+      "description": "A bordered surface for supporting actions.",
+      "html": "<button class=\"ds-secondary\">Export backup</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:9px 15px;border:1px solid var(--border-strong,#647571);border-radius:7px;background:var(--surface,#171d20);color:var(--text,#eceee9);font:600 12px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif;cursor:pointer;transition:background-color 150ms,color 150ms}.ds-secondary:hover:not(:disabled){background:var(--hover,#253033)}.ds-secondary:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}.ds-secondary:disabled{opacity:.48;cursor:not-allowed}"
     },
     {
-      "name": "Search field",
+      "name": "Public primary action",
+      "kind": "button",
+      "refersTo": "public-primary",
+      "description": "A larger action for entering the learning portal.",
+      "html": "<a class=\"ds-public-primary\" href=\"#learn\">Start learning <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-public-primary{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:50px;padding:14px 21px;border-radius:6px;background:var(--public-accent,#b6dac6);color:#16251f;font:750 13px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif;text-decoration:none;transition:background 160ms}.ds-public-primary:hover{background:#cbe6d6}.ds-public-primary:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}"
+    },
+    {
+      "name": "Account email field",
       "kind": "input",
-      "description": "Whole-field keyboard focus surrounds the input and search icon.",
-      "html": "<label class=\"ds-search\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input aria-label=\"Search problems or skills\" placeholder=\"Search problems or skills\"/></label>",
-      "css": ".ds-search {display:flex;align-items:center;gap:10px;border:1px solid var(--border-strong,#7a7a7a);background:var(--surface,#121212);color:var(--muted,#b8b8b8);padding:11px;border-radius:6px;width:300px;max-width:100%;} .ds-search input {min-width:0;width:100%;border:0;background:none;color:var(--text,#ededed);outline:0;font:13px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-search input::placeholder {color:var(--muted,#b8b8b8);} .ds-search:focus-within {outline:2px solid var(--accent,#d4d4d4);outline-offset:2px;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
-      "refersTo": "search-field"
+      "refersTo": "auth-field",
+      "description": "A persistent label and visible focus surround a generous editable field.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-email\">Email address</label><input id=\"ds-email\" type=\"email\" autocomplete=\"email\" /></div>",
+      "css": ".ds-field{max-width:420px;font:14px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif;color:var(--text,#eceee9)}.ds-field label{display:block;margin:0 0 9px;font-size:13px;font-weight:600}.ds-field input{min-height:46px;width:100%;padding:10px 13px;border:1px solid var(--border-strong,#647571);border-radius:6px;background:var(--surface,#171d20);color:var(--text,#eceee9);font:inherit;caret-color:var(--accent,#b6dac6)}.ds-field input:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}"
     },
     {
-      "name": "Navigation",
+      "name": "Portal navigation",
       "kind": "nav",
-      "description": "Current destination stays visibly selected.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a href=\"#learn\" aria-current=\"page\">Learn</a><a href=\"#paths\">Learning paths</a></nav>",
-      "css": ".ds-nav {display:grid;gap:5px;padding:12px;background:var(--surface,#121212);font:13px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-nav a {padding:10px 12px;border-radius:6px;color:var(--muted,#b8b8b8);text-decoration:none;} .ds-nav a:hover {background:var(--raised,#1b1b1b);color:var(--text,#ededed);} .ds-nav a[aria-current=\"page\"] {background:var(--accent-soft,#2b2b2b);color:var(--accent,#d4d4d4);} .ds-nav a:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "description": "Selected destinations use a soft seafoam fill and a persistent text label.",
+      "html": "<nav class=\"ds-portal-nav\" aria-label=\"Portal preview\"><a href=\"#learn\" aria-current=\"page\">Learning portal</a><a href=\"#paths\">Learning paths</a><a href=\"#progress\">Your progress</a></nav>",
+      "css": ".ds-portal-nav{display:grid;gap:6px;padding:16px;width:224px;background:#141a1c;font:13px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif}.ds-portal-nav a{display:flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:6px;color:var(--muted,#a5afad);text-decoration:none;transition:background 150ms,color 150ms}.ds-portal-nav a:hover{background:var(--raised,#1e2629);color:var(--text,#eceee9)}.ds-portal-nav a[aria-current=\"page\"]{background:var(--accent-soft,#22372d);color:var(--accent,#b6dac6);font-weight:650}.ds-portal-nav a:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}"
     },
     {
-      "name": "Difficulty badge",
+      "name": "Public navigation",
+      "kind": "nav",
+      "description": "Horizontal public links use an underline for the current destination.",
+      "html": "<nav class=\"ds-public-nav\" aria-label=\"Public preview\"><a href=\"#home\" aria-current=\"page\">Home</a><a href=\"#about\">About</a></nav>",
+      "css": ".ds-public-nav{display:flex;align-items:center;gap:28px;padding:12px;background:var(--bg,#101416);font:13px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif}.ds-public-nav a{padding-block:12px;color:var(--muted,#a5afad);text-decoration:none;text-underline-offset:5px}.ds-public-nav a:hover,.ds-public-nav a[aria-current=\"page\"]{color:var(--text,#eceee9)}.ds-public-nav a[aria-current=\"page\"]{text-decoration:underline}.ds-public-nav a:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}"
+    },
+    {
+      "name": "Topic label",
       "kind": "chip",
-      "description": "Passive metadata, without a hover or click affordance.",
-      "html": "<span class=\"ds-difficulty\">Beginner</span>",
-      "css": ".ds-difficulty {display:inline-flex;color:var(--accent,#d4d4d4);background:var(--accent-soft,#2b2b2b);padding:2px 8px;border-radius:4px;font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "refersTo": "topic-label",
+      "description": "Passive mathematics metadata keeps its category color contained.",
+      "html": "<span class=\"ds-topic\">Foundations</span>",
+      "css": ".ds-topic{display:inline-flex;padding:3px 7px;border-radius:4px;background:var(--topic-math-surface,#21332c);color:var(--topic-math,#a7ceba);font:11px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif}"
     },
     {
-      "name": "Problem card",
+      "name": "Next lesson panel",
       "kind": "card",
-      "description": "A flat content container; the real card includes its own primary link.",
-      "html": "<article class=\"ds-card\"><div><h2>Numerically Stable Softmax</h2><p>Implement a stable probability distribution with NumPy.</p></div></article>",
-      "css": ".ds-card {display:flex;align-items:center;gap:25px;padding:25px;background:var(--surface,#121212);border:1px solid var(--border,#383838);border-radius:10px;font:14px/1.6 \"Segoe UI\",system-ui,sans-serif;color:var(--text,#ededed);} .ds-card h2 {font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-.015em;margin:0 0 8px;} .ds-card p {font-size:12px;max-width:520px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
-      "refersTo": "problem-card"
+      "description": "The dashboard gives its next lesson a contained green surface.",
+      "html": "<article class=\"ds-next\"><h2>Up next</h2><h3>Build your foundations</h3><p>Continue with your next lesson in the learning portal.</p><a href=\"#lesson\">Open lesson →</a></article>",
+      "css": ".ds-next{padding:26px;border:1px solid #3a5045;border-radius:12px;background:#1b2a25;color:var(--text,#eceee9);font:14px/1.6 \"Manrope\",\"Segoe UI\",system-ui,sans-serif}.ds-next h2{margin:0 0 20px;color:#b5c9bc;font-size:13px;font-weight:600}.ds-next h3{margin:0;max-width:28ch;font-size:25px;line-height:1.35;letter-spacing:-.025em;font-weight:600}.ds-next p{margin:12px 0 24px;max-width:65ch;color:#b6c3bb;font-size:13px;line-height:1.8}.ds-next a{display:inline-flex;min-height:42px;align-items:center;padding:11px 17px;border-radius:7px;background:var(--accent,#b6dac6);color:var(--accent-ink,#13241b);font-size:12px;font-weight:700;text-decoration:none}.ds-next a:hover{background:var(--accent-hover,#cce8d9)}.ds-next a:focus-visible{outline:2px solid var(--accent,#b6dac6);outline-offset:4px}"
     },
     {
-      "name": "Test disclosure",
+      "name": "Account feedback",
       "kind": "custom",
-      "description": "Result wording and expansion accompany status color.",
-      "html": "<details class=\"ds-test\"><summary><span>Basic distribution</span><span>Passed</span><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></summary><p>All probabilities match the expected values.</p></details>",
-      "css": ".ds-test {background:var(--surface,#121212);border-bottom:1px solid var(--border,#383838);font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-test summary {list-style:none;display:flex;align-items:center;gap:9px;min-height:35px;cursor:pointer;color:var(--muted,#b8b8b8);} .ds-test summary::-webkit-details-marker {display:none;} .ds-test summary span:first-child {flex:1;} .ds-test summary span:nth-child(2) {font-size:10px;color:var(--success,#84dba2);} .ds-test summary svg {transition:transform .18s;} .ds-test[open] summary svg {transform:rotate(90deg);} .ds-test summary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-test p {font-size:11px;line-height:1.7;padding:3px 0 13px 24px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
-    },
-    {
-      "name": "Experiment panel",
-      "kind": "custom",
-      "description": "Native control, visible measurement, and interpretation share a flat working surface.",
-      "html": "<section class=\"ds-experiment\"><h3>Inspect vector similarity</h3><p>Change the angle and compare the measurement.</p><label>Angle <input type=\"range\" min=\"0\" max=\"180\" value=\"45\" /></label><output>0.7071 cosine similarity</output></section>",
-      "css": ".ds-experiment{background:var(--raised,#1b1b1b);border:1px solid var(--border,#383838);border-radius:12px;padding:26px;color:var(--text,#ededed);font:14px/1.6 \"Segoe UI\",system-ui,sans-serif}.ds-experiment h3{font-size:20px;line-height:1.3;margin:0}.ds-experiment p{color:var(--muted,#b8b8b8);margin:12px 0}.ds-experiment label{display:block;margin:22px 0 12px}.ds-experiment input{display:block;width:100%;min-height:28px;accent-color:var(--accent,#d4d4d4)}.ds-experiment input:focus-visible{outline:2px solid var(--accent,#d4d4d4);outline-offset:4px}.ds-experiment output{color:var(--accent,#d4d4d4);font-variant-numeric:tabular-nums}"
+      "description": "Explicit wording accompanies status color, and errors receive keyboard focus.",
+      "html": "<p class=\"ds-notice\" role=\"status\">A verification email has been requested. Check your inbox and spam folder.</p>",
+      "css": ".ds-notice{padding:14px 16px;margin:24px 0 16px;border:1px solid var(--border,#303b3f);border-radius:6px;background:var(--accent-soft,#22372d);color:var(--success,#91d5a8);font:13px/1.8 \"Manrope\",\"Segoe UI\",system-ui,sans-serif;overflow-wrap:anywhere}.ds-notice:focus{outline:2px solid currentColor;outline-offset:3px}"
     }
   ],
   "narrative": {
     "northStar": "A clear practice workbench",
-    "overview": "The user-selected dark workspace uses restrained light grey accents to keep reading, editing, and diagnostic feedback central. Black grounds and charcoal surfaces make a compact, familiar tool environment. System UI type is intentional for this code workspace; monospaced code and mathematical notation retain their own functional voices.\n\nThe source is the implemented global stylesheet and workspace, shell, learning, experiment, and retrieval-project components. This record captures shipped choices rather than introducing a new identity. Dense controls serve the work, while larger reading regions retain generous line height. Motion is limited to control feedback, expanding results, and running state.",
+    "overview": "A clear practice workbench. Charcoal grounds, warm off-white type, and restrained seafoam actions support reading, experimentation, and code. This records the implemented dark system on 7 November 2026 and supersedes the earlier light-theme notes, following the user's explicit direction.\n\nThe public introduction and learning portal share typography, color, and the compact ZeroShot mark. Their navigation and density stay distinct: broad public compositions explain the product; the portal puts the next task, saved work, and tools within reach. Component boundaries use tone and thin lines. Images of fictional users, decorative dashboards, and unsupported claims have no role in this system.\n\nImplementation sources are the global, marketing, portal, and authentication stylesheets, their current components, and the desktop/mobile review captures. This is a visual specification, not a release or accessibility certification.",
     "keyCharacteristics": [
-      "Black and charcoal surfaces with light grey actions and selections, plus distinct semantic feedback colors.",
-      "Compact controls, readable prose, and real monospaced code.",
-      "Flat bordered panels with feedback adjacent to the editor.",
-      "Connected reading, experiment, and project surfaces with responsive navigation and a mobile description/code switch."
+      "Charcoal grounds, warm off-white type, and restrained seafoam actions.",
+      "Shared typography and identity with separate public and learning navigation.",
+      "Flat surfaces, thin borders, readable lesson rows, and explicit status text.",
+      "Self-hosted Manrope for the interface and monospace for code."
     ],
     "rules": [
       {
         "name": "The Explicit State Rule",
-        "body": "Pair semantic colors with icons and wording: green success, red failure, amber caution, and blue information. Keep ordinary actions and working surfaces neutral.",
+        "body": "Pair every diagnostic color with meaningful text or an icon. Accent indicates interaction; it does not imply that a lesson has passed.",
         "section": "colors"
       },
       {
-        "name": "The Separate Reading Roles Rule",
-        "body": "Use UI type for explanations and controls, monospace for code and filenames, and serif notation only for mathematics.",
-        "section": "typography"
-      },
-      {
-        "name": "The Flat Workbench Rule",
-        "body": "Separate adjacent working regions with tone and borders; retain the existing flat surface treatment.",
-        "section": "elevation"
+        "name": "The Separate Destinations Rule",
+        "body": "The public home explains ZeroShot and links into `/learn/`; it does not impersonate the learner's personal dashboard. Keep return links visible in both environments.",
+        "section": "layout"
       }
     ],
     "dos": [
-      "**Do** retain dark charcoal working surfaces and light grey interaction emphasis with explicitly labelled diagnostic states.",
-      "**Do** preserve distinct UI, code, and mathematics type roles.",
-      "**Do** keep keyboard focus visible and pair result color with explicit status text.",
-      "**Do** adapt navigation and workspace panels to the available width."
+      "Do preserve the dark palette and distinguish the public website from the learning portal.",
+      "Do use real interactive examples and actual learner state where available.",
+      "Do keep focus visible, input labels explicit, and touch actions reachable.",
+      "Do preserve guest learning and accurate local-storage explanations.",
+      "Do keep code, content, and navigation in a readable order on narrow screens."
     ],
     "donts": [
-      "**Don't** turn restrained accents into large bright decorative panels.",
-      "**Don't** replace the flat workbench with shadow-heavy floating cards.",
-      "**Don't** encode success or failure through color alone.",
-      "**Don't** apply dense toolbar typography to long instructional paragraphs."
+      "Don't reintroduce the rejected light theme or merge the public home into the dashboard.",
+      "Don't fabricate learners, outcomes, testimonials, or synchronization capabilities.",
+      "Don't use color alone to explain success, error, topic, or selection.",
+      "Don't add decorative gradients, glow, or shadow-heavy containers to this flat system."
     ]
   }
 }

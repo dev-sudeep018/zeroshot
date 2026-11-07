@@ -1,0 +1,45 @@
+{
+  "intro": "A shaping reward can give local feedback while telescoping over a trajectory. The difference of discounted potentials matters, including what happens at terminal states.",
+  "task": "Add the potential-based shaping term to each reward. Inspect why the current-state potential is subtracted even on a terminal transition.",
+  "signature": "shape_rewards(rewards, potentials, next_potentials, terminated, discount)",
+  "requirements": [
+    "rewards, potentials, next_potentials, and terminated are equal-length vectors. terminated contains numeric zero/one, and discount is in [0,1].",
+    "Return rewards+discount*(1-terminated)*next_potentials-potentials as a NumPy vector. The terminal next-state potential is defined as zero by this contract.",
+    "Do not clip the shaped rewards or add the current potential. This computes supplied shaping terms; policy-invariance claims require the assumptions of potential-based shaping and compatible terminal handling.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Potential increase",
+      "input": "shape_rewards([1],[2],[6],[0],0.5)",
+      "output": "array([2.])"
+    },
+    {
+      "name": "Terminal potential is zero",
+      "input": "shape_rewards([1],[2],[100],[1],0.5)",
+      "output": "array([-1.])"
+    },
+    {
+      "name": "Two-step telescoping",
+      "input": "shape_rewards([0,0],[2,4],[4,9],[0,1],0.5)",
+      "output": "array([ 0., -4.])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "View shaping as a discounted difference",
+      "body": "The next potential is discounted, while the current potential is not."
+    },
+    {
+      "title": "Check a two-transition trajectory",
+      "body": "Intermediate potentials cancel in the discounted sum if the next potential agrees with the next state\u2019s current potential."
+    }
+  ],
+  "explanation": [
+    "Summing the shaping terms along a discounted trajectory cancels intermediate potentials. The remaining terms depend on the initial potential and the final boundary.",
+    "For a terminal trajectory with the defined zero final potential, the shaped discounted return differs from the original by minus the initial potential. This explains why terminal conventions cannot be omitted."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

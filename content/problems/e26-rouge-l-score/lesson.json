@@ -1,0 +1,45 @@
+{
+  "intro": "A summary may preserve a reference sequence while inserting unrelated words. ROUGE-L separates longest-subsequence recall from precision to reveal that tradeoff.",
+  "task": "Measure retained sequence structure and explain why adding unrelated candidate words changes precision but not recall.",
+  "signature": "rouge_l(candidate, reference)",
+  "requirements": [
+    "candidate and reference are token lists or tuples with nonempty strings and at most 500 tokens each.",
+    "Find the longest common subsequence length L, preserving order but allowing gaps. Return dict lcs, precision=L/len(candidate), recall=L/len(reference), f1=2PR/(P+R).",
+    "A zero denominator gives 0 for that component, including both-empty input. This is single-reference token ROUGE-L F1, without stemming or sentence aggregation.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Extra candidate words",
+      "input": "rouge_l(['a','x','b'], ['a','b'])",
+      "output": "{'lcs': 2, 'precision': 0.666666666667, 'recall': 1.0, 'f1': 0.8}"
+    },
+    {
+      "name": "Short candidate",
+      "input": "rouge_l(['a'], ['a','b','c'])",
+      "output": "{'lcs': 1, 'precision': 1.0, 'recall': 0.333333333333, 'f1': 0.5}"
+    },
+    {
+      "name": "Reordered tokens",
+      "input": "rouge_l(['b','a'], ['a','b'])",
+      "output": "{'lcs': 1, 'precision': 0.5, 'recall': 0.5, 'f1': 0.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Subsequence is not substring",
+      "body": "Matching tokens can be separated by gaps; preserve their relative order."
+    },
+    {
+      "title": "Check both denominators",
+      "body": "Precision divides by candidate length and recall by reference length."
+    }
+  ],
+  "explanation": [
+    "The longest common subsequence rewards preserved order without demanding contiguous matches. Inserting irrelevant candidate text leaves recall unchanged but lowers precision.",
+    "This deliberately explicit single-reference variant omits tokenization, stemming, and sentence-level aggregation. Metric names alone do not specify those evaluation choices."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

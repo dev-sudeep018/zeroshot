@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m84",
+  "kind": "lesson",
+  "slug": "harmonic-rate-summary",
+  "version": 1,
+  "title": "Average Rates over Equal Distances",
+  "summary": "Compute harmonic mean speed and total travel time for equal-distance segments with varying speeds.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Average Rates over Equal Distances"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "equal_distance_rates",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html",
+    ],
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "An affine quantizer can place real zero away from integer zero. Separating scale and zero point reveals how rounding and saturation change reconstructed values.",
+  "task": "Map real values to signed 8-bit codes and reconstruct them, inspecting zero points, ties-to-even rounding, and saturation.",
+  "signature": "affine_quantize(values, scale, zero_point)",
+  "requirements": [
+    "values is any finite numeric array; scale is a strictly positive real scalar; zero_point is an integer in [-128,127]. Require abs(values/scale)<=1e30.",
+    "Compute q=clip(rint(values/scale)+zero_point,-128,127), where rint rounds ties to the nearest even integer. Return q as np.int8.",
+    "Return dict quantized and reconstructed, with reconstructed=(q-zero_point)*scale as float64. Subtract the zero point after promoting q to a wider dtype.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Nonzero zero point",
+      "input": "affine_quantize([-1,0,1], .5, 10)",
+      "output": "{'quantized': [8, 10, 12], 'reconstructed': [-1.0, 0.0, 1.0]}"
+    },
+    {
+      "name": "Round ties to even",
+      "input": "affine_quantize([.5,1.5,2.5], 1, 0)",
+      "output": "{'quantized': [0, 2, 2], 'reconstructed': [0.0, 2.0, 2.0]}"
+    },
+    {
+      "name": "Saturate extremes",
+      "input": "affine_quantize([-1000,1000], 1, 0)",
+      "output": "{'quantized': [-128, 127], 'reconstructed': [-128.0, 127.0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Round before adding the offset",
+      "body": "The zero point maps real zero exactly to its chosen integer code."
+    },
+    {
+      "title": "Avoid int8 subtraction overflow",
+      "body": "Convert quantized codes to float64 before subtracting the zero point."
+    }
+  ],
+  "explanation": [
+    "Affine quantization separates the spacing between representable real values from the integer code assigned to real zero. This supports asymmetric real ranges.",
+    "Saturation is distinct from rounding error: once a value crosses the representable range, changing it further leaves its integer code fixed. The lesson uses supplied calibration parameters rather than fitting them."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

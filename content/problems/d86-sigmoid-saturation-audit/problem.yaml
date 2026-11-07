@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d86",
+  "kind": "lesson",
+  "slug": "sigmoid-saturation-audit",
+  "version": 1,
+  "title": "Audit Sigmoid Saturation",
+  "summary": "A confident sigmoid can transmit almost no local gradient. Measure confidence extremes and sensitivity together.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Audit Sigmoid Saturation"],
+  "prerequisites": ["d08"],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "sigmoid_audit",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://cs231n.github.io/neural-networks-1/",
+    ],
+}

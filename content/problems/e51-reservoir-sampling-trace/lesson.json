@@ -1,0 +1,45 @@
+{
+  "intro": "A stream may be too large to store, yet a uniform sample can fit in fixed memory. Supplied draws make the reservoir replacement decisions reproducible.",
+  "task": "Trace bounded-memory reservoir replacement with supplied random draws and preserve reservoir-slot order.",
+  "signature": "reservoir_sample(values, capacity, draws)",
+  "requirements": [
+    "values is a finite numeric vector with at most 1000000 entries and capacity is an integer from 1 to 10000. Initialize the reservoir with the first min(capacity,N) values.",
+    "For each later stream index i, consume one integer draw in [0,i]. Replace reservoir[draw] with values[i] only when draw<capacity. draws must have exactly max(0,N-capacity) entries.",
+    "Return a NumPy vector in reservoir-slot order. Uniform sampling depends on independent uniform draws; the function verifies bounds, not randomness.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Replace and then keep",
+      "input": "reservoir_sample([10,20,30,40], 2, [0,3])",
+      "output": "[30.0, 20.0]"
+    },
+    {
+      "name": "Fill without extra draws",
+      "input": "reservoir_sample([1,2], 3, [])",
+      "output": "[1.0, 2.0]"
+    },
+    {
+      "name": "Every arrival replaces one slot",
+      "input": "reservoir_sample([1,2,3], 1, [0,0])",
+      "output": "[3.0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use the absolute stream index",
+      "body": "The allowed draw range grows with all items seen, not with reservoir size."
+    },
+    {
+      "title": "Replacement preserves slots",
+      "body": "Do not append a replacement or sort the resulting sample."
+    }
+  ],
+  "explanation": [
+    "At arrival i, an independent uniform draw from 0 through i admits the new item with probability capacity/(i+1). Induction then gives every observed item equal inclusion probability.",
+    "Supplying the draws separates deterministic state transitions from random-number generation. The returned reservoir is in slot order and does not imply a random ordering of the selected items."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

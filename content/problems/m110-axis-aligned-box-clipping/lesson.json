@@ -1,0 +1,45 @@
+{
+  "intro": "Clipping turns spatial constraints into restrictions on one parameter along the segment. The final visible portion is the intersection of all those restrictions.",
+  "task": "Compute the visible parameter interval of a 2D segment inside a closed axis-aligned rectangle.",
+  "signature": "clip_segment_box(start, end, lower, upper)",
+  "requirements": [
+    "All inputs have length two. lower must be coordinatewise <= upper; zero-width rectangles and zero-length segments are allowed.",
+    "Return {\"visible\": bool, \"parameters\": [enter,exit], \"points\": [enter_point,exit_point]}. For no intersection return visible=False, parameters=[0,0], and a (2,2) zero array.",
+    "The rectangle is closed. Intersect parameter ranges for both coordinates with [0,1]; a zero direction component is feasible only when its fixed coordinate is inside the bounds.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Across box",
+      "input": "clip_segment_box([-1,1],[3,1],[0,0],[2,2])",
+      "output": "{'visible': True, 'parameters': [0.25, 0.75], 'points': [[0.0, 1.0], [2.0, 1.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Outside parallel",
+      "input": "clip_segment_box([-1,3],[3,3],[0,0],[2,2])",
+      "output": "{'visible': False, 'parameters': [0.0, 0.0], 'points': [[0.0, 0.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Inside point",
+      "input": "clip_segment_box([1,1],[1,1],[0,0],[2,2])",
+      "output": "{'visible': True, 'parameters': [0.0, 1.0], 'points': [[1.0, 1.0], [1.0, 1.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Each coordinate imposes an allowed interval for the segment parameter."
+    },
+    {
+      "title": "Build the result",
+      "body": "Intersect those intervals, taking care with directions equal to zero before dividing."
+    }
+  ],
+  "explanation": [
+    "Clipping turns spatial constraints into restrictions on one parameter along the segment. The final visible portion is the intersection of all those restrictions.",
+    "Closed bounds preserve tangent or corner contacts as a zero-length visible portion. The explicit empty-result convention makes a missed rectangle distinguishable from a genuine point at the origin."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

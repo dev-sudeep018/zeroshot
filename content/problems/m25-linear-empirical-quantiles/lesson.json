@@ -1,0 +1,45 @@
+{
+  "intro": "A percentile is ambiguous until its interpolation convention is fixed. Build quantiles from sorted observations and fractional positions.",
+  "task": "Return a vector of empirical quantiles using position h=(n-1)*q and linear interpolation between neighboring sorted observations.",
+  "signature": "empirical_quantiles(values, probabilities)",
+  "requirements": [
+    "values is a nonempty vector. probabilities is a vector with every entry in [0,1]; its order need not be sorted.",
+    "For each q, set h=(n-1)*q, lo=floor(h), hi=ceil(h), and interpolate sorted[lo]*(1-fraction)+sorted[hi]*fraction.",
+    "Preserve the query order and repeated queries. A single observation produces that value for every q.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Quartiles of four values",
+      "input": "empirical_quantiles([0,10,20,30],[.25,.5,.75])",
+      "output": "[\n  7.5,\n  15.0,\n  22.5\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Unsorted observations",
+      "input": "empirical_quantiles([9,1,5],[0,.5,1])",
+      "output": "[\n  1,\n  5,\n  9\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Singleton sample",
+      "input": "empirical_quantiles([7],[0,.3,1])",
+      "output": "[\n  7,\n  7,\n  7\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Sort the observations once, then map each query to a fractional index between the first and last observation."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Floor and ceiling locate the two neighbors; the fractional index supplies the interpolation weight."
+    }
+  ],
+  "explanation": [
+    "Quantile conventions choose where sorted observations sit on the probability axis. This exercise places the first and last observations at zero and one, then interpolates between them.",
+    "A median for an even-sized sample therefore averages the two central observations. Query order is independent of observation sorting and should remain unchanged."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

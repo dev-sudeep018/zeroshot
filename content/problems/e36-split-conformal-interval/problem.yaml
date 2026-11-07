@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e36",
+  "kind": "lesson",
+  "slug": "split-conformal-interval",
+  "version": 1,
+  "title": "Construct Split-Conformal Intervals",
+  "summary": "Calibration residuals can turn point predictions into intervals. The finite-sample rank uses n+1, so small calibration sets need special care at high coverage.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "conformal_interval",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Angelopoulos and Bates, A Gentle Introduction to Conformal Prediction. https://arxiv.org/abs/2107.07511",
+    ],
+}

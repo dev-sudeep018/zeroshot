@@ -1,0 +1,45 @@
+{
+  "intro": "A no-fixed-point assignment arises in matching and rearrangement problems. Recurrence replaces factorial enumeration with a short sequence of exact integer operations.",
+  "task": "Build exact derangement counts by recurrence and return the no-fixed-point probability.",
+  "signature": "derangement_probability(size)",
+  "requirements": [
+    "size is an integer in 0..64. A derangement is a permutation where no item remains in its original position.",
+    "Return {\"count\": exact derangement count, \"probability\": count/size!}. The empty permutation has count one and probability one.",
+    "Use D(0)=1, D(1)=0 and D(n)=(n-1)*(D(n-1)+D(n-2)).",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Four assignments",
+      "input": "derangement_probability(4)",
+      "output": "{'count': 9, 'probability': 0.375}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Empty assignment",
+      "input": "derangement_probability(0)",
+      "output": "{'count': 1, 'probability': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One assignment",
+      "input": "derangement_probability(1)",
+      "output": "{'count': 0, 'probability': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Keep the previous two exact counts rather than enumerating permutations."
+    },
+    {
+      "title": "Build the result",
+      "body": "Handle sizes zero and one before applying the recurrence from size two."
+    }
+  ],
+  "explanation": [
+    "A no-fixed-point assignment arises in matching and rearrangement problems. Recurrence replaces factorial enumeration with a short sequence of exact integer operations.",
+    "Dividing by the total number of permutations converts the count into a uniform-random permutation probability. The empty case is a useful combinatorial identity rather than a missing-data error."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

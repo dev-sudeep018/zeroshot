@@ -1,0 +1,44 @@
+{
+  "intro": "A decoder can train on a mixture of previous gold tokens and previous model predictions. Make the choice with supplied random draws so behavior is reproducible.",
+  "task": "Build decoder input tokens, beginning with a start token and then selecting the previous gold or predicted token.",
+  "signature": "teacher_forcing_inputs(targets, predictions, draws, teacher_probability, start_id)",
+  "requirements": [
+    "targets, predictions and draws are matching batch-by-time matrices; time>=2. Token IDs are integers 0..1000000. draws lies in [0,1), teacher_probability in [0,1], and start_id is an integer token ID.",
+    "Return a batch-by-time integer array. Column zero is start_id. For t>=1, use targets[:,t-1] when draws[:,t-1]<teacher_probability and predictions[:,t-1] otherwise. The final column of each supplied matrix is not used as a previous token but must still satisfy validation.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Mixed histories",
+      "input": "teacher_forcing_inputs([[1,2,3]],[[4,5,6]],[[0.1,0.8,0.2]],0.5,9)",
+      "output": "[[9, 1, 5]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "All teacher",
+      "input": "teacher_forcing_inputs([[1,2]],[[3,4]],[[0.9,0.9]],1,0)",
+      "output": "[[0, 1]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "No teacher",
+      "input": "teacher_forcing_inputs([[1,2,3]],[[4,5,6]],[[0,0,0]],0,9)",
+      "output": "[[9, 4, 5]]\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Choose the previous token before shifting it into the next input position."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "At probability zero use predictions everywhere after the start; at one use gold tokens everywhere."
+    }
+  ],
+  "explanation": [
+    "Scheduled teacher forcing changes which historical token the decoder receives during training. This addresses the difference between training with correct histories and generating from its own earlier predictions.",
+    "Supplied predictions are treated as fixed data here. A live autoregressive rollout would recompute later predictions after each chosen input, which is outside this deterministic batch transformation."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

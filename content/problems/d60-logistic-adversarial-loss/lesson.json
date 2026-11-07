@@ -1,0 +1,45 @@
+{
+  "intro": "Adversarial training gives the discriminator and generator different goals on fake samples. Stable logits make those opposing objectives easy to inspect.",
+  "task": "Implement adversarial_losses(real_logits, fake_logits). The discriminator pushes real scores upward and fake scores downward. The non-saturating generator objective pushes fake scores upward without changing real logits.",
+  "signature": "adversarial_losses(real_logits, fake_logits)",
+  "requirements": [
+    "real_logits and fake_logits are nonempty vectors; their lengths may differ.",
+    "Discriminator loss is mean(softplus(-real_logits))+mean(softplus(fake_logits)). Non-saturating generator loss is mean(softplus(-fake_logits)).",
+    "Return scalar entries {discriminator: loss, generator: loss}. Use stable softplus without clipping logits. Each population has its own mean; do not average the two discriminator terms again.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Indifferent discriminator",
+      "input": "adversarial_losses([0],[0])",
+      "output": "{\"discriminator\": 1.38629436112, \"generator\": 0.69314718056}"
+    },
+    {
+      "name": "Confident correct discriminator",
+      "input": "adversarial_losses([1000],[-1000])",
+      "output": "{\"discriminator\": 0.0, \"generator\": 1000.0}"
+    },
+    {
+      "name": "Confident wrong discriminator",
+      "input": "adversarial_losses([-1000],[1000])",
+      "output": "{\"discriminator\": 2000.0, \"generator\": 0.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "A positive fake logit helps the generator but hurts the discriminator."
+    },
+    {
+      "title": "Step 2",
+      "body": "Use logaddexp(0,x) to evaluate softplus stably."
+    }
+  ],
+  "explanation": [
+    "The discriminator pushes real scores upward and fake scores downward. The non-saturating generator objective pushes fake scores upward without changing real logits.",
+    "These forward losses do not imply a complete training loop. During actual updates the appropriate model parameters and gradient routes must be selected."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d55",
+  "kind": "lesson",
+  "slug": "group-normalization",
+  "version": 1,
+  "title": "Normalize Channels in Separate Groups",
+  "summary": "Group normalization computes statistics inside each example. Channel groups determine which features share a mean and variance.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Normalization", "Feature grouping"],
+  "prerequisites": ["d03", "d25"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "group_normalize",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

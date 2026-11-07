@@ -1,0 +1,44 @@
+{
+  "intro": "Missingness has several representations in imported records. Reporting its reason helps a data-cleaning stage choose whether to fill, reject, or preserve the value.",
+  "task": "Return row and field locations of absent, None, or whitespace-only string cells.",
+  "signature": "blank_cells(records, fields)",
+  "requirements": [
+    "fields contains unique nonempty strings. Return [row_index, field, reason] in row order then field order for absent cells (missing), None (null), or whitespace-only strings including empty strings (blank). Zero, False, and empty containers are not blank under this rule.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Three missingness reasons",
+      "input": "blank_cells([{}, {'x':None},{'x':'  '}], ['x'])",
+      "output": "[[0, 'x', 'missing'], [1, 'x', 'null'], [2, 'x', 'blank']]"
+    },
+    {
+      "name": "Falsy data retained",
+      "input": "blank_cells([{'a':0,'b':False,'c':[]}], ['a','b','c'])",
+      "output": "[]"
+    },
+    {
+      "name": "Field order",
+      "input": "blank_cells([{}], ['b','a'])",
+      "output": "[[0, 'b', 'missing'], [0, 'a', 'missing']]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Test absence, None, and blank strings as separate conditions."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Avoid if not value: valid zero and False would be incorrectly reported."
+    }
+  ],
+  "explanation": [
+    "Missingness has several representations in imported records. Reporting its reason helps a data-cleaning stage choose whether to fill, reject, or preserve the value.",
+    "A precise blank policy prevents accidental deletion of legitimate falsy data. Empty containers are retained here because this lesson treats only missing, null, and blank text as issues."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

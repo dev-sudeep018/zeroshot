@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e57",
+  "kind": "lesson",
+  "slug": "bloom-membership-filter",
+  "version": 1,
+  "title": "Inspect Bloom Filter False Positives",
+  "summary": "A Bloom filter can reject unseen items without storing every key. Collisions can produce false positives, so membership means possibly present rather than definitely present.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Streaming data", "Approximate membership"],
+  "prerequisites": ["e55"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bloom_filter",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Bloom, Space/Time Trade-offs in Hash Coding with Allowable Errors. https://www.cs.princeton.edu/courses/archive/spr05/cos598E/bib/p422-bloom.pdf",
+    ],
+}

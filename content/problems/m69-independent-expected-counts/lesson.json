@@ -1,0 +1,45 @@
+{
+  "intro": "Independence means the fraction in a column does not depend on the row. Applying the overall column proportions within each row preserves both margins while removing association.",
+  "task": "Derive expected cell counts from observed row and column totals and report observed-minus-expected residuals.",
+  "signature": "independence_baseline(counts)",
+  "requirements": [
+    "counts is a nonnegative matrix with positive total count. Fractional counts are allowed.",
+    "Return {\"expected\": outer(row_totals,column_totals)/grand_total, \"residual\": counts-expected}.",
+    "Zero rows or columns are valid and retain zero expected mass. Expected counts must share the original row and column totals.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Association",
+      "input": "independence_baseline([[3,1],[1,3]])",
+      "output": "{'expected': [[2.0, 2.0], [2.0, 2.0]], 'residual': [[1.0, -1.0], [-1.0, 1.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Already independent",
+      "input": "independence_baseline([[1,2],[2,4]])",
+      "output": "{'expected': [[1.0, 2.0], [2.0, 4.0]], 'residual': [[0.0, 0.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero row",
+      "input": "independence_baseline([[0,0],[2,4]])",
+      "output": "{'expected': [[0.0, 0.0], [2.0, 4.0]], 'residual': [[0.0, 0.0], [0.0, 0.0]]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the row totals and column totals once."
+    },
+    {
+      "title": "Build the result",
+      "body": "Their outer product is too large by one factor of the grand total, so divide by that total."
+    }
+  ],
+  "explanation": [
+    "Independence means the fraction in a column does not depend on the row. Applying the overall column proportions within each row preserves both margins while removing association.",
+    "Residuals isolate the departures from that baseline. Their row sums and column sums are zero up to floating-point rounding, which is a strong consistency check."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

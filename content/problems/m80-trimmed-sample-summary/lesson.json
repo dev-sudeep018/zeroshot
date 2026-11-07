@@ -1,0 +1,44 @@
+{
+  "intro": "A trimmed mean reduces the influence of extreme observations by removing the same number from both sorted tails. It differs from clipping, which keeps all observations but changes extreme values.",
+  "task": "Sort observations, trim a fixed count from both tails, and report the retained mean and count.",
+  "signature": "trimmed_summary(values, trim)",
+  "requirements": [
+    "trim is an integer count removed from EACH end after sorting. Require 0 <= 2*trim < n.",
+    "Return {\"mean\": retained arithmetic mean, \"count\": retained count, \"retained\": sorted retained values}. Trimming removes observations, not numeric thresholds.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Remove two tails",
+      "input": "trimmed_summary([100,2,3,4,-50],1)",
+      "output": "{'mean': 3.0, 'count': 3, 'retained': [2.0, 3.0, 4.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No trimming",
+      "input": "trimmed_summary([3,1,2],0)",
+      "output": "{'mean': 2.0, 'count': 3, 'retained': [1.0, 2.0, 3.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Keep one",
+      "input": "trimmed_summary([7,1,9,3,5],2)",
+      "output": "{'mean': 5.0, 'count': 1, 'retained': [5.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sort before deciding which observations belong to each tail."
+    },
+    {
+      "title": "Build the result",
+      "body": "Slice from trim to n-trim and compute both the mean and retained count."
+    }
+  ],
+  "explanation": [
+    "A trimmed mean reduces the influence of extreme observations by removing the same number from both sorted tails. It differs from clipping, which keeps all observations but changes extreme values.",
+    "The trim parameter counts observations per side. Returning retained values makes ties and the exact support of the estimate visible, and the nonempty constraint prevents an undefined mean."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A deviation along a tightly constrained direction matters more than the same deviation along a variable direction. Precision-weighted geometry captures that distinction.",
+  "task": "Return squared Mahalanobis distances using a supplied symmetric positive-definite precision matrix.",
+  "signature": "mahalanobis_squared(points, center, precision)",
+  "requirements": [
+    "points is an (n,d) matrix, center is a length-d vector, and precision is a (d,d) matrix.",
+    "precision must be symmetric within 1e-10 and have every eigenvalue at least 1e-8. Return one value (point-center).T@precision@(point-center) per row.",
+    "The output is squared distance, without a square root. A precision matrix is the inverse covariance; do not invert it again.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Identity geometry",
+      "input": "mahalanobis_squared([[3,4],[0,0]],[0,0],[[1,0],[0,1]])",
+      "output": "[\n  25.0,\n  0.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Anisotropic geometry",
+      "input": "mahalanobis_squared([[2,2]],[0,0],[[.25,0],[0,1]])",
+      "output": "[\n  5.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Correlated precision",
+      "input": "mahalanobis_squared([[1,1],[1,-1]],[0,0],[[2,1],[1,2]])",
+      "output": "[\n  6.0,\n  2.0\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Subtract the center from each point, then apply the precision matrix in the quadratic form."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Precision already describes inverse covariance, so no additional inversion belongs inside this scoring operation."
+    }
+  ],
+  "explanation": [
+    "A quadratic form combines scale and cross-coordinate relationships. For diagonal precision, the formula becomes a weighted sum of squared coordinate differences.",
+    "Using a supplied precision avoids repeatedly solving or inverting a covariance inside a scoring loop. The squared convention is useful in Gaussian log densities and should remain explicit."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

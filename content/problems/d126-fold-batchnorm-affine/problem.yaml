@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d126",
+  "kind": "lesson",
+  "slug": "fold-batchnorm-affine",
+  "version": 1,
+  "title": "Fold Evaluation Batch Normalization into a Linear Layer",
+  "summary": "At inference, batch normalization uses fixed running statistics. Combine it with a preceding affine layer to produce exactly the same outputs with one affine operation.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Fold Evaluation Batch Normalization into a Linear Layer"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python functions and array indexing",
+      "Basic arithmetic and NumPy arrays",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "fold_batchnorm",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot lesson, implementation and test fixtures.",
+      "Conceptual reading only; no code or prose copied: https://pytorch.org/tutorials/intermediate/torch_compile_conv_bn_fuser.html",
+    ],
+}

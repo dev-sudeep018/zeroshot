@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import type { LearningItem } from "@mastery/problem-schema";
+import type { LearningItem } from "@zeroshot/problem-schema";
 import { allItems } from "./curriculum";
 
 // Only called by server pages during static generation. Each route serializes

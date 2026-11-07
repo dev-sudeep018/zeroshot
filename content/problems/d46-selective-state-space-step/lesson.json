@@ -1,0 +1,45 @@
+{
+  "intro": "A state-space step combines decayed memory with a new input. Inspect how the time increment controls both forgetting and the strength of the write.",
+  "task": "Implement state_space_step(x, state, decay, input_weights, output_weights, delta). Restricting decay to nonpositive values prevents exponential growth of the retained memory. The input term still depends linearly on the time step.",
+  "signature": "state_space_step(x, state, decay, input_weights, output_weights, delta)",
+  "requirements": [
+    "x and delta have shape (B,D), state is (B,D,N), decay is (D,N), input_weights and output_weights are (B,N). All dimensions positive; delta>=0 and decay<=0.",
+    "next_state=exp(delta[:,:,None]*decay[None,:,:])*state + delta[:,:,None]*input_weights[:,None,:]*x[:,:,None].",
+    "Return a dictionary with state=next_state and output=sum(next_state*output_weights[:,None,:],axis=-1). This is one diagonal recurrence with Euler input discretization, not a complete Mamba model.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Write into empty memory",
+      "input": "state_space_step([[2]],[[[0]]],[[0]],[[3]],[[4]],[[.5]])",
+      "output": "{\"state\": [[[3.0]]], \"output\": [[12.0]]}"
+    },
+    {
+      "name": "No elapsed time",
+      "input": "state_space_step([[99]],[[[2]]],[[-1]],[[3]],[[4]],[[0]])",
+      "output": "{\"state\": [[[2.0]]], \"output\": [[8.0]]}"
+    },
+    {
+      "name": "Half the old memory",
+      "input": "state_space_step([[0]],[[[8]]],[[-np.log(2)]],[[1]],[[1]],[[1]])",
+      "output": "{\"state\": [[[4.0]]], \"output\": [[4.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "A zero time increment preserves state and suppresses the new input."
+    },
+    {
+      "title": "Step 2",
+      "body": "The output reads the updated state, not the old state."
+    }
+  ],
+  "explanation": [
+    "Restricting decay to nonpositive values prevents exponential growth of the retained memory. The input term still depends linearly on the time step.",
+    "The port exposes state and readout arrays directly. It follows the upstream exp(delta*A), delta*B convention rather than an exact zero-order-hold input integral."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

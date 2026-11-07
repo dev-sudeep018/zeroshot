@@ -1,0 +1,44 @@
+{
+  "intro": "Grouping retains individual records rather than immediately reducing them to counts or totals. That makes each group available for later inspection or aggregation.",
+  "task": "Create groups retaining original record order and explicit missing-category bucket.",
+  "signature": "group_records(records, field, missing)",
+  "requirements": [
+    "field and missing are nonempty strings. Present group values must be nonempty strings. Return a mapping from category to copied record lists in input order; absent fields use missing, while present None is invalid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Repeated category",
+      "input": "group_records([{'g':'a','v':1},{'g':'b'},{'g':'a','v':2}], 'g', '?')",
+      "output": "{'a': [{'g': 'a', 'v': 1}, {'g': 'a', 'v': 2}], 'b': [{'g': 'b'}]}"
+    },
+    {
+      "name": "Missing bucket",
+      "input": "group_records([{}], 'g', '?')",
+      "output": "{'?': [{}]}"
+    },
+    {
+      "name": "Empty records",
+      "input": "group_records([], 'g', '?')",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Create a list for a category on its first appearance, then append the full record."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Only absent fields use the missing label; an invalid present value must be rejected."
+    }
+  ],
+  "explanation": [
+    "Grouping retains individual records rather than immediately reducing them to counts or totals. That makes each group available for later inspection or aggregation.",
+    "The missing bucket is a caller-selected label and can intentionally coincide with a present category. This contract makes that merge explicit rather than inventing a hidden sentinel."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

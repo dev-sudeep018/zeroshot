@@ -1,0 +1,45 @@
+{
+  "intro": "A frequency sketch trades exact counts for bounded memory. Several hash rows reduce collision overcounts, and the minimum row counter estimates each queried frequency.",
+  "task": "Build a compact frequency sketch from explicit hash mappings and compare collision inflation across counter rows.",
+  "signature": "count_min_sketch(update_hashes, counts, query_hashes, width)",
+  "requirements": [
+    "update_hashes is an integer-valued (N,D) matrix and query_hashes is an integer-valued (M,D) matrix, D>0. width is an integer 1..10000 and every hash index lies in [0,width-1].",
+    "counts is a length-N vector of nonnegative integer-valued increments up to 1000000. Add each increment to the selected bucket in every sketch row.",
+    "Return dict sketch as a (D,width) integer array and estimates as a length-M integer vector taking the minimum selected counter across rows. Hashes are caller-supplied; use ordinary updates, not conservative updates.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Second hash removes a collision",
+      "input": "count_min_sketch([[0,0],[0,1]], [2,3], [[0,0],[0,1]], 2)",
+      "output": "{'sketch': [[5, 0], [2, 3]], 'estimates': [2, 3]}"
+    },
+    {
+      "name": "All rows collide",
+      "input": "count_min_sketch([[0,0],[0,0]], [2,3], [[0,0]], 2)",
+      "output": "{'sketch': [[5, 0], [5, 0]], 'estimates': [5]}"
+    },
+    {
+      "name": "Unseen buckets remain zero",
+      "input": "count_min_sketch([[0,0]], [4], [[1,1]], 2)",
+      "output": "{'sketch': [[4, 0], [4, 0]], 'estimates': [0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Each update touches every depth",
+      "body": "Rows are separate counter arrays, even if bucket indices happen to match."
+    },
+    {
+      "title": "Use the minimum estimate",
+      "body": "Nonnegative collisions can only add count, so the smallest row counter is the least inflated estimate."
+    }
+  ],
+  "explanation": [
+    "With nonnegative increments, every queried counter includes the true frequency plus possible collision contributions. Taking the minimum cannot introduce an underestimate for a consistently hashed item.",
+    "Statistical error bounds require assumptions about the hash family and sketch dimensions. The lesson exposes supplied bucket mappings so collisions can be examined directly without claiming those probabilistic guarantees."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

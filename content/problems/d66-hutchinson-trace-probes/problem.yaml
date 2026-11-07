@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d66",
+  "kind": "lesson",
+  "slug": "hutchinson-trace-probes",
+  "version": 1,
+  "title": "Estimate a Matrix Trace with Sign Probes",
+  "summary": "A trace estimator can replace a diagonal sum with quadratic probes. Inspect sampling variation using explicit sign vectors instead of hidden random draws.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Trace estimation", "Randomized linear algebra"],
+  "prerequisites": ["d01"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "trace_probes",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

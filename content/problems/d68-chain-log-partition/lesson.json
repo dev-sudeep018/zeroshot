@@ -1,0 +1,45 @@
+{
+  "intro": "A linear-chain model scores entire label sequences. Its normalizing constant sums exponentially many possibilities, but dynamic programming reuses partial sums.",
+  "task": "Implement chain_log_partition(emissions, transitions, start, end). The log partition includes all paths, even those with poor scores. Replacing log-sum-exp with max computes a best-path score and loses normalization mass.",
+  "signature": "chain_log_partition(emissions, transitions, start, end)",
+  "requirements": [
+    "emissions is nonempty (T,K), transitions is (K,K), start and end are length K. transitions[i,j] scores a move from previous i to current j.",
+    "A path scores start[y0]+sum_t emissions[t,yt]+sum_{t=1..T-1} transitions[y(t-1),yt]+end[y(T-1)].",
+    "Return log(sum_paths exp(path_score)) as a finite scalar. Use stable log-sum-exp recurrences, not enumeration or a maximum. There are no impossible transitions in this finite-score contract.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Four equal paths",
+      "input": "chain_log_partition(np.zeros((2,2)),np.zeros((2,2)),[0,0],[0,0])",
+      "output": "1.38629436112"
+    },
+    {
+      "name": "Weighted single-step labels",
+      "input": "chain_log_partition([[0,np.log(3)]],np.zeros((2,2)),[0,0],[0,0])",
+      "output": "1.38629436112"
+    },
+    {
+      "name": "Only one path",
+      "input": "chain_log_partition([[1],[2],[3]],[[4]],[5],[6])",
+      "output": "25.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Maintain one log-sum score for paths ending in each current label."
+    },
+    {
+      "title": "Step 2",
+      "body": "Add end scores only after the last emission; start scores appear only once."
+    }
+  ],
+  "explanation": [
+    "The log partition includes all paths, even those with poor scores. Replacing log-sum-exp with max computes a best-path score and loses normalization mass.",
+    "Transition orientation is part of the model. Transposing it changes the score of an asymmetric chain."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

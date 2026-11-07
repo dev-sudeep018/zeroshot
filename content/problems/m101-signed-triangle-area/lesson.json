@@ -1,0 +1,44 @@
+{
+  "intro": "A signed area retains the order in which vertices are visited. Exchanging two vertices flips the orientation while preserving geometric size.",
+  "task": "Use a 2D cross product to return signed area and orientation, including collinear points.",
+  "signature": "triangle_orientation(a, b, c)",
+  "requirements": [
+    "a,b,c are length-two vectors. Return {\"signed_area\": ((b-a)_x*(c-a)_y-(b-a)_y*(c-a)_x)/2, \"orientation\": sign of signed area as -1,0,+1}.",
+    "Positive area means counterclockwise order. Use exact floating-point zero for collinearity in this bounded exercise; no tolerance is applied.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Counterclockwise",
+      "input": "triangle_orientation([0,0],[4,0],[0,3])",
+      "output": "{'signed_area': 6.0, 'orientation': 1}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Clockwise",
+      "input": "triangle_orientation([0,0],[0,3],[4,0])",
+      "output": "{'signed_area': -6.0, 'orientation': -1}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Collinear",
+      "input": "triangle_orientation([0,0],[1,1],[2,2])",
+      "output": "{'signed_area': 0.0, 'orientation': 0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Translate the triangle so its first vertex becomes the origin."
+    },
+    {
+      "title": "Build the result",
+      "body": "The two edge vectors form a signed parallelogram area; divide by two for the triangle."
+    }
+  ],
+  "explanation": [
+    "A signed area retains the order in which vertices are visited. Exchanging two vertices flips the orientation while preserving geometric size.",
+    "This cross-product calculation is useful in polygon algorithms because it distinguishes left turns, right turns and collinearity without computing angles. The sign convention must remain consistent across those algorithms."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

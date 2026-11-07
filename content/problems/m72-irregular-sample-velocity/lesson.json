@@ -1,0 +1,45 @@
+{
+  "intro": "Dividing by a global sample interval gives the wrong rate on irregular grids. Each segment needs its own duration and displacement.",
+  "task": "Compute interval velocities and their midpoint timestamps from strictly increasing sample times.",
+  "signature": "interval_velocities(times, positions)",
+  "requirements": [
+    "times is a strictly increasing vector with at least two entries; positions has the same length.",
+    "Return {\"time\": interval midpoint times, \"velocity\": position differences divided by time differences}, both length n-1.",
+    "All adjacent time differences must be at least 1e-6. Velocity is an interval-average rate, not a value at an original endpoint.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Uneven steps",
+      "input": "interval_velocities([0,1,3],[0,2,8])",
+      "output": "{'time': [0.5, 2.0], 'velocity': [2.0, 3.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Stationary",
+      "input": "interval_velocities([0,2,5],[4,4,4])",
+      "output": "{'time': [1.0, 3.5], 'velocity': [0.0, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Reverse motion",
+      "input": "interval_velocities([1,2,4],[5,3,-1])",
+      "output": "{'time': [1.5, 3.0], 'velocity': [-2.0, -2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute each elapsed time separately because spacing may change."
+    },
+    {
+      "title": "Build the result",
+      "body": "Pair each difference quotient with the average of its two timestamps."
+    }
+  ],
+  "explanation": [
+    "Dividing by a global sample interval gives the wrong rate on irregular grids. Each segment needs its own duration and displacement.",
+    "A midpoint label makes the interval nature of the estimate explicit. For a linear trajectory every interval velocity agrees even when the timestamps are uneven."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

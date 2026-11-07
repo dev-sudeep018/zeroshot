@@ -1,0 +1,44 @@
+{
+  "intro": "Exact-answer evaluation often ignores harmless differences in case and spacing. Normalizing both predictions and references creates a symmetric comparison rule.",
+  "task": "Normalize casefolded whitespace and compare against multiple accepted answers.",
+  "signature": "answer_matches(answer, accepted)",
+  "requirements": [
+    "Normalize each string by casefolding, splitting on Unicode whitespace, and joining with one space. Return a bool indicating whether normalized answer equals any normalized accepted string. Punctuation is significant; an empty accepted list never matches.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Case and whitespace",
+      "input": "answer_matches('  New YORK ', ['New York'])",
+      "output": "True"
+    },
+    {
+      "name": "Casefold expansion",
+      "input": "answer_matches('STRASSE', ['Stra\u00dfe'])",
+      "output": "True"
+    },
+    {
+      "name": "Punctuation matters",
+      "input": "answer_matches('yes!', ['yes'])",
+      "output": "False"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Apply exactly the same normalization to both sides."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Casefold is intended for caseless comparison and can expand some characters."
+    }
+  ],
+  "explanation": [
+    "Exact-answer evaluation often ignores harmless differences in case and spacing. Normalizing both predictions and references creates a symmetric comparison rule.",
+    "Punctuation remains meaningful under this policy. Removing it would make a broader equivalence relation and could accept answers the task considers different."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

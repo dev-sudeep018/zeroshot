@@ -1,0 +1,45 @@
+{
+  "intro": "The forward diffusion chain has a Gaussian posterior when the clean endpoint is known. Separate its mean coefficients from the noise variance.",
+  "task": "Implement diffusion_posterior(clean, noisy, beta, previous_retention). Conditioning on the clean endpoint produces a different update from a denoiser prediction. The posterior variance vanishes at the first forward step.",
+  "signature": "diffusion_posterior(clean, noisy, beta, previous_retention)",
+  "requirements": [
+    "clean and noisy are matching nonempty arrays of at least one dimension. beta is in [1e-8,1-1e-8]; previous_retention is in [1e-8,1].",
+    "Set alpha=1-beta, retention=alpha*previous_retention. Mean=sqrt(previous_retention)*beta/(1-retention)*clean + sqrt(alpha)*(1-previous_retention)/(1-retention)*noisy.",
+    "Return {mean: array, variance: beta*(1-previous_retention)/(1-retention)}. Variance is a scalar; no random sample is drawn.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "First step returns endpoint",
+      "input": "diffusion_posterior([2],[99],.25,1)",
+      "output": "{\"mean\": [2.0], \"variance\": 0.0}"
+    },
+    {
+      "name": "Zero endpoint and noisy state",
+      "input": "diffusion_posterior([0],[0],.5,.5)",
+      "output": "{\"mean\": [0.0], \"variance\": 0.333333333333}"
+    },
+    {
+      "name": "Symmetric coefficient example",
+      "input": "diffusion_posterior([3],[6],.5,.5)",
+      "output": "{\"mean\": [4.24264068712], \"variance\": 0.333333333333}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "previous_retention is cumulative, while alpha is a single-step retention."
+    },
+    {
+      "title": "Step 2",
+      "body": "At previous_retention one the posterior is the known clean endpoint with zero variance."
+    }
+  ],
+  "explanation": [
+    "Conditioning on the clean endpoint produces a different update from a denoiser prediction. The posterior variance vanishes at the first forward step.",
+    "The two mean coefficients need not add to one. They come from Gaussian conditioning rather than an ordinary convex interpolation."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "An insertion, deletion, or substitution can change a transcription. Dynamic programming finds the fewest unit-cost edits without enumerating edit sequences.",
+  "task": "Find the minimum edit cost between token sequences, checking insertion, deletion, and reordering separately.",
+  "signature": "edit_distance(left, right)",
+  "requirements": [
+    "left and right are lists or tuples of at most 10000 nonempty strings; each sequence must contain at most 500 tokens for this lesson.",
+    "Return the integer Levenshtein distance using unit insertion, deletion, and substitution costs; matching tokens cost zero.",
+    "An empty sequence requires one insertion or deletion per token. Transposition is not a single edit in this contract.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One substitution",
+      "input": "edit_distance(['red','cat'], ['blue','cat'])",
+      "output": "1"
+    },
+    {
+      "name": "Insert a missing word",
+      "input": "edit_distance(['a','cat'], ['a','small','cat'])",
+      "output": "1"
+    },
+    {
+      "name": "Empty hypothesis",
+      "input": "edit_distance([], ['a','b'])",
+      "output": "2"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Start with empty prefixes",
+      "body": "The first row and column are prefix lengths, not zeros."
+    },
+    {
+      "title": "Use three predecessor states",
+      "body": "Compare insertion, deletion, and match-or-substitution costs at every cell."
+    }
+  ],
+  "explanation": [
+    "Each dynamic-programming cell stores the best cost for two prefixes. Optimal edit sequences can be extended from one of three shorter prefix pairs.",
+    "Two rows are sufficient because the recurrence only uses the current row and the previous row. The runtime is O(LR), and memory can be kept linear."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

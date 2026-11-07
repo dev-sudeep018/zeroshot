@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d69",
+  "kind": "lesson",
+  "slug": "chain-viterbi-path",
+  "version": 1,
+  "title": "Recover the Best Label Sequence with Backtracking",
+  "summary": "The best label at each position may not form the best sequence. Viterbi decoding combines local evidence with transition scores and reconstructs a complete path.",
+  "domain": "deep-learning",
+  "difficulty": "advanced",
+  "skills": ["Structured prediction", "Viterbi decoding"],
+  "prerequisites": ["d68"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "chain_viterbi",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

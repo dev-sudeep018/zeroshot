@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d51",
+  "kind": "lesson",
+  "slug": "residual-branch-backward",
+  "version": 1,
+  "title": "Keep the Identity Path during Backpropagation",
+  "summary": "A residual block has identity and transformed gradient routes. Omitting either changes learning even when the forward values look plausible.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Backpropagation", "Residual connections"],
+  "prerequisites": ["d02", "d05"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "residual_backward",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

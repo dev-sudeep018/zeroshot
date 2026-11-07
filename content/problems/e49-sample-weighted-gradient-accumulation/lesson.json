@@ -1,0 +1,45 @@
+{
+  "intro": "Averaging microbatch means equally gives small batches too much influence. Weight each mean gradient by its example count to recover the full-batch mean.",
+  "task": "Combine microbatch mean gradients using example counts and demonstrate the bias from equally weighting unequal batches.",
+  "signature": "accumulate_gradients(mean_gradients, sample_counts)",
+  "requirements": [
+    "mean_gradients is a finite numeric array shaped (B,...) with B>0 and at least one parameter axis. sample_counts is a length-B vector of positive integer-valued counts at most 1000000.",
+    "Return a NumPy array shaped (...) equal to sum(count_i*gradient_i)/sum(count_i). The supplied gradients are means over each microbatch.",
+    "Do not divide by the number of microbatches after sample weighting. No optimizer step or autograd engine is part of this operation.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Unequal microbatch sizes",
+      "input": "accumulate_gradients([[1,3],[5,7]], [3,1])",
+      "output": "[2.0, 4.0]"
+    },
+    {
+      "name": "Equal counts",
+      "input": "accumulate_gradients([[1],[3]], [2,2])",
+      "output": "[2.0]"
+    },
+    {
+      "name": "One microbatch",
+      "input": "accumulate_gradients([[2,-3]], [10])",
+      "output": "[2.0, -3.0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Recover sums before averaging",
+      "body": "A mean gradient multiplied by its example count becomes a summed gradient."
+    },
+    {
+      "title": "Broadcast weights over parameters",
+      "body": "Only the leading axis indexes microbatches; every remaining axis belongs to parameters."
+    }
+  ],
+  "explanation": [
+    "The full-batch mean is a sample-weighted combination of microbatch means. Equal averaging is correct only when microbatches have equal example counts.",
+    "This is an algebraic accumulation lesson with supplied gradients. Stateful layers, stochastic masks, and loss normalization can make actual microbatch training differ from a single large-batch forward pass."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

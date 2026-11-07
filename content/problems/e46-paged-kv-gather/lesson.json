@@ -1,0 +1,45 @@
+{
+  "intro": "Logical token order can differ from physical memory order. A page table maps each sequence to shared storage blocks, and sequence lengths hide unused tail slots.",
+  "task": "Reconstruct logical token histories from noncontiguous physical pages and truncate unused tail capacity.",
+  "signature": "gather_kv_pages(pages, block_table, lengths)",
+  "requirements": [
+    "pages is a finite numeric array (P,B,D) with positive dimensions. block_table is an integer-valued matrix (N,L) of physical page IDs in [0,P-1], with L>0.",
+    "lengths is a length-N integer-valued vector in [0,L*B]. Return a list of N arrays, each shaped (lengths[i],D), by reading page IDs left-to-right and slots within each page in order.",
+    "Page IDs may repeat and unused table entries are still required to be valid. Return copies so modifying an output cannot modify pages. This reconstructs storage order only, without attention computation.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Physical order differs from logical order",
+      "input": "gather_kv_pages(np.array([[[1],[2]],[[3],[4]]]), [[1,0]], [3])",
+      "output": "[[[3.0], [4.0], [1.0]]]"
+    },
+    {
+      "name": "Truncate final page",
+      "input": "gather_kv_pages(np.array([[[1],[99]]]), [[0]], [1])",
+      "output": "[[[1.0]]]"
+    },
+    {
+      "name": "Zero tokens",
+      "input": "gather_kv_pages(np.array([[[1],[2]]]), [[0]], [0])",
+      "output": "[[]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate logical blocks from physical pages",
+      "body": "Use the table to gather pages before flattening their block and token axes."
+    },
+    {
+      "title": "Apply the logical length last",
+      "body": "Tail slots belong to allocated capacity, not necessarily to the sequence."
+    }
+  ],
+  "explanation": [
+    "Paging allows a sequence to occupy noncontiguous physical blocks. A logical page table provides the ordering needed to reconstruct token history.",
+    "This model demonstrates address translation and tail truncation. It does not claim a GPU memory allocator, attention kernel, or measured serving-speed improvement."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "The median resists a minority of extreme values, and the median distance measures a similarly robust spread. A raw MAD is a distance in the same units as the observations.",
+  "task": "Compute a median center and median absolute deviation, then flag strict threshold exceedances including a zero-MAD policy.",
+  "signature": "median_outliers(values, threshold)",
+  "requirements": [
+    "threshold is a nonnegative scalar. center=median(values) and mad=median(abs(values-center)); use the raw MAD without a normal-consistency multiplier.",
+    "Return {\"center\": scalar, \"mad\": scalar, \"outlier\": boolean vector}. Flag abs(x-center) > threshold*mad, using a STRICT comparison.",
+    "When MAD is zero, only values different from the median are flagged, including when threshold is zero.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Isolated outlier",
+      "input": "median_outliers([1,2,2,3,20],3)",
+      "output": "{'center': 2.0, 'mad': 1.0, 'outlier': [False, False, False, False, True]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Zero MAD",
+      "input": "median_outliers([4,4,4,9],2)",
+      "output": "{'center': 4.0, 'mad': 0.0, 'outlier': [False, False, False, True]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Strict boundary",
+      "input": "median_outliers([-2,0,2],1)",
+      "output": "{'center': 0.0, 'mad': 2.0, 'outlier': [False, False, False]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Find the median twice: first on values, then on absolute distances from that center."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compare distances directly with threshold times MAD so the zero-MAD case needs no division."
+    }
+  ],
+  "explanation": [
+    "The median resists a minority of extreme values, and the median distance measures a similarly robust spread. A raw MAD is a distance in the same units as the observations.",
+    "Dividing by MAD creates a zero-denominator problem for repeated values. Comparing distances with the scaled MAD both avoids that division and implements a clear policy for constant or nearly constant samples."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

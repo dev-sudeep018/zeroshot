@@ -1,0 +1,45 @@
+{
+  "intro": "Aggregate accuracy can conceal unequal errors across groups. A disaggregated audit reports selection, true-positive, and false-positive rates with their denominators.",
+  "task": "Disaggregate selection and error rates by group, retaining denominators to expose groups with no eligible positive or negative examples.",
+  "signature": "group_error_rates(labels, predictions, groups)",
+  "requirements": [
+    "labels and predictions are equal-length binary integer-valued vectors; groups is a same-length token list or tuple with at most 10000 nonempty strings. All may be empty.",
+    "Return a dictionary keyed by group with count, positives, negatives, selection_rate, tpr, and fpr. Compute rates independently within each group.",
+    "Define tpr as 0 when a group has no positive labels and fpr as 0 when it has no negative labels; returned denominators make these undefined-in-principle cases visible.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Same selection unequal errors",
+      "input": "group_error_rates([1,0,1,0], [1,0,0,1], ['a','a','b','b'])",
+      "output": "{'a': {'count': 2,\n       'positives': 1,\n       'negatives': 1,\n       'selection_rate': 0.5,\n       'tpr': 1.0,\n       'fpr': 0.0},\n 'b': {'count': 2,\n       'positives': 1,\n       'negatives': 1,\n       'selection_rate': 0.5,\n       'tpr': 0.0,\n       'fpr': 1.0}}"
+    },
+    {
+      "name": "No positive labels",
+      "input": "group_error_rates([0,0], [1,0], ['a','a'])",
+      "output": "{'a': {'count': 2,\n       'positives': 0,\n       'negatives': 2,\n       'selection_rate': 0.5,\n       'tpr': 0.0,\n       'fpr': 0.5}}"
+    },
+    {
+      "name": "No negative labels",
+      "input": "group_error_rates([1,1], [1,0], ['a','a'])",
+      "output": "{'a': {'count': 2,\n       'positives': 2,\n       'negatives': 0,\n       'selection_rate': 0.5,\n       'tpr': 0.5,\n       'fpr': 0.0}}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep label denominators separate",
+      "body": "TPR divides by actual positives; FPR divides by actual negatives."
+    },
+    {
+      "title": "Return counts with rates",
+      "body": "A zero rate with no eligible examples should be distinguishable from zero observed errors."
+    }
+  ],
+  "explanation": [
+    "Group rates expose differences that an aggregate metric can hide. Equal selection rates do not imply equal true-positive or false-positive rates, as the worked example shows.",
+    "These descriptive metrics do not establish a system as fair. The grouping, label quality, uncertainty, and consequences of decisions all affect how the audit should be interpreted."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

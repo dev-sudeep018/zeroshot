@@ -1,0 +1,45 @@
+{
+  "intro": "Nearest-centroid classification compresses each class into its mean feature vector. It provides a simple learned baseline whose fitted state is easy to inspect.",
+  "task": "Fit centroids for each contiguous class ID and predict nearest centroid with smallest-ID tie breaking.",
+  "signature": "nearest_centroid_predict(training, labels, queries, classes)",
+  "requirements": [
+    "training and queries are matrices with matching feature counts. labels matches training rows, classes is an integer in 1..64, and every class 0..classes-1 must appear.",
+    "Return {\"centroids\": class means in class-ID order, \"predictions\": class ID with smallest squared Euclidean distance for each query}.",
+    "Choose the smallest class ID on distance ties. Fit centroids only from training rows.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Two clusters",
+      "input": "nearest_centroid_predict([[0],[2],[8],[10]],[0,0,1,1],[[1],[5],[9]],2)",
+      "output": "{'centroids': [[1.0], [9.0]], 'predictions': [0, 0, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Two-dimensional classes",
+      "input": "nearest_centroid_predict([[0,0],[2,0],[0,4],[2,4]],[0,0,1,1],[[1,1],[1,3]],2)",
+      "output": "{'centroids': [[1.0, 0.0], [1.0, 4.0]], 'predictions': [0, 1]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One class",
+      "input": "nearest_centroid_predict([[1],[3]],[0,0],[[99],[-1]],1)",
+      "output": "{'centroids': [[2.0]], 'predictions': [0, 0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Group training rows by class and average each group along the sample axis."
+    },
+    {
+      "title": "Build the result",
+      "body": "Broadcast query-to-centroid differences, sum their squares over features, and take the first minimum."
+    }
+  ],
+  "explanation": [
+    "Nearest-centroid classification compresses each class into its mean feature vector. It provides a simple learned baseline whose fitted state is easy to inspect.",
+    "Queries must not alter the centroids; that would leak evaluation information into training. Stable class ordering also makes tie behavior reproducible."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A labeled batch can offer more than one positive partner for each anchor. Supervised contrastive learning averages their log probabilities while excluding self comparisons.",
+  "task": "Implement supervised_contrastive(scores, labels). An anchor with several positives contributes the mean of their individual log losses. Taking the log of summed positive probability implements a different objective.",
+  "signature": "supervised_contrastive(scores, labels)",
+  "requirements": [
+    "scores is a nonempty square (N,N) matrix, already scaled by any temperature. labels is a nonnegative integer vector of length N; each label must occur at least twice.",
+    "For anchor i, normalize scores[i,j] over all j!=i. Average negative log probability over j!=i sharing its label, then average anchors.",
+    "Return a scalar. Ignore diagonal scores completely. Average log probabilities, not the probability mass of all positives. Scores need not be symmetric.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Only one possible partner",
+      "input": "supervised_contrastive(np.zeros((2,2)),[0,0])",
+      "output": "0.0"
+    },
+    {
+      "name": "Three equal positive partners",
+      "input": "supervised_contrastive(np.zeros((4,4)),[0,0,0,0])",
+      "output": "1.09861228867"
+    },
+    {
+      "name": "Two classes uniform scores",
+      "input": "supervised_contrastive(np.zeros((4,4)),[0,0,1,1])",
+      "output": "1.09861228867"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Mask the diagonal before computing the stable log normalizer."
+    },
+    {
+      "title": "Step 2",
+      "body": "A positive partner stays in the softmax denominator alongside negatives."
+    }
+  ],
+  "explanation": [
+    "An anchor with several positives contributes the mean of their individual log losses. Taking the log of summed positive probability implements a different objective.",
+    "Supplied similarity scores isolate the objective from embedding normalization and temperature choices. Labels determine partner membership rather than a single diagonal match."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m79",
+  "kind": "lesson",
+  "slug": "piecewise-linear-resampling",
+  "version": 1,
+  "title": "Resample between Known Measurements",
+  "summary": "Interpolate queries on a strictly increasing grid with constant endpoint extension and preserved query order.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Resample between Known Measurements"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "linear_resample",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/user/absolute_beginners.html",
+    ],
+}

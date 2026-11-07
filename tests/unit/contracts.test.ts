@@ -14,7 +14,9 @@ import { loadContent } from "../../scripts/content";
 describe("versioned content", () => {
   it("loads complete content packages", async () => {
     const entries = await loadContent();
-    expect(entries.filter((e) => e.problem.kind === "lesson")).toHaveLength(81);
+    expect(entries.filter((e) => e.problem.kind === "lesson")).toHaveLength(
+      450,
+    );
     expect(entries.filter((e) => e.problem.kind === "project")).toHaveLength(1);
     for (const entry of entries) {
       expect(entry.tests).toContain("run_tests");

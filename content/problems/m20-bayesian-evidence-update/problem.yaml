@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m20",
+  "kind": "lesson",
+  "slug": "bayesian-evidence-update",
+  "version": 1,
+  "title": "Update Beliefs with Evidence",
+  "summary": "A strong signal can still lead to a modest posterior when its prior probability is small. Track both the evidence probability and the updated belief.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Update Beliefs with Evidence"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and basic algebra"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bayes_update",
+      "absolute_tolerance": 1E-07,
+      "relative_tolerance": 1E-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": ["Original ZeroShot lesson, fixtures, and implementation."],
+}

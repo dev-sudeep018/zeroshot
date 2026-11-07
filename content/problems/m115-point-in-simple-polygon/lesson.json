@@ -1,0 +1,45 @@
+{
+  "intro": "A ray starting inside a simple polygon crosses its boundary an odd number of times before reaching infinity. Outside points have an even crossing count.",
+  "task": "Use horizontal ray crossings to test membership in a simple polygon, treating boundary points as inside.",
+  "signature": "points_in_polygon(points, vertices)",
+  "requirements": [
+    "points and vertices are two-column matrices. vertices has 3..64 integer-valued rows, with absolute coordinates <=100; edges close implicitly. Vertices must be distinct and form a simple polygon with nonzero area.",
+    "Return a boolean vector. Boundary points count as inside. Test boundary collinearity with absolute cross-product tolerance 1e-9 and inclusive coordinate bounds expanded by 1e-9.",
+    "For other points use horizontal ray crossing with a half-open vertical test, so a vertex is not counted twice. Reject intersecting or overlapping nonadjacent edges.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Inside outside boundary",
+      "input": "points_in_polygon([[1,1],[3,1],[0,1]],[[0,0],[2,0],[2,2],[0,2]])",
+      "output": "[True, False, True]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Concave notch",
+      "input": "points_in_polygon([[.5,2],[2,2],[2,.5]],[[0,0],[3,0],[3,1],[1,1],[1,3],[0,3]])",
+      "output": "[True, False, True]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Triangle vertices",
+      "input": "points_in_polygon([[0,0],[1,1],[3,3]],[[0,0],[4,0],[0,4]])",
+      "output": "[True, True, False]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Check whether a query lies on any edge before counting ray intersections."
+    },
+    {
+      "title": "Build the result",
+      "body": "Toggle membership only for edges whose endpoint heights straddle the query using one strict and one inclusive side."
+    }
+  ],
+  "explanation": [
+    "A ray starting inside a simple polygon crosses its boundary an odd number of times before reaching infinity. Outside points have an even crossing count.",
+    "Vertices and horizontal edges need careful handling to prevent duplicate crossings. Separating the boundary test from the half-open crossing rule makes edge and corner membership explicit, including for concave polygons."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

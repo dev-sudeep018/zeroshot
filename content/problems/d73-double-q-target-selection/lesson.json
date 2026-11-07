@@ -1,0 +1,45 @@
+{
+  "intro": "Maximizing and evaluating noisy action values with the same estimator can introduce overestimation. Double Q targets separate which action is chosen from how it is valued.",
+  "task": "Select actions using the online estimates, then look up those actions in the target estimates to construct a batch of bootstrap targets.",
+  "signature": "double_q_targets(rewards, online_next, target_next, terminated, discount)",
+  "requirements": [
+    "rewards and terminated have length B; online_next and target_next have identical shape (B,A). terminated is numeric zero/one and discount is in [0,1].",
+    "Choose actions=argmax(online_next,axis=1), breaking exact ties toward the lowest action index. Return {\"actions\": an integer NumPy vector, \"targets\": rewards+discount*(1-terminated)*target_next[rows,actions]}.",
+    "Select actions even for terminal rows, but suppress their bootstrap values. Do not maximize the target estimator independently or average the two estimators.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Estimators disagree",
+      "input": "double_q_targets([1],[[5,2]],[[3,9]],[0],0.5)",
+      "output": "{'actions': array([0]), 'targets': array([2.5])}"
+    },
+    {
+      "name": "Lowest-index tie",
+      "input": "double_q_targets([0],[[4,4]],[[2,8]],[0],1)",
+      "output": "{'actions': array([0]), 'targets': array([2.])}"
+    },
+    {
+      "name": "Terminal has no bootstrap",
+      "input": "double_q_targets([7],[[1,3]],[[8,20]],[1],0.9)",
+      "output": "{'actions': array([1]), 'targets': array([7.])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep the roles separate",
+      "body": "The online matrix selects the column; the target matrix supplies its value."
+    },
+    {
+      "title": "Test disagreeing estimators",
+      "body": "Equal rankings cannot reveal the mistake of taking max(target_next)."
+    }
+  ],
+  "explanation": [
+    "If the estimators disagree about the best action, Double Q uses the target value at the online-selected action, even when that is not the target maximum.",
+    "This exercise computes the target from supplied estimates. Network updates, replay, and target-network synchronization belong to the surrounding training system."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

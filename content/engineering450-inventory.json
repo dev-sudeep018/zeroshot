@@ -1,0 +1,1308 @@
+{
+  "batch": "e63-e162",
+  "lesson_count": 100,
+  "beginner_count": 80,
+  "public_case_count": 1010,
+  "lessons": [
+    {
+      "id": "e63",
+      "title": "Normalize and Deduplicate Tags",
+      "slug": "normalize-and-deduplicate-tags",
+      "objective": "Strip and lowercase tags, discard blanks, preserve first occurrence.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e64",
+      "title": "Route Support Tickets",
+      "slug": "route-support-tickets",
+      "objective": "Partition ticket IDs into urgent and normal queues using priority and blocked status.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e65",
+      "title": "Reconcile Stock Requests",
+      "slug": "reconcile-stock-requests",
+      "objective": "Fill each request from remaining stock and return fulfilled and unfilled quantities.",
+      "difficulty": "beginner",
+      "prerequisites": ["e64"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e66",
+      "title": "Summarize Completed Orders",
+      "slug": "summarize-completed-orders",
+      "objective": "Aggregate integer cent amounts by customer, ignoring cancelled orders.",
+      "difficulty": "beginner",
+      "prerequisites": ["e64"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e67",
+      "title": "Apply Sequential Balance Changes",
+      "slug": "apply-sequential-balance-changes",
+      "objective": "Trace account balance while rejecting withdrawals that exceed available funds.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e68",
+      "title": "Find the First Matching Record",
+      "slug": "find-the-first-matching-record",
+      "objective": "Select the first record matching every supplied field and return its index.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e69",
+      "title": "Extract Optional Record Fields",
+      "slug": "extract-optional-record-fields",
+      "objective": "Collect a requested field with an explicit fallback while retaining falsy values.",
+      "difficulty": "beginner",
+      "prerequisites": ["e68"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e70",
+      "title": "Project Records to a Schema",
+      "slug": "project-records-to-a-schema",
+      "objective": "Build uniform records from an ordered field list, filling absent fields with None.",
+      "difficulty": "beginner",
+      "prerequisites": ["e69"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e71",
+      "title": "Rename Record Fields Safely",
+      "slug": "rename-record-fields-safely",
+      "objective": "Rename selected keys and reject collisions without modifying input records.",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e72",
+      "title": "Index Unique Records",
+      "slug": "index-unique-records",
+      "objective": "Create an ID lookup and reject duplicate identifiers instead of silently overwriting.",
+      "difficulty": "beginner",
+      "prerequisites": ["e68"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e73",
+      "title": "Group Records by Category",
+      "slug": "group-records-by-category",
+      "objective": "Create groups retaining original record order and explicit missing-category bucket.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e74",
+      "title": "Deduplicate Records by Latest Position",
+      "slug": "deduplicate-records-by-latest-position",
+      "objective": "Keep each ID's last record while ordering results by last occurrence.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e75",
+      "title": "Compare Two Inventories",
+      "slug": "compare-two-inventories",
+      "objective": "Report added, removed, and changed quantities in sorted item order.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e76",
+      "title": "Merge Configuration Layers",
+      "slug": "merge-configuration-layers",
+      "objective": "Apply ordered shallow overrides while treating None as deletion.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e77",
+      "title": "Resolve Configuration Defaults",
+      "slug": "resolve-configuration-defaults",
+      "objective": "Fill only absent configuration keys and preserve explicit zero, false, and None.",
+      "difficulty": "beginner",
+      "prerequisites": ["e76"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e78",
+      "title": "Invert a Many-to-One Lookup",
+      "slug": "invert-a-many-to-one-lookup",
+      "objective": "Collect source keys per target value in original mapping order.",
+      "difficulty": "beginner",
+      "prerequisites": ["e73"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e79",
+      "title": "Allocate Round-Robin Work",
+      "slug": "allocate-round-robin-work",
+      "objective": "Distribute ordered task IDs among workers and retain empty worker queues.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e80",
+      "title": "Split Work into Fixed Batches",
+      "slug": "split-work-into-fixed-batches",
+      "objective": "Create full and final partial batches without padding or losing records.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e81",
+      "title": "Paginate Records with Metadata",
+      "slug": "paginate-records-with-metadata",
+      "objective": "Return an offset page together with total count and the next offset.",
+      "difficulty": "beginner",
+      "prerequisites": ["e80"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e82",
+      "title": "Interleave Unequal Streams",
+      "slug": "interleave-unequal-streams",
+      "objective": "Take one item from each nonempty stream per round until all are exhausted.",
+      "difficulty": "beginner",
+      "prerequisites": ["e79"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e83",
+      "title": "Flatten One Level of Records",
+      "slug": "flatten-one-level-of-records",
+      "objective": "Flatten batches exactly one level, preserving nested record payloads.",
+      "difficulty": "beginner",
+      "prerequisites": ["e80"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e84",
+      "title": "Expand Repeated Job Requests",
+      "slug": "expand-repeated-job-requests",
+      "objective": "Expand count-coded jobs into a bounded ordered work queue.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e85",
+      "title": "Count Adjacent Status Transitions",
+      "slug": "count-adjacent-status-transitions",
+      "objective": "Count each ordered pair of adjacent statuses, including self transitions.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e86",
+      "title": "Summarize Streak Lengths by Status",
+      "slug": "summarize-streak-lengths-by-status",
+      "objective": "Find the longest consecutive streak for each status value.",
+      "difficulty": "beginner",
+      "prerequisites": ["e85"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e87",
+      "title": "Find Gaps in Sequence Numbers",
+      "slug": "find-gaps-in-sequence-numbers",
+      "objective": "Return missing integer sequence IDs between explicit inclusive bounds.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e88",
+      "title": "Audit Duplicate Identifiers",
+      "slug": "audit-duplicate-identifiers",
+      "objective": "Report each duplicated ID with all zero-based occurrence positions.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e89",
+      "title": "Match Ordered IDs to Records",
+      "slug": "match-ordered-ids-to-records",
+      "objective": "Resolve a requested ID list against unique records and retain missing positions.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e90",
+      "title": "Zip Unequal Columns Explicitly",
+      "slug": "zip-unequal-columns-explicitly",
+      "objective": "Combine columns into rows up to the longest column using None padding.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e91",
+      "title": "Unzip Record Columns",
+      "slug": "unzip-record-columns",
+      "objective": "Extract aligned lists from records according to an explicit field order.",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e92",
+      "title": "Build a Multi-Key Stable Sort",
+      "slug": "build-a-multi-key-stable-sort",
+      "objective": "Sort records by category then descending integer priority, keeping exact ties stable.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e93",
+      "title": "Select the Best Record Per Group",
+      "slug": "select-the-best-record-per-group",
+      "objective": "Pick the highest-score record per group with first-occurrence tie handling.",
+      "difficulty": "beginner",
+      "prerequisites": ["e73"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e94",
+      "title": "Filter Records by Inclusive Ranges",
+      "slug": "filter-records-by-inclusive-ranges",
+      "objective": "Retain numeric records satisfying every configured field range.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e95",
+      "title": "Report Field-Level Changes",
+      "slug": "report-field-level-changes",
+      "objective": "Return added, removed, and changed fields between two shallow records.",
+      "difficulty": "beginner",
+      "prerequisites": ["e75"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e96",
+      "title": "Apply Explicit Record Patches",
+      "slug": "apply-explicit-record-patches",
+      "objective": "Interpret set and delete operations in order, rejecting deletion of absent keys.",
+      "difficulty": "beginner",
+      "prerequisites": ["e76", "e95"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e97",
+      "title": "Build a Quantity Histogram",
+      "slug": "build-a-quantity-histogram",
+      "objective": "Bucket nonnegative integer quantities by explicit increasing upper bounds.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e98",
+      "title": "Validate a Required-Field Schema",
+      "slug": "validate-a-required-field-schema",
+      "objective": "Report missing and unexpected fields per record without dropping rows.",
+      "difficulty": "beginner",
+      "prerequisites": ["e70"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e99",
+      "title": "Validate Foreign-Key References",
+      "slug": "validate-foreign-key-references",
+      "objective": "Return child row indices whose key does not occur in the parent ID list.",
+      "difficulty": "beginner",
+      "prerequisites": ["e72", "e98"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e100",
+      "title": "Reconcile Ordered Membership Lists",
+      "slug": "reconcile-ordered-membership-lists",
+      "objective": "Split candidate IDs into accepted and rejected lists using allow and deny sets.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e101",
+      "title": "Merge Sorted Event Streams",
+      "slug": "merge-sorted-event-streams",
+      "objective": "Merge two already sorted timestamp streams stably with left-first ties.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e102",
+      "title": "Track Open and Closed Tasks",
+      "slug": "track-open-and-closed-tasks",
+      "objective": "Replay open/close events and report remaining IDs with invalid transition indices.",
+      "difficulty": "beginner",
+      "prerequisites": ["e85"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e103",
+      "title": "Normalize Whitespace in Text",
+      "slug": "normalize-whitespace-in-text",
+      "objective": "Collapse Unicode whitespace while preserving case and punctuation.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e104",
+      "title": "Tokenize ASCII Words with Offsets",
+      "slug": "tokenize-ascii-words-with-offsets",
+      "objective": "Extract ASCII alphabetic words and their original half-open character spans.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e105",
+      "title": "Replace Whole Tokens from a Glossary",
+      "slug": "replace-whole-tokens-from-a-glossary",
+      "objective": "Map whitespace-delimited tokens with case-sensitive whole-token replacement.",
+      "difficulty": "beginner",
+      "prerequisites": ["e103"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e106",
+      "title": "Redact Explicit Character Spans",
+      "slug": "redact-explicit-character-spans",
+      "objective": "Mask the union of validated spans while keeping text length and untouched characters.",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e107",
+      "title": "Extract Bounded Context Windows",
+      "slug": "extract-bounded-context-windows",
+      "objective": "Return left, match, and right context around validated text spans.",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e108",
+      "title": "Match Case-Insensitive Exact Answers",
+      "slug": "match-case-insensitive-exact-answers",
+      "objective": "Normalize casefolded whitespace and compare against multiple accepted answers.",
+      "difficulty": "beginner",
+      "prerequisites": ["e103"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e109",
+      "title": "Count Unique Terms Per Document",
+      "slug": "count-unique-terms-per-document",
+      "objective": "Compute document frequencies, counting repeated terms once per document.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e110",
+      "title": "Filter Stopwords Without Reordering",
+      "slug": "filter-stopwords-without-reordering",
+      "objective": "Remove exact stopword tokens while retaining repetition and original order.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e111",
+      "title": "Build UTF-8 Character Offset Maps",
+      "slug": "build-utf-8-character-offset-maps",
+      "objective": "Return the byte offset of every Unicode code point boundary, including the final boundary.",
+      "difficulty": "beginner",
+      "prerequisites": ["e104"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e112",
+      "title": "Encode Tokens with an Unknown ID",
+      "slug": "encode-tokens-with-an-unknown-id",
+      "objective": "Map tokens through a validated vocabulary and return unknown-token positions.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e113",
+      "title": "Decode Token IDs with Explicit Fallback",
+      "slug": "decode-token-ids-with-explicit-fallback",
+      "objective": "Resolve IDs through a vocabulary, preserving order and recording unknown IDs.",
+      "difficulty": "beginner",
+      "prerequisites": ["e112"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e114",
+      "title": "Measure Truncation of Token Sequences",
+      "slug": "measure-truncation-of-token-sequences",
+      "objective": "Truncate each sequence and report original lengths and dropped counts.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e115",
+      "title": "Validate BIO Entity Tag Transitions",
+      "slug": "validate-bio-entity-tag-transitions",
+      "objective": "Report I-type tags lacking an immediately preceding B-type or I-type tag of the same entity type.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e116",
+      "title": "Read Simple Key-Value Lines",
+      "slug": "read-simple-key-value-lines",
+      "objective": "Parse nonblank key=value lines, splitting only the first separator and rejecting duplicate keys.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e117",
+      "title": "Parse Strict Boolean Settings",
+      "slug": "parse-strict-boolean-settings",
+      "objective": "Convert explicit true/false/yes/no/1/0 strings after trimming and case normalization.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e118",
+      "title": "Parse Bounded Decimal Integers",
+      "slug": "parse-bounded-decimal-integers",
+      "objective": "Parse signed ASCII decimal strings without accepting floats, exponent notation, or underscores.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e119",
+      "title": "Parse Durations with Explicit Units",
+      "slug": "parse-durations-with-explicit-units",
+      "objective": "Convert integer ms, s, and m durations into milliseconds with full-string matching.",
+      "difficulty": "beginner",
+      "prerequisites": ["e118"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e120",
+      "title": "Parse Semantic Version Triples",
+      "slug": "parse-semantic-version-triples",
+      "objective": "Parse and compare strict numeric major.minor.patch versions without prerelease syntax.",
+      "difficulty": "beginner",
+      "prerequisites": ["e118"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e121",
+      "title": "Parse CSV Records by Header",
+      "slug": "parse-csv-records-by-header",
+      "objective": "Read quoted CSV text into records, rejecting duplicate headers and unequal row widths.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e122",
+      "title": "Serialize CSV Records in Schema Order",
+      "slug": "serialize-csv-records-in-schema-order",
+      "objective": "Write CSV rows with quoting and explicit columns, requiring every field.",
+      "difficulty": "beginner",
+      "prerequisites": ["e121"],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e123",
+      "title": "Parse JSON Lines with Error Positions",
+      "slug": "parse-json-lines-with-error-positions",
+      "objective": "Read one JSON object per nonblank line and return valid objects plus rejected line numbers.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e124",
+      "title": "Canonicalize JSON for Cache Keys",
+      "slug": "canonicalize-json-for-cache-keys",
+      "objective": "Produce deterministic compact JSON with sorted object keys and finite numbers only.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e125",
+      "title": "Validate an ASCII Slug",
+      "slug": "validate-an-ascii-slug",
+      "objective": "Normalize ASCII names into lower-case hyphenated slugs and reject names with no letters or digits.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e126",
+      "title": "Normalize Relative Resource Paths",
+      "slug": "normalize-relative-resource-paths",
+      "objective": "Resolve dot and dot-dot path segments while rejecting traversal above the root.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e127",
+      "title": "Parse URL Query Pairs",
+      "slug": "parse-url-query-pairs",
+      "objective": "Decode repeated query parameters into ordered value lists, retaining blank values.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e128",
+      "title": "Encode Query Parameters Deterministically",
+      "slug": "encode-query-parameters-deterministically",
+      "objective": "Encode string multimap keys in sorted order while preserving each key's value order.",
+      "difficulty": "beginner",
+      "prerequisites": ["e127"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e129",
+      "title": "Audit Tabular Row Widths",
+      "slug": "audit-tabular-row-widths",
+      "objective": "Identify ragged rows against an expected schema width and retain each actual width.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e130",
+      "title": "Detect Mixed Primitive Column Types",
+      "slug": "detect-mixed-primitive-column-types",
+      "objective": "Report which primitive types occur in each named column, separating booleans and numbers.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e131",
+      "title": "Find Blank and Missing Cells",
+      "slug": "find-blank-and-missing-cells",
+      "objective": "Return row and field locations of absent, None, or whitespace-only string cells.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e132",
+      "title": "Check Monotonic Event Times",
+      "slug": "check-monotonic-event-times",
+      "objective": "Report every adjacent timestamp decrease without sorting the observations.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e133",
+      "title": "Validate Unique Composite Keys",
+      "slug": "validate-unique-composite-keys",
+      "objective": "Detect duplicate combinations of configured record fields and report occurrence groups.",
+      "difficulty": "beginner",
+      "prerequisites": ["e88"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e134",
+      "title": "Forward-Fill Missing Values with a Limit",
+      "slug": "forward-fill-missing-values-with-a-limit",
+      "objective": "Carry earlier observed values through bounded None runs without using future data.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e135",
+      "title": "Check Allowed Category Values",
+      "slug": "check-allowed-category-values",
+      "objective": "Report row indices whose category is outside a supplied vocabulary, including missing values.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e136",
+      "title": "Apply Training Category Maps",
+      "slug": "apply-training-category-maps",
+      "objective": "Fit a vocabulary on training categories only, then encode heldout unknowns distinctly.",
+      "difficulty": "beginner",
+      "prerequisites": ["e112"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e137",
+      "title": "Summarize Rule-Based Data Quality",
+      "slug": "summarize-rule-based-data-quality",
+      "objective": "Combine required-field and range rules into per-row violation lists with stable rule order.",
+      "difficulty": "beginner",
+      "prerequisites": ["e98", "e94"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e138",
+      "title": "Audit Multilabel Hamming Errors",
+      "slug": "audit-multilabel-hamming-errors",
+      "objective": "Count missing and extra labels per example and divide total mismatches by examples times vocabulary size.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e139",
+      "title": "Score Exact-Match Predictions by Group",
+      "slug": "score-exact-match-predictions-by-group",
+      "objective": "Report correct and total counts per group plus accuracy with explicit empty behavior.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e140",
+      "title": "Compute Retrieval Precision at a Cutoff",
+      "slug": "compute-retrieval-precision-at-a-cutoff",
+      "objective": "Count unique relevant retrieved IDs in the first k positions with duplicate slots consuming rank.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e141",
+      "title": "Measure Ranking Coverage Across Queries",
+      "slug": "measure-ranking-coverage-across-queries",
+      "objective": "Report unique retrieved corpus IDs, coverage fraction, and out-of-corpus IDs.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e142",
+      "title": "Find Pairwise Result-Set Disagreements",
+      "slug": "find-pairwise-result-set-disagreements",
+      "objective": "Compare two per-query result sets and preserve query order in overlap and exclusive outputs.",
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e143",
+      "title": "Build Deterministic Holdout by ID Hash",
+      "slug": "build-deterministic-holdout-by-id-hash",
+      "objective": "Assign each distinct string ID to a stable split using a documented SHA-256 bucket.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 13,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e144",
+      "title": "Assign Events to Fixed Time Windows",
+      "slug": "assign-events-to-fixed-time-windows",
+      "objective": "Aggregate event counts into half-open integer windows anchored at a supplied origin.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e145",
+      "title": "Sessionize Events by Inactivity",
+      "slug": "sessionize-events-by-inactivity",
+      "objective": "Start a new session only when the sorted timestamp gap strictly exceeds a timeout.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e146",
+      "title": "Deduplicate Idempotency Keys",
+      "slug": "deduplicate-idempotency-keys",
+      "objective": "Replay request keys with a bounded seen-key history and return accepted indices.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e147",
+      "title": "Schedule Bounded Retries",
+      "slug": "schedule-bounded-retries",
+      "objective": "Generate capped exponential delays and total elapsed delay from attempt count.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e148",
+      "title": "Trace a Circuit Breaker",
+      "slug": "trace-a-circuit-breaker",
+      "objective": "Open after consecutive failures and reset on success under a simple no-timer state machine.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e149",
+      "title": "Simulate a FIFO Work Queue",
+      "slug": "simulate-a-fifo-work-queue",
+      "objective": "Replay enqueue/dequeue operations and return served IDs plus final queue.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e150",
+      "title": "Simulate a Bounded Priority Queue",
+      "slug": "simulate-a-bounded-priority-queue",
+      "objective": "Choose highest-priority pending work with FIFO ties and reject inserts when full.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e151",
+      "title": "Compute Worker Makespan",
+      "slug": "compute-worker-makespan",
+      "objective": "Assign each job to the currently least-loaded worker with lowest-index ties.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e152",
+      "title": "Select Jobs by Dependencies",
+      "slug": "select-jobs-by-dependencies",
+      "objective": "Return a stable topological order or reject cycles and missing dependencies.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e153",
+      "title": "Find Transitive Dependency Impact",
+      "slug": "find-transitive-dependency-impact",
+      "objective": "Return all downstream components affected by changed IDs, excluding seeds from results.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e154",
+      "title": "Build a Prefix Search Index",
+      "slug": "build-a-prefix-search-index",
+      "objective": "Map each nonempty term prefix to sorted unique matching terms.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e155",
+      "title": "Match Multiword Phrases Exactly",
+      "slug": "match-multiword-phrases-exactly",
+      "objective": "Find all overlapping token starts matching a phrase without case normalization.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e156",
+      "title": "Segment Sentences with a Small State Machine",
+      "slug": "segment-sentences-with-a-small-state-machine",
+      "objective": "Split on .!? runs and retain closing punctuation without claiming linguistic completeness.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e157",
+      "title": "Budget Messages by UTF-8 Bytes",
+      "slug": "budget-messages-by-utf-8-bytes",
+      "objective": "Keep the longest whole-message prefix fitting a byte budget including separators.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e158",
+      "title": "Build Reversible Length-Prefixed Frames",
+      "slug": "build-reversible-length-prefixed-frames",
+      "objective": "Encode and decode UTF-8 text frames with decimal byte lengths and reject malformed frames.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 11,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e159",
+      "title": "Verify Payload Digests",
+      "slug": "verify-payload-digests",
+      "objective": "Compare lowercase SHA-256 digests for byte payloads and return mismatched indices.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e160",
+      "title": "Apply a Versioned Cache Policy",
+      "slug": "apply-a-versioned-cache-policy",
+      "objective": "Accept entries only when version matches and age is within an explicit TTL interval.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e161",
+      "title": "Reconcile Append-Only Checkpoints",
+      "slug": "reconcile-append-only-checkpoints",
+      "objective": "Advance a contiguous completed offset only across gap-free acknowledged sequence IDs.",
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    },
+    {
+      "id": "e162",
+      "title": "Plan a Minimal Incremental Rebuild",
+      "slug": "plan-a-minimal-incremental-rebuild",
+      "objective": "Propagate changed input fingerprints through a DAG and return affected tasks in dependency order.",
+      "difficulty": "intermediate",
+      "prerequisites": ["e152", "e153"],
+      "test_count": 10,
+      "status": "validated",
+      "attribution": [
+        "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported."
+      ]
+    }
+  ]
+}

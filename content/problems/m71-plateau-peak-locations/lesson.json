@@ -1,0 +1,45 @@
+{
+  "intro": "Comparing each cell independently would either miss flat peaks or count the same peak repeatedly. Grouping equal runs makes the peak decision about the whole plateau.",
+  "task": "Return midpoints of flat local maxima with strict lower neighbors and explicit endpoint exclusion.",
+  "signature": "plateau_peaks(values)",
+  "requirements": [
+    "values is a numeric vector. Treat each maximal run of exactly equal values as one plateau.",
+    "A plateau is a peak only if it has neighbors on both sides and both neighbors are strictly smaller. Exclude plateaus touching either endpoint.",
+    "Return an integer NumPy vector of floor((start+end)/2) for peak plateau inclusive endpoints, ordered left to right. Empty output is valid.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Single peak",
+      "input": "plateau_peaks([0,3,0])",
+      "output": "[1]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Even plateau",
+      "input": "plateau_peaks([0,2,2,0])",
+      "output": "[1]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Several peaks",
+      "input": "plateau_peaks([0,2,0,3,3,3,1])",
+      "output": "[1, 4]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Find the full equal-valued run before deciding whether it is a peak."
+    },
+    {
+      "title": "Build the result",
+      "body": "Check both outside neighbors and select the left middle index for an even plateau."
+    }
+  ],
+  "explanation": [
+    "Comparing each cell independently would either miss flat peaks or count the same peak repeatedly. Grouping equal runs makes the peak decision about the whole plateau.",
+    "Endpoint exclusion is a deliberate convention: without observations on both sides, the exercise cannot establish a local rise and fall. Midpoint rounding is fixed so even plateaus have deterministic locations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m109",
+  "kind": "lesson",
+  "slug": "reflection-across-line",
+  "version": 1,
+  "title": "Reflect Points across an Implicit Line",
+  "summary": "Use signed line offsets to reflect a batch of 2D points across a nonzero-normal line.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Reflect Points across an Implicit Line"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "reflect_points",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

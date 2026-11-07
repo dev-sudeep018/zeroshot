@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d46",
+  "kind": "lesson",
+  "slug": "selective-state-space-step",
+  "version": 1,
+  "title": "Advance a Diagonal State-Space Memory",
+  "summary": "A state-space step combines decayed memory with a new input. Inspect how the time increment controls both forgetting and the strength of the write.",
+  "domain": "deep-learning",
+  "difficulty": "advanced",
+  "skills": ["State-space models", "Recurrence"],
+  "prerequisites": ["d02"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "state_space_step",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors; adapted from Pyre-Code / TorchCode",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Adapted MIT-licensed arithmetic: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/mamba_ssm.py",
+      "Upstream copyright (c) 2024 duoan and (c) 2024 kiren. Full MIT notice retained; original additions Apache-2.0 and original prose CC-BY-SA-4.0.",
+    ],
+}

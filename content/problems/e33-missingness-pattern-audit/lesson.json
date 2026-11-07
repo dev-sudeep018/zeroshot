@@ -1,0 +1,45 @@
+{
+  "intro": "Column missing rates can hide rows where several features disappear together. A joint audit reports both marginal rates and pairwise co-missingness.",
+  "task": "Report marginal and pairwise missingness to distinguish jointly missing features from disjoint missingness patterns.",
+  "signature": "missingness_audit(mask)",
+  "requirements": [
+    "mask is a two-dimensional NumPy boolean array with at least one row and one column. True means missing.",
+    "Return dict feature_rates (column means), row_counts (missing count per row as integer array), and co_missing (feature-by-feature matrix of mean pairwise AND).",
+    "The diagonal of co_missing equals feature_rates. Pairwise values are joint fractions, not correlations or conditional probabilities.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Correlated missingness",
+      "input": "missingness_audit(np.array([[True,True],[False,False]]))",
+      "output": "{'feature_rates': [0.5, 0.5],\n 'row_counts': [2, 0],\n 'co_missing': [[0.5, 0.5], [0.5, 0.5]]}"
+    },
+    {
+      "name": "Disjoint missingness",
+      "input": "missingness_audit(np.array([[True,False],[False,True]]))",
+      "output": "{'feature_rates': [0.5, 0.5],\n 'row_counts': [1, 1],\n 'co_missing': [[0.5, 0.0], [0.0, 0.5]]}"
+    },
+    {
+      "name": "No missing values",
+      "input": "missingness_audit(np.zeros((2,2),dtype=bool))",
+      "output": "{'feature_rates': [0.0, 0.0],\n 'row_counts': [0, 0],\n 'co_missing': [[0.0, 0.0], [0.0, 0.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Convert before multiplying",
+      "body": "Boolean matrix multiplication does not produce integer co-occurrence counts; cast the mask."
+    },
+    {
+      "title": "Normalize by rows",
+      "body": "Divide pairwise counts by the total number of observations."
+    }
+  ],
+  "explanation": [
+    "Marginal missingness rates summarize individual features, while joint rates reveal whether features tend to disappear in the same rows. The diagonal is a useful internal consistency check.",
+    "Joint missingness is not evidence of a causal mechanism. This audit provides observable counts that can guide data collection checks and later modeling choices."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

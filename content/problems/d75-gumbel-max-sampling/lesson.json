@@ -1,0 +1,45 @@
+{
+  "intro": "A categorical sample can be produced by adding Gumbel noise to logits and taking an argmax. Supplied uniforms make every choice reproducible for inspection.",
+  "task": "Use the supplied uniform draws to perturb logits. Compare a deterministic preference with a noise-driven change of action.",
+  "signature": "gumbel_choice(logits, uniforms)",
+  "requirements": [
+    "logits and uniforms are matching nonempty vectors. Every uniform must lie strictly between zero and one.",
+    "Subtract max(logits) from the logits first, then compute scores=shifted_logits-log(-log(uniforms)). Return the integer index of the largest score, breaking exact ties toward the lowest index. Centering preserves small noise differences beside a huge common logit offset.",
+    "Do not apply softmax before adding noise, divide by temperature, or generate new random numbers. The inputs supply one uniform draw per category.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Equal noise follows logits",
+      "input": "gumbel_choice([0,2],[0.5,0.5])",
+      "output": "1"
+    },
+    {
+      "name": "Noise changes the winner",
+      "input": "gumbel_choice([0,1],[0.99,0.01])",
+      "output": "0"
+    },
+    {
+      "name": "Exact ties choose first",
+      "input": "gumbel_choice([3,3],[0.5,0.5])",
+      "output": "0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Watch both logarithms",
+      "body": "The inner logarithm is negative; negate it before taking the outer logarithm."
+    },
+    {
+      "title": "Logit shifts do not change the choice",
+      "body": "Adding the same constant to every logit shifts all perturbed scores equally."
+    }
+  ],
+  "explanation": [
+    "Independent uniform draws transformed as -log(-log(U)) have a standard Gumbel distribution. Adding them to logits yields a sample with probabilities proportional to exponentiated logits.",
+    "With fixed supplied draws this function is deterministic. It exposes the sampling mechanism; a single outcome does not estimate a category probability."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

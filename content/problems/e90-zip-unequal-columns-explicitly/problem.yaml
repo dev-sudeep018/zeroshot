@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e90",
+  "kind": "lesson",
+  "slug": "zip-unequal-columns-explicitly",
+  "version": 1,
+  "title": "Zip Unequal Columns Explicitly",
+  "summary": "Combine columns into rows up to the longest column using None padding.",
+  "domain": "engineering",
+  "difficulty": "beginner",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "zip_columns",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 15,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

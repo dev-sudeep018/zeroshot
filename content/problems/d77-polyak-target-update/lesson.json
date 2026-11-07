@@ -1,0 +1,45 @@
+{
+  "intro": "A target network can move more slowly than the model being optimized. Its update rate controls how much of a newly learned parameter vector is copied at each synchronization.",
+  "task": "Compute a fresh target parameter array and compare a frozen target, a partial update, and a hard copy.",
+  "signature": "polyak_update(target, online, rate)",
+  "requirements": [
+    "target and online are matching nonempty vectors or matrices, with every axis length in 1..256. rate is a scalar in [0,1].",
+    "Return (1-rate)*target+rate*online as a new NumPy array. Here rate weights the online parameters; some literature instead names the target retention coefficient.",
+    "Rate zero preserves the target values, rate one copies the online values. Never change either input in place, including endpoint cases.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Partial move",
+      "input": "polyak_update([0,10],[8,2],0.25)",
+      "output": "array([2., 8.])"
+    },
+    {
+      "name": "Frozen target",
+      "input": "polyak_update([1,2],[9,8],0)",
+      "output": "array([1., 2.])"
+    },
+    {
+      "name": "Hard copy",
+      "input": "polyak_update([1,2],[9,8],1)",
+      "output": "array([9., 8.])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Identify which coefficient is named",
+      "body": "This contract names the online contribution, so a small rate produces a small move."
+    },
+    {
+      "title": "Check repeated updates",
+      "body": "For fixed online parameters, the remaining target error is multiplied by 1-rate on each update."
+    }
+  ],
+  "explanation": [
+    "A partial copy reduces abrupt movement of the target used for bootstrapping. It is an exponential moving average when applied repeatedly to successive online parameters.",
+    "The rate convention must be explicit: using a retention coefficient as an online rate reverses the behavior. This operation synchronizes parameters and does not compute gradients."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

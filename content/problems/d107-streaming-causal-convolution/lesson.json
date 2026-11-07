@@ -1,0 +1,44 @@
+{
+  "intro": "Streaming inference sees chunks rather than the whole sequence. Retain just enough history to match a continuous causal convolution.",
+  "task": "Compute outputs for the new chunk and return the history needed for the next call.",
+  "signature": "causal_convolution_chunk(chunk, kernel, state)",
+  "requirements": [
+    "chunk and kernel are vectors; kernel length is 2..64. state has length kernel_length-1 and stores previous samples from oldest to newest.",
+    "For current sample at time t, output=sum(kernel[j]*sample_at_t_minus_j). Thus kernel[0] multiplies the current sample. Return {\"output\": vector, \"state\": the last kernel_length-1 samples of concatenated history and chunk}.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two tap stream",
+      "input": "causal_convolution_chunk([3,4],[1,2],[2])",
+      "output": "{'output': [7.0, 10.0], 'state': [4.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Short chunk retains history",
+      "input": "causal_convolution_chunk([4],[1,2,3,4],[1,2,3])",
+      "output": "{'output': [20.0], 'state': [2.0, 3.0, 4.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Zero history",
+      "input": "causal_convolution_chunk([1,2,3],[1,-1],[0])",
+      "output": "{'output': [1.0, 1.0, 1.0], 'state': [3.0]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Join the stored history to the new chunk before applying backward-looking windows."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A chunk shorter than the kernel still leaves some old history in the next state."
+    }
+  ],
+  "explanation": [
+    "A finite causal kernel needs only a fixed-length suffix of past input. Carrying that suffix makes chunk boundaries invisible to the mathematical operation.",
+    "Kernel orientation is easy to reverse accidentally: the first coefficient corresponds to the newest sample here. Keeping a clear state order enables independent streaming and full-sequence implementations to agree."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "A sampled action receives a signed advantage. The score-function gradient shifts probability toward helpful actions and away from harmful ones while balancing each row.",
+  "task": "Compute the negative mean advantage-weighted log-probability loss and its gradient with respect to the supplied logits.",
+  "signature": "policy_score_gradient(logits, actions, advantages)",
+  "requirements": [
+    "logits is a nonempty (B,A) matrix. actions is a vector of B integer-valued category indices in [0,A). advantages has length B and may contain positive, zero, or negative values.",
+    "Use stable log-softmax. Return {\"loss\": -mean(advantages*log_probability_of_actions), \"gradient\": advantages[:,None]*(softmax(logits)-one_hot(actions))/B}.",
+    "Treat advantages as fixed supplied weights. The gradient is for minimizing the stated negative objective, not for gradient ascent. Do not normalize advantages or take another mean over actions.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Positive advantage",
+      "input": "policy_score_gradient([[0,0]],[0],[2])",
+      "output": "{'loss': 1.38629436, 'gradient': array([[-1.,  1.]])}"
+    },
+    {
+      "name": "Negative advantage",
+      "input": "policy_score_gradient([[0,0]],[1],[-2])",
+      "output": "{'loss': -1.38629436, 'gradient': array([[-1.,  1.]])}"
+    },
+    {
+      "name": "Known action probability",
+      "input": "policy_score_gradient([[0,np.log(3)]],[1],[1])",
+      "output": "{'loss': 0.287682072, 'gradient': array([[ 0.25, -0.25]])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Differentiate one selected log-probability",
+      "body": "The derivative is one_hot(action)-probability before the negative-loss sign."
+    },
+    {
+      "title": "Check the sum over actions",
+      "body": "Each row of the logit gradient sums to zero, reflecting invariance to a common logit shift."
+    }
+  ],
+  "explanation": [
+    "A positive advantage makes gradient descent increase the chosen action logit relative to the others. A negative advantage reverses that direction.",
+    "This explicit derivative is a small score-function calculation from supplied samples. Estimating useful advantages and collecting rollouts are separate parts of policy optimization."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,45 @@
+{
+  "intro": "An n-step target combines several observed rewards with a later value prediction. A terminal event or rollout boundary can shorten that lookahead.",
+  "task": "Construct a target for every starting transition. Keep track of how many rewards were consumed so the bootstrap receives the correct discount power.",
+  "signature": "n_step_targets(rewards, values, terminated, discount, steps)",
+  "requirements": [
+    "rewards and terminated have length T in 1..255, values has length T+1, and terminated contains numeric zero/one. discount is in [0,1], and steps is an integer in [1,256].",
+    "Starting at each t, accumulate up to steps rewards with powers discount**0, discount**1, etc. Stop after including a terminal transition\u2019s reward. Otherwise add discount**k*values[t+k], where k rewards were consumed.",
+    "At a nonterminal rollout cutoff use the final supplied value, even when fewer than steps rewards remain. Never cross a terminal into the next episode. Return a NumPy vector of length T.",
+    "Use real finite numeric inputs of magnitude at most 1e30, excluding boolean parameters. Vectors have 1..256 entries and each matrix axis has length 1..256 unless a stricter bound is stated. Leave caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two observed rewards",
+      "input": "n_step_targets([1,2,3],[0,10,20,30],[0,0,0],0.5,2)",
+      "output": "array([ 7., 11., 18.])"
+    },
+    {
+      "name": "Terminal cuts lookahead",
+      "input": "n_step_targets([1,2,100],[0,10,20,30],[0,1,0],0.5,3)",
+      "output": "array([  2.,   2., 115.])"
+    },
+    {
+      "name": "One-step horizon",
+      "input": "n_step_targets([1,2],[0,4,8],[0,0],0.5,1)",
+      "output": "array([3., 6.])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Count consumed transitions",
+      "body": "The bootstrap exponent equals the number of rewards included, not the requested horizon when the rollout is shorter."
+    },
+    {
+      "title": "Include the terminal reward",
+      "body": "Stopping an episode removes the later value, not the reward observed on its last transition."
+    }
+  ],
+  "explanation": [
+    "At a one-step horizon the target uses one reward and the next value. With a horizon spanning the rollout, it equals the bootstrapped return recurrence.",
+    "The later value trades an observed long-term sum for a prediction. This lesson isolates horizon and boundary mechanics rather than asserting a universally best horizon."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "e23",
+  "kind": "lesson",
+  "slug": "token-ngram-counts",
+  "version": 1,
+  "title": "Count Overlapping Token N-grams",
+  "summary": "Phrase statistics depend on overlapping windows: repeated phrases should increase a count, while a short document may contain no complete window.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Text evaluation", "Token sequences"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "ngram_counts",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

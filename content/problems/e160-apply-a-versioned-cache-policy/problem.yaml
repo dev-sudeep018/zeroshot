@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "e160",
+  "kind": "lesson",
+  "slug": "apply-a-versioned-cache-policy",
+  "version": 1,
+  "title": "Apply a Versioned Cache Policy",
+  "summary": "Accept entries only when version matches and age is within an explicit TTL interval.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Python data processing", "Contract reasoning"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    [
+      "Python function arguments and return values",
+      "Lists, dictionaries, and loops",
+    ],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "valid_cache_entries",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot exercise, explanation, implementation, and test fixtures; no third-party lesson or code imported.",
+    ],
+}

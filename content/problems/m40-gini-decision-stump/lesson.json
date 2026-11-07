@@ -1,0 +1,46 @@
+{
+  "intro": "A useful tree split separates class mixtures. Compare every gap in a numeric feature using the weighted impurity of its two children.",
+  "task": "Find the best binary split of one feature using Gini impurity, with deterministic threshold and class ties.",
+  "signature": "gini_split(values, labels)",
+  "requirements": [
+    "values and labels are equal-length vectors with at least two observations. Labels are zero or one and values must contain at least two distinct numbers.",
+    "Candidate thresholds are midpoints of consecutive distinct sorted values. Left rows satisfy value<=threshold. Minimize child-size-weighted Gini impurity 1-sum(class_probability**2).",
+    "Return {\"threshold\": threshold, \"impurity\": weighted_impurity, \"gain\": parent_impurity-weighted_impurity, \"left_class\": majority_left, \"right_class\": majority_right}. Impurity ties within 1e-12 choose the smaller threshold; class ties choose zero.",
+    "If a floating-point midpoint rounds up to the upper endpoint, use the largest representable value below that endpoint so both children remain nonempty.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Perfect separation",
+      "input": "gini_split([0,1,2,3],[0,0,1,1])",
+      "output": "{\n  \"threshold\": 1.5,\n  \"impurity\": 0,\n  \"gain\": 0.5,\n  \"left_class\": 0,\n  \"right_class\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Tie chooses first gap",
+      "input": "gini_split([0,1,2],[0,1,0])",
+      "output": "{\n  \"threshold\": 0.5,\n  \"impurity\": 0.33333333,\n  \"gain\": 0.11111111,\n  \"left_class\": 0,\n  \"right_class\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Pure parent",
+      "input": "gini_split([0,2,4],[1,1,1])",
+      "output": "{\n  \"threshold\": 1,\n  \"impurity\": 0,\n  \"gain\": 0,\n  \"left_class\": 1,\n  \"right_class\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Distinct sorted values define all possible changes to the partition; gaps are enough to enumerate candidates."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Weight each child impurity by its sample count before comparing candidates, then resolve ties consistently."
+    }
+  ],
+  "explanation": [
+    "Each candidate is judged by the impurity remaining after the split, weighted by child sample counts. An unweighted average could overvalue a tiny pure child.",
+    "Thresholds inside a gap create the same partition, so midpoints give a reproducible representative. Ties are resolved explicitly to keep training deterministic."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

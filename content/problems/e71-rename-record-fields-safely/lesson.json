@@ -1,0 +1,44 @@
+{
+  "intro": "Schema migrations often rename fields while retaining values. Applying all renames from the original keys avoids one rename accidentally changing the input to another.",
+  "task": "Rename selected keys and reject collisions without modifying input records.",
+  "signature": "rename_fields(record, renames)",
+  "requirements": [
+    "renames maps nonempty source strings to nonempty destination strings. Ignore mappings for absent source keys. Rename simultaneously and reject any collision among resulting keys. Preserve record values.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Rename one key",
+      "input": "rename_fields({'old':1,'x':2}, {'old':'new'})",
+      "output": "{'new': 1, 'x': 2}"
+    },
+    {
+      "name": "Swap keys simultaneously",
+      "input": "rename_fields({'a':1,'b':2}, {'a':'b','b':'a'})",
+      "output": "{'b': 1, 'a': 2}"
+    },
+    {
+      "name": "Absent mapping ignored",
+      "input": "rename_fields({'a':1}, {'z':'a'})",
+      "output": "{'a': 1}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Read names from the original record and write into a fresh dictionary."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Check collisions on the final names, allowing a simultaneous a/b swap."
+    }
+  ],
+  "explanation": [
+    "Schema migrations often rename fields while retaining values. Applying all renames from the original keys avoids one rename accidentally changing the input to another.",
+    "A collision would destroy a value through overwriting. Rejecting it makes the migration explicit, while ignoring absent source keys allows one rename policy to serve heterogeneous records."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

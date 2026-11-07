@@ -1,0 +1,45 @@
+{
+  "intro": "Markov transitions redistribute probability mass according to the current state. A full trajectory reveals transient behavior that a single final distribution would hide.",
+  "task": "Propagate a probability row vector through a stochastic matrix for a fixed number of steps.",
+  "signature": "markov_steps(initial, transition, steps)",
+  "requirements": [
+    "initial is a probability vector; transition is a square matrix of matching size with nonnegative rows summing to one within 1e-10.",
+    "steps is an integer in 0..64. Return a matrix of shape (steps+1, states), including the initial distribution at row zero.",
+    "Treat distributions as row vectors: each next row is current @ transition. Normalize accepted initial probabilities and matrix rows.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Switching states",
+      "input": "markov_steps([1,0],[[.8,.2],[.3,.7]],2)",
+      "output": "[[1.0, 0.0], [0.8, 0.2], [0.7, 0.3]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "No transitions",
+      "input": "markov_steps([.2,.8],[[1,0],[0,1]],0)",
+      "output": "[[0.2, 0.8]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Deterministic cycle",
+      "input": "markov_steps([1,0,0],[[0,1,0],[0,0,1],[1,0,0]],3)",
+      "output": "[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [1.0, 0.0, 0.0]]\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "A transition row describes where probability leaves its starting state."
+    },
+    {
+      "title": "Build the result",
+      "body": "Save the initial row, then repeatedly multiply on the right and append each resulting distribution."
+    }
+  ],
+  "explanation": [
+    "Markov transitions redistribute probability mass according to the current state. A full trajectory reveals transient behavior that a single final distribution would hide.",
+    "The row-vector convention fixes which side of the transition matrix is used. Row sums preserve total mass; transposing an asymmetric matrix generally changes the process."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

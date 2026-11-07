@@ -1,0 +1,45 @@
+{
+  "intro": "Two distributions can have disjoint support. Jensen\u2013Shannon divergence compares each distribution with their shared mixture and remains finite.",
+  "task": "Return the equally weighted Jensen\u2013Shannon divergence in nats, not its square-root distance.",
+  "signature": "js_divergence(p, q)",
+  "requirements": [
+    "p and q are nonnegative probability vectors with equal length and totals within 1e-8 of one.",
+    "Use m=(p+q)/2 and return (KL(p||m)+KL(q||m))/2, skipping zero-weight terms separately.",
+    "The output lies between zero and log(2), up to rounding. Disjoint supports are valid; do not add epsilon.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Identical distributions",
+      "input": "js_divergence([.3,.7],[.3,.7])",
+      "output": "0\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Disjoint supports",
+      "input": "js_divergence([1,0],[0,1])",
+      "output": "0.69314718\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Partial overlap",
+      "input": "js_divergence([1,0],[.5,.5])",
+      "output": "0.21576155\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Introduce a distribution halfway between the inputs so each input has support inside that mixture."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "For very small probabilities, form the mixture logarithm with logaddexp instead of halving a subnormal value."
+    }
+  ],
+  "explanation": [
+    "The mixture gives positive mass wherever either input does, so each nonzero term has a valid denominator even when the original supports are disjoint.",
+    "This operation is a divergence. Some libraries return the square root as a metric; keeping the output convention explicit prevents a subtle numerical mismatch."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

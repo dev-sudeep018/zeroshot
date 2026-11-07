@@ -1,0 +1,44 @@
+{
+  "intro": "Group-level evaluation can expose a weak slice hidden by overall accuracy. Returning counts alongside rates shows how much evidence supports each rate.",
+  "task": "Report correct and total counts per group plus accuracy with explicit empty behavior.",
+  "signature": "group_accuracy(expected, predicted, groups)",
+  "requirements": [
+    "All three inputs are equally long string sequences; groups use nonempty names. Return each group mapped to correct, total, and accuracy. Match expected and predicted by exact string equality; an empty input returns an empty dictionary.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Separate group rates",
+      "input": "group_accuracy(['a','b','c'], ['a','x','c'], ['x','x','y'])",
+      "output": "{'x': {'correct': 1, 'total': 2, 'accuracy': 0.5},\n 'y': {'correct': 1, 'total': 1, 'accuracy': 1.0}}"
+    },
+    {
+      "name": "Exact case matters",
+      "input": "group_accuracy(['A'], ['a'], ['g'])",
+      "output": "{'g': {'correct': 0, 'total': 1, 'accuracy': 0.0}}"
+    },
+    {
+      "name": "Empty answers match",
+      "input": "group_accuracy([''], [''], ['g'])",
+      "output": "{'g': {'correct': 1, 'total': 1, 'accuracy': 1.0}}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Accumulate correct and total counts per group before dividing."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not average group accuracies to reconstruct overall accuracy unless group sizes are equal."
+    }
+  ],
+  "explanation": [
+    "Group-level evaluation can expose a weak slice hidden by overall accuracy. Returning counts alongside rates shows how much evidence supports each rate.",
+    "Exact match is deliberately strict here. Case and whitespace normalization would be a separate evaluation policy and should not be introduced silently."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,44 @@
+{
+  "intro": "Explicit bucket boundaries turn raw quantities into a stable reporting schema. Keeping empty bins means reports remain comparable even when some ranges have no observations.",
+  "task": "Bucket nonnegative integer quantities by explicit increasing upper bounds.",
+  "signature": "quantity_histogram(values, upper_bounds)",
+  "requirements": [
+    "values are integers 0..1e9. upper_bounds are strictly increasing integers 0..1e9. Return len(bounds)+1 counts: each value goes to the first bound >= value, or the final overflow bin.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Boundary and overflow",
+      "input": "quantity_histogram([0,2,3,5,6], [2,5])",
+      "output": "[2, 2, 1]"
+    },
+    {
+      "name": "No bounds",
+      "input": "quantity_histogram([1,2,3], [])",
+      "output": "[3]"
+    },
+    {
+      "name": "Empty values",
+      "input": "quantity_histogram([], [2,5])",
+      "output": "[0, 0, 0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Advance past a bound only when the value is strictly greater than it."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Always allocate the overflow bin, even if all observed values fit earlier bins."
+    }
+  ],
+  "explanation": [
+    "Explicit bucket boundaries turn raw quantities into a stable reporting schema. Keeping empty bins means reports remain comparable even when some ranges have no observations.",
+    "Boundary equality belongs to the lower indexed bucket under this contract. A conservation check is that the sum of counts equals the number of input values."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

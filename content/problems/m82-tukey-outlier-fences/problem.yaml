@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m82",
+  "kind": "lesson",
+  "slug": "tukey-outlier-fences",
+  "version": 1,
+  "title": "Explain Which Tail Contains an Outlier",
+  "summary": "Compute linear-interpolated quartiles and Tukey fences, and classify lower and upper outliers separately.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Explain Which Tail Contains an Outlier"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "tukey_fences",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://numpy.org/doc/stable/reference/routines.statistics.html",
+    ],
+}

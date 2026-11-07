@@ -1,0 +1,45 @@
+{
+  "intro": "Covariance and least-squares calculations often involve symmetric positive definite matrices. A triangular square root exposes their structure.",
+  "task": "Compute the lower-triangular Cholesky factor with positive diagonal using the column recurrence.",
+  "signature": "cholesky_lower(matrix)",
+  "requirements": [
+    "matrix is square and symmetric within absolute tolerance 1e-10.",
+    "Return lower-triangular L satisfying L@L.T=matrix. At each diagonal, subtract previously accumulated squares before taking the positive square root.",
+    "Reject a computed diagonal pivot at or below 1e-12. Semidefinite matrices are outside this positive-definite exercise.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Correlated pair",
+      "input": "cholesky_lower([[4,2],[2,5]])",
+      "output": "[\n  [\n    2.0,\n    0.0\n  ],\n  [\n    1.0,\n    2.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Diagonal covariance",
+      "input": "cholesky_lower([[9,0],[0,16]])",
+      "output": "[\n  [\n    3.0,\n    0.0\n  ],\n  [\n    0.0,\n    4.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Single entry",
+      "input": "cholesky_lower([[25]])",
+      "output": "[\n  [\n    5.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Earlier factor columns already explain part of each matrix entry; subtract their inner product first."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Diagonal residuals are squared factor entries, while off-diagonal residuals divide by an already known diagonal."
+    }
+  ],
+  "explanation": [
+    "At position (i,j), earlier factor columns already explain part of the original matrix entry. Subtracting that contribution leaves the next diagonal square or off-diagonal product.",
+    "A positive pivot is essential. A zero or negative residual cannot be represented by a real positive diagonal factor under this contract."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

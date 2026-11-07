@@ -1,0 +1,45 @@
+{
+  "intro": "Attention has two gradient routes: the weighted values and the score-dependent weights. Follow both without confusing the query, key and value axes.",
+  "task": "Implement attention_backward(queries, keys, values, upstream). A single-key attention output cannot depend on query or key scores, so their gradients vanish while the value still receives upstream.",
+  "signature": "attention_backward(queries, keys, values, upstream)",
+  "requirements": [
+    "queries is (Q,D), keys is (K,D), values is (K,V), upstream is (Q,V), with positive dimensions. Forward is softmax(queries@keys.T/sqrt(D))@values.",
+    "Let P be that stable row softmax, dP=upstream@values.T, dS=P*(dP-sum(P*dP,axis=1,keepdims=True)).",
+    "Return {queries: dS@keys/sqrt(D), keys: dS.T@queries/sqrt(D), values: P.T@upstream}. No mask, bias, dropout or batch averaging is applied.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "One key only",
+      "input": "attention_backward([[2]],[[3]],[[4]],[[5]])",
+      "output": "{\"queries\": [[0.0]], \"keys\": [[0.0]], \"values\": [[5.0]]}"
+    },
+    {
+      "name": "Uniform weights still have score derivative",
+      "input": "attention_backward([[0]],[[0],[1]],[[0],[4]],[[1]])",
+      "output": "{\"queries\": [[1.0]], \"keys\": [[0.0], [0.0]], \"values\": [[0.5], [0.5]]}"
+    },
+    {
+      "name": "Equal keys can receive opposite gradients",
+      "input": "attention_backward([[1]],[[0],[0]],[[1],[3]],[[2]])",
+      "output": "{\"queries\": [[0.0]], \"keys\": [[-1.0], [1.0]], \"values\": [[1.0], [1.0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The softmax derivative couples all keys in one query row."
+    },
+    {
+      "title": "Step 2",
+      "body": "Value gradients use the attention weights; query and key gradients also pass through the softmax Jacobian."
+    }
+  ],
+  "explanation": [
+    "A single-key attention output cannot depend on query or key scores, so their gradients vanish while the value still receives upstream.",
+    "The scale factor belongs to both query and key derivatives. Finite differences against the complete attention objective can detect missing transpose or normalization terms."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

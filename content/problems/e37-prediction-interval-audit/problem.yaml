@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e37",
+  "kind": "lesson",
+  "slug": "prediction-interval-audit",
+  "version": 1,
+  "title": "Audit Interval Coverage and Width",
+  "summary": "Wide intervals can cover everything while providing little information. Report empirical coverage together with width to make the tradeoff visible.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": ["e36"],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "interval_audit",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): Angelopoulos and Bates, A Gentle Introduction to Conformal Prediction. https://arxiv.org/abs/2107.07511",
+    ],
+}

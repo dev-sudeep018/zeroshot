@@ -1,0 +1,44 @@
+{
+  "intro": "Projection separates a vector into one component along a chosen direction and one component orthogonal to it. Scaling the direction changes its coordinates but not the subspace being selected.",
+  "task": "Project a vector onto a nonzero direction and return orthogonal residual and squared lengths.",
+  "signature": "orthogonal_components(vector, direction)",
+  "requirements": [
+    "vector and direction are equal-length vectors; direction norm must be at least 1e-6.",
+    "Return {\"parallel\": projection onto direction, \"perpendicular\": vector-parallel, \"squared_lengths\": [parallel squared norm, perpendicular squared norm]}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Horizontal direction",
+      "input": "orthogonal_components([3,4],[1,0])",
+      "output": "{'parallel': [3.0, 0.0], 'perpendicular': [0.0, 4.0], 'squared_lengths': [9.0, 16.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Diagonal direction",
+      "input": "orthogonal_components([2,0],[1,1])",
+      "output": "{'parallel': [1.0, 1.0], 'perpendicular': [1.0, -1.0], 'squared_lengths': [2.0, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Already parallel",
+      "input": "orthogonal_components([2,4],[1,2])",
+      "output": "{'parallel': [2.0, 4.0], 'perpendicular': [0.0, 0.0], 'squared_lengths': [20.0, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "The projection coefficient is the dot product divided by the direction squared norm."
+    },
+    {
+      "title": "Build the result",
+      "body": "Subtract the projected part to obtain a residual with zero dot product against the direction."
+    }
+  ],
+  "explanation": [
+    "Projection separates a vector into one component along a chosen direction and one component orthogonal to it. Scaling the direction changes its coordinates but not the subspace being selected.",
+    "The Pythagorean identity says the two squared component lengths add to the original squared length. This gives a useful conservation check in addition to testing orthogonality."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

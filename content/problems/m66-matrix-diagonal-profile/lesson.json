@@ -1,0 +1,45 @@
+{
+  "intro": "Diagonal offsets compare row and column positions without requiring a square matrix. Negative offsets lie below the main diagonal and positive offsets lie above it.",
+  "task": "Compute counts and means for every diagonal of a rectangular matrix with explicit offset order.",
+  "signature": "diagonal_profile(matrix)",
+  "requirements": [
+    "For a matrix with r rows and c columns, offsets range from -(r-1) through c-1 in ascending order.",
+    "Return {\"offsets\": integer offset vector, \"count\": number of cells on each diagonal, \"mean\": diagonal means}. Offset is column index minus row index.",
+    "Every cell belongs to exactly one offset; rectangular matrices are valid.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Square grid",
+      "input": "diagonal_profile([[1,2],[3,4]])",
+      "output": "{'offsets': [-1, 0, 1], 'count': [1, 2, 1], 'mean': [3.0, 2.5, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Wide grid",
+      "input": "diagonal_profile([[1,2,3],[4,5,6]])",
+      "output": "{'offsets': [-1, 0, 1, 2], 'count': [1, 2, 2, 1], 'mean': [4.0, 3.0, 4.0, 3.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Tall grid",
+      "input": "diagonal_profile([[1,2],[3,4],[5,6]])",
+      "output": "{'offsets': [-2, -1, 0, 1], 'count': [1, 2, 2, 1], 'mean': [5.0, 4.5, 2.5, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "The offset c-r identifies which diagonal a cell belongs to."
+    },
+    {
+      "title": "Build the result",
+      "body": "Keep counts with means so different diagonal lengths remain visible."
+    }
+  ],
+  "explanation": [
+    "Diagonal offsets compare row and column positions without requiring a square matrix. Negative offsets lie below the main diagonal and positive offsets lie above it.",
+    "Because edge diagonals are shorter, an unweighted mean of diagonal means usually differs from the matrix mean. Counts supply the weights needed to recover the global average."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

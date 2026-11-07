@@ -1,0 +1,45 @@
+{
+  "intro": "An average prediction treats underestimates and overestimates symmetrically. Quantile loss changes that balance to target a chosen part of a distribution.",
+  "task": "Return the mean pinball loss and its per-prediction subgradient for a fixed quantile.",
+  "signature": "pinball_loss(targets, predictions, quantile)",
+  "requirements": [
+    "targets and predictions are equal-length vectors. quantile is a scalar in [0,1]. Let residual=target-prediction.",
+    "Each loss is quantile*residual for residual>=0 and (quantile-1)*residual for residual<0. Return {\"loss\": mean_loss, \"gradient\": per-prediction derivatives of that mean}.",
+    "Gradient entries are -quantile/n for positive residual, (1-quantile)/n for negative residual, and zero at exactly zero residual. Do not take a gradient with respect to targets.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Median loss",
+      "input": "pinball_loss([0,2],[1,1],.5)",
+      "output": "{\n  \"loss\": 0.5,\n  \"gradient\": [\n    0.25,\n    -0.25\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Asymmetric penalty",
+      "input": "pinball_loss([3],[1],.9)",
+      "output": "{\n  \"loss\": 1.8,\n  \"gradient\": [\n    -0.9\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Overprediction",
+      "input": "pinball_loss([1],[3],.9)",
+      "output": "{\n  \"loss\": 0.2,\n  \"gradient\": [\n    0.1\n  ]\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Split residuals by sign to distinguish underprediction from overprediction at the selected quantile."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Differentiate with respect to predictions, which reverses the residual slope, and divide each derivative by sample count."
+    }
+  ],
+  "explanation": [
+    "Underestimation and overestimation have different slopes. At a high quantile, an underestimate is penalized more strongly, shifting a fitted constant toward the upper part of the observations.",
+    "The reported vector differentiates the mean loss, so each component includes division by the observation count. At zero residual the loss has a kink and this exercise chooses the zero subgradient."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

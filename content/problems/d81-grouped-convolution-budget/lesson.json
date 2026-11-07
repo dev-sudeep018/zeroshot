@@ -1,0 +1,44 @@
+{
+  "intro": "A convolution reuses its kernel across spatial positions. Grouping controls channel connectivity while image size controls compute.",
+  "task": "Count weight parameters, optional biases, and multiply-accumulates for one output image.",
+  "signature": "convolution_budget(input_channels, output_channels, kernel, groups, output_size, bias)",
+  "requirements": [
+    "Channel counts and groups are integers 1..64, with both channel counts divisible by groups. kernel and output_size are two-entry integer vectors in 1..64. bias is integer 0 or 1.",
+    "Return {\"weights\": scalar, \"biases\": scalar, \"parameters\": scalar, \"macs\": scalar}. weights=output_channels*(input_channels/groups)*kernel area; biases=bias*output_channels; macs=weights*output area, excluding bias additions.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Shared kernel",
+      "input": "convolution_budget(3,4,[3,3],1,[2,2],1)",
+      "output": "{'weights': 108, 'biases': 4, 'parameters': 112, 'macs': 432}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Depthwise channels",
+      "input": "convolution_budget(4,4,[3,3],4,[2,3],0)",
+      "output": "{'weights': 36, 'biases': 0, 'parameters': 36, 'macs': 216}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Grouped pointwise",
+      "input": "convolution_budget(4,6,[1,1],2,[5,5],1)",
+      "output": "{'weights': 12, 'biases': 6, 'parameters': 18, 'macs': 300}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Each grouped output sees only input_channels/groups input channels."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Output positions share parameters; multiply the operation count by area."
+    }
+  ],
+  "explanation": [
+    "Sharing weights keeps parameter storage independent of image area. Computation still grows because each output position applies the same kernel.",
+    "Divisibility expresses valid grouping of channel connections. A depthwise layer uses one group per input channel, potentially with multiple outputs per group."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

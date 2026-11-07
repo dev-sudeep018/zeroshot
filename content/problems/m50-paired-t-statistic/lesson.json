@@ -1,0 +1,45 @@
+{
+  "intro": "Paired observations share a baseline. Work with within-pair differences before comparing their average change with its sampling variability.",
+  "task": "Return the mean paired difference, its estimated standard error, and the corresponding t statistic without computing a p-value.",
+  "signature": "paired_t_statistic(before, after)",
+  "requirements": [
+    "before and after are equal-length vectors containing at least two pairs. The difference direction is after-before.",
+    "Use sample variance with denominator n-1, then standard_error=sample_std/sqrt(n) and t=mean_difference/standard_error.",
+    "Reject difference standard deviation at or below 1e-12. Return {\"mean_difference\": mean, \"standard_error\": se, \"t\": statistic, \"degrees_of_freedom\": n-1}.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Positive changes",
+      "input": "paired_t_statistic([0,0,0],[1,2,3])",
+      "output": "{\n  \"mean_difference\": 2,\n  \"standard_error\": 0.57735027,\n  \"t\": 3.46410162,\n  \"degrees_of_freedom\": 2\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Zero mean change",
+      "input": "paired_t_statistic([5,5,5],[4,5,6])",
+      "output": "{\n  \"mean_difference\": 0,\n  \"standard_error\": 0.57735027,\n  \"t\": 0,\n  \"degrees_of_freedom\": 2\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Two pairs",
+      "input": "paired_t_statistic([0,0],[1,3])",
+      "output": "{\n  \"mean_difference\": 2,\n  \"standard_error\": 1,\n  \"t\": 2,\n  \"degrees_of_freedom\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Calculate after-minus-before within each pair before estimating any mean or variance."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Use the sample standard deviation of differences, then divide by the square root of the number of pairs."
+    }
+  ],
+  "explanation": [
+    "Pairing removes the shared baseline before estimating variability. The spread that matters is the spread of differences, not the separate spreads of the two measurement vectors.",
+    "The statistic divides average change by its estimated standard error. Converting it into an inferential conclusion requires assumptions and a reference distribution beyond this computational exercise."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

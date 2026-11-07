@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e35",
+  "kind": "lesson",
+  "slug": "empirical-ks-distance",
+  "version": 1,
+  "title": "Compare Empirical Distributions with KS Distance",
+  "summary": "A distribution can shift even when its mean stays fixed. The two-sample KS distance finds the largest vertical gap between empirical cumulative distributions.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Model evaluation", "Uncertainty"],
+  "prerequisites": [],
+  "assumed_knowledge": ["Python functions", "NumPy array shapes and indexing"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "ks_distance",
+      "absolute_tolerance": 1e-7,
+      "relative_tolerance": 0.000001,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Concept reference (original implementation and prose): SciPy two-sample Kolmogorov-Smirnov documentation. https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
+    ],
+}

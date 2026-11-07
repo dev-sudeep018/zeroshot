@@ -1,0 +1,45 @@
+{
+  "intro": "Repeating a correct word should not manufacture a high translation score. Clipped unigram precision limits credit, while a brevity penalty discourages tiny outputs.",
+  "task": "Score a candidate with clipped unigram overlap and a brevity penalty; use repetition and short-output examples to inspect both mechanisms.",
+  "signature": "bleu_one(candidate, reference)",
+  "requirements": [
+    "candidate and reference are token lists or tuples of at most 10000 nonempty strings. reference must be nonempty.",
+    "Clip each candidate token count to its reference count. Precision is clipped matches divided by candidate length. Multiply by exp(min(0,1-reference_length/candidate_length)).",
+    "Return a float, with 0 for an empty candidate. This is unsmoothed sentence BLEU-1 with one reference, not corpus BLEU or BLEU-4.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Repetition is clipped",
+      "input": "bleu_one(['a','a','a'], ['a','b'])",
+      "output": "0.333333333333"
+    },
+    {
+      "name": "Short output penalty",
+      "input": "bleu_one(['a'], ['a','b'])",
+      "output": "0.367879441171"
+    },
+    {
+      "name": "Perfect unigram overlap",
+      "input": "bleu_one(['b','a'], ['a','b'])",
+      "output": "1.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Cap credit token by token",
+      "body": "Take the smaller candidate and reference count before summing matches."
+    },
+    {
+      "title": "Separate length from overlap",
+      "body": "Compute clipped precision and brevity penalty independently, then multiply."
+    }
+  ],
+  "explanation": [
+    "Clipping prevents repeated matching words from receiving unlimited credit. Unigram overlap ignores order, which is why a reordered candidate can still score one in this lesson.",
+    "The brevity penalty is below one only when the candidate is shorter than the reference. The explicit BLEU-1 contract avoids silently treating it as a full multi-order corpus metric."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

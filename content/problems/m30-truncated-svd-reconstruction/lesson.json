@@ -1,0 +1,45 @@
+{
+  "intro": "Low-rank compression keeps the matrix directions carrying the most energy. Reconstruct the approximation and measure the discarded energy separately.",
+  "task": "Return a rank-limited matrix reconstruction and its squared Frobenius residual using the largest singular values.",
+  "signature": "low_rank_approximation(matrix, rank)",
+  "requirements": [
+    "matrix is a nonempty matrix. rank is an integer from zero through min(matrix.shape).",
+    "Return {\"matrix\": approximation, \"squared_error\": sum((matrix-approximation)**2)}. Rank zero returns a zero matrix.",
+    "When 0<rank<min(shape), reject a positive boundary singular value above 1e-12 if its gap to the retained value is at most 1e-10; otherwise the best approximation can be ambiguous.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Keep largest direction",
+      "input": "low_rank_approximation([[3,0],[0,1]],1)",
+      "output": "{\n  \"matrix\": [\n    [\n      3.0,\n      0.0\n    ],\n    [\n      0.0,\n      0.0\n    ]\n  ],\n  \"squared_error\": 1\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Zero rank",
+      "input": "low_rank_approximation([[1,2],[3,4]],0)",
+      "output": "{\n  \"matrix\": [\n    [\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      0.0\n    ]\n  ],\n  \"squared_error\": 30\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Full rank",
+      "input": "low_rank_approximation([[1,2],[0,1]],2)",
+      "output": "{\n  \"matrix\": [\n    [\n      1.0,\n      2.0\n    ],\n    [\n      0.0,\n      1.0\n    ]\n  ],\n  \"squared_error\": 0\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Singular values rank the strength of matrix directions. Reconstruct only the leading terms of the expansion."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Report the residual energy after reconstruction; a tie at the cutoff makes a unique best reconstruction impossible."
+    }
+  ],
+  "explanation": [
+    "The truncated singular-value expansion is a best rank-k approximation in squared Frobenius error. Its discarded squared singular values equal the residual energy.",
+    "Singular-vector signs cancel during reconstruction. A tie exactly at the truncation boundary is different: several reconstructed matrices can be equally good, so this contract rejects that ambiguous case."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

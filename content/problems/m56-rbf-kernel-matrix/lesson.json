@@ -1,0 +1,45 @@
+{
+  "intro": "A radial basis kernel turns squared distance into a smooth similarity. Its bandwidth controls how rapidly a neighbor stops looking similar.",
+  "task": "Return the pairwise Gaussian radial-basis kernel matrix between two sets of feature rows.",
+  "signature": "rbf_kernel(first, second, gamma)",
+  "requirements": [
+    "first is an (n,d) matrix and second is an (m,d) matrix. gamma is a scalar in [0,1e6].",
+    "Return a matrix K with K[i,j]=exp(-gamma*sum((first[i]-second[j])**2)). Use squared Euclidean distance.",
+    "gamma zero returns all ones. Equal rows have similarity one; no normalization by the number of features or by row sums is applied.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two observations",
+      "input": "rbf_kernel([[0],[1]],[[0],[1]],1)",
+      "output": "[\n  [\n    1.0,\n    0.36787944\n  ],\n  [\n    0.36787944,\n    1.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Zero gamma",
+      "input": "rbf_kernel([[0],[99]],[[2]],0)",
+      "output": "[\n  [\n    1.0\n  ],\n  [\n    1.0\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Squared distance",
+      "input": "rbf_kernel([[0]],[[2]],.5)",
+      "output": "[\n  [\n    0.13533528\n  ]\n]\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Expand one sample axis from each matrix to obtain all pairwise coordinate differences."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Sum squared differences along the feature axis before applying the negative exponential; do not normalize kernel rows."
+    }
+  ],
+  "explanation": [
+    "The exponential maps zero distance to one and large distance toward zero. Multiplying squared distance by gamma sets the length scale of that decay.",
+    "A kernel matrix is not an attention probability matrix: its rows need not sum to one. Keeping cross-set shape explicit makes the same operation usable for training and evaluation rows."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "d68",
+  "kind": "lesson",
+  "slug": "chain-log-partition",
+  "version": 1,
+  "title": "Normalize Scores over Every Label Sequence",
+  "summary": "A linear-chain model scores entire label sequences. Its normalizing constant sums exponentially many possibilities, but dynamic programming reuses partial sums.",
+  "domain": "deep-learning",
+  "difficulty": "advanced",
+  "skills": ["Structured prediction", "Dynamic programming"],
+  "prerequisites": ["m02"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "chain_log_partition",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+}

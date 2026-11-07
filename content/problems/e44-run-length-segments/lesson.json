@@ -1,0 +1,45 @@
+{
+  "intro": "Consecutive repeated values can be represented as segments. Run-length encoding preserves order, unlike a frequency table that merges equal values from distant positions.",
+  "task": "Compress consecutive runs while preserving boundaries between equal values that occur in separate segments.",
+  "signature": "run_length_encode(values)",
+  "requirements": [
+    "values is a finite numeric vector, possibly empty. Compare neighboring values using exact equality, not a tolerance.",
+    "Return dict values as one numeric representative per consecutive run, lengths as integer run lengths, and starts as integer starting indices.",
+    "The decoded sequence repeats each representative by its corresponding length. Equal values separated by a different value must remain separate runs.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Separate repeated segments",
+      "input": "run_length_encode([1,1,2,1,1,1])",
+      "output": "{'values': [1.0, 2.0, 1.0], 'lengths': [2, 1, 3], 'starts': [0, 2, 3]}"
+    },
+    {
+      "name": "Empty stream",
+      "input": "run_length_encode([])",
+      "output": "{'values': [], 'lengths': [], 'starts': []}"
+    },
+    {
+      "name": "One long run",
+      "input": "run_length_encode([5,5,5])",
+      "output": "{'values': [5.0], 'lengths': [3], 'starts': [0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find transition indices",
+      "body": "A new run begins at zero and wherever adjacent values differ."
+    },
+    {
+      "title": "Use a final sentinel",
+      "body": "Appending the sequence length to run starts makes run lengths simple differences."
+    }
+  ],
+  "explanation": [
+    "Run-length encoding exploits local repetition. The run lengths sum to the original sequence length, and the start positions recover each segment boundary.",
+    "Exact equality is part of the format. Approximate grouping would require a different, potentially lossy contract for floating-point observations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

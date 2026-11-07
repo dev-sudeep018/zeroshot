@@ -1,0 +1,44 @@
+{
+  "intro": "Multilabel prediction makes one binary decision for every vocabulary label on every example. Hamming loss measures the fraction of those individual decisions that disagree.",
+  "task": "Count missing and extra labels per example and divide total mismatches by examples times vocabulary size.",
+  "signature": "hamming_label_errors(expected, predicted, vocabulary)",
+  "requirements": [
+    "expected and predicted contain equally many label lists; vocabulary is a nonempty unique nonempty-string list. Every row contains unique vocabulary labels. Return missing and extra counts per row, total_errors, and loss=total_errors/(row_count*vocabulary_size), or 0.0 for no rows.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Missing and extra",
+      "input": "hamming_label_errors([['a','b'],[]], [['a'],['c']], ['a','b','c'])",
+      "output": "{'missing': [1, 0],\n 'extra': [0, 1],\n 'total_errors': 2,\n 'loss': 0.3333333333333333}"
+    },
+    {
+      "name": "Exact agreement",
+      "input": "hamming_label_errors([['a']], [['a']], ['a','b'])",
+      "output": "{'missing': [0], 'extra': [0], 'total_errors': 0, 'loss': 0.0}"
+    },
+    {
+      "name": "Complete mismatch",
+      "input": "hamming_label_errors([['a']], [['b']], ['a','b'])",
+      "output": "{'missing': [1], 'extra': [1], 'total_errors': 2, 'loss': 1.0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Compute expected minus predicted and predicted minus expected separately."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "The denominator counts all label decisions, including correctly absent labels."
+    }
+  ],
+  "explanation": [
+    "Multilabel prediction makes one binary decision for every vocabulary label on every example. Hamming loss measures the fraction of those individual decisions that disagree.",
+    "A missing label and an extra label are both errors, but separate counts explain the direction of failure. The vocabulary size matters even for labels absent from both sets."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

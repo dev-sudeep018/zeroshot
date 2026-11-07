@@ -1,0 +1,45 @@
+{
+  "intro": "CTC assigns probability to a label sequence by summing many frame-level alignments. Repeated labels require a blank separator to survive the collapse rule.",
+  "task": "Implement ctc_probability(probabilities, labels, blank=0). Consecutive repeated frame labels merge before blanks are removed. Thus a target with two identical labels needs a blank frame between their emissions.",
+  "signature": "ctc_probability(probabilities, labels, blank=0)",
+  "requirements": [
+    "probabilities has shape (T,C), with 1<=T<=64 and 2<=C<=32. Values lie in [0,1] and each row sums to one within absolute tolerance 1e-8.",
+    "labels is an integer vector (possibly empty), with indices in [0,C), excluding blank; blank is an integer in [0,C). Target length may exceed T.",
+    "Return the scalar sum of alignment probabilities that collapse to labels: merge consecutive identical frame symbols, then remove blank symbols. Impossible targets return 0. This short-sequence probability-space exercise may underflow for extremely tiny likelihoods.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Single frame label",
+      "input": "ctc_probability([[.3,.7]],[1])",
+      "output": "0.7"
+    },
+    {
+      "name": "Three alignments for one label",
+      "input": "ctc_probability([[.5,.5],[.5,.5]],[1])",
+      "output": "0.75"
+    },
+    {
+      "name": "Repeated target needs blank",
+      "input": "ctc_probability(np.full((3,2),.5),[1,1])",
+      "output": "0.125"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "Interleave the target with blanks; transitions can stay, advance one state, or skip a blank when adjacent target labels differ."
+    },
+    {
+      "title": "Step 2",
+      "body": "Start with the initial blank and first label. End at the final blank or final label."
+    }
+  ],
+  "explanation": [
+    "Consecutive repeated frame labels merge before blanks are removed. Thus a target with two identical labels needs a blank frame between their emissions.",
+    "The forward dynamic program sums paths rather than selecting the most probable path. Greedy frame decoding does not compute a target likelihood."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

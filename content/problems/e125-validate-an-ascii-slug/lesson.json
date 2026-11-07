@@ -1,0 +1,44 @@
+{
+  "intro": "Resource slugs provide a predictable identifier from a display name. Collapsing separators prevents cosmetic differences in punctuation from generating awkward runs of hyphens.",
+  "task": "Normalize ASCII names into lower-case hyphenated slugs and reject names with no letters or digits.",
+  "signature": "ascii_slug(name)",
+  "requirements": [
+    "Require a string containing only ASCII characters. Lowercase it, replace each maximal run outside a-z and 0-9 with one hyphen, then trim outer hyphens. Return the slug; reject a result with no alphanumeric character.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Words and punctuation",
+      "input": "ascii_slug(' Model: V2! ')",
+      "output": "'model-v2'"
+    },
+    {
+      "name": "Repeated separators",
+      "input": "ascii_slug('a___b---c')",
+      "output": "'a-b-c'"
+    },
+    {
+      "name": "Already normalized",
+      "input": "ascii_slug('ml-data')",
+      "output": "'ml-data'"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Replace runs of separators, not each separator individually."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Validate that something remains after trimming outer hyphens."
+    }
+  ],
+  "explanation": [
+    "Resource slugs provide a predictable identifier from a display name. Collapsing separators prevents cosmetic differences in punctuation from generating awkward runs of hyphens.",
+    "ASCII-only input avoids silently transliterating names with an unspecified policy. Slugs are not guaranteed unique, so a real registry must handle collisions separately."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

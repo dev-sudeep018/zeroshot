@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "d73",
+  "kind": "lesson",
+  "slug": "double-q-target-selection",
+  "version": 1,
+  "title": "Separate Action Selection from Action Evaluation",
+  "summary": "Maximizing and evaluating noisy action values with the same estimator can introduce overestimation. Double Q targets separate which action is chosen from how it is valued.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills":
+    [
+      "Reinforcement learning",
+      "Separate Action Selection from Action Evaluation",
+    ],
+  "prerequisites": ["d72"],
+  "assumed_knowledge":
+    ["NumPy arrays", "Conditional probability", "Basic gradients"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "double_q_targets",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 25,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original lesson, code, and test fixtures. Conceptual reading only; no source code or prose copied: https://arxiv.org/abs/1509.06461",
+    ],
+}

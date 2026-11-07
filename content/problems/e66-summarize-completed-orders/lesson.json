@@ -1,0 +1,44 @@
+{
+  "intro": "Grouped aggregation combines several rows into one summary per customer. Filtering first prevents cancelled orders from influencing totals or creating empty customer groups.",
+  "task": "Aggregate integer cent amounts by customer, ignoring cancelled orders.",
+  "signature": "customer_totals(orders)",
+  "requirements": [
+    "Records require customer (nonempty string), cents (integer 0..1e9), and cancelled (bool). Sum cents only for noncancelled orders; include zero-valued completed customers. Return a customer-to-integer dictionary.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Integer inputs must be Python ints, excluding bool, within the task-specific bounds or -1e9..1e9 when no narrower bounds are stated. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Sum repeated customers",
+      "input": "customer_totals([dict(customer='a',cents=120,cancelled=False),dict(customer='a',cents=80,cancelled=False)])",
+      "output": "{'a': 200}"
+    },
+    {
+      "name": "Cancelled order excluded",
+      "input": "customer_totals([dict(customer='a',cents=50,cancelled=True)])",
+      "output": "{}"
+    },
+    {
+      "name": "Zero completed order",
+      "input": "customer_totals([dict(customer='z',cents=0,cancelled=False)])",
+      "output": "{'z': 0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Apply the cancellation filter before adding to a customer total."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Use integer cents throughout; a zero total is still an observed completed customer."
+    }
+  ],
+  "explanation": [
+    "Grouped aggregation combines several rows into one summary per customer. Filtering first prevents cancelled orders from influencing totals or creating empty customer groups.",
+    "Integer cents avoid binary floating-point rounding for this simplified currency representation. The lesson does not perform tax or exchange-rate calculations; it preserves exact integer addition."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m119",
+  "kind": "lesson",
+  "slug": "circle-circle-overlap",
+  "version": 1,
+  "title": "Measure Overlap between Two Disks",
+  "summary": "Handle disjoint, contained and partial-overlap circles with the lens-area formula.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Measure Overlap between Two Disks"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "disk_overlap",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

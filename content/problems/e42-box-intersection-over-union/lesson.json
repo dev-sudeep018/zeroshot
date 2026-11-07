@@ -1,0 +1,45 @@
+{
+  "intro": "Localization quality depends on geometric overlap. Pairwise intersection over union compares boxes of different sizes without treating touching edges as positive area.",
+  "task": "Compute pairwise geometric overlap and distinguish touching edges, containment, and zero-area boxes.",
+  "signature": "box_iou(boxes, other)",
+  "requirements": [
+    "boxes and other are finite matrices shaped (N,4) and (M,4), with coordinates [xmin,ymin,xmax,ymax]. Zero-area boxes and empty matrices with four columns are allowed.",
+    "Require xmax>=xmin and ymax>=ymin. Return an (N,M) float array of intersection area divided by union area.",
+    "Use continuous coordinates without a pixel +1 correction. Define IoU 0 for zero union, including two identical zero-area boxes.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Partial overlap",
+      "input": "box_iou([[0,0,2,2]], [[1,1,3,3]])",
+      "output": "[[0.142857142857]]"
+    },
+    {
+      "name": "Identical boxes",
+      "input": "box_iou([[0,0,1,1]], [[0,0,1,1]])",
+      "output": "[[1.0]]"
+    },
+    {
+      "name": "Touching edges",
+      "input": "box_iou([[0,0,1,1]], [[1,0,2,1]])",
+      "output": "[[0.0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Clip intersection side lengths",
+      "body": "Disjoint boxes can produce negative raw lengths, which must become zero before multiplication."
+    },
+    {
+      "title": "Broadcast both box axes",
+      "body": "Compare each row from the first matrix with every row from the second."
+    }
+  ],
+  "explanation": [
+    "IoU normalizes intersection area by the combined area covered by either box. It is symmetric and stays in [0,1] for valid boxes.",
+    "Continuous-coordinate geometry has no pixel-inclusive +1 term. Declaring the coordinate convention prevents a subtle disagreement between otherwise similar detection implementations."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

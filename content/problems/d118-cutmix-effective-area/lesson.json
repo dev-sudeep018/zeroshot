@@ -1,0 +1,44 @@
+{
+  "intro": "A requested CutMix patch can extend beyond the image. The label mixture must reflect the area actually replaced after clipping.",
+  "task": "Replace a clipped rectangle of the first image with the second image and return the area-correct soft label.",
+  "signature": "cutmix_pair(image_a, image_b, label_a, label_b, rectangle)",
+  "requirements": [
+    "The two images are matching matrices. label_a and label_b are equal-length probability vectors, validated to absolute sum tolerance 1e-8 and normalized. rectangle=[top,left,bottom,right] has ordered integer entries in -64..128.",
+    "Clip the half-open rectangle to image bounds. Let fraction=effective patch area/image area. Return {\"image\": mixed matrix, \"label\": (1-fraction)*label_a+fraction*label_b, \"replaced_fraction\": scalar}.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Quarter image",
+      "input": "cutmix_pair(np.zeros((2,2)),np.ones((2,2)),[1,0],[0,1],[0,0,1,1])",
+      "output": "{'image': [[1.0, 0.0], [0.0, 0.0]],\n 'label': [0.75, 0.25],\n 'replaced_fraction': 0.25}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Clipped half",
+      "input": "cutmix_pair(np.zeros((2,2)),np.ones((2,2)),[1,0],[0,1],[-2,0,1,2])",
+      "output": "{'image': [[1.0, 1.0], [0.0, 0.0]],\n 'label': [0.5, 0.5],\n 'replaced_fraction': 0.5}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Whole image",
+      "input": "cutmix_pair([[1]],[[2]],[1,0],[0,1],[0,0,1,1])",
+      "output": "{'image': [[2.0]], 'label': [0.0, 1.0], 'replaced_fraction': 1.0}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "Compute label mixing from clipped dimensions, not the requested dimensions."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A patch outside the image has zero area and must leave the first label unchanged."
+    }
+  ],
+  "explanation": [
+    "CutMix connects a spatial replacement with a target distribution. Area correction keeps the target consistent with how much of each source image is present.",
+    "The area rule is a useful training assumption rather than a proof that semantic evidence is uniformly distributed. A small patch can still contain the most informative object region."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

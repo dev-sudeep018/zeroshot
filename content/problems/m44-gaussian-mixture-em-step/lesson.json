@@ -1,0 +1,45 @@
+{
+  "intro": "A mixture model does not know which component generated each observation. One EM step turns current likelihoods into soft assignments and updates component statistics.",
+  "task": "Perform one full univariate Gaussian-mixture expectation and maximization step, returning updated parameters and the old total log likelihood.",
+  "signature": "gaussian_em_step(values, weights, means, variances, variance_floor=1e-6)",
+  "requirements": [
+    "values is a vector. weights, means, and variances are equal-length component vectors; weights sum to one and are strictly positive. Variances and variance_floor lie in [1e-8,1e6].",
+    "Compute normalized responsibilities using log Gaussian density plus log weight. Use responsibility sums for new weights, weighted means, and weighted population variances about the new means.",
+    "Return {\"weights\": new_weights, \"means\": new_means, \"variances\": maximum(new_variances,variance_floor), \"log_likelihood\": sum(old log evidence)}. Reject any component effective count <=1e-12; do not relabel components.",
+    "Use real finite numeric inputs with magnitude at most 1e6, excluding booleans. Vectors have length 1..128 and matrix axes have length 1..128 unless a tighter bound is stated. Leave all inputs unchanged; raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One component fits moments",
+      "input": "gaussian_em_step([-1,1],[1],[0],[1])",
+      "output": "{\n  \"weights\": [\n    1.0\n  ],\n  \"means\": [\n    0.0\n  ],\n  \"variances\": [\n    1.0\n  ],\n  \"log_likelihood\": -2.83787707\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Identical components preserve weights",
+      "input": "gaussian_em_step([-1,1],[.25,.75],[0,0],[1,1])",
+      "output": "{\n  \"weights\": [\n    0.25,\n    0.75\n  ],\n  \"means\": [\n    0.0,\n    0.0\n  ],\n  \"variances\": [\n    1.0,\n    1.0\n  ],\n  \"log_likelihood\": -2.83787707\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    },
+    {
+      "name": "Variance floor",
+      "input": "gaussian_em_step([2,2],[1],[2],[1],.1)",
+      "output": "{\n  \"weights\": [\n    1.0\n  ],\n  \"means\": [\n    2.0\n  ],\n  \"variances\": [\n    0.1\n  ],\n  \"log_likelihood\": -1.83787707\n}\n(Arrays shown as lists; numeric values rounded to 8 decimal places.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Find the structure",
+      "body": "Calculate log joint component scores and normalize each observation row after subtracting its largest score."
+    },
+    {
+      "title": "Build the calculation",
+      "body": "Use fractional memberships to compute new means first, then center the variance calculation on those new means."
+    }
+  ],
+  "explanation": [
+    "The expectation step normalizes component joint densities into responsibilities. The maximization step treats those responsibilities as fractional membership weights for new means and variances.",
+    "The likelihood belongs to the parameters supplied at the start of the step. A variance floor prevents collapse to zero width; numerically empty components require a policy and are rejected here."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

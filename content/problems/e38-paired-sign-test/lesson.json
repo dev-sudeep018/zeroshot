@@ -1,0 +1,45 @@
+{
+  "intro": "Paired measurements should be compared within each example. An exact sign test asks whether positive and negative nonzero differences are balanced under a fair-sign null.",
+  "task": "Compare the directions of paired changes using an exact two-sided sign test, excluding ties from the null trial count.",
+  "signature": "paired_sign_test(differences)",
+  "requirements": [
+    "differences is a finite numeric vector of length at most 1000; positive means the first system did better, negative means the second did better.",
+    "Discard exact zero differences. Return integer wins, losses, ties and a two-sided p_value=min(1, 2*sum(comb(n,k), k=0..min(wins,losses))/2**n).",
+    "When all differences are ties or the vector is empty, return p_value 1. The test uses signs, not magnitudes, and assumes independent fair signs under the null.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, except where a stricter bound is stated. Booleans are not numeric parameters. Leave all caller inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Three consistent improvements",
+      "input": "paired_sign_test([1,2,3])",
+      "output": "{'wins': 3, 'losses': 0, 'ties': 0, 'p_value': 0.25}"
+    },
+    {
+      "name": "Balanced signs",
+      "input": "paired_sign_test([10,-1])",
+      "output": "{'wins': 1, 'losses': 1, 'ties': 0, 'p_value': 1.0}"
+    },
+    {
+      "name": "Ties do not count as trials",
+      "input": "paired_sign_test([0,1,0,1])",
+      "output": "{'wins': 2, 'losses': 0, 'ties': 2, 'p_value': 0.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Remove ties from the trial count",
+      "body": "Zero differences are reported separately and excluded from the binomial null."
+    },
+    {
+      "title": "Use the smaller tail",
+      "body": "The two-sided result doubles the lower tail through the less frequent sign, then caps it at one."
+    }
+  ],
+  "explanation": [
+    "The exact sign test discards effect magnitudes and uses only the direction of nonzero paired changes. It avoids treating the two systems as independent samples.",
+    "A small p-value is evidence against the fair-sign null, not a measurement of practical benefit. Report the paired effect sizes alongside this sign-based diagnostic when interpreting real results."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

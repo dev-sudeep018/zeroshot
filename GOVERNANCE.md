@@ -1,6 +1,6 @@
 # Governance
 
-Project Mastery currently has one founding maintainer, the repository owner. The maintainer decides scope, merges changes, and publishes releases. Proposals and trade-offs should be documented in issues and pull requests so future contributors can understand them.
+ZeroShot currently has one founding maintainer, the repository owner. The maintainer decides scope, merges changes, and publishes releases. Proposals and trade-offs should be documented in issues and pull requests so future contributors can understand them.
 
 The mission is free, open-source AI learning through practical work. No employment guarantees or unverified certification claims belong in the product.
 

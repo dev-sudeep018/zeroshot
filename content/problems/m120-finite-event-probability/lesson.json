@@ -1,0 +1,45 @@
+{
+  "intro": "Events can overlap even when individual outcomes are mutually exclusive. Summing selected outcome masses makes the overlap explicit and prevents counting it twice in a union.",
+  "task": "Use probability masses and two event masks to compute union, intersection and conditional probability.",
+  "signature": "event_probabilities(probabilities, event_a, event_b)",
+  "requirements": [
+    "probabilities is a nonnegative vector summing to one within 1e-10. event_a and event_b are boolean masks of the same length.",
+    "Return {\"a\": P(A), \"b\": P(B), \"union\": P(A or B), \"intersection\": P(A and B), \"a_given_b\": P(A and B)/P(B)}.",
+    "Reject an event B with zero probability; an empty event A is allowed.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Overlapping events",
+      "input": "event_probabilities([.1,.2,.3,.4],[True,True,False,False],[False,True,True,False])",
+      "output": "{'a': 0.3, 'b': 0.5, 'union': 0.6, 'intersection': 0.2, 'a_given_b': 0.4}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Disjoint events",
+      "input": "event_probabilities([.5,.5],[True,False],[False,True])",
+      "output": "{'a': 0.5, 'b': 0.5, 'union': 1.0, 'intersection': 0.0, 'a_given_b': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Certain events",
+      "input": "event_probabilities([1],[True],[True])",
+      "output": "{'a': 1.0, 'b': 1.0, 'union': 1.0, 'intersection': 1.0, 'a_given_b': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Treat each mask as a selection of outcomes, and combine masks with AND and OR."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compute the probability of B before division; conditioning is undefined when that mass is zero."
+    }
+  ],
+  "explanation": [
+    "Events can overlap even when individual outcomes are mutually exclusive. Summing selected outcome masses makes the overlap explicit and prevents counting it twice in a union.",
+    "Conditional probability renormalizes the mass inside B. It differs from the unconditional probability of A unless the event relationship happens to preserve that probability."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

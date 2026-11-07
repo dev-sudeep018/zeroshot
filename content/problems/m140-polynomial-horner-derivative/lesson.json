@@ -1,0 +1,45 @@
+{
+  "intro": "Horner evaluation avoids constructing every power separately. Differentiating each nested multiplication gives a second recurrence that computes the slope at the same time.",
+  "task": "Apply a coupled Horner recurrence to descending coefficients at a batch of query points.",
+  "signature": "horner_value_slope(coefficients, points)",
+  "requirements": [
+    "coefficients is a length 1..10 vector in descending power order. points is a vector with absolute values <=10.",
+    "Return {\"value\": polynomial values, \"slope\": derivative values} at the points, preserving query order.",
+    "Use the coupled recurrence slope=slope*x+previous_value then value=previous_value*x+coefficient. A constant polynomial has zero slope.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Quadratic",
+      "input": "horner_value_slope([2,-3,1],[-1,0,2])",
+      "output": "{'value': [6.0, 1.0, 3.0], 'slope': [-7.0, -3.0, 5.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant",
+      "input": "horner_value_slope([7],[-3,2])",
+      "output": "{'value': [7.0, 7.0], 'slope': [0.0, 0.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Leading zeros",
+      "input": "horner_value_slope([0,0,2,-1],[0,3])",
+      "output": "{'value': [-1.0, 5.0], 'slope': [2.0, 2.0]}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Keep the value and slope accumulators as arrays matching the query vector."
+    },
+    {
+      "title": "Build the result",
+      "body": "Update the slope using the old value before replacing the value accumulator."
+    }
+  ],
+  "explanation": [
+    "Horner evaluation avoids constructing every power separately. Differentiating each nested multiplication gives a second recurrence that computes the slope at the same time.",
+    "The update order matters because the derivative needs the previous partial polynomial. Constant and leading-zero coefficients provide simple checks on initialization."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

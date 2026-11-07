@@ -1,0 +1,44 @@
+{
+  "intro": "A causal language model predicts the token after each input position. Padding must not accidentally become a training target.",
+  "task": "Shift a padded token batch into aligned inputs and targets, and mark the valid prediction positions.",
+  "signature": "shift_language_batch(tokens, lengths, padding_id)",
+  "requirements": [
+    "tokens is an integer batch-by-time matrix with values 0..1000000 and time>=2. lengths is one integer valid-token count per row, in 2..time. padding_id is an integer 0..1000000.",
+    "Return {\"inputs\": tokens[:,:-1] with invalid positions replaced by padding_id, \"targets\": tokens[:,1:] with invalid positions replaced by padding_id, \"mask\": boolean matrix}. A position t is valid exactly when t<length-1. Values after each length are ignored.",
+    "Use finite real numeric values of magnitude at most 1e6, excluding boolean inputs. Each array axis has 1..64 entries and at most 65536 elements total unless a stricter bound is stated. Return NumPy arrays for array outputs, preserve caller inputs, and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Unequal sequence lengths",
+      "input": "shift_language_batch([[2,3,4,0],[5,6,0,0]],[3,2],0)",
+      "output": "{'inputs': [[2, 3, 0], [5, 0, 0]],\n 'targets': [[3, 4, 0], [6, 0, 0]],\n 'mask': [[True, True, False], [True, False, False]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Full sequence",
+      "input": "shift_language_batch([[1,2,3]],[3],0)",
+      "output": "{'inputs': [[1, 2]], 'targets': [[2, 3]], 'mask': [[True, True]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    },
+    {
+      "name": "Minimum pair",
+      "input": "shift_language_batch([[7,8]],[2],0)",
+      "output": "{'inputs': [[7]], 'targets': [[8]], 'mask': [[True]]}\n(NumPy arrays shown as lists; rounded to 12 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Follow the data",
+      "body": "For a sequence of length L there are L-1 adjacent prediction pairs."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Apply the same position mask to both sides of each pair."
+    }
+  ],
+  "explanation": [
+    "Shifting creates supervised targets from an existing sequence without a separate label file. The model sees a prefix position and learns to predict its immediate successor.",
+    "Masking based on explicit lengths avoids confusing a padding identifier with a genuine token that happens to use the same value. This operation prepares labels; the model must separately enforce causal attention."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

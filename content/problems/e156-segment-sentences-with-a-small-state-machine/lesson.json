@@ -1,0 +1,44 @@
+{
+  "intro": "Rule-based sentence segmentation can be useful when its limitations are explicit. A short scanner gives reproducible boundaries without requiring a language model.",
+  "task": "Split on .!? runs and retain closing punctuation without claiming linguistic completeness.",
+  "signature": "split_sentences(text)",
+  "requirements": [
+    "Scan text left to right. A maximal run of .!? ends a sentence; include any immediately following closing quotes or brackets from the set double-quote, single-quote, ), ], }. Trim outer Unicode whitespace from each sentence and omit empty pieces. Return a final unterminated fragment if present. Do not infer abbreviations or require a space after punctuation.",
+    "Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Mixed sentence endings",
+      "input": "split_sentences('Hello! Ready? Go.')",
+      "output": "['Hello!', 'Ready?', 'Go.']"
+    },
+    {
+      "name": "Punctuation runs",
+      "input": "split_sentences('Wait... really?! yes')",
+      "output": "['Wait...', 'really?!', 'yes']"
+    },
+    {
+      "name": "Closing bracket retained",
+      "input": "split_sentences('A!) B.')",
+      "output": "['A!)', 'B.']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Consume an entire punctuation run and then its immediate closing characters before cutting."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Keep a final fragment even if it has no terminator."
+    }
+  ],
+  "explanation": [
+    "Rule-based sentence segmentation can be useful when its limitations are explicit. A short scanner gives reproducible boundaries without requiring a language model.",
+    "Periods in abbreviations or decimal numbers still split here. This deliberately narrow contract teaches stateful scanning rather than promising linguistic sentence detection."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

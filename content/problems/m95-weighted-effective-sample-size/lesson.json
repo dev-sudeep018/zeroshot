@@ -1,0 +1,44 @@
+{
+  "intro": "Unequal weights can make a large collection behave like a much smaller equally weighted one. This effective-size measure summarizes weight concentration without using any observed outcomes.",
+  "task": "Normalize nonnegative weights and compute inverse squared-mass effective sample size and maximum weight share.",
+  "signature": "weight_effective_size(weights)",
+  "requirements": [
+    "weights is nonnegative with positive total. Return {\"normalized\": weights divided by their sum, \"effective_size\": 1/sum(normalized**2), \"largest_share\": max(normalized)}.",
+    "Zero weights are valid. This concentration-based effective size lies between 1 and the number of nonzero weights.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Uneven weights",
+      "input": "weight_effective_size([1,2,3])",
+      "output": "{'normalized': [0.1666666667, 0.3333333333, 0.5],\n 'effective_size': 2.571428571,\n 'largest_share': 0.5}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Equal weights",
+      "input": "weight_effective_size([4,4,4,4])",
+      "output": "{'normalized': [0.25, 0.25, 0.25, 0.25], 'effective_size': 4.0, 'largest_share': 0.25}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "One active weight",
+      "input": "weight_effective_size([0,7,0])",
+      "output": "{'normalized': [0.0, 1.0, 0.0], 'effective_size': 1.0, 'largest_share': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Normalize the weights before measuring concentration."
+    },
+    {
+      "title": "Build the result",
+      "body": "Squaring increases the influence of large shares; invert the sum of squares to express it as a count."
+    }
+  ],
+  "explanation": [
+    "Unequal weights can make a large collection behave like a much smaller equally weighted one. This effective-size measure summarizes weight concentration without using any observed outcomes.",
+    "It is invariant to common scaling. It is not a universal replacement for sample size in every uncertainty calculation, since correlations or how the weights were obtained can matter separately."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

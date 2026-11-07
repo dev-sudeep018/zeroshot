@@ -1,0 +1,44 @@
+{
+  "intro": "Feature preprocessing should learn its vocabulary from training data only. Holding that mapping fixed gives an honest picture of unseen categories during evaluation.",
+  "task": "Fit a vocabulary on training categories only, then encode heldout unknowns distinctly.",
+  "signature": "fit_category_codes(training, heldout)",
+  "requirements": [
+    "Both inputs are sequences of strings, including empty strings. Assign training categories consecutive integer IDs from 0 in first-occurrence order. Return vocabulary, train_codes, heldout_codes, and unknown_positions for heldout; unseen heldout values encode as -1 and never extend the vocabulary.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Train-only vocabulary",
+      "input": "fit_category_codes(['b','a','b'], ['a','c'])",
+      "output": "{'vocabulary': {'b': 0, 'a': 1},\n 'train_codes': [0, 1, 0],\n 'heldout_codes': [1, -1],\n 'unknown_positions': [1]}"
+    },
+    {
+      "name": "Empty training",
+      "input": "fit_category_codes([], ['a'])",
+      "output": "{'vocabulary': {},\n 'train_codes': [],\n 'heldout_codes': [-1],\n 'unknown_positions': [0]}"
+    },
+    {
+      "name": "Empty category",
+      "input": "fit_category_codes([''], ['','x'])",
+      "output": "{'vocabulary': {'': 0},\n 'train_codes': [0],\n 'heldout_codes': [0, -1],\n 'unknown_positions': [1]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Fit the mapping using training values before looking at heldout values."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Do not call setdefault while encoding heldout categories; that would leak new categories into the fitted mapping."
+    }
+  ],
+  "explanation": [
+    "Feature preprocessing should learn its vocabulary from training data only. Holding that mapping fixed gives an honest picture of unseen categories during evaluation.",
+    "First-occurrence IDs make the fit deterministic for a fixed training order. Unknown heldout values use a reserved negative code and remain visible through their positions."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

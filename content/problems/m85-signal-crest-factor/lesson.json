@@ -1,0 +1,44 @@
+{
+  "intro": "RMS describes typical signal energy, whereas the peak describes the largest instantaneous magnitude. Their ratio identifies signals whose energy is concentrated into sharp excursions.",
+  "task": "Compute RMS amplitude, peak absolute amplitude, and crest factor with an explicit all-zero convention.",
+  "signature": "crest_summary(signal)",
+  "requirements": [
+    "Return {\"rms\": sqrt(mean(signal**2)), \"peak\": max(abs(signal)), \"crest\": peak/rms}.",
+    "For an all-zero signal use crest=0. Keep the root-mean-square normalization by n, not n-1.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "One pulse",
+      "input": "crest_summary([0,0,3,0])",
+      "output": "{'rms': 1.5, 'peak': 3.0, 'crest': 2.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Constant magnitude",
+      "input": "crest_summary([-2,2,-2,2])",
+      "output": "{'rms': 2.0, 'peak': 2.0, 'crest': 1.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "All zero",
+      "input": "crest_summary([0,0])",
+      "output": "{'rms': 0.0, 'peak': 0.0, 'crest': 0.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Square every sample before averaging so positive and negative amplitudes cannot cancel."
+    },
+    {
+      "title": "Build the result",
+      "body": "Compute peak from absolute values and define the zero-energy case before dividing."
+    }
+  ],
+  "explanation": [
+    "RMS describes typical signal energy, whereas the peak describes the largest instantaneous magnitude. Their ratio identifies signals whose energy is concentrated into sharp excursions.",
+    "Crest factor is invariant to nonzero scaling and sign changes. With n samples a single nonzero pulse has crest factor sqrt(n), which provides a useful check on the averaging convention."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

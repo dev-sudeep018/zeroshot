@@ -19,7 +19,7 @@
     },
   "estimated_minutes": 30,
   "status": "validated",
-  "author": "Project Mastery contributors",
+  "author": "ZeroShot contributors",
   "license": "CC-BY-SA-4.0",
   "code_license": "Apache-2.0",
   "kind": "lesson",
@@ -27,6 +27,6 @@
     [
       "Loop adapted from Dive into Deep Learning corr2d, revision 23d7a5aecceee57d1292c56e90cce307f183bb0a, MIT-0: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_convolutional-neural-networks/conv-layer.md",
       "Original upstream notice: https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SAMPLECODE; preserved in THIRD_PARTY_NOTICE.md and solution.py.",
-      "Lesson prose, examples, tests, and validation authored by Project Mastery contributors.",
+      "Lesson prose, examples, tests, and validation authored by ZeroShot contributors.",
     ],
 }

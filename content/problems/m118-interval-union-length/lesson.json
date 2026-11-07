@@ -1,0 +1,44 @@
+{
+  "intro": "Adding interval lengths directly double-counts overlapping coverage. Merging first gives a disjoint representation whose lengths can be summed safely.",
+  "task": "Merge overlapping or touching real intervals and report their union length.",
+  "signature": "interval_union(intervals)",
+  "requirements": [
+    "intervals has shape (n,2) with start<=end in every row. Zero-length intervals are allowed.",
+    "Sort intervals by start, merge overlaps AND touching endpoints, and return {\"intervals\": merged sorted intervals, \"length\": sum of their lengths}.",
+    "Unless a requirement explicitly sets another range, numeric inputs are real and finite with magnitude at most 10000. Booleans are rejected except explicit boolean masks. Vectors have length 1..64 and matrix axes 1..64 unless specified otherwise. Leave inputs unchanged. Raise ValueError for invalid types, bounds, shapes or documented domain conditions."
+  ],
+  "examples": [
+    {
+      "name": "Overlapping intervals",
+      "input": "interval_union([[1,4],[2,6],[8,9]])",
+      "output": "{'intervals': [[1.0, 6.0], [8.0, 9.0]], 'length': 6.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Touching intervals",
+      "input": "interval_union([[0,2],[2,3],[3,5]])",
+      "output": "{'intervals': [[0.0, 5.0]], 'length': 5.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    },
+    {
+      "name": "Unsorted contained",
+      "input": "interval_union([[4,5],[0,10],[2,3]])",
+      "output": "{'intervals': [[0.0, 10.0]], 'length': 10.0}\n(NumPy arrays shown as lists; rounded to 10 significant digits.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sorting ensures a new interval can overlap only the last currently merged interval."
+    },
+    {
+      "title": "Build the result",
+      "body": "Extend that interval rightward on overlap or contact; otherwise start a new merged interval."
+    }
+  ],
+  "explanation": [
+    "Adding interval lengths directly double-counts overlapping coverage. Merging first gives a disjoint representation whose lengths can be summed safely.",
+    "Touching endpoints occupy no extra length, but merging them produces a canonical connected representation. Degenerate point intervals can remain visible while contributing zero to total covered length."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

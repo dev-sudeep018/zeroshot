@@ -1,0 +1,44 @@
+{
+  "intro": "Composite keys identify rows using several fields together. A repeated value in one column is acceptable when the full combination remains unique.",
+  "task": "Detect duplicate combinations of configured record fields and report occurrence groups.",
+  "signature": "duplicate_composite_keys(records, fields)",
+  "requirements": [
+    "fields is a nonempty unique field list. Every selected value must be a string, including optional empty strings. Return groups of row indices sharing the same selected-value tuple, only for groups of size >=2, ordered by first occurrence. Missing selected fields are invalid.",
+    "Sequence inputs are Python lists or tuples of at most 1000 items. Text inputs contain valid Unicode scalar characters and at most 10000 characters. Identifier and dictionary keys are nonempty strings of at most 100 characters. Numeric values are finite Python ints or floats with magnitude at most 1e9; bool is not numeric. Plain record data may contain strings, numbers, booleans, None, lists, tuples, and dictionaries; nesting is limited to six levels and dictionaries to 1000 keys.",
+    "Return the documented Python output types and preserve all caller inputs. Raise ValueError for invalid inputs unless the task explicitly reports a record-level rejection."
+  ],
+  "examples": [
+    {
+      "name": "Composite equality",
+      "input": "duplicate_composite_keys([{'a':'x','b':'1'},{'a':'x','b':'2'},{'a':'x','b':'1'}], ['a','b'])",
+      "output": "[[0, 2]]"
+    },
+    {
+      "name": "Multiple duplicate groups",
+      "input": "duplicate_composite_keys([{'x':'a'},{'x':'b'},{'x':'b'},{'x':'a'}], ['x'])",
+      "output": "[[0, 3], [1, 2]]"
+    },
+    {
+      "name": "Delimiter-safe tuples",
+      "input": "duplicate_composite_keys([{'a':'x|y','b':'z'},{'a':'x','b':'y|z'}], ['a','b'])",
+      "output": "[]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace one record",
+      "body": "Use a tuple of field values instead of joining with a separator."
+    },
+    {
+      "title": "Handle the boundary",
+      "body": "Retain every position in a repeated key group, including its first row."
+    }
+  ],
+  "explanation": [
+    "Composite keys identify rows using several fields together. A repeated value in one column is acceptable when the full combination remains unique.",
+    "Tuple keys preserve component boundaries. String concatenation with a delimiter can produce collisions when that delimiter already occurs in source values."
+  ],
+  "formula": null,
+  "test_count": 10,
+  "sample_count": 3
+}

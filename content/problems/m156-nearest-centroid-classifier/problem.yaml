@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "m156",
+  "kind": "lesson",
+  "slug": "nearest-centroid-classifier",
+  "version": 1,
+  "title": "Classify by Learned Class Means",
+  "summary": "Fit centroids for each contiguous class ID and predict nearest centroid with smallest-ID tie breaking.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Classify by Learned Class Means"],
+  "prerequisites": [],
+  "assumed_knowledge":
+    ["Python functions and indexing", "Basic arithmetic and NumPy arrays"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "nearest_centroid_predict",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 18,
+  "status": "validated",
+  "author": "ZeroShot contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Original ZeroShot prose, implementation and fixtures.",
+      "Concept reading only; no code or prose copied: https://docs.python.org/3/library/math.html",
+    ],
+}

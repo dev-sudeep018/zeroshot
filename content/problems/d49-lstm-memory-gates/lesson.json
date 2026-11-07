@@ -1,0 +1,45 @@
+{
+  "intro": "An LSTM stores cell memory separately from visible hidden output. Inspect write, retention and read gates using supplied preactivations.",
+  "task": "Implement lstm_step(cell, input_logits, forget_logits, output_logits, candidate_logits). A closed output gate can conceal information that remains in the cell. Treating hidden output as the next cell loses this distinction.",
+  "signature": "lstm_step(cell, input_logits, forget_logits, output_logits, candidate_logits)",
+  "requirements": [
+    "All five inputs have the same nonempty shape (B,H). Gate and candidate inputs are preactivation logits, not probabilities.",
+    "i=sigmoid(input_logits), f=sigmoid(forget_logits), o=sigmoid(output_logits), g=tanh(candidate_logits); next_cell=f*cell+i*g.",
+    "Return {cell: next_cell, hidden: o*tanh(next_cell)} with arrays (B,H). Affine input/recurrent projections are omitted.",
+    "All numeric arrays contain finite real numbers with magnitude at most 1e30. Boolean arrays and boolean scalar parameters are invalid. Raise ValueError for invalid shapes, bounds or types. Do not mutate any input."
+  ],
+  "examples": [
+    {
+      "name": "Empty memory",
+      "input": "lstm_step([[0]],[[0]],[[0]],[[0]],[[0]])",
+      "output": "{\"cell\": [[0.0]], \"hidden\": [[0.0]]}"
+    },
+    {
+      "name": "Half retention",
+      "input": "lstm_step([[2]],[[0]],[[0]],[[0]],[[0]])",
+      "output": "{\"cell\": [[1.0]], \"hidden\": [[0.380797077978]]}"
+    },
+    {
+      "name": "Candidate write",
+      "input": "lstm_step([[0]],[[0]],[[0]],[[0]],[[1]])",
+      "output": "{\"cell\": [[0.380797077978]], \"hidden\": [[0.181699742195]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Step 1",
+      "body": "The output gate controls visibility, not stored cell memory."
+    },
+    {
+      "title": "Step 2",
+      "body": "Use sigmoid for the three gates and tanh for the candidate."
+    }
+  ],
+  "explanation": [
+    "A closed output gate can conceal information that remains in the cell. Treating hidden output as the next cell loses this distinction.",
+    "This exercise isolates memory arithmetic. A complete LSTM also computes the supplied preactivations from an input and previous hidden state."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}
